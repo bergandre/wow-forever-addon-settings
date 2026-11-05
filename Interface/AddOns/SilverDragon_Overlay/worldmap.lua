@@ -1,0 +1,289 @@
+local myname = ...
+
+local core = LibStub("AceAddon-3.0"):GetAddon("SilverDragon")
+local module = core:GetModule("Overlay")
+local Debug = core.Debug
+local ns = core.NAMESPACE
+
+local frameLevelType = ns.CLASSIC and "PIN_FRAME_LEVEL_WORLD_QUEST" or "PIN_FRAME_LEVEL_VIGNETTE"
+
+-- Mobs
+
+local mobs = {
+    template = "SilverDragonOverlayWorldMapPinTemplate",
+    data = {},
+}
+
+-- IterateNodes works the whole zone out under one cache hold, so its results
+-- have to be carried rather than looked up again per-pin. These are reused by
+-- index to keep a refresh from allocating.
+local nodecache = {}
+function mobs:OnRefresh()
+    wipe(self.data)
+
+    -- if we're here really early for some reason
+    if not module.db then return end
+    if not module.db.profile.worldmap.enabled then return end
+
+    local uiMapID = WorldMapFrame:GetMapID()
+    if not uiMapID then return end
+    if module.db.profile.worldmap.zone_disabled[uiMapID] then return end
+
+    for coord, pointType, id, icon, scale, alpha in module:IterateNodes(uiMapID, false) do
+        ns.Loot.Cache(id, pointType == "treasure")
+        local index = #self.data + 1
+        local node = nodecache[index]
+        if not node then
+            node = {}
+            nodecache[index] = node
+        end
+        node.coord, node.id, node.type, node.icon = coord, id, pointType, icon
+        node.scale, node.alpha, node.uiMapID = scale or 1, alpha or 1, uiMapID
+        self.data[index] = node
+    end
+end
+
+function mobs.OnPinCreated(pin)
+    pin:OnLoad()
+end
+
+function mobs.OnPinAcquire(pin, node)
+    -- the pool resets the frame level on release, so this can't live in OnLoad
+    pin:SetFrameLevel(ns.MapSystem.GetWorldMapFrameLevelByType(frameLevelType))
+    pin:OnAcquired(node.id, node.type, node.icon, node.scale, node.alpha, node.coord, node.uiMapID, false)
+    return node.uiMapID, core:GetXY(node.coord)
+end
+
+function mobs.OnPinReset(pin)
+    -- the quantizer prefers whatever it last wrote to the pin's new position
+    pin.quantizedX, pin.quantizedY = nil, nil
+    pin.normalizedX, pin.normalizedY = nil, nil
+    if pin.OnReleased then
+        -- pins only have the mixin once they've been created
+        pin:OnReleased()
+    end
+end
+
+function mobs.OnPinEnter(pin)
+    pin:OnMouseEnter()
+end
+
+function mobs.OnPinLeave(pin)
+    pin:OnMouseLeave()
+end
+
+function mobs.OnPinClick(pin, button, down)
+    if down then return end
+    pin:OnClick(button)
+end
+
+local quantizer
+if _G.WorldMapPOIQuantizerMixin then
+    quantizer = CreateFromMixins(WorldMapPOIQuantizerMixin)
+    quantizer.size = 75
+    quantizer:OnLoad(quantizer.size, quantizer.size)
+end
+
+local pinsToQuantize = {}
+local quantizedRows
+
+local function quantizerShape()
+    -- Sizing the grid from a canvas that hasn't been laid out makes its cell
+    -- counts NaN, which then errors inside the quantizer for every pin, and the
+    -- grid stays poisoned until a refresh manages to replace it.
+    local width = WorldMapFrame:DenormalizeHorizontalSize(1.0)
+    local height = WorldMapFrame:DenormalizeVerticalSize(1.0)
+    if not (width > 0 and height > 0) then return end
+    local container = WorldMapFrame.ScrollContainer
+    local zoom = container:GetCanvasScale() / container:GetScaleForMinZoom()
+    -- pins keep their screen size as you zoom, so they cover less of the map
+    if zoom ~= zoom or zoom < 1 then zoom = 1 end -- NaN if the min scale is 0
+    local rows = math.ceil(quantizer.size * zoom)
+    return math.ceil(rows * (width / height)), rows
+end
+
+function mobs:Quantize()
+    if not (quantizer and module.db.profile.worldmap.quantize) then return end
+    local columns, rows = quantizerShape()
+    if not columns then return end
+
+    wipe(pinsToQuantize)
+    for pin in self:EnumeratePins() do
+        -- the quantizer reads normalizedX/Y, and x/y get overwritten with its answer
+        pin.normalizedX = pin.normalizedX or pin.x
+        pin.normalizedY = pin.normalizedY or pin.y
+        table.insert(pinsToQuantize, pin)
+    end
+    quantizer:Resize(columns, rows)
+    quantizer:ClearAndQuantize(pinsToQuantize)
+    for _, pin in ipairs(pinsToQuantize) do
+        pin.x = pin.quantizedX or pin.normalizedX
+        pin.y = pin.quantizedY or pin.normalizedY
+    end
+    quantizedRows = rows
+end
+
+function mobs:AfterRefresh()
+    self:Quantize()
+
+    if module.last_mob and time() < (module.last_mob_time + 30) then
+        self:Ping(module.last_mob)
+    end
+    if module.focus_ping then
+        self:Ping(module.focus_id, module.focus_treasure)
+        module.focus_ping = nil
+    end
+end
+
+-- pins always carry a real boolean; callers dealing only in mobs pass nothing
+local function pinIs(pin, id, isTreasure)
+    return pin.id == id and pin.isTreasure == (isTreasure or false)
+end
+
+-- /script SilverDragon:GetModule("Overlay").WorldMapProvider:Ping(32487)
+function mobs:Ping(id, isTreasure)
+    for pin in self:EnumeratePins() do
+        if pinIs(pin, id, isTreasure) then
+            pin:Ping()
+        end
+    end
+end
+
+function mobs:Emphasize(id, isTreasure, state)
+    for pin in self:EnumeratePins() do
+        if pinIs(pin, id, isTreasure) then
+            pin.emphasis:SetVertexColor(1, 1, 1, 1)
+            pin.emphasis:SetShown(state)
+        end
+    end
+end
+
+function mobs:ApplyFocusState()
+    for pin in self:EnumeratePins() do
+        pin:ApplyFocusState()
+        if module:IsFocused(pin.id, pin.isTreasure) then
+            pin:Ping()
+        end
+    end
+end
+
+module.WorldMapProvider = ns.MapSystem:AddProvider(mobs)
+
+-- The grid only changes in whole rows, so most of a zoom animation does nothing.
+hooksecurefunc(WorldMapFrame, "OnCanvasScaleChanged", function()
+    if not (quantizer and module.db and module.db.profile.worldmap.quantize) then return end
+    local _, rows = quantizerShape()
+    if not rows or rows == quantizedRows then return end
+
+    local provider = module.WorldMapProvider
+    provider:Quantize()
+    -- the shared pin code has already placed them for this scale, with the old positions
+    for pin in provider:EnumeratePins() do
+        local scale = pin:GetCurrentScale()
+        local overlay = pin:GetParent()
+        pin:SetPoint("CENTER", overlay, "TOPLEFT",
+            (overlay:GetWidth() * pin.x) / scale, -(overlay:GetHeight() * pin.y) / scale)
+    end
+end)
+
+-- Routes
+
+local routes = {
+    data = {},
+}
+
+local routecache = {}
+function routes:OnRefresh()
+    wipe(self.data)
+
+    if not module.db then return end
+    if not (module.db.profile.worldmap.enabled and module.db.profile.worldmap.routes) then return end
+
+    local uiMapID = WorldMapFrame:GetMapID()
+    if not uiMapID then return end
+    if module.db.profile.worldmap.zone_disabled[uiMapID] then return end
+    if not ns.mobsByZone[uiMapID] then return end
+
+    for mobid in pairs(ns.mobsByZone[uiMapID]) do
+        local data = ns.mobdb[mobid]
+        if data and data.routes and data.routes[uiMapID] and module.should_show_point(mobid, uiMapID) then
+            for _, route in ipairs(data.routes[uiMapID]) do
+                if not routecache[route] then
+                    routecache[route] = {route = route, id = mobid, uiMapID = uiMapID}
+                end
+                table.insert(self.data, routecache[route])
+            end
+        end
+    end
+end
+
+function routes.OnPinCreated(pin)
+    pin:EnableMouse(false)
+end
+
+function routes.OnPinReset(pin)
+    pin.id = nil
+    pin.line = nil
+end
+
+function routes:Connect(pin1, pin2, routedata)
+    local route = routedata.route
+    local r, g, b, a = 1, 1, 1, 0.6
+    if route.r then
+        r, g, b, a = route.r or 1, route.g or 1, route.b or 1, route.a or 0.6
+    else
+        r, g, b = module.id_to_color(routedata.id, routedata.uiMapID)
+    end
+    local line = ns.MapSystem:AttachLine(pin1, pin2)
+    line.baseThickness = line:GetThickness()
+    line:SetVertexColor(r, g, b, a)
+    return line
+end
+
+function routes:HandleData(routedata)
+    local firstPin, prevPin
+    for _, coord in ipairs(routedata.route) do
+        local pin = self:AcquirePin()
+        pin:SetSize(1, 1) -- needs a size or the route can't connect
+        pin.id = routedata.id
+        if pin:SetPosition(routedata.uiMapID, core:GetXY(coord)) then
+            pin:Show()
+            if prevPin then
+                pin.line = self:Connect(prevPin, pin, routedata)
+            end
+            prevPin = pin
+            firstPin = firstPin or pin
+        else
+            self:ReleasePin(pin)
+        end
+    end
+    if routedata.route.loop and firstPin and prevPin ~= firstPin then
+        firstPin.line = self:Connect(prevPin, firstPin, routedata)
+    end
+end
+
+function routes:Emphasize(id, isTreasure, state)
+    if isTreasure then return end -- only mobs have routes
+    for pin in self:EnumeratePins() do
+        if pin.line and pin.id == id then
+            pin.line:SetThickness(pin.line.baseThickness * (state and 1.5 or 1))
+        end
+    end
+end
+
+module.WorldMapRouteProvider = ns.MapSystem:AddProvider(routes)
+
+-- Pin mixin
+
+SilverDragonOverlayWorldMapPinMixin = CreateFromMixins(module.SilverDragonOverlayPinMixinBase)
+
+function SilverDragonOverlayWorldMapPinMixin:OnLoad()
+    self:SetScalingLimits(1, 1.0, 1.2)
+    self:EnableMouse(true)
+    self:SetMouseClickEnabled(true)
+    self:SetMouseMotionEnabled(true)
+end
+
+function module:UpdateWorldMapIcons()
+    ns.MapSystem:UpdateProviders()
+end

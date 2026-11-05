@@ -1,0 +1,160 @@
+local myname, ns = ...
+
+if LE_EXPANSION_LEVEL_CURRENT < (LE_EXPANSION_DRAGONFLIGHT or math.huge) then
+	ns.BeginDataModule(nil)
+	return
+end
+
+local core = LibStub("AceAddon-3.0"):GetAddon("SilverDragon")
+
+ns.BeginDataModule("Dragonflight")
+
+-- Rares
+
+local LOC_alldragonisles = {[ns.WAKINGSHORES]={},[ns.OHNAHRANPLAINS]={},[ns.AZURESPAN]={},[ns.THALDRASZUS]={},}
+
+core:RegisterMobData("Dragonflight", {
+	[193217] = {
+		name="Drakewing",
+		achievement=16676, -- Adventurer
+		criteria=56039,
+		loot={
+			200219, -- Dangerous Drapery
+		},
+		note="Flying",
+		locations={[ns.WAKINGSHORES]={49806960,52205060,69205480,72824701}},
+		routes={[ns.WAKINGSHORES]={
+			{49806960, 49807220, 48007680, 47207700, r=1, g=1, b=0},
+			{52205060, 53605320, 55205820, r=1, g=1, b=0},
+			{69205480, 69405940, 67606020, 63605860, r=1, g=1, b=0},
+		}},
+	},
+	-- Stormed off
+	-- Storm
+	[193653] = {name="Gaelzion", locations=LOC_alldragonisles,notes="Storm Invasions", vignette=5232, quest=69959,},
+	[193647] = {name="Karantun", locations=LOC_alldragonisles,notes="Storm Invasions", loot={200170}, vignette=5227, quest=69953,}, -- 74004
+	[193684] = {name="Pipspark Thundersnap", locations=LOC_alldragonisles,notes="Storm Invasions", vignette=5246, quest=69974,},
+	[193674] = {name="Voraazka", locations=LOC_alldragonisles,notes="Storm Invasions", vignette=5241, quest=69969,},
+	-- Earth
+	[193644] = {name="Bouldron", locations=LOC_alldragonisles,notes="Earth Invasions", vignette=5225, quest=69951,},
+	[193680] = {name="Zurgaz Corebreaker", locations=LOC_alldragonisles,notes="Earth Invasions", vignette=5244, quest=69972,},
+	[193652] = {name="Grizzlerock", locations=LOC_alldragonisles,notes="Earth Invasions", vignette=5231, quest=69956,},
+	[193654] = {name="Gravlion", locations=LOC_alldragonisles,notes="Earth Invasions", vignette=5233, quest=69960,},
+	-- Fire
+	[193648] = {name="Infernum", locations=LOC_alldragonisles,notes="Fire Invasions", vignette=5228, quest=69954,},
+	[193686] = {name="Neela Firebane", locations=LOC_alldragonisles,notes="Fire Invasions", vignette=5247, quest=69975,}, -- 74016
+	[193675] = {name="Kain Firebrand", locations=LOC_alldragonisles,notes="Fire Invasions", vignette=5242, quest=69970,},
+	[193650] = {name="Emblazion", locations=LOC_alldragonisles,notes="Fire Invasions", vignette=5230, quest=69955,},
+	-- Water
+	[193645] = {name="Crystalus", locations=LOC_alldragonisles,notes="Water Invasions", vignette=5226, quest=69952,},
+	[193682] = {name="Rouen Icewind", locations=LOC_alldragonisles,notes="Water Invasions", vignette=5245, quest=69973,},
+	[193655] = {name="Frozion", locations=LOC_alldragonisles,notes="Water Invasions", vignette=5234, quest=69961,},
+	[193677] = {name="Maeleera", locations=LOC_alldragonisles,notes="Water Invasions", vignette=5243, quest=69971,},
+	[193678] = {name="Fieraan", locations=LOC_alldragonisles,notes="Water Invasions", vignette=5243, quest=69971,},
+	[193679] = {name="Leerain", locations=LOC_alldragonisles,notes="Water Invasions", vignette=5243, quest=69971,},
+	-- Assorted hidden things
+	[190971] = {name="Shas'ith", hidden=true}, -- the locked-up variant which is always there
+	[201563] = {name="Rugren", hidden=true}, -- Accompanies Huntmaster Yrgena
+	-- War party, except Brundin who's below:
+	[192737] = {name="Qalashi War Mammoth", locations={[ns.WAKINGSHORES]={}},hidden=true,},
+	[192741] = {name="Flamebreaker Grella", locations={[ns.WAKINGSHORES]={}},hidden=true,},
+	[192743] = {name="Stonefist Rejara", locations={[ns.WAKINGSHORES]={}},hidden=true,},
+	[192744] = {name="Scalemelter Dorbane", locations={[ns.WAKINGSHORES]={}},hidden=true,},
+	-- Dragon hunters
+	[186201] = {name="Groth",locations={[ns.WAKINGSHORES]={}},hidden=true,},
+	[186202] = {name="Voll",locations={[ns.WAKINGSHORES]={}},hidden=true,},
+	[186203] = {name="Snee",locations={[ns.WAKINGSHORES]={}},hidden=true,},
+	--
+	[201186] = {name="Shimmermaw Jr.", locations={[ns.FORBIDDENREACH]={},},hidden=true,},
+	[201310] = {name="Nidharr", locations={[ns.FORBIDDENREACH]={},},hidden=true,},
+	-- Fyrakk assault rares
+	[200832] = {name="Fyrakk", locations=LOC_alldragonisles,hidden=true,},
+	[203699] = {name="Half-bound Rageflame", locations=LOC_alldragonisles,hidden=true,},
+	[201054] = {name="Crimson Oldblood", locations=LOC_alldragonisles,hidden=true,},
+	[203703] = {name="Flamebringer Rageblood", locations=LOC_alldragonisles,hidden=true,},
+	[203705] = {name="Flamebringer Elementalist", locations=LOC_alldragonisles,hidden=true,},
+	[203707] = {name="Flamebringer Cauterizer", locations=LOC_alldragonisles,hidden=true,},
+	[203698] = {name="Rampant Shadowflame", locations=LOC_alldragonisles,hidden=true,},
+	[203700] = {name="Flamebringer Shaman", locations=LOC_alldragonisles,hidden=true,},
+	-- Researchers Under Fire
+	[203834] = {name="Contaminated Titan Watcher",locations={[ns.ZARALEKCAVERN]={45006200}},achievement=18201,criteria=1,hidden=true,},
+	[202318] = {name="Response Team Watcher",locations={[ns.ZARALEKCAVERN]={47806380}},hidden=true,},
+	[202309] = {name="Cavern Flayer Matriarch",locations={[ns.ZARALEKCAVERN]={47405680}},loot={205276},hidden=true,},
+	[202270] = {name="Animated Contaminant",locations={[ns.ZARALEKCAVERN]={45406180}},hidden=true},
+	[203846] = {name="Elder Magma Serpent",locations={[ns.ZARALEKCAVERN]={44605800}},achievement=18199,criteria=2,loot={205229},hidden=true},
+	[203355] = {name="Captain Reykal",locations={[ns.ZARALEKCAVERN]={49205740}},achievement=18209,criteria=1,hidden=true},
+	-- Sniffenseeking
+	[201747] = {name="Bogg",locations={[ns.ZARALEKCAVERN]={54405220}},hidden=true,},
+	[204426] = {name="Jalgon Stoutburn",locations={[ns.ZARALEKCAVERN]={58005660}},hidden=true,},
+	[205540] = {name="Pahi'rys",locations={[ns.ZARALEKCAVERN]={60005620}},hidden=true},
+	[203606] = {name="Calibrating Scent Matrix",locations={[ns.ZARALEKCAVERN]={58005600}},notes="Making Scents",hidden=true},
+}, true)
+
+-- Treasures
+
+core:RegisterTreasureData("Dragonflight", {
+	[5408] = {name="Wind of the Isles", hidden=true},
+	[5468] = {
+		label="Expedition Scout's Pack",
+		loot={
+			{192764, mount=1617, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 25)}, -- Verdant Skitterfly
+			-- all the treasure-prerequisite items
+			{199061, quest=70527}, -- A Guide To Rare Fish
+			{194540, quest=67046}, -- Nokhud Armorer's Notes
+			{199065, quest=70534}, -- Sorrowful Letter
+			{199066, quest=70535}, -- Letter of Caution
+			{199068, quest=70537}, -- Time-Lost Memo
+			{199062, quest=70528, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Ruby Gem Cluster Map
+			{198843, quest=70392, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Emerald Gardens Explorer's Notes
+			{199067, quest=70536, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Precious Plans
+			{198852, quest=70407, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Bear Termination Orders
+			-- others
+			201387, -- Drakonid Stalker's Halberd
+			201388, -- Dragonspawn Wingtipped Staff
+			201389, -- Wingcrest Battle Staff
+			201390, -- Devastating Drakonid Waraxe
+			201392, -- Drakonid Striker's Cutlass
+			201393, -- Dragonspawn Spellweaver's Focus
+			201394, -- Drakonid's Jade Bulwark
+			201395, -- Wingcrest Scimitar
+			201396, -- Hidepiercing Claw Extensions
+		},
+		requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 2),
+	},
+	[5466] = {
+		label="Disturbed Dirt",
+		loot={
+			-- all the treasure-prerequisite items
+			{199061, quest=70527}, -- A Guide To Rare Fish
+			{194540, quest=67046}, -- Nokhud Armorer's Notes
+			{199065, quest=70534}, -- Sorrowful Letter
+			{199066, quest=70535}, -- Letter of Caution
+			{199068, quest=70537}, -- Time-Lost Memo
+			{199062, quest=70528, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Ruby Gem Cluster Map
+			{198843, quest=70392, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Emerald Gardens Explorer's Notes
+			{199067, quest=70536, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Precious Plans
+			{198852, quest=70407, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Bear Termination Orders
+			-- others
+			192055, -- Dragon Isles Artifact
+			201390, -- Devastating Drakonid Waraxe
+			201391, -- Drakonid Enforcer's Hidesplitter
+		},
+	},
+	[5467] = {
+		label="Magic-Bound Chest",
+		loot={
+			-- all the treasure-prerequisite items
+			{199061, quest=70527}, -- A Guide To Rare Fish
+			{194540, quest=67046}, -- Nokhud Armorer's Notes
+			{199065, quest=70534}, -- Sorrowful Letter
+			{199066, quest=70535}, -- Letter of Caution
+			{199068, quest=70537}, -- Time-Lost Memo
+			{199062, quest=70528, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Ruby Gem Cluster Map
+			{198843, quest=70392, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Emerald Gardens Explorer's Notes
+			{199067, quest=70536, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Precious Plans
+			{198852, quest=70407, requires=core.conditions.MajorFaction(ns.FACTION_DRAGONSCALE, 21)}, -- Bear Termination Orders
+			-- others
+			192055, -- Dragon Isles Artifact
+		},
+	},
+}, true)

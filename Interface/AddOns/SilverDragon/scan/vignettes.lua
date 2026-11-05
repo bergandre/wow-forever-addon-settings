@@ -1,0 +1,418 @@
+local myname, ns = ...
+
+local core = LibStub("AceAddon-3.0"):GetAddon("SilverDragon")
+local module = core:NewModule("Scan_Vignettes", "AceEvent-3.0", "AceConsole-3.0")
+local Debug = core.Debug
+
+local HBD = LibStub("HereBeDragons-2.0")
+
+-- Vignettes seen this session, as {[id] = name or true}. They stay listed under
+-- Ignore once unticked, so an accidental untick is easy to undo.
+local listed = {}
+
+ns.RegisterIDListWidget("SilverDragonVignetteList", {})
+
+local function vignetteTypeToggle(atlas, name, order)
+	return {
+		type = "toggle",
+		name = name,
+		desc = "ID: " .. atlas,
+		arg = atlas,
+		-- width = "double",
+		descStyle = "inline",
+		order = order,
+	}
+end
+
+function module:OnInitialize()
+	self.db = core.db:RegisterNamespace("Scan_Vignettes", {
+		profile = {
+			enabled = true,
+			pointsofinterest = true,
+			visibleOnly = false,
+			zoneInfinite = true,
+			ignore = {
+				-- [id] = "name",
+			},
+			ignore_type = {
+				-- [atlas:lower()] = true
+			},
+		},
+	})
+
+	-- missing before the last patch of Mists
+	self.compat_disabled = not C_EventUtils.IsEventValid("VIGNETTE_MINIMAP_UPDATED")
+
+	-- migrate!
+	local db = self.db.profile
+	-- ignore ids are always numbers; a string key breaks the options panel
+	for id in pairs(db.ignore) do
+		if type(id) ~= "number" then
+			db.ignore[id] = nil
+		end
+	end
+	if db.loot == false then
+		db.ignore_type.vignetteloot = true
+		db.ignore_type.vignettelootelite = true
+		db.loot = nil
+	end
+
+	local config = core:GetModule("Config", true)
+	if config then
+		config.options.args.scanning.plugins.vignettes = {
+			vignettes = {
+				type = "group",
+				name = "Vignettes",
+				get = function(info) return self.db.profile[info[#info]] end,
+				set = function(info, v) self.db.profile[info[#info]] = v end,
+				args = {
+					enabled = config.toggle("Enabled", "Scan minimap vignettes (it's what Blizzard calls them, okay?)", 10),
+					pointsofinterest = config.toggle("World points-of-interest", "Show alerts for point of interest vignettes added to world map itself", 20),
+					zoneInfinite = config.toggle("Infinite distance vignettes", "Show alerts for vignettes that can be seen from across the entire zone (this can get really spammy in some zones)", 25),
+					visibleOnly = config.toggle("Wait until visible", "Don't notify until the vignette is actually visible on the minimap", 30),
+					ignore = {
+						type="group",
+						name=IGNORE,
+						inline = true,
+						args={
+							desc = config.desc("These lists will fill in as vignettes are announced. Check a box, and we'll remember to never announce that specific vignette again.", 0),
+							type = {
+								type="group",
+								name="Types",
+								inline=true,
+								get=function(info) return self.db.profile.ignore_type[info.arg] end,
+								set=function(info, value) self:SetIgnoreType(info.arg, value) end,
+								args={
+									vignettekill = vignetteTypeToggle("vignettekill", CreateAtlasMarkup("vignettekill", 20, 20) .. " Kill", 10),
+									vignettekillelite = vignetteTypeToggle("vignettekillelite", CreateAtlasMarkup("vignettekillelite", 24, 24) .. " Kill elite", 20),
+									vignetteloot = vignetteTypeToggle("vignetteloot", CreateAtlasMarkup("vignetteloot", 20, 20) .. " Loot", 30),
+									vignettelootelite = vignetteTypeToggle("vignettelootelite", CreateAtlasMarkup("vignettelootelite", 24, 24) .. " Loot elite", 40),
+									vignetteevent = vignetteTypeToggle("vignetteevent", CreateAtlasMarkup("vignetteevent", 20, 20) .. " Event", 50),
+									vignetteeventelite = vignetteTypeToggle("vignetteeventelite", CreateAtlasMarkup("vignetteeventelite", 24, 24) .. " Event elite", 60),
+									["warfront-neutralhero"] = vignetteTypeToggle("warfront-neutralhero", CreateAtlasMarkup("warfront-neutralhero", 20, 20) .. " Bonus boss", 70),
+									glowingmoth = vignetteTypeToggle("glowingmoth", CreateAtlasMarkup("ancientmana", 20, 20) .. " Glowing Moth", 100),
+								},
+								order=10,
+							},
+							specific = {
+								type="multiselect",
+								name="Specific",
+								dialogControl="SilverDragonVignetteList",
+								arg="vignettes",
+								width="full",
+								order=20,
+								values=function()
+									local values = {}
+									for id, name in pairs(listed) do
+										values[id] = name
+									end
+									for id, name in pairs(self.db.profile.ignore) do
+										-- the name stored when it was ignored beats the one seen this session
+										values[id] = type(name) == "string" and name or values[id] or true
+									end
+									return values
+								end,
+								get=function(info, id) return self.db.profile.ignore[id] end,
+								set=function(info, id, value)
+									local name = listed[id]
+									self:SetIgnore(id, value and (type(name) == "string" and name or tostring(id)) or nil)
+								end,
+							},
+						},
+					},
+				},
+			},
+		}
+		local types = config.options.args.scanning.plugins.vignettes.vignettes.args.ignore.args.type.args
+		for atlas in pairs(self.db.profile.ignore_type) do
+			if not types[atlas:lower()] then
+				types[atlas:lower()] = vignetteTypeToggle(atlas:lower(), CreateAtlasMarkup(atlas, 20, 20) .. " " .. atlas)
+			end
+		end
+	end
+end
+
+function module:OnEnable()
+	if self.compat_disabled then return end
+	-- Vignettes are often missing data right on initial load, so delay this first scan by a second
+	C_Timer.After(1.5, function()
+		self:RegisterEvent("VIGNETTE_MINIMAP_UPDATED")
+		self:RegisterEvent("VIGNETTES_UPDATED")
+
+		core.RegisterCallback(self, "SeenVignette")
+
+		self:VIGNETTES_UPDATED()
+	end)
+end
+
+function module:SetIgnore(id, ignore, quiet)
+	if not id then return false end
+	if id >= 7173 and id <= 7293 then
+		return module:SetIgnoreType("glowingmoth", ignore, quiet)
+	end
+	if (ignore and self.db.profile.ignore[id]) or (not ignore and not self.db.profile.ignore[id]) then
+		-- to avoid the nil/false issue
+		return false
+	end
+	self.db.profile.ignore[id] = ignore
+	if not quiet then
+		core.events:Fire("IgnoreVignetteChanged", id, ignore)
+	end
+	return true
+end
+
+function module:SetIgnoreType(atlas, ignore, quiet)
+	if not atlas then return end
+	atlas = atlas:lower()
+	if (ignore and self.db.profile.ignore_type[atlas]) or (not ignore and not self.db.profile.ignore_type[atlas]) then
+		-- to avoid the nil/false issue
+		return false
+	end
+	self.db.profile.ignore_type[atlas] = ignore
+	if not quiet then
+		core.events:Fire("IgnoreVignetteTypeChanged", atlas, ignore)
+	end
+	return true
+end
+
+function module:ShouldIgnoreVignette(id, atlas)
+	if self.db.profile.ignore[id] then
+		return true
+	end
+	if ns.vignetteTreasureLookup[id] and ns.vignetteTreasureLookup[id].source and core.db.global.ignore_datasource[ns.vignetteTreasureLookup[id].source] then
+		return true
+	end
+	if self.db.profile.ignore_type.glowingmoth and id >= 7173 and id <= 7293 then
+		return true
+	end
+	if atlas and self.db.profile.ignore_type[atlas:lower()] then
+		return true
+	end
+	return false
+end
+
+function module:SeenVignette(event, name, vignetteid, atlas)
+	local config = core:GetModule("Config", true)
+	if not config then return end
+	-- Either of these can be missing, for vignettes the client has told us
+	-- about without giving us any details beyond the GUID. Nothing to add to
+	-- the ignore lists in that case, since there'd be no way to match on it.
+	if vignetteid then
+		if type(name) == "string" then
+			listed[vignetteid] = name
+		elseif not listed[vignetteid] then
+			listed[vignetteid] = true
+		end
+	end
+	if atlas then
+		local typeconfig = config.options.args.scanning.plugins.vignettes.vignettes.args.ignore.args.type.args
+		if not typeconfig[atlas:lower()] then
+			typeconfig[atlas:lower()] = vignetteTypeToggle(atlas:lower(), CreateAtlasMarkup(atlas, 20, 20) .. " " .. atlas)
+		end
+	end
+end
+
+-- handy debug command:
+-- /dump C_VignetteInfo.GetVignetteInfo(C_VignetteInfo.GetVignettes()[1])
+
+local already_notified = {
+	-- [instanceid] = true
+}
+local already_notified_loot = {
+	-- [instanceid] = time()
+}
+
+local MOB = 1
+local LOOT = 2
+local visible_zonedeny = {
+	-- [1550] = LOOT, -- The Shadowlands, because of...
+	-- [1565] = LOOT, -- Ardenweald, where all chests are notified from the entire zone
+	-- But also all the Shadowlands zones, because callings quests are fucky about this and I need to work out a heuristic for them
+	-- [1533] = LOOT, -- Bastion
+	-- [1536] = LOOT, -- Maldraxxus
+	-- [1525] = LOOT, -- Revendreth
+	[1543] = true, -- Maw (where there's just so *many*)
+}
+local visible_noparents = {
+	[1961] = true, -- Korthia is a child of the Maw
+}
+local vignette_denylist = {
+	[637] = true, -- Garrison Cache
+}
+local function shouldShowNotVisible(vignetteInfo, zone)
+	local variant = (vignetteInfo.atlasName == "VignetteLoot" or vignetteInfo.atlasName == "VignetteLootElite") and LOOT or MOB
+	if vignetteInfo.onWorldMap and module.db.profile.pointsofinterest and variant == MOB then
+		-- If it's on the world map, it's cool
+		-- BUT don't alert for treasures on the world map, because there's no time-sensitive ones so far (9.1), and
+		-- it results in bursts of alerts when zoning into the Shadowlands area with the daily chests
+		return not module.db.profile.visibleOnly
+	end
+	if vignetteInfo.zoneInfiniteAOI and not module.db.profile.zoneInfinite then
+		-- It can be semi-seen from the entire zone, and so we should wait until it's actually-visible
+		return false
+	end
+	if visible_zonedeny[zone] == true or visible_zonedeny[zone] == variant then
+		return false
+	end
+	local info = C_Map.GetMapInfo(zone)
+	if not visible_noparents[zone] and info and info.parentMapID and info.parentMapID ~= 0 then
+		return shouldShowNotVisible(vignetteInfo, info.parentMapID)
+	end
+	return not module.db.profile.visibleOnly
+end
+
+function module:WorkOutMobFromVignette(instanceid)
+	if not self.db.profile.enabled then return end
+	if already_notified[instanceid] then
+		return --Debug("Skipping notify", "already done", instanceid)
+	end
+	if not core.db.profile.instances and IsInInstance() then return end
+	local vignetteInfo = C_VignetteInfo.GetVignetteInfo(instanceid)
+	if not vignetteInfo then
+		return -- Debug("vignette had no info")
+	end
+	local vignetteID = vignetteInfo.vignetteID or 0
+	if vignette_denylist[vignetteID] then
+		return -- Debug("Vignette was on the denylist", vignetteInfo.vignetteID)
+	end
+	if self:ShouldIgnoreVignette(vignetteID, vignetteInfo.atlasName) then
+		return -- Debug("Vignette was ignored", vignetteInfo.vignetteID, vignetteInfo.name)
+	end
+	-- instanceid *is* the vignetteGUID, and unlike vignetteInfo.vignetteGUID it's
+	-- guaranteed to be present, so it's the safer key to dedupe on. Checked early
+	-- to skip the position and zone lookups below.
+	if already_notified_loot[instanceid] and time() < (already_notified_loot[instanceid] + core.db.profile.delay) then
+		return -- Debug("skipping notification", "delay not exceeded")
+	end
+	local current_zone = HBD:GetPlayerZone()
+	if not current_zone or current_zone == 0 then
+		return -- Debug("We don't know what zone we're in", current_zone)
+	end
+	local source = vignetteInfo.onWorldMap and "point-of-interest" or "vignette"
+	local x, y
+	if vignetteInfo.vignetteGUID then
+		local position = C_VignetteInfo.GetVignettePosition(vignetteInfo.vignetteGUID, current_zone)
+		if position then
+			x, y = position:GetXY()
+		else
+			-- Some zones give vignette data for the parent zone, but without position information because they're
+			-- off the edge of the child zone map. (E.g. Siren Isle's Forgotten Vault.)
+			local mapInfo = C_Map.GetMapInfo(current_zone)
+			if mapInfo and mapInfo.parentMapID then
+				position = C_VignetteInfo.GetVignettePosition(vignetteInfo.vignetteGUID, mapInfo.parentMapID)
+				if position then
+					x, y = position:GetXY()
+					current_zone = mapInfo.parentMapID
+				end
+			end
+		end
+	end
+	if not vignetteInfo.onMinimap and not shouldShowNotVisible(vignetteInfo, current_zone) then
+		return -- Debug("vignette not visible on minimap and we're only alerting for visibles")
+	end
+	if vignetteInfo.atlasName == "VignetteLoot" or vignetteInfo.atlasName == "VignetteLootElite" or ns.vignetteTreasureLookup[vignetteInfo.vignetteID] then
+		if ns.vignetteTreasureLookup[vignetteInfo.vignetteID] and ns.vignetteTreasureLookup[vignetteInfo.vignetteID].hidden then
+			return -- Debug("skipping notification", "ignored by vignette-id")
+		end
+		if not core:PlayerIsInteractive() then
+			return -- Debug("skipping notification", "on taxi")
+		end
+		local treasure = ns.vignetteTreasureLookup[vignetteInfo.vignetteID]
+		if treasure then
+			if not core:PassesFactionCheck(treasure) then
+				-- Debug("skipping notification", "wrong faction")
+				return
+			end
+			if treasure.requires and not ns.conditions.check(treasure.requires) then
+				-- Debug("skipping notification", "vignette requirements not met", ns.conditions.summarize(treasure.requires))
+				return
+			end
+			if treasure.active and not ns.conditions.check(treasure.active) then
+				-- Debug("skipping notification", "vignette not active", ns.conditions.summarize(treasure.active))
+				return
+			end
+		end
+		already_notified_loot[instanceid] = time()
+		-- deliberately the raw value, not the `or 0` local: downstream treats
+		-- this as the treasure's identity, and 0 is truthy, so a sentinel would
+		-- collide across every vignette we couldn't identify
+		core.events:Fire("SeenVignette", vignetteInfo.name, vignetteInfo.vignetteID, vignetteInfo.atlasName, current_zone, x or 0, y or 0, instanceid)
+		core.events:Fire("SeenLoot", vignetteInfo.name, vignetteInfo.vignetteID, current_zone, x or 0, y or 0, instanceid)
+		return true
+	end
+	if vignetteInfo.objectGUID then
+		-- this *may* be a mob, but it also may be something which you interact with to summon the mob
+		local mobid = ns.IdFromGuid(vignetteInfo.objectGUID)
+		if mobid and ns.mobdb[mobid] then
+			--Debug("mob from guid", vignetteInfo.objectGUID, mobid)
+			return self:NotifyIfNeeded(mobid, current_zone, x, y, source, instanceid)
+		end
+	end
+	-- And now, comparatively uncommon fallbacks:
+	if vignetteInfo.vignetteID and ns.vignetteMobLookup[vignetteInfo.vignetteID] then
+		-- IDs are based on https://wago.tools/db2/Vignette
+		--Debug("vignetteMobLookup", vignetteInfo.name, vignetteInfo.vignetteID, ns.vignetteMobLookup[vignetteInfo.vignetteID])
+		return self:NotifyForMobs(ns.vignetteMobLookup[vignetteInfo.vignetteID], current_zone, x, y, source, instanceid)
+	end
+	if vignetteInfo.name then
+		local mobid = core:IdForMob(vignetteInfo.name)
+		if mobid then
+			--Debug("name", vignetteInfo.name, mobid)
+			return self:NotifyIfNeeded(mobid, current_zone, x, y, source, instanceid)
+		end
+	end
+	Debug("Couldn't work out mob from vignette", vignetteInfo.name)
+end
+function module:NotifyForMobs(mobs, ...)
+	for mobid in pairs(mobs) do
+		self:NotifyIfNeeded(mobid, ...)
+	end
+end
+
+function module:VIGNETTE_MINIMAP_UPDATED(event, instanceid, onMinimap, ...)
+	Debug("VIGNETTE_MINIMAP_UPDATED", instanceid, onMinimap, ...)
+	if not instanceid then
+		-- ...just in case
+		Debug("No Vignette instanceid")
+		return
+	end
+	self:WorkOutMobFromVignette(instanceid)
+end
+function module:VIGNETTES_UPDATED()
+	-- Debug("VIGNETTES_UPDATED")
+	local vignetteids = C_VignetteInfo.GetVignettes()
+
+	-- Interesting point: these show up here before they're on the minimap. This means that VIGNETTE_MINIMAP_UPDATED is actually almost never going to trip this notification now...
+
+	for i=1, #vignetteids do
+		self:WorkOutMobFromVignette(vignetteids[i])
+	end
+end
+
+function module:NotifyIfNeeded(id, current_zone, x, y, variant, instanceid)
+	if not (x and y) then
+		x, y = HBD:GetPlayerZonePosition()
+	end
+	if not (current_zone and x and y) then
+		return
+	end
+	local mob = ns.mobdb[id]
+	if mob then
+		if mob.requires and not ns.conditions.check(mob.requires) then
+			-- Debug("skipping notification", "mob requirements not met", ns.conditions.summarize(mob.requires))
+			return
+		end
+		if mob.active and not ns.conditions.check(mob.active) then
+			-- Debug("skipping notification", "mob not active", ns.conditions.summarize(mob.active))
+			return
+		end
+	end
+	already_notified[instanceid] = true
+	local vignetteInfo = C_VignetteInfo.GetVignetteInfo(instanceid)
+	local ret = core:NotifyForMob(id, current_zone, x, y, false, variant or "vignette", false, nil, false, nil, instanceid)
+	if vignetteInfo then
+		-- here the mob id is the identity, so a missing vignetteID is fine to pass along
+		core.events:Fire("SeenVignette", vignetteInfo.name, vignetteInfo.vignetteID, vignetteInfo.atlasName, current_zone, x, y, instanceid, id)
+	end
+	return ret
+end

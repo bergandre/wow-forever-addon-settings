@@ -1,0 +1,152 @@
+local core = LibStub("AceAddon-3.0"):GetAddon("SilverDragon")
+local module = core:NewModule("Config", "AceConsole-3.0")
+
+local function toggle(name, desc, order, inline, disabled)
+	return {
+		type = "toggle",
+		name = name,
+		desc = desc,
+		order = order,
+		descStyle = (inline or (inline == nil)) and "inline" or nil,
+		width = (inline or (inline == nil)) and "full" or nil,
+		disabled = disabled,
+	}
+end
+module.toggle = toggle
+local function desc(text, order)
+	return {
+		type = "description",
+		name = text,
+		order = order,
+		fontSize = "medium",
+	}
+end
+module.desc = desc
+
+local options = {
+	type = "group",
+	name = "SilverDragon",
+	get = function(info) return core.db.profile[info[#info]] end,
+	set = function(info, v)
+		core.db.profile[info[#info]] = v
+		-- anything drawing from these has to be told; the map in particular keeps
+		-- its pins up until something asks it to think again
+		core.events:Fire("OptionsChanged", info[#info], v)
+	end,
+	args = {
+		about = {
+			type = "group",
+			name = "About",
+			args = {
+				about = desc("SilverDragon keeps an eye out for rare mobs for you.\n\n"..
+						"If you want to change how it does that, go to the \"Scanning\" section "..
+						"of the config. You can enable or disable the different methods used, and "..
+						"adjust how some of them behave.\n\n"..
+						"If you want to adjust the way the targeting popup appears, go to the \"ClickTarget\" "..
+						"section.\n\n"..
+						"If you want to change how you're told about seeing a rare, check out the "..
+						"\"Announcements\" section.\n\n"..
+						"If you want to add a custom mob to scan for, look at \"Custom\" in the \"Mobs\" "..
+						"section.\n\n"..
+						"If you want SilverDragon to please, please stop telling you about a certain "..
+						"mob, look at \"Ignore\" in the \"Mobs\" section.\n\n"..
+						"The same but about a treasure is in \"Scanning\" > \"Vignettes\"."),
+			},
+			order = 0,
+		},
+		general = {
+			type = "group",
+			name = "General",
+			order = 10,
+			args = {
+				loot = {
+					type = "group",
+					name = "Loot",
+					inline = true,
+					order = 10,
+					args = {
+						about = desc("Some options for how SilverDragon will treat loot drops from mobs", 0),
+						charloot = toggle("Current character only", "Only count loot that should drop for your current character towards a rare being worth announcing. The loot window still shows everything, with what won't drop for you moved to its own section.", 10),
+						sharedloot = toggle("Count shared loot", "Some rares draw on a loot table shared with others nearby. Count what's in it towards them being worth announcing, the same as their own loot.", 15),
+						sharedloot_alerts = toggle("...for alerts?", "A shared mount you haven't got will earn the mount sound, flash and map icon as well, rather than just being notable.", 16, nil, function() return not core.db.profile.sharedloot end),
+						boeloot = toggle("Count sellable duplicates", "A mount, pet or toy you already have still counts as notable if it's bind-on-equip, since you can sell it.", 20),
+						transmog_specific = toggle("Transmog exact items", "For transmog appearances, only count them as known if you know them from that exact item, rather than from another sharing the same appearance", 25),
+					}
+				},
+			},
+			plugins = {},
+		},
+		notable = {
+			type = "group",
+			name = "Notability",
+			order = 13,
+			args = {
+				about = desc("These decide what SilverDragon treats as worth your attention. The announcement filter, the map overlay and the click-target macro all ask the same question.", 0),
+				achievement_notable = toggle(_G.TRANSMOG_SOURCE_5 or ACHIEVEMENTS or "Achievement", "Count unearned achievement-progress as notable", 10),
+				mount_notable = toggle(PERKS_VENDOR_CATEGORY_MOUNT or MOUNTS or "Mount", "Count unlearned mounts as notable loot. This also picks which sightings get the mount sound and flash, whatever the filters say", 20),
+				toy_notable = toggle(TOY or "Toy", "Count unlearned toys as notable loot", 30),
+				pet_notable = toggle(TOOLTIP_BATTLE_PET or "Battle Pet", "Count uncaught pets as notable loot", 40),
+				transmog_notable = toggle("Transmog", "Count unlearned transmogrification appearances as notable loot.\n\nWhether an appearance you know from some other item counts as known here is up to \"Transmog exact items\", over in General's Loot options", 50),
+				decor_notable = toggle(_G.BINDING_TAG_DECOR or "Decor", "Count unfound decor as notable loot", 60, nil, not _G.BINDING_TAG_DECOR),
+				quest_notable = toggle("Quest-attached", "Count items with attached uncompleted quests as notable loot (this includes a lot of \"learnable\" items, weekly reputation drops, etc)", 70),
+				alts_achievements_count = toggle("An alt counts", "Treat an achievement one of your other characters has completed as done, rather than as something still to earn", 80),
+			},
+			plugins = {},
+		},
+		announcements = {
+			type = "group",
+			name = "Announcements",
+			order = 17,
+			args = {
+				about = desc("SilverDragon wants to tell you when it sees a rare. These options set how it does that.", 0),
+			},
+			plugins = {},
+		},
+		scanning = {
+			type = "group",
+			name = "Scanning",
+			order = 20,
+			args = {
+				about = desc("SilverDragon is all about scanning for rare mobs. The options you see in this tab apply generally to all the scanning methods used. For more specific controls, check out the sub-sections.", 0),
+				scan = {
+					type = "range",
+					name = "Scan interval",
+					desc = "How often to scan for nearby rares, in seconds (0 disables scanning)",
+					min = 0, max = 10, step = 0.1,
+					order = 10,
+				},
+				delay = {
+					type = "range",
+					name = "Recording delay",
+					desc = "How long to wait before recording the same rare again",
+					min = 30, max = (60 * 60), step = 10,
+					order = 20,
+				},
+				dead = toggle("Dead rares", "Count a rare that's already dead when we spot it, and tell you about it. Not every way of spotting them can tell whether one is dead.", 45),
+				instances = toggle("Scan in instances", "Look for rares while you're in an instance, and tell you about the ones we find. There aren't that many actual rares in instances, and scanning might slow things down at a time when you'd like the most performance possible.", 50),
+				taxi = toggle("Scan on taxis", "Keep scanning for rares while flying on a taxi or in a dragon race. Just hope that it'll still be there after you land and make your way back...", 55),
+			},
+			plugins = {},
+		},
+	},
+	plugins = {
+	},
+}
+module.options = options
+
+function module:OnInitialize()
+	options.plugins["profiles"] = {
+		profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(core.db)
+	}
+	options.plugins.profiles.profiles.order = -1 -- last!
+
+	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("SilverDragon", function()
+		core.events:Fire("OptionsRequested", options)
+		return options
+	end)
+	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SilverDragon", "SilverDragon")
+end
+
+function module:ShowConfig(...)
+	LibStub("AceConfigDialog-3.0"):Open("SilverDragon", ...)
+end

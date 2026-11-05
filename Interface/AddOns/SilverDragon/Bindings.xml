@@ -1,0 +1,9 @@
+<Bindings>
+	<Binding name="CLICK SilverDragonPopupButton:LeftButton" category="BINDING_HEADER_SILVERDRAGON">
+	</Binding>
+	<Binding name="CLICK SilverDragonMacroButton:LeftButton" category="BINDING_HEADER_SILVERDRAGON">
+	</Binding>
+	<Binding name="SILVERDRAGON_TOGGLE_BROWSER" category="BINDING_HEADER_SILVERDRAGON">
+		SilverDragon:GetModule("Browser"):Toggle()
+	</Binding>
+</Bindings>

@@ -1,0 +1,346 @@
+local myname = ...
+
+local core = LibStub("AceAddon-3.0"):GetAddon("SilverDragon")
+local module = core:GetModule("Overlay")
+local Debug = core.Debug
+local ns = core.NAMESPACE
+
+local HBD = LibStub("HereBeDragons-2.0")
+local HBDPins = LibStub("HereBeDragons-Pins-2.0")
+
+-- cached so the OnUpdate doesn't read the cvar every frame
+local rotating = GetCVar("rotateMinimap") == "1"
+
+local f = CreateFrame("Frame", myname .. "MiniMapDataProviderFrame")
+local dataProvider = {
+    facing = GetPlayerFacing(),
+    pins = {},
+    pinPools = {},
+    -- pool = CreateFramePool("FRAME", Minimap, "SilverDragonOverlayMinimapPinTemplate"),
+}
+module.MiniMapDataProvider = dataProvider
+
+function dataProvider:RefreshAllData()
+    -- if we're here really early for some reason
+    if not module.db then return end
+
+    HBDPins:RemoveAllMinimapIcons(self)
+    self:ReleaseAllPins()
+
+    -- if we either can't display anything meaningful, or are disabled
+    if rotating and self.facing == nil then return end
+    if not module.db.profile.minimap.enabled then return end
+
+    local uiMapID = HBD:GetPlayerZone()
+    if not uiMapID then return end
+
+    for coord, pointType, id, textureData, scale, alpha in module:IterateNodes(uiMapID, true) do
+        local x, y = core:GetXY(coord)
+        local pin = self:AcquirePin("SilverDragonOverlayMinimapPinTemplate", id, pointType, textureData, scale or 1.0, alpha or 1.0, coord, uiMapID, true)
+
+        local edge = module.db.profile.minimap.edge == module.const.EDGE_ALWAYS
+        if module.db.profile.minimap.edge == module.const.EDGE_FOCUS then
+            edge = module:IsFocused(id, pointType == "treasure")
+        end
+
+        HBDPins:AddMinimapIconMap(self, pin, uiMapID, x, y, false, edge)
+
+        pin:UpdateEdge()
+    end
+
+    self.moveThreshold = nil
+
+    if module.db.profile.minimap.routes and ns.mobsByZone[uiMapID] then
+        -- Route segments are culled against where the player is standing now, so
+        -- note it: CheckMovement rebuilds the whole set once they've gone far
+        -- enough that something culled could be close to coming into view.
+        local radius = module:GetMinimapViewDiameter() / 2
+        self.playerX, self.playerY = HBD:GetPlayerWorldPosition()
+        self.moveThreshold = radius / 2
+        self.cullDistance = radius + self.moveThreshold
+
+        for mobid, coords in pairs(ns.mobsByZone[uiMapID]) do
+            self:AddRoute(uiMapID, mobid)
+        end
+    end
+end
+
+function dataProvider:CheckMovement()
+    if not (self.moveThreshold and self.playerX) then return end
+    local x, y = HBD:GetPlayerWorldPosition()
+    if not x then return end
+    local dx, dy = x - self.playerX, y - self.playerY
+    if (dx * dx + dy * dy) > (self.moveThreshold * self.moveThreshold) then
+        module:UpdateMinimapIcons()
+    end
+end
+
+function dataProvider:RefreshAllRotations()
+    for _, pool in pairs(self.pinPools) do
+        for pin in pool:EnumerateActive() do
+            if pin.UpdateRotation then
+                pin:UpdateRotation()
+            end
+        end
+    end
+end
+
+local function OnPinReleased(pinPool, pin)
+    (_G.FramePool_HideAndClearAnchors or _G.Pool_HideAndClearAnchors)(pinPool, pin)
+    pin:OnReleased()
+
+    pin.pinTemplate = nil
+    pin.provider = nil
+end
+function dataProvider:AcquirePin(pinTemplate, ...)
+    if not self.pinPools[pinTemplate] then
+        self.pinPools[pinTemplate] = CreateFramePool("FRAME", Minimap, pinTemplate, OnPinReleased)
+    end
+    local pin, newPin = self.pinPools[pinTemplate]:Acquire()
+
+    pin.pinTemplate = pinTemplate
+    pin.provider = self
+
+    if newPin then
+        pin:OnLoad()
+    end
+
+    pin:Show()
+    pin:OnAcquired(...)
+
+    return pin
+end
+
+function dataProvider:ReleaseAllPins()
+    for _, pool in pairs(self.pinPools) do
+        pool:ReleaseAll()
+    end
+end
+
+-- these go through UpdateMinimapIcons rather than straight to RefreshAllData
+-- because it refreshes the cached minimap zoom, which MINIMAP_UPDATE_ZOOM in
+-- particular has just told us changed
+module:RegisterEvent("MINIMAP_UPDATE_ZOOM", function() module:UpdateMinimapIcons() end)
+module:RegisterEvent("CVAR_UPDATE", function(_, varname)
+    if varname == "ROTATE_MINIMAP" then
+        rotating = GetCVar("rotateMinimap") == "1"
+        module:UpdateMinimapIcons()
+    end
+end)
+f:SetScript("OnUpdate", function(self)
+    if rotating then
+        local facing = GetPlayerFacing()
+        if facing ~= dataProvider.facing then
+            dataProvider.facing = facing
+            dataProvider:RefreshAllRotations()
+        end
+    end
+end)
+C_Timer.NewTicker(0.5, function(...)
+    for _, pool in pairs(dataProvider.pinPools) do
+        for pin in pool:EnumerateActive() do
+            if pin.UpdateEdge then
+                pin:UpdateEdge()
+            end
+        end
+    end
+    dataProvider:CheckMovement()
+end)
+
+function dataProvider:AddRoute(uiMapID, mobid)
+    local data = ns.mobdb[mobid or 0]
+    if not data then return end
+    if not (data.routes and data.routes[uiMapID]) then return end
+    if not module.should_show_point(mobid, uiMapID) then return end
+    for _, route in ipairs(data.routes[uiMapID]) do
+        for i=1, #route - 1 do
+            self:DrawSegment(route[i], route[i+1], uiMapID, mobid, route)
+        end
+        if route.loop and #route > 1 then
+            self:DrawSegment(route[1], route[#route], uiMapID, mobid, route)
+        end
+    end
+end
+
+-- Segments are cut to a length in screen pixels, so how many of them a leg needs
+-- follows the minimap zoom. Each piece stays short enough that hiding the ones
+-- whose midpoint leaves the minimap reads as the route being clipped to the
+-- edge, and square enough that rotating its texture doesn't distort it.
+local SEGMENT_LENGTH = 16
+
+local function screenLength(worldDistance)
+    return Minimap:GetWidth() * (worldDistance / module:GetMinimapViewDiameter())
+end
+
+local function onScreenLength(x1, y1, x2, y2, uiMapID)
+    local wx1, wy1 = HBD:GetWorldCoordinatesFromZone(x1, y1, uiMapID)
+    local wx2, wy2 = HBD:GetWorldCoordinatesFromZone(x2, y2, uiMapID)
+    if not (wx1 and wx2) then return 0 end
+    return screenLength(math.sqrt((wx2-wx1)^2 + (wy2-wy1)^2))
+end
+
+-- HereBeDragons hides the pins that fall outside the minimap, but it still has
+-- to look at every one it's been handed, so segments the player can't be near
+-- are better off never being registered.
+function dataProvider:InView(wx, wy, reach)
+    if not self.playerX then return true end
+    local dx, dy = wx - self.playerX, wy - self.playerY
+    return (dx * dx + dy * dy) <= (reach * reach)
+end
+
+local segmented = {}
+function dataProvider:DrawSegment(coord1, coord2, uiMapID, ...)
+    wipe(segmented)
+    local x1, y1 = core:GetXY(coord1)
+    local x2, y2 = core:GetXY(coord2)
+
+    local wx1, wy1 = HBD:GetWorldCoordinatesFromZone(x1, y1, uiMapID)
+    local wx2, wy2 = HBD:GetWorldCoordinatesFromZone(x2, y2, uiMapID)
+    if not (wx1 and wx2) then return end
+
+    local worldLength = math.sqrt((wx2-wx1)^2 + (wy2-wy1)^2)
+    local segments = max(ceil(screenLength(worldLength) / SEGMENT_LENGTH), 1)
+
+    for i=0, segments do
+        segmented[#segmented + 1] = core:GetCoord(
+            x1 + (x2-x1) / segments * i,
+            y1 + (y2-y1) / segments * i
+        )
+    end
+
+    -- zone to world is affine, so a segment's midpoint interpolates exactly
+    local reach = (self.cullDistance or 0) + (worldLength / segments) / 2
+    for i=1, #segmented - 1 do
+        local along = (i - 0.5) / segments
+        if self:InView(wx1 + (wx2-wx1) * along, wy1 + (wy2-wy1) * along, reach) then
+            self:AcquirePin("SilverDragonOverlayMinimapRoutePinTemplate", segmented[i], segmented[i + 1], uiMapID, ...)
+        end
+    end
+end
+
+--
+
+SilverDragonOverlayMinimapPinMixin = CreateFromMixins(module.SilverDragonOverlayPinMixinBase)
+
+function SilverDragonOverlayMinimapPinMixin:OnLoad()
+    self:SetParent(Minimap)
+    self:SetFrameStrata(Minimap:GetFrameStrata())
+    self:SetFrameLevel(Minimap:GetFrameLevel() + 5)
+    self:EnableMouse()
+
+    self:SetScript("OnEnter", self.OnMouseEnter)
+    self:SetScript("OnLeave", self.OnMouseLeave)
+    self:SetScript("OnMouseUp", self.OnClick)
+
+    self:SetMouseClickEnabled(true)
+    self:SetMouseMotionEnabled(true)
+end
+
+function SilverDragonOverlayMinimapPinMixin:UpdateEdge()
+    local alpha = (HBDPins:IsMinimapIconOnEdge(self) and 0.6 or 1) * self:Config().icon_alpha
+    self:SetAlpha(alpha)
+end
+
+SilverDragonOverlayMinimapRoutePinMixin = {}
+function SilverDragonOverlayMinimapRoutePinMixin:OnLoad()
+    self:SetParent(Minimap)
+    self:SetFrameStrata(Minimap:GetFrameStrata())
+    self:SetFrameLevel(Minimap:GetFrameLevel() + 3)
+    if ns.CLASSIC then
+        self.texture:SetAtlas("_UI-Taxi-Line-horizontal")
+    else
+        self.texture:SetAtlas("_AnimaChannel-Channel-Line-horizontal")
+    end
+
+    self.minimap = true
+end
+
+function SilverDragonOverlayMinimapRoutePinMixin:OnAcquired(coord1, coord2, uiMapID, mobid, route)
+    -- print("OnAcquired", coord1, coord2, uiMapID)
+    local x1, y1 = core:GetXY(coord1)
+    local x2, y2 = core:GetXY(coord2)
+
+    local wx1, wy1 = HBD:GetWorldCoordinatesFromZone(x1, y1, uiMapID)
+    local wx2, wy2 = HBD:GetWorldCoordinatesFromZone(x2, y2, uiMapID)
+    self.rotation = -math.atan2(wy2-wy1, wx2-wx1)
+
+    self:SetSize(onScreenLength(x1, y1, x2, y2, uiMapID), SEGMENT_LENGTH)
+    self.texture:SetRotation(self.rotation)
+
+    local r, g, b, a = 1, 1, 1, 0.6
+    if route and route.r then
+        r, g, b, a = route.r or 1, route.g or 1, route.b or 1, route.a or 0.6
+    else
+        r, g, b = module.id_to_color(mobid, uiMapID)
+    end
+    self.texture:SetVertexColor(r, g, b, a * self:Config().icon_alpha)
+
+    local x, y = (x1+x2)/2, (y1+y2)/2
+    HBDPins:AddMinimapIconMap(dataProvider, self, uiMapID, x, y)
+
+    if rotating then self:UpdateRotation() end
+end
+function SilverDragonOverlayMinimapRoutePinMixin:OnReleased()
+    self.texture:SetRotation(0)
+    self.texture:SetTexCoord(0, 1, 0, 1)
+    self.texture:SetVertexColor(1, 1, 1, 1)
+    self.rotation = nil
+    self:SetAlpha(1)
+    if self.SetScalingLimits then -- world map
+        self:SetScalingLimits(nil, nil, nil)
+    end
+end
+function SilverDragonOverlayMinimapRoutePinMixin:UpdateRotation()
+    if self.rotation == nil or self.provider.facing == nil then return end
+    self.texture:SetRotation(self.rotation + math.pi*2 - self.provider.facing)
+end
+
+-- This isn't made from the mixin, but I want this method anyway:
+SilverDragonOverlayMinimapRoutePinMixin.Config = module.SilverDragonOverlayPinMixinBase.Config
+
+--
+
+do
+    local APIfallback = not (C_Minimap and C_Minimap.GetViewRadius)
+    local indoors, zoom
+    local function refreshZoom()
+        zoom = Minimap:GetZoom()
+        indoors = GetCVar("minimapZoom")+0 == zoom and "outdoor" or "indoor"
+    end
+    function module:UpdateMinimapIcons()
+        -- on PlayerZoneChanged
+        if APIfallback then
+            refreshZoom()
+        end
+        self.MiniMapDataProvider:RefreshAllData()
+    end
+    -- this table is from HereBeDragons:
+    local minimap_size = {
+        indoor = {
+            [0] = 300, -- scale
+            [1] = 240, -- 1.25
+            [2] = 180, -- 5/3
+            [3] = 120, -- 2.5
+            [4] = 80,  -- 3.75
+            [5] = 50,  -- 6
+        },
+        outdoor = {
+            [0] = 466 + 2/3, -- scale
+            [1] = 400,       -- 7/6
+            [2] = 333 + 1/3, -- 1.4
+            [3] = 266 + 2/6, -- 1.75
+            [4] = 200,       -- 7/3
+            [5] = 133 + 1/3, -- 3.5
+        },
+    }
+    function module:GetMinimapViewDiameter()
+        if APIfallback then
+            if not indoors then
+                -- we've been reached without anything having primed the cache
+                refreshZoom()
+            end
+            return minimap_size[indoors][zoom]
+        end
+        return C_Minimap.GetViewRadius() * 2
+    end
+end
