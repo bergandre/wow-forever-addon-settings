@@ -1,0 +1,159 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- Required for ScrollUtil to work properly.
+	This template describes the row only. The other objects and widgets are in the Lua.
+
+	The row itself must be described in a frame template (virtual = true).
+	This template is used by the data provider (<data provider>:Insert).  
+	Insert creates an instance of this template to use as the row.
+
+	Unsure how much detail is **required** for ScrollUtil to work.
+	We will use KISS here, fleshing out detail in Lua as needed.
+
+	Include in XML:
+	- Visual layout of a row : order (relative to); offsets; size
+	- Any static button icon / texture
+
+	Include in Lua:
+	- Tooltips because they could change
+	- Frame scripts - changes based on row data; touch easier to find and change
+
+	Notes:
+	- Button textures seem touchy, accessing any XML created texture from Lua seems doomed :).
+	Using straight Button (no inherit) with :SetNormalTexture (plus) is working.
+	Several button templates throw an error or do not seem to work...
+	
+	
+	See the Lua implementation for details.
+	-->
+	<Frame name="TitanUIRowTemplate" virtual="true">
+		<Size x="300" y="30" />
+		<Layers>
+			<!-- Prefix for Command input -->
+			<Layer level="OVERLAY">
+				<FontString parentKey="Text" inherits="GameFontNormal" text="/">
+					<Anchors>
+						<Anchor point="LEFT" x="0" y="-3" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- Command input -->
+			<EditBox parentKey="Command" inherits="InputBoxTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT"
+						relativeKey="$parent.Text">
+						<Offset>
+							<AbsDimension x="5" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="350" y="24" />
+				</Size>
+			</EditBox>
+
+			<!-- Notes / Description -->
+			<EditBox parentKey="Notes" inherits="InputBoxTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT"
+						relativeKey="$parent.Command">
+						<Offset>
+							<AbsDimension x="10" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="180" y="24" />
+				</Size>
+			</EditBox>
+
+			<!-- Whether to show on menu or not -->
+			<CheckButton parentKey="OnMenu" inherits="UICheckButtonTemplate">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT"
+						relativeKey="$parent.Notes">
+						<Offset>
+							<AbsDimension x="5" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+
+			<!-- Save / Update -->
+			<Button parentKey="SaveIcon">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT"
+						relativeKey="$parent.OnMenu">
+						<Offset>
+							<AbsDimension x="5" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="$parent.IconTexture"
+							file="Interface\AddOns\TitanUI\Artwork\save_black">
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+
+			<!-- Clear / Delete -->
+			<Button parentKey="ClearIcon">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT"
+						relativeKey="$parent.SaveIcon">
+						<Offset>
+							<AbsDimension x="5" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="$parent.IconTexture"
+							file="Interface\AddOns\TitanUI\Artwork\delete_recycle">
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+
+			<!-- Tag for run / current SLASH -->
+			<Button parentKey="CommandTag">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT"
+						relativeKey="$parent.ClearIcon">
+						<Offset>
+							<AbsDimension x="5" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+
+			<!-- Run command -->
+			<Button parentKey="RunIcon">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT"
+						relativeKey="$parent.CommandTag">
+						<Offset>
+							<AbsDimension x="5" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="$parent.IconTexture"
+							file="Interface\AddOns\TitanUI\Artwork\run_blue">
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+
+		</Frames>
+	</Frame>
+</Ui>

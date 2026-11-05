@@ -1,0 +1,20 @@
+VER 3 0000000000000003 "charge + rend" "134400"
+#showtooltip
+/startattack
+/cast [nocombat,nostance:1] Battle Stance
+/cast [nocombat,stance:1] Charge
+/cast [combat] Rend
+END
+VER 3 0000000000000004 "RXP ITEM" "134400"
+#showtooltip
+/click RXPItemFrameButton1 LeftButton 1
+/click RXPItemFrameButton1 LeftButton
+END
+VER 3 0000000000000002 "RXPFollow" "Inv_boots_02"
+//You are not in a party.
+END
+VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
+/targetexact Rezlak
+/tm !7
+/targetlasttarget [dead]
+END

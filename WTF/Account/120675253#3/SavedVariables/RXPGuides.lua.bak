@@ -1,0 +1,107 @@
+
+RXPData = {
+["maxLoadTime"] = 4000,
+["gameVersion"] = 16001,
+["cacheVersion"] = 30,
+["questNames"] = {
+["locale"] = "enUS",
+},
+["trainGenericSpells"] = true,
+["release"] = "v4.11.32",
+["defaultProfile"] = false,
+["realmData"] = {
+["CAMWOW EU4 Realm 8 PvP"] = {
+},
+},
+}
+RXPDB = {
+["profileKeys"] = {
+["Invited - PvP"] = "global",
+},
+["profiles"] = {
+["global"] = {
+},
+},
+}
+RXPSettings = {
+["profileKeys"] = {
+["Invited - PvP"] = "Invited - PvP",
+},
+["profiles"] = {
+["Invited - PvP"] = {
+["tbcStart"] = 2,
+["hardcore"] = false,
+["framePositions"] = {
+["activeItemFrame"] = {
+{
+"CENTER",
+"UIParent",
+"CENTER",
+0,
+0,
+},
+},
+["activeTargetFrame"] = {
+{
+"CENTER",
+"UIParent",
+"CENTER",
+0,
+0,
+},
+},
+["RXPV2GuideConfigurator"] = {
+{
+"RIGHT",
+nil,
+"RIGHT",
+-268.3328552246094,
+152.166259765625,
+},
+},
+["RXPFrame"] = {
+{
+"LEFT",
+"UIParent",
+"LEFT",
+0,
+34.99994277954102,
+},
+},
+["arrowFrame"] = {
+{
+"TOP",
+"UIParent",
+"TOP",
+0,
+0,
+},
+},
+},
+["season"] = 0,
+["frameSizes"] = {
+["activeItemFrame"] = {
+77.22542572021484,
+42.99982070922852,
+},
+["RXPFrame"] = {
+234.9996185302734,
+124.9998397827148,
+},
+["activeTargetFrame"] = {
+83.99966430664062,
+17.99995994567871,
+},
+["arrowFrame"] = {
+31.99997520446777,
+31.99997520446777,
+},
+},
+["goblinTele"] = false,
+["tbcWBF"] = true,
+["gnomeTele"] = false,
+["portalTele"] = false,
+},
+},
+}
+RXPString = nil

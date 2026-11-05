@@ -1,0 +1,145 @@
+
+AutoLooterDB = {
+["namespaces"] = {
+["RarityModule"] = {
+["profiles"] = {
+["Default"] = {
+["rarity"] = {
+true,
+[0] = true,
+},
+},
+},
+},
+},
+["profileKeys"] = {
+["Karums - CAMWOW EU4 Realm 4 PvP"] = "Default",
+["Gniloe - CAMWOW EU4 Realm 4 PvP"] = "Default",
+},
+["profiles"] = {
+["Default"] = {
+["typeTable"] = {
+["Quiver"] = {
+["Quiver"] = false,
+["Ammo Pouch"] = false,
+},
+["WoW Token"] = {
+["WoW Token"] = false,
+},
+["Trade Goods"] = {
+["Other"] = false,
+["Elemental"] = false,
+["Cooking"] = false,
+["Enchanting"] = false,
+["Leather"] = false,
+["Cloth"] = false,
+["Herb"] = false,
+["Metal & Stone"] = false,
+["Parts"] = false,
+},
+["Recipe"] = {
+["Tailoring"] = false,
+["Blacksmithing"] = false,
+["Alchemy"] = false,
+["First Aid"] = false,
+["Book"] = false,
+["Cooking"] = false,
+["Engineering"] = false,
+["Leatherworking"] = false,
+["Enchanting"] = false,
+},
+["Reagent"] = {
+["Reagent"] = false,
+},
+["Key"] = {
+["Key"] = false,
+["Lockpick"] = false,
+},
+["Armor"] = {
+["Totems"] = false,
+["Cosmetic"] = false,
+["Shields"] = false,
+["Librams"] = false,
+["Miscellaneous"] = false,
+["Leather"] = false,
+["Idols"] = false,
+["Mail"] = false,
+["Plate"] = false,
+["Cloth"] = false,
+},
+["Quest"] = {
+["Quest"] = false,
+},
+["Container"] = {
+["Bag"] = false,
+["Mining Bag"] = false,
+["Soul Bag"] = false,
+["Reagent Bag"] = false,
+["Cooking Bag"] = false,
+["Engineering Bag"] = false,
+["Herb Bag"] = false,
+["Trinket Bag"] = false,
+["Leatherworking Bag"] = false,
+["Enchanting Bag"] = false,
+},
+["Permanent(OBSOLETE)"] = {
+["Permanent"] = false,
+},
+["Miscellaneous"] = {
+["Other"] = false,
+["Reagent"] = false,
+["Mount"] = false,
+["Pet"] = false,
+["Junk"] = false,
+["Holiday"] = false,
+},
+["Consumable"] = {
+["Potions"] = false,
+["Temporary"] = false,
+["Draughts"] = false,
+["Devices"] = false,
+["Other"] = false,
+["Elixirs"] = false,
+["Food & Drink"] = false,
+["Explosives"] = false,
+["Flasks"] = false,
+["Scrolls"] = false,
+["Bandages"] = false,
+["Permanent"] = false,
+},
+["Generic(OBSOLETE)"] = {
+["Generic(OBSOLETE)"] = false,
+},
+["Projectile"] = {
+["Bullet"] = false,
+["Arrow"] = false,
+},
+["Jewelry(OBSOLETE)"] = {
+["Jewelry(OBSOLETE)"] = false,
+},
+["Money(OBSOLETE)"] = {
+["Money(OBSOLETE)"] = false,
+},
+["Weapon"] = {
+["One-Handed Axes"] = false,
+["One-Handed Swords"] = false,
+["Staves"] = false,
+["Crossbows"] = false,
+["Fishing Pole"] = false,
+["Polearms"] = false,
+["One-Handed Maces"] = false,
+["Bows"] = false,
+["Two-Handed Swords"] = false,
+["Miscellaneous"] = false,
+["Two-Handed Maces"] = false,
+["Guns"] = false,
+["Fist Weapons"] = false,
+["Thrown"] = false,
+["Wands"] = false,
+["Daggers"] = false,
+["Two-Handed Axes"] = false,
+},
+},
+},
+},
+}

@@ -1,0 +1,14 @@
+
+Scrap_CharSets = {
+["unusable"] = false,
+["consumable"] = true,
+["auto"] = {
+},
+["list"] = {
+[4946] = true,
+[281267] = true,
+[2318] = false,
+[4936] = false,
+[2934] = true,
+},
+}

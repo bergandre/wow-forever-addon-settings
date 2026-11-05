@@ -1,0 +1,46 @@
+## Interface: 120100, 50504, 38002, 20506, 16001, 11509
+## Title: AutoLooter
+## Version: v3.32
+## Author: Eliote
+## Notes: Auto Loot Money and Specific Items
+## SavedVariables: AutoLooterDB
+## IconTexture: Interface\Icons\Inv_misc_bag_01
+
+## X-Curse-Project-ID: 94767
+## X-Wago-ID: R4N2wQ6L
+
+embeds.xml
+widget\WrapTextCheckBox.lua
+
+Core.lua
+
+Locales.lua
+
+Util.lua
+AutoLooter.lua
+
+modules\common\ListHelper.lua
+modules\common\ToggleableModulePrototype.lua
+
+modules\Debug.lua
+modules\AlertList.lua
+modules\All.lua
+modules\AutoConfirmLoot.lua
+modules\Base.lua
+modules\BlackList.lua
+modules\ChatLoot.lua
+modules\Currency.lua
+modules\DataBroker.lua
+modules\Fishing.lua
+modules\FishingIgnore.lua
+modules\IgnoreBOP.lua
+modules\Locked.lua
+modules\Money.lua
+modules\Price.lua
+modules\Quest.lua
+modules\Rarity.lua
+modules\Token.lua
+modules\Type.lua
+modules\WhiteList.lua
+modules\DragonflightOptions.lua
+

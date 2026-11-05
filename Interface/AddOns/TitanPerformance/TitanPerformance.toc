@@ -1,0 +1,10 @@
+## Interface: 120105, 50504, 20506, 16001, 11509
+## Title: Titan Panel [|cffeda55fPerformance|r] |cff00aa009.3.5|r
+## Version: 9.3.5
+## IconTexture: Interface\AddOns\TitanPerformance\TitanPerformance
+## Notes: Adds FPS and Garbage collection information to Titan Panel
+## Author: Titan Panel Development Team
+## SavedVariables: 
+## OptionalDeps: 
+## Dependencies: Titan
+TitanPerformance.lua

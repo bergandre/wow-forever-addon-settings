@@ -1,0 +1,46 @@
+VER 3 0000000000000002 "/follow" "134357"
+/follow
+END
+VER 3 0000000000000006 "assist focus" "134400"
+#showtooltip
+/assist focus
+/cast Smite
+END
+VER 3 0000000000000005 "follow focus" "1322719"
+/follow focus
+END
+VER 3 0000000000000004 "follow heal" "1035050"
+/target Karums Warrior
+/focus
+END
+VER 3 0000000000000009 "heal flash" "134400"
+#showtooltip
+/cast [mod:shift,@player][@focus,help,nodead][] Lesser Heal
+END
+VER 3 000000000000000C "RXP ITEM" "134400"
+#showtooltip
+/click RXPItemFrameButton1 LeftButton 1
+/click RXPItemFrameButton1 LeftButton
+END
+VER 3 000000000000000A "RXPFollow" "Inv_boots_02"
+//You are not in a party.
+END
+VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
+/targetexact Tai'jin
+/tm !7
+/targetlasttarget [dead]
+END
+VER 3 000000000000000B "shoot" "134400"
+#showtooltip
+/assist focus
+/cast [mod:shift] Shadow Word: Pain; !Shoot
+END
+VER 3 0000000000000008 "word pain assist" "134400"
+#showtooltip
+/assist focus
+/cast Shadow Word: Pain
+END
+VER 3 000000000000000D "word shield focu" "134400"
+#showtooltip
+/cast [mod:shift,@player][@focus,help,nodead][] Power Word: Shield
+END

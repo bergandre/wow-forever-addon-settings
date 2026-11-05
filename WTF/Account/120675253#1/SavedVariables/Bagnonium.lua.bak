@@ -1,0 +1,116 @@
+
+Bagnonium_Sets = {
+["latest"] = {
+},
+["global"] = {
+["inventory"] = {
+["rules"] = {
+["tabs"] = {
+"all",
+"normal",
+"trade",
+},
+["sidebar"] = {
+"all",
+"tradegoods",
+"consumable",
+"armor",
+"questitem",
+"miscellaneous",
+},
+},
+["borderColor"] = {
+},
+["color"] = {
+},
+["height"] = 500.0001831054688,
+["activeRules"] = {
+["tabs"] = "all",
+["sidebar"] = "all",
+},
+["width"] = 399.9998474121094,
+},
+["guild"] = {
+["color"] = {
+},
+["rules"] = {
+["tabs"] = {
+"all",
+},
+["sidebar"] = {
+"all",
+"tradegoods",
+"consumable",
+"armor",
+"questitem",
+"miscellaneous",
+},
+},
+["activeRules"] = {
+},
+["borderColor"] = {
+},
+},
+["bank"] = {
+["color"] = {
+},
+["rules"] = {
+["tabs"] = {
+"all",
+"normal",
+"trade",
+},
+["sidebar"] = {
+"all",
+"tradegoods",
+"consumable",
+"armor",
+"questitem",
+"miscellaneous",
+},
+},
+["activeRules"] = {
+},
+["borderColor"] = {
+},
+},
+},
+["customRules"] = {
+},
+["color"] = {
+["quiver"] = {
+},
+["account"] = {
+},
+["enchant"] = {
+},
+["soul"] = {
+},
+["fridge"] = {
+},
+["mine"] = {
+},
+["engineer"] = {
+},
+["leather"] = {
+},
+["reagent"] = {
+},
+["gem"] = {
+},
+["key"] = {
+},
+["tackle"] = {
+},
+["inscribe"] = {
+},
+["normal"] = {
+},
+["herb"] = {
+},
+},
+["display"] = {
+},
+["profiles"] = {
+},
+}

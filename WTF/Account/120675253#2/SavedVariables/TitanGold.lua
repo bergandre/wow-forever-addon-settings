@@ -1,0 +1,2 @@
+
+GoldSave = nil

@@ -1,0 +1,12 @@
+## Interface: 120105, 110205, 50504, 20506, 16001, 11509
+## Title: Titan Panel [|cffeda55fAlts|r] |cff00aa009.3.5|r
+## Author: Titan Panel Dev Team
+## Version: 9.3.5
+## Notes: Adds Reload and select functions in a plugin
+## Author: Titan Panel Development Team
+## IconTexture: Interface\AddOns\TitanAlts\Artwork\Alts
+## SavedVariables: 
+## Dependencies: Titan
+## DefaultState: Enabled
+
+TitanAlts.lua

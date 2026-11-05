@@ -1,0 +1,172 @@
+<!--
+	Templates used for the Bagnonium frame design on all game versions.
+	All Rights Reserved
+-->
+
+<Ui>
+	<!-- Frame -->
+	<Frame name="BagnoniumFrameTemplate" virtual="true" movable="true" toplevel="true" enableMouse="true" resizable="true" clampedToScreen="true">
+		<Frames>
+			<Button parentKey="Title" inherits="PanelDragBarTemplate">
+				<Size y="14"/>
+				<NormalFont style="GameFontNormalCenter"/>
+				<Anchors>
+					<Anchor point="TOP" x="0" y="-4"/>
+				</Anchors>
+			</Button>
+
+			<EditBox parentKey="SearchBox" inherits="SearchBoxTemplate">
+				<Size y="20"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" x="70" y="-32"/>
+				</Anchors>
+			</EditBox>
+
+			<Button parentKey="ResizeButton" inherits="PanelResizeButtonTemplate">
+				<Size x="20" y="20"/>
+				<NormalTexture file="Interface\ChatFrame\UI-ChatIM-SizeGrabber-Up">
+					<Color r="1" g="0.82" b="0" a="0.8"/>
+				</NormalTexture>
+			</Button>
+
+			<Button parentKey="CloseButton" inherits="UIPanelCloseButtonNoScripts"/>
+		</Frames>
+	</Frame>
+
+	<CheckButton name="BagnoniumTabTemplate" inherits="SimplePopupButtonTemplate" registerForClicks="anyUp" virtual="true">
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+		<CheckedTexture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD"/>
+		<NormalTexture parentKey="Icon"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Border" file="Interface\SpellBook\SpellBook-SkillLineTab">
+					<Size x="72" y="72"/>
+					<Anchors>
+						<Anchor point="TOP" x="14" y="12"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+	</CheckButton>
+
+	<!-- Buttons -->
+	<Button name="BagnoniumRoundTemplate" registerForClicks="anyUp" virtual="true">
+		<Size x="28" y="28"/>
+		<HighlightTexture file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight" alphaMode="ADD">
+			<TexCoords left="0.0625" right="0.9375" top="0.0625" bottom="0.9375"/>
+		</HighlightTexture>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Icon">
+					<Anchors><Anchor point="CENTER"/></Anchors>
+				</Texture>
+				<MaskTexture parentKey="Mask" file="Interface\CharacterFrame\TempPortraitAlphaMask" hWrapMode="CLAMPTOBLACKADDITIVE" vWrapMode="CLAMPTOBLACKADDITIVE">
+					<Anchors><Anchor point="CENTER"/></Anchors>
+					<MaskedTextures><MaskedTexture childKey="Icon"/></MaskedTextures>
+				</MaskTexture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				self.Icon:SetSize(self.size or 24, self.size or 24)
+				self.Mask:SetSize(self.mask or 22, self.mask or 22)
+				self.Icon:SetTexture(self.icon)
+			</OnLoad>
+			<OnMouseDown>
+				if self:IsEnabled() then
+					self.Icon:SetSize((self.size or 24) - 2, (self.size or 24) - 2)
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				self.Icon:SetSize(self.size or 24, self.size or 24)
+			</OnMouseUp>
+		</Scripts>
+	</Button>
+
+	<Button name="BagnoniumRoundButtonTemplate" inherits="BagnoniumRoundTemplate" virtual="true">
+		<Layers>
+			<Layer level="BORDER">
+				<Texture parentKey="Border" file="Interface\Minimap\MiniMap-TrackingBorder">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="22" y="-22"/>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0.037037" right="0.962963" top="0.037037" bottom="0.962963"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<KeyValues>
+			<KeyValue key="off" value="5" type="number"/>
+		</KeyValues>
+	</Button>
+
+	<Button name="BagnoniumLogToggleTemplate" inherits="BagnoniumRoundButtonTemplate" virtual="true"/>
+	<Button name="BagnoniumBagToggleTemplate" inherits="BagnoniumRoundButtonTemplate" virtual="true">
+		<KeyValues>
+			<KeyValue key="icon" value="Interface/Buttons/Button-Backpack-Up" type="string"/>
+		</KeyValues>
+	</Button>
+
+	<CheckButton name="BagnoniumSortButtonTemplate" registerForClicks="anyUp" virtual="true">
+		<Size x="28" y="26"/>
+		<NormalTexture atlas="bags-button-autosort-up"/>
+		<PushedTexture atlas="bags-button-autosort-down"/>
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD">
+			<Size x="24" y="23"/>
+			<Anchors>
+				<Anchor point="CENTER"/>
+			</Anchors>
+		</HighlightTexture>
+		<CheckedTexture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD">
+			<Size x="24" y="23"/>
+			<Anchors>
+				<Anchor point="CENTER"/>
+			</Anchors>
+		</CheckedTexture>
+		<Scripts>
+			<OnLoad>
+				if Bagnonium.IsMainline then
+					self:GetHighlightTexture():SetSize(21, 19)
+
+					if self.GetCheckedTexture then
+						self:GetCheckedTexture():SetSize(21, 19)
+					end
+				end
+			</OnLoad>
+		</Scripts>
+	</CheckButton>
+
+	<!-- Skinning -->
+	<Frame name="BagnoniumNineSlice" inherits="NineSliceCodeTemplate" setAllPoints="true" virtual="true">
+		<Scripts>
+			<OnLoad>
+				-- using nineslice because in-texture slicing has some issues
+				NineSliceUtil.ApplyLayout(self, NineSliceLayouts['ChatBubble'])
+
+				local w,h, e = unpack(TableUtil.Transform({strsplit(',', self.size)}, tonumber))
+				local x, y = w-e, h-e
+				local slices = {
+					TopLeftCorner = { 0,e, 0,e },
+					TopRightCorner = { x,w, 0,e },
+					BottomLeftCorner = { 0,e, y,h },
+					BottomRightCorner = { x,w, y,h },
+					TopEdge = { e,x, 0,e },
+					BottomEdge = { e,x, y,h },
+					LeftEdge = { 0,e, e,y },
+					RightEdge = { x,w, e,y },
+					Center = { e,x, e,y }
+				}
+
+				for key,coords in pairs(slices) do
+					local left, right, top, bottom = unpack(coords)
+					local t = self[key]
+					t:SetTexture(self.file)
+					t:SetTexCoord(left/w,right/w, top/h,bottom/h)
+					t:SetSize(right-left, bottom-top)
+					t:SetHorizTile(false)
+					t:SetVertTile(false)
+				end
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>
