@@ -1,0 +1,22 @@
+## Interface: 120105, 50504, 20506, 16001, 11509
+## Title: |cff00ff00TradeSkillMaster_AppHelper|r
+## IconTexture: Interface\Addons\TradeSkillMaster\Media\Logo
+## Category-enUS: Auctions
+## Category-deDE: Auktionen
+## Category-esES: Subastas
+## Category-esMX: Subastas
+## Category-frFR: Ventes
+## Category-itIT: Aste
+## Category-koKR: 경매
+## Category-ptBR: Leilões
+## Category-ruRU: Лоты
+## Category-zhCN: 拍卖
+## Category-zhTW: 拍賣
+## Notes: Acts as a connection between the TSM addon and app.
+## Author: TSM Team
+## Version: v4.15
+## SavedVariables: TradeSkillMaster_AppHelperDB
+## Dependency: TradeSkillMaster
+
+TradeSkillMaster_AppHelper.lua
+AppData.lua

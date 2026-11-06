@@ -1703,10 +1703,28 @@ RXPCData = {
 }
 RXPCTrackingData = {
 ["profileKeys"] = {
+["Invited Friend"] = "Invited Friend",
 ["Invited - PvP"] = "Invited - PvP",
 },
 ["profiles"] = {
+["Invited Friend"] = {
+["levels"] = {
+{
+["groupExperience"] = 0,
+["deaths"] = 0,
+["mobs"] = {
+},
+["timestamp"] = {
+["started"] = 0,
+},
+["quests"] = {
+},
+},
+},
+["trackedGuid"] = "Player-6942-00A4D9A1",
+},
 ["Invited - PvP"] = {
+["trackedGuid"] = "Player-6942-00A4D9A1",
 ["levels"] = {
 {
 ["groupExperience"] = 0,
@@ -1728,56 +1746,90 @@ RXPCTrackingData = {
 },
 },
 },
-["trackedGuid"] = "Player-6942-00A4D9A1",
 },
 },
 }
 RXPCComms = {
 ["profileKeys"] = {
+["Invited Friend"] = "Invited Friend",
 ["Invited - PvP"] = "Invited - PvP",
 },
 ["profiles"] = {
+["Invited Friend"] = {
+["players"] = {
+["Karums Warrior"] = {
+["level"] = 12,
+["isRxp"] = true,
+["version"] = 1,
+["lastSeen"] = 1523.185,
+["timePlayed"] = 0,
+["class"] = "WARRIOR",
+["xp"] = 0,
+["xpPercentage"] = 70,
+},
+["Karums Priest"] = {
+["level"] = 12,
+["isRxp"] = true,
+["version"] = 1,
+["lastSeen"] = 1523.185,
+["timePlayed"] = 0,
+["class"] = "PRIEST",
+["xp"] = 0,
+["xpPercentage"] = 64,
+},
+["Langemann Durek"] = {
+["timePlayed"] = 0,
+["class"] = "SHAMAN",
+["version"] = 1,
+["lastSeen"] = 1522.785,
+["xpPercentage"] = 82,
+["isRxp"] = true,
+["xp"] = 0,
+["level"] = 11,
+},
+},
+},
 ["Invited - PvP"] = {
 ["players"] = {
 ["Karums Warrior"] = {
-["isRxp"] = true,
 ["level"] = 10,
+["isRxp"] = true,
 ["version"] = 1,
-["lastSeen"] = 53400.389,
-["xpPercentage"] = 32,
+["lastSeen"] = 56279.066,
+["timePlayed"] = 0,
 ["class"] = "WARRIOR",
 ["xp"] = 0,
-["timePlayed"] = 0,
+["xpPercentage"] = 48,
 },
 ["Karums Priest"] = {
-["isRxp"] = true,
 ["level"] = 10,
+["isRxp"] = true,
 ["version"] = 1,
-["lastSeen"] = 53400.689,
-["xpPercentage"] = 27,
+["lastSeen"] = 56279.066,
+["timePlayed"] = 0,
 ["class"] = "PRIEST",
 ["xp"] = 0,
-["timePlayed"] = 0,
+["xpPercentage"] = 46,
 },
 ["Gniloe Forever"] = {
-["level"] = 1,
 ["isRxp"] = true,
+["level"] = 1,
 ["version"] = 1,
 ["lastSeen"] = 37784.107,
-["timePlayed"] = 0,
+["xpPercentage"] = 75,
 ["class"] = "MAGE",
 ["xp"] = 0,
-["xpPercentage"] = 75,
+["timePlayed"] = 0,
 },
 ["Frosty Dan"] = {
-["isRxp"] = true,
 ["level"] = 5,
+["isRxp"] = true,
 ["version"] = 1,
 ["lastSeen"] = 36584.611,
-["xpPercentage"] = 66,
+["timePlayed"] = 0,
 ["class"] = "MAGE",
 ["xp"] = 0,
-["timePlayed"] = 0,
+["xpPercentage"] = 66,
 },
 },
 },

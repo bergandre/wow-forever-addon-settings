@@ -1,8 +1,0 @@
-<Bindings>
-    <Binding name="EQOL_TOGGLE_SPOTLIGHT_FRAME"
-             category="Enhance QoL">
-        if EnhanceQoL and EnhanceQoL.Aura and EnhanceQoL.Aura.UF and EnhanceQoL.Aura.UF.GroupFrames and type(EnhanceQoL.Aura.UF.GroupFrames.ToggleSpotlightMouseover) == "function" then
-            EnhanceQoL.Aura.UF.GroupFrames:ToggleSpotlightMouseover()
-        end
-    </Binding>
-</Bindings>

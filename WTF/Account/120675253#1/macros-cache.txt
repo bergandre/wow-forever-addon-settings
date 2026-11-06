@@ -10,11 +10,8 @@ VER 3 0000000000000004 "RXP ITEM" "134400"
 /click RXPItemFrameButton1 LeftButton 1
 /click RXPItemFrameButton1 LeftButton
 END
-VER 3 0000000000000002 "RXPFollow" "Inv_boots_02"
-//You are not in a party.
-END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Rezlak
+/targetexact Thatog
 /tm !7
 /targetlasttarget [dead]
 END

@@ -21,3 +21,5 @@ TitanXP: enabled
 Blizzard_ObjectiveTracker: enabled
 Blizzard_CompactRaidFrames: enabled
 Bagnon: disabled
+Blizzard_CombatText: enabled
+Bagnonium_Bank: enabled

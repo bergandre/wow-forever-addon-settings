@@ -3,6 +3,7 @@ AutoLooterDB = {
 ["namespaces"] = {
 },
 ["profileKeys"] = {
+["Karums Warrior"] = "Default",
 ["Karums - CAMWOW EU5 Realm 4 PvP"] = "Default",
 },
 ["profiles"] = {
@@ -78,9 +79,9 @@ AutoLooterDB = {
 ["Other"] = false,
 ["Reagent"] = false,
 ["Mount"] = false,
+["Junk"] = false,
 ["Holiday"] = false,
 ["Pet"] = false,
-["Junk"] = false,
 },
 ["Consumable"] = {
 ["Potions"] = false,

@@ -1,6 +1,7 @@
 
 TipTac_Config = {
 ["profileKeys"] = {
+["Invited Friend"] = "Default",
 ["Invited - PvP"] = "Default",
 },
 ["profiles"] = {

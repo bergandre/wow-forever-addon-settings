@@ -1,0 +1,9 @@
+
+CraftUpgradesCharDB = {
+["collapsed"] = {
+},
+["hiddenForAlts"] = {
+},
+["hidden"] = {
+},
+}

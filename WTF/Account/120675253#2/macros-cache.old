@@ -22,12 +22,8 @@ VER 3 000000000000000C "RXP ITEM" "134400"
 /click RXPItemFrameButton1 LeftButton 1
 /click RXPItemFrameButton1 LeftButton
 END
-VER 3 000000000000000A "RXPFollow" "Inv_boots_02"
-/targetexact Invited
-/follow
-END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Razormane Scout
+/targetexact Ur'kyo
 /tm !7
 /targetlasttarget [dead]
 END

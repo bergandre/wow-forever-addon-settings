@@ -4,6 +4,7 @@ AutoLooterDB = {
 },
 ["profileKeys"] = {
 ["Invited - CAMWOW EU4 Realm 8 PvP"] = "Default",
+["Invited Friend"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {

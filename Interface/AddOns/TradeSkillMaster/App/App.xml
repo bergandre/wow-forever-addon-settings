@@ -1,0 +1,145 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="Core.lua" />
+
+    <Script file="BankingUI\BankingMoveButton.lua" />
+    <Script file="BankingUI\BankingButtonsFrame.lua" />
+    <Script file="BankingUI\Core.lua" />
+
+    <Script file="DestroyingUI\DestroyingResultsList.lua" />
+    <Script file="DestroyingUI\DestroyingScrollTable.lua" />
+    <Script file="DestroyingUI\DestroyNextButton.lua" />
+    <Script file="DestroyingUI\Core.lua" />
+
+    <Script file="MailingUI\SendItemsList.lua" />
+    <Script file="MailingUI\MailSendTextDialog.lua" />
+    <Script file="MailingUI\Send.lua" />
+    <Script file="MailingUI\OpenMailActionButton.lua" />
+    <Script file="MailingUI\OpenAllMailActionButton.lua" />
+    <Script file="MailingUI\MailsScrollTable.lua" />
+    <Script file="MailingUI\MailInboxButtonsFrame.lua" />
+    <Script file="MailingUI\MailReloadButton.lua" />
+    <Script file="MailingUI\MailInboxTopFrame.lua" />
+    <Script file="MailingUI\MailInboxSummaryFrame.lua" />
+    <Script file="MailingUI\MailInboxFrame.lua" />
+    <Script file="MailingUI\MailItemsList.lua" />
+    <Script file="MailingUI\MailContentsFrame.lua" />
+    <Script file="MailingUI\Inbox.lua" />
+    <Script file="MailingUI\Groups.lua" />
+    <Script file="MailingUI\Other.lua" />
+    <Script file="MailingUI\Core.lua" />
+
+    <Script file="TaskListUI\Core.lua" />
+
+    <Script file="AuctionUI\ScanPauseResumeButton.lua" />
+    <Script file="AuctionUI\CommodityList.lua" />
+    <Script file="AuctionUI\AuctionCommodityBuyConfirmationDialog.lua" />
+    <Script file="AuctionUI\AuctionBuyScan.lua" />
+    <Script file="AuctionUI\AuctionItemBuyConfirmationDialog.lua" />
+    <Script file="AuctionUI\SavedSearchEditDialog.lua" />
+    <Script file="AuctionUI\ShoppingAdvancedSearch.lua" />
+    <Script file="AuctionUI\ShoppingPostDialogPriceView.lua" />
+    <Script file="AuctionUI\ShoppingPostDialog.lua" />
+    <Script file="AuctionUI\Shopping.lua" />
+    <Script file="AuctionUI\AuctioningBagScrollTable.lua" />
+    <Script file="AuctionUI\AuctioningSelection.lua" />
+    <Script file="AuctionUI\Auctioning.lua" />
+    <Script file="AuctionUI\SniperScrollTable.lua" />
+    <Script file="AuctionUI\Sniper.lua" />
+    <Script file="AuctionUI\MyAuctionsScrollTable.lua" />
+    <Script file="AuctionUI\MyAuctions.lua" />
+    <Script file="AuctionUI\Core.lua" />
+
+    <Script file="CraftingUI\CraftingQueueEditDialog.lua" />
+    <Script file="CraftingUI\CraftingQueueList.lua" />
+    <Script file="CraftingUI\CraftingQueueStatusIcon.lua" />
+    <Script file="CraftingUI\CraftingRestockDialog.lua" />
+    <Script file="CraftingUI\CraftingMatList.lua" />
+    <Script file="CraftingUI\CraftTierDialog.lua" />
+    <Script file="CraftingUI\OptionalMatsRow.lua" />
+    <Script file="CraftingUI\CraftDetails.lua" />
+    <Script file="CraftingUI\ProfessionScrollTable.lua" />
+    <Script file="CraftingUI\CraftingProfession.lua" />
+    <Script file="CraftingUI\GatheringScrollTable.lua" />
+    <Script file="CraftingUI\GatheringSourceRow.lua" />
+    <Script file="CraftingUI\Gathering.lua" />
+    <Script file="CraftingUI\CraftsScrollTable.lua" />
+    <Script file="CraftingUI\MatsScrollTable.lua" />
+    <Script file="CraftingUI\MatCostDialog.lua" />
+    <Script file="CraftingUI\CraftingReports.lua" />
+    <Script file="CraftingUI\Core.lua" />
+
+    <Script file="VendoringUI\Util.lua" />
+    <Script file="VendoringUI\VendorQuantityDialog.lua" />
+    <Script file="VendoringUI\VendorBuyScrollTable.lua" />
+    <Script file="VendoringUI\VendorRepairButton.lua" />
+    <Script file="VendoringUI\Buy.lua" />
+    <Script file="VendoringUI\VendorSellScrollTable.lua" />
+    <Script file="VendoringUI\Sell.lua" />
+    <Script file="VendoringUI\VendorBuybackScrollTable.lua" />
+    <Script file="VendoringUI\Buyback.lua" />
+    <Script file="VendoringUI\Groups.lua" />
+    <Script file="VendoringUI\Core.lua" />
+
+    <Script file="MainUI\Dashboard\DashboardDetailsRow.lua" />
+    <Script file="MainUI\Dashboard\DashboardSummary.lua" />
+    <Script file="MainUI\Dashboard\DashboardTimeButton.lua" />
+    <Script file="MainUI\Dashboard\DashboardNewsDialog.lua" />
+    <Script file="MainUI\Dashboard\DashboardActivityEntry.lua" />
+    <Script file="MainUI\Dashboard\DashboardNewsEntry.lua" />
+    <Script file="MainUI\Dashboard\DashboardFeed.lua" />
+    <Script file="MainUI\Dashboard\Core.lua" />
+
+    <Script file="MainUI\Ledger\LedgerInventoryScrollTable.lua" />
+    <Script file="MainUI\Ledger\Inventory.lua" />
+    <Script file="MainUI\Ledger\LedgerDetailScrollTable.lua" />
+    <Script file="MainUI\Ledger\LedgerTransactionsScrollTable.lua" />
+    <Script file="MainUI\Ledger\Transactions.lua" />
+    <Script file="MainUI\Ledger\LedgerOtherScrollTable.lua" />
+    <Script file="MainUI\Ledger\Other.lua" />
+    <Script file="MainUI\Ledger\LedgerResaleScrollTable.lua" />
+    <Script file="MainUI\Ledger\Resale.lua" />
+    <Script file="MainUI\Ledger\LedgerAuctionsScrollTable.lua" />
+    <Script file="MainUI\Ledger\Auctions.lua" />
+    <Script file="MainUI\Ledger\ItemDetail.lua" />
+    <Script file="MainUI\Ledger\LedgerPrimaryNavButton.lua" />
+    <Script file="MainUI\Ledger\LedgerSecondaryNavButton.lua" />
+    <Script file="MainUI\Ledger\Core.lua" />
+
+    <Script file="MainUI\Groups\Items.lua" />
+    <Script file="MainUI\Groups\Operations.lua" />
+    <Script file="MainUI\Groups\BaseGroup.lua" />
+    <Script file="MainUI\Groups\Core.lua" />
+
+    <Script file="MainUI\Operations\Util.lua" />
+    <Script file="MainUI\Operations\Auctioning.lua" />
+    <Script file="MainUI\Operations\Shopping.lua" />
+    <Script file="MainUI\Operations\Sniper.lua" />
+    <Script file="MainUI\Operations\Crafting.lua" />
+    <Script file="MainUI\Operations\Vendoring.lua" />
+    <Script file="MainUI\Operations\Mailing.lua" />
+    <Script file="MainUI\Operations\Warehousing.lua" />
+    <Script file="MainUI\Operations\Core.lua" />
+
+    <Script file="MainUI\Settings\General.lua" />
+    <Script file="MainUI\Settings\Tooltip.lua" />
+    <Script file="MainUI\Settings\Accounting.lua" />
+    <Script file="MainUI\Settings\RampColorPicker.lua" />
+    <Script file="MainUI\Settings\EditableRampColor.lua" />
+    <Script file="MainUI\Settings\EditableThemeColor.lua" />
+    <Script file="MainUI\Settings\Appearance.lua" />
+    <Script file="MainUI\Settings\Auctioning.lua" />
+    <Script file="MainUI\Settings\Destroying.lua" />
+    <Script file="MainUI\Settings\Mailing.lua" />
+    <Script file="MainUI\Settings\CustomSources.lua" />
+    <Script file="MainUI\Settings\Crafting.lua" />
+    <Script file="MainUI\Settings\Macros.lua" />
+    <Script file="MainUI\Settings\BrowseSniper.lua" />
+    <Script file="MainUI\Settings\Vendoring.lua" />
+    <Script file="MainUI\Settings\Core.lua" />
+
+    <Script file="MainUI\Core.lua" />
+
+    <!-- Public APIs -->
+    <Script file="API.lua" />
+</Ui>

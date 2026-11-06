@@ -16,8 +16,9 @@ RXPData = {
 }
 RXPDB = {
 ["profileKeys"] = {
-["Opikol - PvP"] = "global",
+["Karums Warrior"] = "global",
 ["Karums - PvP"] = "global",
+["Opikol - PvP"] = "global",
 },
 ["profiles"] = {
 ["global"] = {
@@ -94,10 +95,202 @@ RXPDB = {
 }
 RXPSettings = {
 ["profileKeys"] = {
-["Opikol - PvP"] = "Opikol - PvP",
+["Karums Warrior"] = "Karums Warrior",
 ["Karums - PvP"] = "Karums - PvP",
+["Opikol - PvP"] = "Opikol - PvP",
 },
 ["profiles"] = {
+["Karums Warrior"] = {
+["tbcStart"] = 2,
+["hardcore"] = false,
+["framePositions"] = {
+["activeTargetFrame"] = {
+{
+"TOP",
+nil,
+"TOP",
+27.00000190734863,
+-69.0000228881836,
+},
+},
+["RXPFrame"] = {
+{
+"LEFT",
+nil,
+"LEFT",
+20.28367805480957,
+-71.39964294433594,
+},
+},
+["activeItemFrame"] = {
+{
+"CENTER",
+nil,
+"CENTER",
+-136.0000610351563,
+-179.0000305175781,
+},
+},
+["arrowFrame"] = {
+{
+"TOP",
+nil,
+"TOP",
+-70.25590515136719,
+-94.89730834960938,
+},
+},
+},
+["season"] = 0,
+["frameSizes"] = {
+["activeTargetFrame"] = {
+84.36984252929688,
+42.9999885559082,
+},
+["RXPFrame"] = {
+249.2841949462891,
+238.321044921875,
+},
+["activeItemFrame"] = {
+78.25634765625,
+42.9999885559082,
+},
+["arrowFrame"] = {
+31.99990081787109,
+31.99999046325684,
+},
+},
+["goblinTele"] = false,
+["tbcWBF"] = true,
+["gnomeTele"] = false,
+["portalTele"] = false,
+["frameHeight"] = 238.3211059570313,
+["macroAnnounced"] = true,
+},
+["Karums - PvP"] = {
+["activeTargetScale"] = 1.15,
+["gnomeTele"] = false,
+["groupMode"] = true,
+["tbcWBF"] = true,
+["portalTele"] = false,
+["season"] = 0,
+["frameSizes"] = {
+["activeItemFrame"] = {
+78.16057586669922,
+42.99994277954102,
+},
+["activeTargetFrame"] = {
+85.80768585205078,
+18.00002479553223,
+},
+["RXPFrame"] = {
+383.0000305175781,
+230.8327331542969,
+},
+["arrowFrame"] = {
+40.00001525878906,
+39.99998474121094,
+},
+["levelSplits"] = {
+109.8978118896484,
+160.5401458740234,
+},
+},
+["tbcStart"] = 2,
+["enableGroupQuests"] = true,
+["autoDiscardItems"] = true,
+["windowScale"] = 1.25,
+["enablelevelSplits"] = true,
+["enableTrainerAutomation"] = true,
+["frameHeight"] = 230.8327331542969,
+["shareQuests"] = true,
+["arrowScale"] = 1.25,
+["guideFontSize"] = 10,
+["disableArrow"] = false,
+["macroAnnounced"] = true,
+["hardcore"] = false,
+["framePositions"] = {
+["activeItemFrame"] = {
+{
+"BOTTOMRIGHT",
+nil,
+"BOTTOMRIGHT",
+-450.0000305175781,
+184,
+},
+},
+["activeTargetFrame"] = {
+{
+"TOPRIGHT",
+nil,
+"TOPRIGHT",
+-237.0000152587891,
+-68.99999237060547,
+},
+},
+["RXPV2GuideConfigurator"] = {
+{
+"TOP",
+"UIParent",
+"TOP",
+399.9999084472656,
+-59.99968338012695,
+},
+},
+["RXPFrame"] = {
+{
+"LEFT",
+nil,
+"LEFT",
+109,
+-67,
+},
+},
+["arrowFrame"] = {
+{
+"RIGHT",
+nil,
+"RIGHT",
+-185.0000152587891,
+173,
+},
+},
+["levelSplits"] = {
+{
+"TOPRIGHT",
+nil,
+"TOPRIGHT",
+-327.0000305175781,
+-146,
+},
+},
+},
+["enableLevelUpAnnounceGroup"] = true,
+["createFollowMacro"] = true,
+["dungeons"] = {
+["ULDA"] = true,
+["SFK"] = true,
+["RFD"] = true,
+["BFD"] = true,
+["RFK"] = true,
+["GNOMER"] = true,
+["DM"] = true,
+["SM"] = true,
+["ROL"] = true,
+["RFC"] = true,
+["MARA"] = true,
+["BRD"] = true,
+["ST"] = true,
+["ZF"] = true,
+},
+["compareNextLevelSplit"] = true,
+["soloSelfFound"] = false,
+["enableCollectStepAnnouncements"] = true,
+["autoSellJunk"] = true,
+["enableQuestRewardAutomation"] = true,
+["goblinTele"] = false,
+["enableCompleteStepAnnouncements"] = true,
+},
 ["Opikol - PvP"] = {
 ["tbcStart"] = 2,
 ["gnomeTele"] = false,
@@ -161,130 +354,6 @@ RXPSettings = {
 },
 ["goblinTele"] = false,
 ["tbcWBF"] = true,
-},
-["Karums - PvP"] = {
-["groupMode"] = true,
-["tbcStart"] = 2,
-["windowScale"] = 1.25,
-["enableTrainerAutomation"] = true,
-["hardcore"] = false,
-["enableCollectStepAnnouncements"] = true,
-["activeTargetScale"] = 1.15,
-["season"] = 0,
-["guideFontSize"] = 10,
-["createFollowMacro"] = true,
-["enablelevelSplits"] = true,
-["frameSizes"] = {
-["activeItemFrame"] = {
-78.16057586669922,
-42.99994277954102,
-},
-["activeTargetFrame"] = {
-85.80768585205078,
-18.00002479553223,
-},
-["RXPFrame"] = {
-383.0000305175781,
-230.8327331542969,
-},
-["arrowFrame"] = {
-40.00001525878906,
-39.99998474121094,
-},
-["levelSplits"] = {
-109.8978118896484,
-160.5401458740234,
-},
-},
-["enableQuestRewardAutomation"] = true,
-["arrowScale"] = 1.25,
-["shareQuests"] = true,
-["enableLevelUpAnnounceGroup"] = true,
-["dungeons"] = {
-["ULDA"] = true,
-["SFK"] = true,
-["RFD"] = true,
-["BFD"] = true,
-["RFK"] = true,
-["GNOMER"] = true,
-["DM"] = true,
-["SM"] = true,
-["ROL"] = true,
-["RFC"] = true,
-["MARA"] = true,
-["BRD"] = true,
-["ST"] = true,
-["ZF"] = true,
-},
-["soloSelfFound"] = false,
-["compareNextLevelSplit"] = true,
-["goblinTele"] = false,
-["tbcWBF"] = true,
-["gnomeTele"] = false,
-["portalTele"] = false,
-["enableGroupQuests"] = true,
-["autoDiscardItems"] = true,
-["frameHeight"] = 230.8327331542969,
-["macroAnnounced"] = true,
-["autoSellJunk"] = true,
-["disableArrow"] = false,
-["framePositions"] = {
-["activeItemFrame"] = {
-{
-"BOTTOMRIGHT",
-nil,
-"BOTTOMRIGHT",
--450.0000305175781,
-184,
-},
-},
-["activeTargetFrame"] = {
-{
-"TOPRIGHT",
-nil,
-"TOPRIGHT",
--237.0000152587891,
--68.99999237060547,
-},
-},
-["RXPFrame"] = {
-{
-"LEFT",
-nil,
-"LEFT",
-109,
--67,
-},
-},
-["RXPV2GuideConfigurator"] = {
-{
-"TOP",
-"UIParent",
-"TOP",
-399.9999084472656,
--59.99968338012695,
-},
-},
-["arrowFrame"] = {
-{
-"RIGHT",
-nil,
-"RIGHT",
--185.0000152587891,
-173,
-},
-},
-["levelSplits"] = {
-{
-"TOPRIGHT",
-nil,
-"TOPRIGHT",
--327.0000305175781,
--146,
-},
-},
-},
-["enableCompleteStepAnnouncements"] = true,
 },
 },
 }

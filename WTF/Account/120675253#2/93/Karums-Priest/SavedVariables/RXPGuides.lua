@@ -1,26 +1,43 @@
 
 RXPCData = {
 ["completedWaypoints"] = {
-[104] = {
+[16] = {
 },
 },
-["currentStep"] = 104,
+["currentStep"] = 16,
 ["questObjectivesCache"] = {
-[0] = 31,
-[818] = {
+[99123] = {
 {
-["type"] = "item",
-["numRequired"] = 4,
+["type"] = "event",
+["numRequired"] = 1,
+["text"] = "Escort Pal'juh out of Kolkar Crag.",
 ["finished"] = false,
-["text"] = "0/4  ",
-["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[826] = {
+{
+["type"] = "monster",
+["numRequired"] = 8,
+["finished"] = false,
+["text"] = "0/8   slain",
+["objectiveType"] = 0,
+["numFulfilled"] = 0,
+},
+{
+["type"] = "monster",
+["numRequired"] = 8,
+["finished"] = false,
+["text"] = "0/8   slain",
+["objectiveType"] = 0,
 ["numFulfilled"] = 0,
 },
 {
 ["type"] = "item",
-["numRequired"] = 8,
+["numRequired"] = 1,
 ["finished"] = false,
-["text"] = "0/8  ",
+["text"] = "0/1  ",
 ["objectiveType"] = 1,
 ["numFulfilled"] = 0,
 },
@@ -37,36 +54,33 @@ RXPCData = {
 },
 ["finished"] = false,
 },
-[97223] = {
+[5441] = {
+{
+["type"] = "monster",
+["numRequired"] = 5,
+["finished"] = false,
+["text"] = "0/5 Peons Awoken",
+["objectiveType"] = 0,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[4402] = {
 {
 ["type"] = "item",
-["numRequired"] = 1,
+["numRequired"] = 10,
 ["finished"] = false,
-["text"] = "0/1  ",
+["text"] = "0/10  ",
 ["objectiveType"] = 1,
 ["numFulfilled"] = 0,
 },
 ["finished"] = false,
 },
-[96822] = {
+[96655] = {
 {
-["type"] = "item",
+["type"] = "object",
 ["numRequired"] = 1,
-["text"] = "0/1 Raider's Bow",
-["finished"] = false,
-["numFulfilled"] = 0,
-},
-{
-["type"] = "item",
-["numRequired"] = 1,
-["text"] = "0/1 Raider's Battleaxe",
-["finished"] = false,
-["numFulfilled"] = 0,
-},
-{
-["type"] = "item",
-["numRequired"] = 1,
-["text"] = "0/1 Raider's Shield",
+["text"] = "Learn cooking from Cook Torka in Razor Hill",
 ["finished"] = false,
 ["numFulfilled"] = 0,
 },
@@ -83,18 +97,97 @@ RXPCData = {
 },
 ["finished"] = false,
 },
-[792] = {
+[791] = {
+{
+["type"] = "item",
+["numRequired"] = 8,
+["text"] = "0/8 Canvas Scraps",
+["finished"] = false,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[5648] = {
 {
 ["type"] = "monster",
-["numRequired"] = 12,
+["numRequired"] = 1,
+["text"] = "0/1 Heal and fortify Grunt Kor'ja",
 ["finished"] = false,
-["text"] = "0/12   slain",
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[97242] = {
+{
+["type"] = "item",
+["numRequired"] = 2,
+["finished"] = false,
+["text"] = "0/2  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+{
+["type"] = "item",
+["numRequired"] = 4,
+["finished"] = false,
+["text"] = "0/4  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[96821] = {
+{
+["type"] = "monster",
+["numRequired"] = 6,
+["finished"] = false,
+["text"] = "0/6 Ridgeshade Creeper slain",
+["objectiveType"] = 0,
+["numFulfilled"] = 0,
+},
+{
+["type"] = "monster",
+["numRequired"] = 6,
+["finished"] = false,
+["text"] = "0/6 Ridgeshade Lurker slain",
 ["objectiveType"] = 0,
 ["numFulfilled"] = 0,
 },
 ["finished"] = false,
 },
-[790] = {
+[96825] = {
+{
+["type"] = "item",
+["numRequired"] = 8,
+["text"] = "0/8 Prickly Pear Fruit",
+["finished"] = false,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[815] = {
+{
+["type"] = "item",
+["numRequired"] = 3,
+["finished"] = false,
+["text"] = "0/3  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[817] = {
+{
+["type"] = "item",
+["numRequired"] = 4,
+["finished"] = false,
+["text"] = "0/4  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[97223] = {
 {
 ["type"] = "item",
 ["numRequired"] = 1,
@@ -102,6 +195,55 @@ RXPCData = {
 ["text"] = "0/1  ",
 ["objectiveType"] = 1,
 ["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[825] = {
+{
+["type"] = "item",
+["numRequired"] = 3,
+["finished"] = false,
+["text"] = "0/3  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[827] = {
+{
+["type"] = "item",
+["numRequired"] = 6,
+["text"] = "6/6 Searing Collar",
+["finished"] = true,
+["numFulfilled"] = 6,
+},
+["finished"] = false,
+},
+[96873] = {
+{
+["type"] = "item",
+["numRequired"] = 3,
+["finished"] = false,
+["text"] = "0/3  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[835] = {
+{
+["type"] = "monster",
+["numRequired"] = 12,
+["text"] = "12/12 Dustwind Savage slain",
+["finished"] = true,
+["numFulfilled"] = 12,
+},
+{
+["type"] = "monster",
+["numRequired"] = 8,
+["text"] = "7/8 Dustwind Storm Witch slain",
+["finished"] = false,
+["numFulfilled"] = 7,
 },
 ["finished"] = false,
 },
@@ -140,11 +282,36 @@ RXPCData = {
 },
 ["finished"] = false,
 },
-[791] = {
+[6394] = {
 {
 ["type"] = "item",
+["numRequired"] = 1,
+["finished"] = false,
+["text"] = "0/1  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[784] = {
+{
+["type"] = "monster",
+["numRequired"] = 10,
+["text"] = "0/10 Kul Tiras Sailor slain",
+["finished"] = false,
+["numFulfilled"] = 0,
+},
+{
+["type"] = "monster",
 ["numRequired"] = 8,
-["text"] = "0/8 Canvas Scraps",
+["text"] = "0/8 Kul Tiras Marine slain",
+["finished"] = false,
+["numFulfilled"] = 0,
+},
+{
+["type"] = "monster",
+["numRequired"] = 1,
+["text"] = "0/1 Lieutenant Benedict slain",
 ["finished"] = false,
 ["numFulfilled"] = 0,
 },
@@ -177,12 +344,67 @@ RXPCData = {
 },
 ["finished"] = false,
 },
-[4402] = {
+[788] = {
 {
-["type"] = "item",
+["type"] = "monster",
 ["numRequired"] = 10,
 ["finished"] = false,
-["text"] = "0/10  ",
+["text"] = "0/10 Mottled Boar slain",
+["objectiveType"] = 0,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[790] = {
+{
+["type"] = "item",
+["numRequired"] = 1,
+["finished"] = false,
+["text"] = "0/1  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[792] = {
+{
+["type"] = "monster",
+["numRequired"] = 12,
+["finished"] = false,
+["text"] = "0/12   slain",
+["objectiveType"] = 0,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[794] = {
+{
+["type"] = "item",
+["numRequired"] = 1,
+["finished"] = false,
+["text"] = "0/1  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[97326] = {
+{
+["type"] = "item",
+["numRequired"] = 8,
+["finished"] = false,
+["text"] = "0/8  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[806] = {
+{
+["type"] = "item",
+["numRequired"] = 1,
+["finished"] = false,
+["text"] = "0/1  ",
 ["objectiveType"] = 1,
 ["numFulfilled"] = 0,
 },
@@ -199,34 +421,78 @@ RXPCData = {
 },
 ["finished"] = false,
 },
-[6394] = {
+[5726] = {
 {
 ["type"] = "item",
 ["numRequired"] = 1,
 ["finished"] = false,
-["text"] = "0/1  ",
+["text"] = "0/1 Lieutenant's Insignia",
 ["objectiveType"] = 1,
 ["numFulfilled"] = 0,
 },
 ["finished"] = false,
 },
-[96873] = {
+[97282] = {
 {
 ["type"] = "item",
-["numRequired"] = 3,
+["numRequired"] = 5,
 ["finished"] = false,
-["text"] = "0/3  ",
+["text"] = "0/5  ",
 ["objectiveType"] = 1,
 ["numFulfilled"] = 0,
 },
 ["finished"] = false,
 },
-[794] = {
+[0] = 37,
+[96822] = {
 {
 ["type"] = "item",
 ["numRequired"] = 1,
+["text"] = "0/1 Raider's Bow",
 ["finished"] = false,
-["text"] = "0/1  ",
+["numFulfilled"] = 0,
+},
+{
+["type"] = "item",
+["numRequired"] = 1,
+["text"] = "0/1 Raider's Battleaxe",
+["finished"] = false,
+["numFulfilled"] = 0,
+},
+{
+["type"] = "item",
+["numRequired"] = 1,
+["text"] = "0/1 Raider's Shield",
+["finished"] = false,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[818] = {
+{
+["type"] = "item",
+["numRequired"] = 4,
+["finished"] = false,
+["text"] = "0/4  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+{
+["type"] = "item",
+["numRequired"] = 8,
+["finished"] = false,
+["text"] = "0/8  ",
+["objectiveType"] = 1,
+["numFulfilled"] = 0,
+},
+["finished"] = false,
+},
+[97225] = {
+{
+["type"] = "item",
+["numRequired"] = 8,
+["finished"] = false,
+["text"] = "0/8  ",
 ["objectiveType"] = 1,
 ["numFulfilled"] = 0,
 },
@@ -259,33 +525,6 @@ RXPCData = {
 },
 ["finished"] = false,
 },
-[826] = {
-{
-["type"] = "monster",
-["numRequired"] = 8,
-["finished"] = false,
-["text"] = "0/8   slain",
-["objectiveType"] = 0,
-["numFulfilled"] = 0,
-},
-{
-["type"] = "monster",
-["numRequired"] = 8,
-["finished"] = false,
-["text"] = "0/8   slain",
-["objectiveType"] = 0,
-["numFulfilled"] = 0,
-},
-{
-["type"] = "item",
-["numRequired"] = 1,
-["finished"] = false,
-["text"] = "0/1  ",
-["objectiveType"] = 1,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
 [96604] = {
 {
 ["type"] = "",
@@ -303,166 +542,6 @@ RXPCData = {
 },
 ["finished"] = false,
 },
-[96821] = {
-{
-["type"] = "monster",
-["numRequired"] = 6,
-["finished"] = false,
-["text"] = "0/6 Ridgeshade Creeper slain",
-["objectiveType"] = 0,
-["numFulfilled"] = 0,
-},
-{
-["type"] = "monster",
-["numRequired"] = 6,
-["finished"] = false,
-["text"] = "0/6 Ridgeshade Lurker slain",
-["objectiveType"] = 0,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[806] = {
-{
-["type"] = "item",
-["numRequired"] = 1,
-["finished"] = false,
-["text"] = "0/1  ",
-["objectiveType"] = 1,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[96825] = {
-{
-["type"] = "item",
-["numRequired"] = 8,
-["text"] = "0/8 Prickly Pear Fruit",
-["finished"] = false,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[815] = {
-{
-["type"] = "item",
-["numRequired"] = 3,
-["finished"] = false,
-["text"] = "0/3  ",
-["objectiveType"] = 1,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[99123] = {
-{
-["type"] = "event",
-["numRequired"] = 1,
-["text"] = "Escort Pal'juh out of Kolkar Crag.",
-["finished"] = false,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[97225] = {
-{
-["type"] = "item",
-["numRequired"] = 8,
-["finished"] = false,
-["text"] = "0/8  ",
-["objectiveType"] = 1,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[5441] = {
-{
-["type"] = "monster",
-["numRequired"] = 5,
-["finished"] = false,
-["text"] = "0/5 Peons Awoken",
-["objectiveType"] = 0,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[784] = {
-{
-["type"] = "monster",
-["numRequired"] = 10,
-["text"] = "0/10 Kul Tiras Sailor slain",
-["finished"] = false,
-["numFulfilled"] = 0,
-},
-{
-["type"] = "monster",
-["numRequired"] = 8,
-["text"] = "0/8 Kul Tiras Marine slain",
-["finished"] = false,
-["numFulfilled"] = 0,
-},
-{
-["type"] = "monster",
-["numRequired"] = 1,
-["text"] = "0/1 Lieutenant Benedict slain",
-["finished"] = false,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[788] = {
-{
-["type"] = "monster",
-["numRequired"] = 10,
-["finished"] = false,
-["text"] = "0/10 Mottled Boar slain",
-["objectiveType"] = 0,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[5648] = {
-{
-["type"] = "monster",
-["numRequired"] = 1,
-["text"] = "0/1 Heal and fortify Grunt Kor'ja",
-["finished"] = false,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[96655] = {
-{
-["type"] = "object",
-["numRequired"] = 1,
-["text"] = "Learn cooking from Cook Torka in Razor Hill",
-["finished"] = false,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[817] = {
-{
-["type"] = "item",
-["numRequired"] = 4,
-["finished"] = false,
-["text"] = "0/4  ",
-["objectiveType"] = 1,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
-[825] = {
-{
-["type"] = "item",
-["numRequired"] = 3,
-["finished"] = false,
-["text"] = "0/3  ",
-["objectiveType"] = 1,
-["numFulfilled"] = 0,
-},
-["finished"] = false,
-},
 },
 ["currentGuideGroup"] = "RestedXP Forever Dungeon Guide (H)",
 ["exploredZones"] = {
@@ -470,14 +549,18 @@ RXPCData = {
 ["questNameCache"] = {
 [2161] = "A Peon's Burden",
 [826] = "Zalazane",
+[828] = "Margoz",
 [830] = "The Admiral's Orders",
 [834] = "Winds in the Desert",
 [5441] = "Lazy Peons",
 [4402] = "Galgar's Cactus Apple Surprise",
+[97281] = "A Simmering Storm",
 [99049] = "Threat from Below",
 [789] = "Sting of the Scorpid",
 [791] = "Carry Your Weight",
 [5648] = "Garments of Spirituality",
+[97242] = "Yelmak's Medley",
+[97246] = "Meal Appeal",
 [5649] = "In Favor of Spirituality",
 [3085] = "Hallowed Tablet",
 [805] = "Report to Sen'jin Village",
@@ -486,26 +569,33 @@ RXPCData = {
 [815] = "Break a Few Eggs",
 [817] = "Practical Prey",
 [97223] = "Bloodtalon Matriarch",
-[823] = "Report to Orgnil",
 [825] = "From The Wreckage....",
+[823] = "Report to Orgnil",
+[5652] = "Hex of Weakness",
+[827] = "Skull Rock",
+[829] = "Neeru Fireblade",
 [831] = "The Admiral's Orders",
 [96873] = "A Pain in the Neck",
+[835] = "Securing the Lines",
 [837] = "Encroachment",
 [6394] = "Thazz'ril's Pick",
 [5654] = "Hex of Weakness",
+[97326] = "Rocks to Rests",
+[5726] = "Hidden Enemies",
 [784] = "Vanquish the Betrayers",
 [786] = "Thwarting Kolkar Aggression",
 [788] = "Cutting Teeth",
 [790] = "Sarkoth",
 [792] = "Vile Familiars",
 [794] = "Burning Blade Medallion",
+[99048] = "A Missing Hand",
 [96655] = "Camping 101: Cooking",
 [96876] = "Ukor's Lost Pack",
 [96604] = "The Great Outdoors",
 [804] = "Sarkoth",
 [806] = "Dark Storms",
 [808] = "Minshina's Skull",
-[99048] = "A Missing Hand",
+[97282] = "Stormy Potential",
 [99123] = "Lost in the Shadows",
 [97279] = "Wayward Weapons",
 [4641] = "Your Place in the World",
@@ -517,50 +607,31 @@ RXPCData = {
 ["guideDisabled"] = {
 [0] = 481,
 },
-["currentStepId"] = 467080245,
+["currentStepId"] = 669388537,
 ["guideProgress"] = {
 ["RestedXP Forever Dungeon Guide (H)|Dungeon Guide 1-22|06-10 Durotar"] = {
-["step"] = 104,
-["stepId"] = 467080245,
+["step"] = 117,
+["stepId"] = 467080603,
 },
 ["RestedXP Forever Dungeon Guide (H)|Dungeon Guide 1-22|01-06 Durotar"] = {
 ["step"] = 59,
 ["stepId"] = 264311193,
 },
+["RestedXP Forever Dungeon Guide (H)|Dungeon Guide 1-22|10-12 Durotar"] = {
+["step"] = 16,
+["stepId"] = 669388537,
+},
 ["playerGUID"] = "Player-6938-008C0737",
 },
 ["flightPaths"] = {
 },
-["currentGuideName"] = "06-10 Durotar",
+["currentGuideName"] = "10-12 Durotar",
 ["stepSkip"] = {
-[83] = true,
-[2] = true,
-[87] = true,
-[31] = true,
-[16] = true,
-[32] = true,
-[34] = true,
-[35] = true,
-[72] = true,
-[74] = true,
-[78] = true,
-[80] = true,
-[11] = true,
-[15] = true,
-[6] = true,
-[91] = true,
-[96] = true,
-[98] = true,
-[49] = true,
+true,
 [13] = true,
-[69] = true,
-[71] = true,
-[53] = true,
-[54] = true,
-[77] = true,
-[79] = true,
-[27] = true,
-[73] = true,
+[8] = true,
+[3] = true,
+[5] = true,
 },
 ["discardPile"] = {
 },
@@ -2250,6 +2321,7 @@ RXPCData = {
 RXPCTrackingData = {
 ["profileKeys"] = {
 ["Karums - PvP"] = "Karums - PvP",
+["Karums Priest"] = "Karums Priest",
 },
 ["profiles"] = {
 ["Karums - PvP"] = {
@@ -2630,11 +2702,97 @@ RXPCTrackingData = {
 },
 ["trackedGuid"] = "Player-6938-008C0737",
 },
+["Karums Priest"] = {
+["levels"] = {
+[11] = {
+["groupExperience"] = 6072,
+["deaths"] = 0,
+["mobs"] = {
+["Durotar"] = {
+["xp"] = 2797,
+["count"] = 66,
+},
+},
+["timestamp"] = {
+["started"] = 2,
+["finished"] = 0,
+},
+["quests"] = {
+["Durotar"] = {
+[812] = 975,
+[834] = 775,
+[837] = 625,
+[806] = 900,
+},
+},
+},
+[13] = {
+["groupExperience"] = 1950,
+["deaths"] = 0,
+["mobs"] = {
+["Durotar"] = {
+["xp"] = 200,
+["count"] = 7,
+},
+},
+["timestamp"] = {
+["dateStarted"] = {
+["monthDay"] = 6,
+["weekday"] = 6,
+["month"] = 11,
+["minute"] = 49,
+["hour"] = 9,
+["year"] = 2026,
+},
+["started"] = 63624,
+},
+["quests"] = {
+["Durotar"] = {
+[97282] = 850,
+[827] = 900,
+},
+},
+},
+[12] = {
+["groupExperience"] = 4209,
+["deaths"] = 0,
+["mobs"] = {
+["Durotar"] = {
+["xp"] = 1999,
+["count"] = 53,
+},
+},
+["timestamp"] = {
+["dateFinished"] = {
+["monthDay"] = 6,
+["weekday"] = 6,
+["month"] = 11,
+["minute"] = 49,
+["hour"] = 9,
+["year"] = 2026,
+},
+["finished"] = 63623,
+["started"] = 1,
+},
+["quests"] = {
+["Durotar"] = {
+[835] = 875,
+[97281] = 875,
+},
+["Orgrimmar"] = {
+[5727] = 460,
+},
+},
+},
+},
+["trackedGuid"] = "Player-6938-008C0737",
+},
 },
 }
 RXPCComms = {
 ["profileKeys"] = {
 ["Karums - PvP"] = "Karums - PvP",
+["Karums Priest"] = "Karums Priest",
 },
 ["profiles"] = {
 ["Karums - PvP"] = {
@@ -2709,12 +2867,109 @@ RXPCComms = {
 ["complete"] = {
 ["{rt3} RestedXP Guides: Completed 3/3 Gnomish Tools"] = 8,
 ["{rt3} RestedXP Guides: Completed 4/4 Durotar Tiger Fur"] = 8,
-["{rt3} RestedXP Guides: Completed 8/8 Crawler Mucus"] = 9,
-["{rt3} RestedXP Guides: Completed 3/3 Taillasher Egg"] = 9,
 ["{rt3} RestedXP Guides: Completed 1/1 Bloodtalon Matriarch Eggs"] = 9,
+["{rt3} RestedXP Guides: Completed 8/8 Crawler Mucus"] = 9,
 ["{rt3} RestedXP Guides: Completed 1/1 Banner Scrap"] = 8,
 ["{rt3} RestedXP Guides: Completed 1/1 Orcish Dagger"] = 8,
+["{rt3} RestedXP Guides: Completed 3/3 Taillasher Egg"] = 9,
 ["{rt3} RestedXP Guides: Completed 4/4 Intact Makrura Eye"] = 9,
+},
+},
+},
+},
+["Karums Priest"] = {
+["players"] = {
+["Langemann"] = {
+["timePlayed"] = 27.03199999999993,
+["class"] = "SHAMAN",
+["xp"] = 0,
+["version"] = 1,
+},
+["Eli Yaffa"] = {
+["level"] = 11,
+["isRxp"] = true,
+["version"] = 1,
+["lastSeen"] = 3464.705,
+["timePlayed"] = 0,
+["class"] = "SHAMAN",
+["xp"] = 0,
+["xpPercentage"] = 96,
+},
+["Karums Warrior"] = {
+["isRxp"] = true,
+["level"] = 13,
+["version"] = 1,
+["lastSeen"] = 20310.223,
+["xpPercentage"] = 22,
+["class"] = "WARRIOR",
+["xp"] = 0,
+["timePlayed"] = 0,
+},
+["Invited"] = {
+["timePlayed"] = 1289.776,
+["class"] = "SHAMAN",
+["xp"] = 2906,
+["version"] = 1,
+},
+["Invited Friend"] = {
+["xpPercentage"] = 25,
+["class"] = "SHAMAN",
+["version"] = 1,
+["lastSeen"] = 1523.198,
+["timePlayed"] = 0,
+["level"] = 1,
+["xp"] = 0,
+["isRxp"] = true,
+},
+["Karums"] = {
+["timePlayed"] = 5693.880999999998,
+["class"] = "WARRIOR",
+["xp"] = 11554,
+["version"] = 1,
+},
+["Mista"] = {
+["timePlayed"] = 0,
+["class"] = "MAGE",
+["xp"] = 0,
+["version"] = 1,
+},
+["Animia"] = {
+["timePlayed"] = 0,
+["class"] = "SHAMAN",
+["xp"] = 0,
+["version"] = 1,
+},
+["Eli"] = {
+["timePlayed"] = 0,
+["class"] = "SHAMAN",
+["xp"] = 0,
+["version"] = 1,
+},
+["Langemann Durek"] = {
+["level"] = 11,
+["isRxp"] = true,
+["version"] = 1,
+["lastSeen"] = 1522.765,
+["timePlayed"] = 0,
+["class"] = "SHAMAN",
+["xp"] = 0,
+["xpPercentage"] = 82,
+},
+},
+["announcements"] = {
+["06-10 Durotar"] = {
+["collect"] = {
+},
+["complete"] = {
+["{rt3} RestedXP Guides: Completed 5/5 Sack of Supplies"] = 11,
+},
+},
+["10-12 Durotar"] = {
+["collect"] = {
+},
+["complete"] = {
+["{rt3} RestedXP Guides: Completed 8/8 Dustwind Storm Witch slain"] = 12,
+["{rt3} RestedXP Guides: Completed 5/5 Charged Thunder Lizard Organ"] = 13,
 },
 },
 },

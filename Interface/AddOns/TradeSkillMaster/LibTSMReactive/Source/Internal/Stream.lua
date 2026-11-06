@@ -1,0 +1,150 @@
+-- ------------------------------------------------------------------------------ --
+--                                 LibTSMReactive                                 --
+--               https://github.com/TradeSkillMaster/LibTSMReactive               --
+--         Licensed under the MIT license. See LICENSE.txt for more info.         --
+-- ------------------------------------------------------------------------------ --
+
+local LibTSMReactive = select(2, ...).LibTSMReactive
+local ReactiveStream = LibTSMReactive:DefineInternalClassType("ReactiveStream")
+local ReactivePublisherSchema = LibTSMReactive:IncludeClassType("ReactivePublisherSchema")
+local OrderedTable = LibTSMReactive:From("LibTSMUtil"):Include("BaseType.OrderedTable")
+local ObjectPool = LibTSMReactive:From("LibTSMUtil"):IncludeClassType("ObjectPool")
+local private = {
+	objectPool = ObjectPool.New("STREAM", ReactiveStream, 0),
+}
+
+---@class ReactiveStream<T>: ReactiveSubject<T>
+
+
+
+-- ============================================================================
+-- Static Class Functions
+-- ============================================================================
+
+---Gets a stream object.
+---@generic T
+---@param initialValueFunc fun(): T A function to get the initial value to send to new publishers
+---@return ReactiveStream<T>
+function ReactiveStream.__static.Get(initialValueFunc)
+	local stream = private.objectPool:Get()
+	stream:_Acquire(initialValueFunc)
+	return stream
+end
+
+
+
+-- ============================================================================
+-- Meta Class Methods
+-- ============================================================================
+
+function ReactiveStream.__private:__init()
+	self._initialValueFunc = nil ---@type (fun(): T)!
+	self._publishers = {} ---@type OrderedTable.Table<ReactivePublisher,true>
+	self._disabled = {}
+	self._noPublishersCallback = nil
+	self._sending = false
+	self._sendQueue = {}
+end
+
+---@param initialValueFunc fun(): T
+function ReactiveStream.__private:_Acquire(initialValueFunc)
+	assert(initialValueFunc)
+	self._initialValueFunc = initialValueFunc
+end
+
+
+
+-- ============================================================================
+-- Public Class Methods
+-- ============================================================================
+
+---Releases the stream.
+function ReactiveStream:Release()
+	assert(not self._sending and not next(self._sendQueue))
+	assert(self:GetNumPublishers() == 0)
+	self._noPublishersCallback = nil
+	self._initialValueFunc = nil
+	private.objectPool:Recycle(self)
+end
+
+---Creates a new publisher for the stream.
+---@return ReactivePublisherSchema<T>
+function ReactiveStream:Publisher()
+	return ReactivePublisherSchema.Get(self)
+end
+
+---Sends a new data value the stream's publishers.
+---@param data T The data to send
+function ReactiveStream:Send(data)
+	local sendQueue = self._sendQueue
+	assert(not self._sending and #sendQueue == 0)
+	self._sending = true
+	local publishers = self._publishers
+	for i = 1, #publishers do
+		sendQueue[i] = publishers[i]
+	end
+	for i = 1, #sendQueue do
+		local publisher = sendQueue[i]
+		if self._publishers[publisher] and not self._disabled[publisher] then
+			publisher:_HandleData(data)
+		end
+	end
+	wipe(sendQueue)
+	self._sending = false
+end
+
+---Sets a callback for when there are no remaining publishers.
+---@param handler fun(stream: ReactiveStream) The handler function
+---@return self
+function ReactiveStream:SetNoPublishersCallback(handler)
+	assert(not self._noPublishersCallback)
+	self._noPublishersCallback = handler
+	return self
+end
+
+---Gets the number of publishers on the stream.
+---@return number
+function ReactiveStream:GetNumPublishers()
+	return #self._publishers
+end
+
+
+
+-- ============================================================================
+-- Private Class Methods
+-- ============================================================================
+
+---@private
+---@param publisher ReactivePublisher
+function ReactiveStream:_AddPublisher(publisher)
+	OrderedTable.Insert(self._publishers, publisher, true)
+end
+
+---@private
+---@param publisher ReactivePublisher
+function ReactiveStream:_RemovePublisher(publisher)
+	OrderedTable.Remove(self._publishers, publisher)
+	self._disabled[publisher] = nil
+	if self:GetNumPublishers() == 0 and self._noPublishersCallback then
+		self:_noPublishersCallback()
+	end
+end
+
+---@private
+---@param publisher ReactivePublisher
+---@param disabled boolean
+function ReactiveStream:_SetPublisherDisabled(publisher, disabled)
+	self._disabled[publisher] = disabled
+end
+
+---@private
+---@return T
+function ReactiveStream:_GetInitialValue()
+	return self._initialValueFunc()
+end
+
+---@private
+---@return boolean
+function ReactiveStream:_RequiresOptimized()
+	return false
+end

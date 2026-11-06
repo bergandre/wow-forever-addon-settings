@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="Source\Core.lua" />
+
+    <Script file="Source\Internal\Util.lua" />
+    <Script file="Source\Internal\IndexRanges.lua" />
+    <Script file="Source\Internal\IndexPositions.lua" />
+    <Script file="Source\Internal\QueryClause.lua" />
+    <Script file="Source\Internal\Query.lua" />
+    <Script file="Source\Internal\Table.lua" />
+    <Script file="Source\Internal\Schema.lua" />
+    <Script file="Source\Database.lua" />
+</Ui>

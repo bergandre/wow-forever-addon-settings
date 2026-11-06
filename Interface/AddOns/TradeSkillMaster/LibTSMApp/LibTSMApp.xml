@@ -1,0 +1,124 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="Source\Core.lua" />
+
+    <Script file="Source\Service\SlashCommands.lua" />
+    <Script file="Source\Service\AddonSettings.lua" />
+
+    <Script file="Source\Price\CustomPrice.lua" />
+
+    <Script file="Source\Config\LogConfig.lua" />
+    <Script file="Source\Config\ErrorConfig.lua" />
+    <Script file="Source\Config\ItemInfoConfig.lua" />
+    <Script file="Source\Config\TexturePacks.lua" />
+    <Script file="Source\Config\ThreadingConfig.lua" />
+    <Script file="Source\Config\AppHelperConfig.lua" />
+    <Script file="Source\Config\AuctionDBConfig.lua" />
+    <Script file="Source\Config\UIConfig.lua" />
+    <Script file="Source\Config\DebugConfig.lua" />
+
+    <Script file="Source\Service\PlayerInfo.lua" />
+    <Script file="Source\Service\AltTracking.lua" />
+    <Script file="Source\Service\Inventory.lua" />
+    <Script file="Source\Service\AuctionChatMessage.lua" />
+    <Script file="Source\Service\ThemeColorSets.lua" />
+    <Script file="Source\Service\ProfileSync.lua" />
+
+    <Script file="Source\Config\GroupOperationConfig.lua" />
+
+    <Script file="Source\Price\External.lua" />
+    <Script file="Source\Price\Item.lua" />
+    <Script file="Source\Price\Operations.lua" />
+
+    <Script file="Source\UI\WhatsNew.lua" />
+
+    <Script file="Source\Auctioning\Internal\Log.lua" />
+    <Script file="Source\Auctioning\Internal\Util.lua" />
+    <Script file="Source\Auctioning\Internal\CancelScan.lua" />
+    <Script file="Source\Auctioning\Internal\PostScan.lua" />
+    <Script file="Source\Auctioning\Auctioning.lua" />
+
+    <Script file="Source\Banking\Internal\Auctioning.lua" />
+    <Script file="Source\Banking\Internal\Mailing.lua" />
+    <Script file="Source\Banking\Internal\Warehousing.lua" />
+    <Script file="Source\Banking\Banking.lua" />
+
+    <Script file="Source\Mailing\Internal\Util.lua" />
+    <Script file="Source\Mailing\Internal\Groups.lua" />
+    <Script file="Source\Mailing\Internal\Open.lua" />
+    <Script file="Source\Mailing\Mailing.lua" />
+
+    <Script file="Source\Crafting\Internal\Gathering.lua" />
+    <Script file="Source\Crafting\Internal\Restock.lua" />
+    <Script file="Source\Crafting\Crafting.lua" />
+
+    <Script file="Source\Accounting\Accounting.lua" />
+
+    <Script file="Source\Destroying\Internal\Ignore.lua" />
+    <Script file="Source\Destroying\Internal\BagDB.lua" />
+    <Script file="Source\Destroying\Internal\History.lua" />
+    <Script file="Source\Destroying\Internal\Combine.lua" />
+    <Script file="Source\Destroying\Internal\Destroy.lua" />
+    <Script file="Source\Destroying\Destroying.lua" />
+
+    <Script file="Source\Vendoring\Internal\Ignore.lua" />
+    <Script file="Source\Vendoring\Internal\PotentialValue.lua" />
+    <Script file="Source\Vendoring\Internal\Sell.lua" />
+    <Script file="Source\Vendoring\Internal\Groups.lua" />
+    <Script file="Source\Vendoring\Vendoring.lua" />
+
+    <Script file="Source\MyAuctions\MyAuctions.lua" />
+
+    <Script file="Source\Shopping\Internal\CanIMogItIntegration.lua" />
+    <Script file="Source\Shopping\Internal\FilterSearchContext.lua" />
+    <Script file="Source\Shopping\Internal\FilterSearch.lua" />
+    <Script file="Source\Shopping\Internal\GreatDeals.lua" />
+    <Script file="Source\Shopping\Internal\VendorSearchContext.lua" />
+    <Script file="Source\Shopping\Internal\VendorSearch.lua" />
+    <Script file="Source\Shopping\Internal\DisenchantSearch.lua" />
+    <Script file="Source\Shopping\Internal\GroupSearchContext.lua" />
+    <Script file="Source\Shopping\Internal\GroupSearch.lua" />
+    <Script file="Source\Shopping\Shopping.lua" />
+
+    <Script file="Source\Sniper\Internal\Util.lua" />
+    <Script file="Source\Sniper\Internal\Bid.lua" />
+    <Script file="Source\Sniper\Internal\Buyout.lua" />
+    <Script file="Source\Sniper\Sniper.lua" />
+
+    <Script file="Source\Tooltip\Internal\TooltipEntry.lua" />
+    <Script file="Source\Tooltip\Internal\TooltipInfo.lua" />
+    <Script file="Source\Tooltip\Internal\Registry.lua" />
+    <Script file="Source\Tooltip\Internal\Config.lua" />
+    <Script file="Source\Tooltip\Internal\General\Convert.lua" />
+    <Script file="Source\Tooltip\Internal\General\CustomSources.lua" />
+    <Script file="Source\Tooltip\Internal\General\Destroy.lua" />
+    <Script file="Source\Tooltip\Internal\General\GroupOperation.lua" />
+    <Script file="Source\Tooltip\Internal\General\Inventory.lua" />
+    <Script file="Source\Tooltip\Internal\General\Vendor.lua" />
+    <Script file="Source\Tooltip\Internal\General\General.lua" />
+    <Script file="Source\Tooltip\Internal\Accounting.lua" />
+    <Script file="Source\Tooltip\Internal\AuctionDB.lua" />
+    <Script file="Source\Tooltip\Internal\Auctioning.lua" />
+    <Script file="Source\Tooltip\Internal\Crafting.lua" />
+    <Script file="Source\Tooltip\Internal\Shopping.lua" />
+    <Script file="Source\Tooltip\Internal\Sniper.lua" />
+    <Script file="Source\Tooltip\Tooltip.lua" />
+
+    <Script file="Source\TaskList\Internal\TaskPool.lua" />
+    <Script file="Source\TaskList\Internal\UpdateManager.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\ItemTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\AltTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\BankingTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\VendoringTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\OpenMailTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\SendMailTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\CraftingTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\CooldownCraftingTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\ExpiringMailTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\ExpiredAuctionTask.lua" />
+    <Script file="Source\TaskList\Internal\Tasks\ShoppingTask.lua" />
+    <Script file="Source\TaskList\Internal\Cooldowns.lua" />
+    <Script file="Source\TaskList\Internal\Expirations.lua" />
+    <Script file="Source\TaskList\Internal\Gathering.lua" />
+    <Script file="Source\TaskList\TaskList.lua" />
+</Ui>

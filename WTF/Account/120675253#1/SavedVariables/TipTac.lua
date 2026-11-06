@@ -1,8 +1,9 @@
 
 TipTac_Config = {
 ["profileKeys"] = {
-["Opikol - PvP"] = "Default",
+["Karums Warrior"] = "Default",
 ["Karums - PvP"] = "Default",
+["Opikol - PvP"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {

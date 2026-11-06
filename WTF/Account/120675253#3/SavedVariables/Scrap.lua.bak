@@ -2,7 +2,7 @@
 Scrap_Sets = {
 ["latest"] = {
 },
-["tutorial"] = 1,
+["tutorial"] = 2,
 ["list"] = {
 },
 }

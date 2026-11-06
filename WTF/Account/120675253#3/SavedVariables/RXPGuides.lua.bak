@@ -16,6 +16,7 @@ RXPData = {
 }
 RXPDB = {
 ["profileKeys"] = {
+["Invited Friend"] = "global",
 ["Invited - PvP"] = "global",
 },
 ["profiles"] = {
@@ -25,11 +26,86 @@ RXPDB = {
 }
 RXPSettings = {
 ["profileKeys"] = {
+["Invited Friend"] = "Invited Friend",
 ["Invited - PvP"] = "Invited - PvP",
 },
 ["profiles"] = {
-["Invited - PvP"] = {
+["Invited Friend"] = {
 ["tbcStart"] = 2,
+["hardcore"] = false,
+["framePositions"] = {
+["activeItemFrame"] = {
+{
+"CENTER",
+"UIParent",
+"CENTER",
+0,
+0,
+},
+},
+["arrowFrame"] = {
+{
+"TOP",
+"UIParent",
+"TOP",
+0,
+0,
+},
+},
+["RXPV2GuideConfigurator"] = {
+{
+"TOP",
+"UIParent",
+"TOP",
+399.9999694824219,
+-60,
+},
+},
+["RXPFrame"] = {
+{
+"LEFT",
+nil,
+"LEFT",
+38,
+118,
+},
+},
+["activeTargetFrame"] = {
+{
+"CENTER",
+"UIParent",
+"CENTER",
+0,
+0,
+},
+},
+},
+["season"] = 0,
+["frameSizes"] = {
+["activeItemFrame"] = {
+80.61359405517578,
+43.00000762939453,
+},
+["RXPFrame"] = {
+234.9999847412109,
+124.9999084472656,
+},
+["arrowFrame"] = {
+31.99998283386231,
+31.99998283386231,
+},
+["activeTargetFrame"] = {
+0,
+40.00000381469727,
+},
+},
+["goblinTele"] = false,
+["tbcWBF"] = true,
+["gnomeTele"] = false,
+["portalTele"] = false,
+},
+["Invited - PvP"] = {
+["gnomeTele"] = false,
 ["hardcore"] = false,
 ["framePositions"] = {
 ["activeItemFrame"] = {
@@ -55,8 +131,8 @@ RXPSettings = {
 "RIGHT",
 nil,
 "RIGHT",
--268.3328552246094,
-152.166259765625,
+-268.3327026367188,
+152.1661987304688,
 },
 },
 ["RXPFrame"] = {
@@ -65,7 +141,7 @@ nil,
 "UIParent",
 "LEFT",
 0,
-34.99994277954102,
+34.99992752075195,
 },
 },
 ["arrowFrame"] = {
@@ -79,28 +155,28 @@ nil,
 },
 },
 ["season"] = 0,
+["tbcStart"] = 2,
+["portalTele"] = false,
 ["frameSizes"] = {
-["activeItemFrame"] = {
-77.22542572021484,
-42.99982070922852,
+["activeTargetFrame"] = {
+83.99954223632812,
+17.99995040893555,
 },
 ["RXPFrame"] = {
-234.9996185302734,
-124.9998397827148,
+234.9994659423828,
+124.9997177124023,
 },
-["activeTargetFrame"] = {
-83.99966430664062,
-17.99995994567871,
+["activeItemFrame"] = {
+77.22542572021484,
+42.99971389770508,
 },
 ["arrowFrame"] = {
-31.99997520446777,
-31.99997520446777,
+31.99991416931152,
+32.00002670288086,
 },
 },
 ["goblinTele"] = false,
 ["tbcWBF"] = true,
-["gnomeTele"] = false,
-["portalTele"] = false,
 },
 },
 }

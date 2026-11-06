@@ -1,0 +1,35 @@
+
+Prat3DB = {
+["namespaces"] = {
+["Prat_Frames"] = {
+["profiles"] = {
+["Default"] = {
+["initialized"] = true,
+["maxchatheightdefault"] = 799.9999389648438,
+["minchatwidthdefault"] = 250.0000152587891,
+["maxchatwidthdefault"] = 799.9999389648438,
+},
+},
+},
+},
+["profileKeys"] = {
+["Invited Friend"] = "Default",
+},
+["profiles"] = {
+["Default"] = {
+["modules"] = {
+["EventNames"] = 3,
+["ChatLog"] = 2,
+["Mentions"] = 2,
+["PopupMessage"] = 2,
+["AltNames"] = 2,
+["Sounds"] = 2,
+["Paragraph"] = 2,
+["KeyBindings"] = 2,
+["LinkInfoIcons"] = 2,
+["Alias"] = 2,
+["OriginalButtons"] = 2,
+},
+},
+},
+}

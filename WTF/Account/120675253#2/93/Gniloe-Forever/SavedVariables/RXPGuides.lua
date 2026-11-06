@@ -9,17 +9,6 @@ RXPCData = {
 },
 ["questNameCache"] = {
 },
-["guideDisabled"] = {
-[0] = 481,
-},
-["flightPaths"] = {
-},
-["guideProgress"] = {
-},
-["stepSkip"] = {
-},
-["discardPile"] = {
-},
 ["guideMetaData"] = {
 ["RestedXP Forever Guide (H)||50-51 Stranglethorn/Blasted Lands"] = {
 ["guideId"] = 2342917451,
@@ -1774,13 +1763,42 @@ RXPCData = {
 ["displayname"] = "6-10 Durotar",
 },
 },
+["flightPaths"] = {
+},
+["guideProgress"] = {
+},
+["stepSkip"] = {
+},
+["discardPile"] = {
+},
+["guideDisabled"] = {
+[0] = 481,
+},
 }
 RXPCTrackingData = {
 ["profileKeys"] = {
+["Gniloe Forever"] = "Gniloe Forever",
 ["Gniloe - PvP"] = "Gniloe - PvP",
 },
 ["profiles"] = {
+["Gniloe Forever"] = {
+["levels"] = {
+{
+["groupExperience"] = 0,
+["deaths"] = 0,
+["mobs"] = {
+},
+["timestamp"] = {
+["started"] = 0,
+},
+["quests"] = {
+},
+},
+},
+["trackedGuid"] = "Player-6938-009964C9",
+},
 ["Gniloe - PvP"] = {
+["trackedGuid"] = "Player-6938-009964C9",
 ["levels"] = {
 {
 ["groupExperience"] = 0,
@@ -1792,9 +1810,9 @@ RXPCTrackingData = {
 ["monthDay"] = 5,
 ["weekday"] = 5,
 ["month"] = 11,
-["minute"] = 42,
-["hour"] = 9,
 ["year"] = 2026,
+["hour"] = 9,
+["minute"] = 42,
 },
 ["started"] = 0,
 },
@@ -1802,36 +1820,38 @@ RXPCTrackingData = {
 },
 },
 },
-["trackedGuid"] = "Player-6938-009964C9",
 },
 },
 }
 RXPCComms = {
 ["profileKeys"] = {
+["Gniloe Forever"] = "Gniloe Forever",
 ["Gniloe - PvP"] = "Gniloe - PvP",
 },
 ["profiles"] = {
+["Gniloe Forever"] = {
+},
 ["Gniloe - PvP"] = {
 ["players"] = {
 ["Invited Friend"] = {
+["level"] = 1,
+["isRxp"] = true,
+["version"] = 1,
+["lastSeen"] = 37784.339,
 ["timePlayed"] = 0,
 ["class"] = "SHAMAN",
-["version"] = 1,
-["lastSeen"] = 37784.339,
-["xpPercentage"] = 25,
-["isRxp"] = true,
 ["xp"] = 0,
-["level"] = 1,
+["xpPercentage"] = 25,
 },
 ["Karums Warrior"] = {
-["timePlayed"] = 0,
-["class"] = "WARRIOR",
+["level"] = 7,
+["isRxp"] = true,
 ["version"] = 1,
 ["lastSeen"] = 37784.339,
-["xpPercentage"] = 56,
-["isRxp"] = true,
+["timePlayed"] = 0,
+["class"] = "WARRIOR",
 ["xp"] = 0,
-["level"] = 7,
+["xpPercentage"] = 56,
 },
 },
 },

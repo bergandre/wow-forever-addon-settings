@@ -1,0 +1,66 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="Source\Core.lua" />
+
+    <Script file="Source\EnumTypes\EnumTypes.lua" />
+
+    <Script file="Source\Item\BonusIds.lua" />
+    <Script file="Source\Item\ItemString.lua" />
+    <Script file="Source\Item\Conversion.lua" />
+    <Script file="Source\Item\Internal\ItemInfoSerializer.lua" />
+    <Script file="Source\Item\ItemInfoCache.lua" />
+
+    <Script file="Source\Crafting\CraftString.lua" />
+    <Script file="Source\Crafting\MatString.lua" />
+    <Script file="Source\Crafting\MatQuantityString.lua" />
+    <Script file="Source\Crafting\RecipeString.lua" />
+
+    <Script file="Source\Ledger\GoldLog.lua" />
+
+    <Script file="Source\CustomString\Internal\Types.lua" />
+    <Script file="Source\CustomString\Internal\Utils.lua" />
+    <Script file="Source\CustomString\Internal\Sources.lua" />
+    <Script file="Source\CustomString\Internal\Tokenizer.lua" />
+    <Script file="Source\CustomString\Internal\TokenProcessor.lua" />
+    <Script file="Source\CustomString\Internal\Optimizer.lua" />
+    <Script file="Source\CustomString\Internal\AST.lua" />
+    <Script file="Source\CustomString\Internal\CodeGen.lua" />
+    <Script file="Source\CustomString\Internal\Object.lua" />
+    <Script file="Source\CustomString\CustomString.lua" />
+
+    <Script file="Source\Operation\Internal\Util.lua" />
+    <Script file="Source\Operation\Internal\Type.lua" />
+    <Script file="Source\Operation\Operation.lua" />
+
+    <Script file="Source\Group\Internal\Path.lua" />
+    <Script file="Source\Group\Internal\ItemMap.lua" />
+    <Script file="Source\Group\Internal\ItemDB.lua" />
+    <Script file="Source\Group\Group.lua" />
+
+    <Script file="Source\GroupOperation\GroupOperation.lua" />
+
+    <Script file="Source\ImportExport\GroupImport.lua" />
+    <Script file="Source\ImportExport\GroupExport.lua" />
+
+    <Script file="Source\Threading\Internal\EventWaiter.lua" />
+    <Script file="Source\Threading\Internal\SignalWaiter.lua" />
+    <Script file="Source\Threading\Internal\FunctionWaiter.lua" />
+    <Script file="Source\Threading\Internal\FutureWaiter.lua" />
+    <Script file="Source\Threading\Internal\Scheduler.lua" />
+    <Script file="Source\Threading\Internal\Thread.lua" />
+    <Script file="Source\Threading\Threading.lua" />
+
+    <Script file="Source\Settings\Internal\Util.lua" />
+    <Script file="Source\Settings\Internal\Types.lua" />
+    <Script file="Source\Settings\Internal\Migration.lua" />
+    <Script file="Source\Settings\Internal\Schema.lua" />
+    <Script file="Source\Settings\Internal\View.lua" />
+    <Script file="Source\Settings\Internal\DB.lua" />
+    <Script file="Source\Settings\Settings.lua" />
+
+    <Script file="Source\SavedSearches\Internal\Util.lua" />
+    <Script file="Source\SavedSearches\AuctioningSavedSearches.lua" />
+    <Script file="Source\SavedSearches\ShoppingSavedSearches.lua" />
+
+    <Script file="Source\Task\Task.lua" />
+</Ui>

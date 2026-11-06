@@ -3,8 +3,20 @@ VER 3 0000000000000002 "/follow" "134357"
 END
 VER 3 0000000000000006 "assist focus" "134400"
 #showtooltip
-/assist focus
+/assist [mod:ctrl][noharm][dead] focus
 /cast Smite
+END
+VER 3 0000000000000016 "cureD f" "134400"
+#showtooltip
+/cast [help,nodead][@focus,help,nodead][@player] Cure Disease
+END
+VER 3 0000000000000015 "dispel f" "134400"
+#showtooltip
+/cast [help,nodead][@focus,help,nodead][@player] Dispel Magic
+END
+VER 3 0000000000000012 "flashH f" "134400"
+#showtooltip
+/cast [help,nodead][@focus,help,nodead][@player] Flash Heal
 END
 VER 3 0000000000000005 "follow focus" "1322719"
 /follow focus
@@ -13,34 +25,58 @@ VER 3 0000000000000004 "follow heal" "1035050"
 /target Karums Warrior
 /focus
 END
+VER 3 0000000000000014 "fortitude f" "134400"
+#showtooltip
+/cast [help,nodead][@focus,help,nodead][@player] Power Word: Fortitude
+END
+VER 3 0000000000000011 "heal f" "134400"
+#showtooltip
+/cast [help,nodead][@focus,help,nodead][@player] Heal
+END
 VER 3 0000000000000009 "heal flash" "134400"
 #showtooltip
-/cast [mod:shift,@player][@focus,help,nodead][] Lesser Heal
+/cast [help,nodead][@focus,help,nodead][@player] Lesser Heal
+END
+VER 3 000000000000000E "holyfire foxus" "134400"
+#showtooltip
+/assist [mod:ctrl][noharm][dead] focus
+/cast Holy Fire
+END
+VER 3 0000000000000010 "mindblast f" "134400"
+#showtooltip
+/assist [mod:ctrl][noharm][dead] focus
+/cast Mind Blast
+END
+VER 3 000000000000000F "Mindflay focus" "134400"
+#showtooltip
+/assist [mod:ctrl][noharm][dead] focus
+/cast Mind Flay
+END
+VER 3 0000000000000013 "renew f" "134400"
+#showtooltip
+/cast [help,nodead][@focus,help,nodead][@player] Renew
 END
 VER 3 000000000000000C "RXP ITEM" "134400"
 #showtooltip
 /click RXPItemFrameButton1 LeftButton 1
 /click RXPItemFrameButton1 LeftButton
 END
-VER 3 000000000000000A "RXPFollow" "Inv_boots_02"
-//You are not in a party.
-END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Tai'jin
+/targetexact Ur'kyo
 /tm !7
 /targetlasttarget [dead]
 END
 VER 3 000000000000000B "shoot" "134400"
 #showtooltip
-/assist focus
-/cast [mod:shift] Shadow Word: Pain; !Shoot
+/assist [mod:ctrl][noharm][dead] focus
+/cast !Shoot
 END
 VER 3 0000000000000008 "word pain assist" "134400"
 #showtooltip
-/assist focus
+/assist [mod:ctrl][noharm][dead] focus
 /cast Shadow Word: Pain
 END
 VER 3 000000000000000D "word shield focu" "134400"
 #showtooltip
-/cast [mod:shift,@player][@focus,help,nodead][] Power Word: Shield
+/cast [help,nodead][@focus,help,nodead][@player] Power Word: Shield
 END

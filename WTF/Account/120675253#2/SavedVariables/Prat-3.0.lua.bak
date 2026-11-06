@@ -1,0 +1,37 @@
+
+Prat3DB = {
+["namespaces"] = {
+["Prat_Frames"] = {
+["profiles"] = {
+["Default"] = {
+["initialized"] = true,
+["minchatwidthdefault"] = 250,
+["maxchatheightdefault"] = 800.0000610351562,
+["maxchatwidthdefault"] = 800.0000610351562,
+["minchatheightdefault"] = 119.9999847412109,
+},
+},
+},
+},
+["profileKeys"] = {
+["Gniloe Forever"] = "Default",
+["Karums Priest"] = "Default",
+},
+["profiles"] = {
+["Default"] = {
+["modules"] = {
+["EventNames"] = 3,
+["Alias"] = 2,
+["Mentions"] = 2,
+["PopupMessage"] = 2,
+["AltNames"] = 2,
+["Sounds"] = 2,
+["Paragraph"] = 2,
+["KeyBindings"] = 2,
+["LinkInfoIcons"] = 2,
+["ChatLog"] = 2,
+["OriginalButtons"] = 2,
+},
+},
+},
+}

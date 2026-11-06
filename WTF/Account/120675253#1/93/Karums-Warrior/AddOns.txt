@@ -22,3 +22,5 @@ Blizzard_ObjectiveTracker: enabled
 Blizzard_CompactRaidFrames: enabled
 Bagnon: disabled
 Bagnon_Bank: disabled
+Blizzard_CombatText: enabled
+Bagnonium_Bank: enabled

@@ -1,0 +1,189 @@
+-- ------------------------------------------------------------------------------ --
+--                                 LibTSMReactive                                 --
+--               https://github.com/TradeSkillMaster/LibTSMReactive               --
+--         Licensed under the MIT license. See LICENSE.txt for more info.         --
+-- ------------------------------------------------------------------------------ --
+
+local LibTSMReactive = select(2, ...).LibTSMReactive
+local ReactivePublisherSchemaBase = LibTSMReactive:IncludeClassType("ReactivePublisherSchemaBase")
+local ReactivePublisherSchema = LibTSMReactive:DefineInternalClassType("ReactivePublisherSchema", ReactivePublisherSchemaBase)
+local ReactivePublisher = LibTSMReactive:IncludeClassType("ReactivePublisher")
+local ReactivePublisherCodeGen = LibTSMReactive:IncludeClassType("ReactivePublisherCodeGen")
+local ReactivePublisherSchemaShared = LibTSMReactive:IncludeClassType("ReactivePublisherSchemaShared")
+local Util = LibTSMReactive:Include("Reactive.Util")
+local ObjectPool = LibTSMReactive:From("LibTSMUtil"):IncludeClassType("ObjectPool")
+local private = {
+	objectPool = ObjectPool.New("PUBLISHER_SCHEMA", ReactivePublisherSchema, 2),
+}
+local STEP = Util.PUBLISHER_STEP
+
+---@class ReactivePublisherSchema<T> : ReactivePublisherSchemaBase<T>
+
+
+
+-- ============================================================================
+-- Static Class Functions
+-- ============================================================================
+
+---Gets a publisher schema object.
+---@generic T
+---@param subject ReactiveSubject<T> The subject which is publishing values
+---@return ReactivePublisherSchema<T>
+function ReactivePublisherSchema.__static.Get(subject)
+	local publisher = private.objectPool:Get()
+	publisher:_Acquire(subject)
+	return publisher
+end
+
+
+
+-- ============================================================================
+-- Meta Class Methods
+-- ============================================================================
+
+function ReactivePublisherSchema.__protected:__init()
+	self.__super:__init(false)
+	self._subject = nil
+	self._codeGen = nil
+	self._autoStore = nil
+	self._autoDisable = false
+	self._hasShare = false
+end
+
+---@param subject ReactiveSubject<T>
+function ReactivePublisherSchema.__protected:_Acquire(subject)
+	self._subject = subject
+end
+
+function ReactivePublisherSchema.__protected:_Release()
+	assert(not self._codeGen)
+	self._subject = nil
+	self._autoStore = nil
+	self._autoDisable = false
+	self._hasShare = false
+	private.objectPool:Recycle(self)
+end
+
+
+
+-- ============================================================================
+-- Public Class Methods
+-- ============================================================================
+
+---Shares the result of the publisher at the current point in the chain.
+---@return ReactivePublisherSchemaShared<T,T>
+---@nodiscard
+function ReactivePublisherSchema:Share()
+	assert(not self._hasShare)
+	self._hasShare = true
+	self:_AddStepHelper(STEP.SHARE)
+	assert(self._codeGen)
+	return ReactivePublisherSchemaShared.Get(self, self._codeGen)
+end
+
+---Calls a method with the published values.
+---@generic Obj, K: keyof Obj
+---@param obj Obj The object to call the method on
+---@param method K The name of the method to call with the published values
+---@param arg? any An additional argument to pass to the method
+---@return ReactivePublisher
+function ReactivePublisherSchema:CallMethod(obj, method, arg)
+	assert(not self._hasShare)
+	local _ = self.__super:CallMethod(obj, method, arg)
+	return self:_Commit()
+end
+
+---Calls a function with the published values.
+---@generic A: any
+---@param func fun(value: T, arg?: A) The function to call with the published values
+---@param arg? A An additional argument to pass to the function
+---@return ReactivePublisher
+function ReactivePublisherSchema:CallFunction(func, arg)
+	assert(not self._hasShare)
+	local _ = self.__super:CallFunction(func, arg)
+	return self:_Commit()
+end
+
+---Assigns published values to the specified key in the table.
+---@generic TBL, K: keyof TBL
+---@param tbl TBL The table to assign the published values into
+---@param key K The key to assign the published values at
+---@return ReactivePublisher
+function ReactivePublisherSchema:AssignToTableKey(tbl, key)
+	assert(not self._hasShare)
+	local _ = self.__super:AssignToTableKey(tbl, key)
+	return self:_Commit()
+end
+
+---Maps published values to a new publisher which is owned by the current publisher and call a method with values it publishes.
+---@param map ReactivePublisherFlatMapFunc<T> A function which takes a published value and returns a new publisher
+---@param obj table The object to call the method on
+---@param method string The name of the method to call with the published values
+---@param arg? any An additional argument to pass to the method
+---@return ReactivePublisher
+function ReactivePublisherSchema:FlatMapCallMethod(map, obj, method, arg)
+	assert(not self._hasShare)
+	local _ = self:_AddStepHelper(STEP.FLAT_MAP_CALL_METHOD, map, obj, method, arg)
+	return self:_Commit()
+end
+
+---Maps published values to a new publisher which is owned by the current publisher and call a function with values it publishes.
+---@param map ReactivePublisherFlatMapFunc<T> A function which takes a published value and returns a new publisher
+---@param func fun(value: any) The function to call with the published values
+---@param arg? any An additional argument to pass to the function
+---@return ReactivePublisher
+function ReactivePublisherSchema:FlatMapCallFunction(map, func, arg)
+	assert(not self._hasShare)
+	local _ = self:_AddStepHelper(STEP.FLAT_MAP_CALL_FUNCTION, map, func, arg)
+	return self:_Commit()
+end
+
+
+
+-- ============================================================================
+-- Private Class Methods
+-- ============================================================================
+
+---@private
+function ReactivePublisherSchema:_AutoStore(tbl)
+	assert(type(tbl) == "table" and not self._autoStore)
+	assert(self._subject and not self._codeGen)
+	self._autoStore = tbl
+	return self
+end
+
+---@private
+function ReactivePublisherSchema:_AutoDisable()
+	self._autoDisable = true
+	return self
+end
+
+function ReactivePublisherSchema.__protected:_AddStepHelper(stepType, ...)
+	assert(self._subject)
+	self._codeGen = self._codeGen or ReactivePublisherCodeGen.Get()
+	self._codeGen:AddStep(stepType, ...)
+	return self
+end
+
+---@protected
+function ReactivePublisherSchema:_Commit()
+	-- Commit the generated code to a publisher
+	assert(self._codeGen and self._subject)
+	local publisher = ReactivePublisher.Get(self._codeGen, self._subject)
+	self._codeGen = nil
+
+	-- Disable the publisher if applicable
+	if self._autoDisable then
+		publisher:Disable()
+	end
+
+	-- Store the publisher if applicable
+	if self._autoStore then
+		publisher:StoreIn(self._autoStore)
+	end
+
+	-- Release this schema object
+	self:_Release()
+
+	return publisher
+end
