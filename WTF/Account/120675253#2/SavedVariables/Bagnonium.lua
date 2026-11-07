@@ -23,7 +23,7 @@ Bagnonium_Sets = {
 },
 ["color"] = {
 },
-["height"] = 500.0005798339844,
+["height"] = 500.0008850097656,
 ["activeRules"] = {
 ["tabs"] = "all",
 ["sidebar"] = "all",

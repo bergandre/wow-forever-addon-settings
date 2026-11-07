@@ -84,33 +84,33 @@ Bagnonium_Sets = {
 ["color"] = {
 ["quiver"] = {
 },
-["herb"] = {
+["account"] = {
 },
-["normal"] = {
+["enchant"] = {
 },
 ["soul"] = {
 },
-["leather"] = {
+["reagent"] = {
 },
 ["mine"] = {
 },
-["gem"] = {
+["engineer"] = {
 },
 ["inscribe"] = {
 },
-["reagent"] = {
+["fridge"] = {
 },
-["engineer"] = {
+["gem"] = {
 },
 ["key"] = {
 },
 ["tackle"] = {
 },
-["fridge"] = {
+["leather"] = {
 },
-["enchant"] = {
+["normal"] = {
 },
-["account"] = {
+["herb"] = {
 },
 },
 ["display"] = {

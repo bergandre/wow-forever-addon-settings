@@ -33,9 +33,9 @@ _detalhes_database = {
 ["show_options"] = false,
 ["ignored_cooldowns"] = {
 },
-["framme_locked"] = false,
 ["cooldowns"] = {
 },
+["height"] = 18,
 ["own_frame"] = {
 ["defensive-raid"] = false,
 ["ofensive"] = false,
@@ -43,7 +43,7 @@ _detalhes_database = {
 ["utility"] = false,
 ["defensive-personal"] = false,
 },
-["height"] = 18,
+["framme_locked"] = false,
 ["show_conditions"] = {
 ["only_inside_instance"] = true,
 ["only_in_group"] = true,
@@ -61,7 +61,7 @@ _detalhes_database = {
 ["utility"] = false,
 },
 },
-["combat_counter"] = 24,
+["combat_counter"] = 40,
 ["player_stats"] = {
 },
 ["force_font_outline"] = "",
@@ -69,18 +69,25 @@ _detalhes_database = {
 },
 ["arena_data_compressed"] = {
 },
-["mythic_plus_log"] = {
+["announce_firsthit"] = {
+["enabled"] = true,
+["channel"] = "SELF",
 },
 ["arena_data_index_selected"] = 1,
-["damage_meter_sessions"] = {
+["coach"] = {
+["enabled"] = false,
+["welcome_panel_pos"] = {
+},
+["last_coach_name"] = false,
 },
 ["on_death_menu"] = false,
-["auto_combatlog"] = false,
-["damage_meter_session_info"] = {
+["announce_damagerecord"] = {
+["enabled"] = true,
+["channel"] = "SELF",
 },
-["nick_tag_cache"] = {
-["nextreset"] = 1795211215,
-["last_version"] = 16,
+["damage_meter_sessions"] = {
+},
+["cached_talents"] = {
 },
 ["last_instance_id"] = 0,
 ["data_harvest_for_charsts"] = {
@@ -113,6 +120,12 @@ _detalhes_database = {
 ["reverse"] = false,
 },
 ["active_profile"] = "Karums-CAMWOW EU4 Realm 4 PvP",
+["last_realversion"] = 172,
+["nick_tag_cache"] = {
+["nextreset"] = 1795211215,
+["last_version"] = 16,
+},
+["ignore_nicktag"] = false,
 ["mythic_dungeon_currentsaved"] = {
 ["dungeon_name"] = "",
 ["started"] = false,
@@ -124,14 +137,6 @@ _detalhes_database = {
 ["dungeon_zone_id"] = 0,
 ["previous_boss_killed_at"] = 0,
 },
-["character_data"] = {
-["logons"] = 11,
-},
-["benchmark_db"] = {
-["frame"] = {
-},
-},
-["last_day"] = "06",
 ["apocalypes_info"] = {
 },
 ["combat_log"] = {
@@ -144,41 +149,7 @@ _detalhes_database = {
 ["evoker_show_realtimedps"] = false,
 ["inverse_deathlog_mplus"] = false,
 },
-["local_instances_config"] = {
-{
-["modo"] = 2,
-["sub_attribute"] = 1,
-["horizontalSnap"] = false,
-["verticalSnap"] = false,
-["isLocked"] = false,
-["is_open"] = true,
-["sub_atributo_last"] = {
-1,
-1,
-1,
-1,
-1,
-},
-["snap"] = {
-},
-["segment"] = 0,
-["mode"] = 2,
-["attribute"] = 1,
-["pos"] = {
-["normal"] = {
-["y"] = -350.3648986816406,
-["x"] = 1138.591064453125,
-["w"] = 313.2340393066406,
-["h"] = 86.84896850585938,
-},
-["solo"] = {
-["y"] = 2,
-["x"] = 1,
-["w"] = 300,
-["h"] = 200,
-},
-},
-},
+["data_harvested_for_charts"] = {
 },
 ["plugin_database"] = {
 ["DETAILS_PLUGIN_TINY_THREAT"] = {
@@ -317,16 +288,47 @@ _detalhes_database = {
 ["arrow_anchor_y"] = 0,
 },
 },
-["cached_talents"] = {
+["mythic_plus_log"] = {
 },
-["last_realversion"] = 172,
-["coach"] = {
-["enabled"] = false,
-["welcome_panel_pos"] = {
+["character_data"] = {
+["logons"] = 19,
 },
-["last_coach_name"] = false,
+["last_day"] = "07",
+["local_instances_config"] = {
+{
+["modo"] = 2,
+["sub_attribute"] = 1,
+["horizontalSnap"] = false,
+["verticalSnap"] = false,
+["isLocked"] = false,
+["is_open"] = true,
+["sub_atributo_last"] = {
+1,
+1,
+1,
+1,
+1,
 },
-["data_harvested_for_charts"] = {
+["snap"] = {
+},
+["segment"] = 0,
+["mode"] = 2,
+["attribute"] = 1,
+["pos"] = {
+["normal"] = {
+["y"] = -350.3651580810547,
+["x"] = 1254.6650390625,
+["w"] = 313.2340393066406,
+["h"] = 86.84902954101562,
+},
+["solo"] = {
+["y"] = 2,
+["x"] = 1,
+["w"] = 300,
+["h"] = 200,
+},
+},
+},
 },
 ["apocalypse_hashes"] = {
 },
@@ -337,11 +339,11 @@ _detalhes_database = {
 ["combat_id"] = 0,
 ["savedStyles"] = {
 },
-["announce_damagerecord"] = {
-["enabled"] = true,
-["channel"] = "SELF",
+["last_instance_time"] = 0,
+["benchmark_db"] = {
+["frame"] = {
 },
-["ignore_nicktag"] = false,
+},
 ["announce_deaths"] = {
 ["enabled"] = false,
 ["last_hits"] = 1,
@@ -376,7 +378,7 @@ _detalhes_database = {
 },
 ["raid_roster"] = {
 },
-["tempo_start"] = 17968.184,
+["tempo_start"] = 11851.146,
 ["last_events_tables"] = {
 },
 ["alternate_power"] = {
@@ -444,9 +446,9 @@ _detalhes_database = {
 ["data_inicio"] = 0,
 ["amountCasts"] = {
 },
-["mapId"] = 1,
+["mapId"] = 0,
 ["instance_type"] = "none",
-["zoneName"] = "Kalimdor",
+["zoneName"] = "Eastern Kingdoms",
 ["boss_hp"] = 1,
 ["is_challenge"] = false,
 ["frags"] = {
@@ -473,15 +475,13 @@ _detalhes_database = {
 ["start_time"] = 0,
 ["TimeData"] = {
 },
-["combat_counter"] = 23,
+["combat_counter"] = 39,
 },
-["announce_firsthit"] = {
-["enabled"] = true,
-["channel"] = "SELF",
+["damage_meter_session_info"] = {
 },
 ["arena_data_headers"] = {
 },
-["last_instance_time"] = 0,
+["auto_combatlog"] = false,
 ["announce_cooldowns"] = {
 ["enabled"] = false,
 ["ignored_cooldowns"] = {

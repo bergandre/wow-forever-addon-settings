@@ -11,7 +11,7 @@ VER 3 0000000000000004 "RXP ITEM" "134400"
 /click RXPItemFrameButton1 LeftButton
 END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Dustwind Storm Witch
+/targetexact High Executor Hadrec
 /tm !7
 /targetlasttarget [dead]
 END

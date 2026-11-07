@@ -2,7 +2,7 @@ Version: 1
 Frame: RXPFrame
 FrameLevel: 1
 Anchor: LEFT
-X: 38
-Y: 118
+X: 166
+Y: 137
 W: 235
 H: 125

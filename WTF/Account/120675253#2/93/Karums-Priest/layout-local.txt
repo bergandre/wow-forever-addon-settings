@@ -16,10 +16,10 @@ H: 43
 Frame: RXPFrame
 FrameLevel: 1
 Anchor: LEFT
-X: 35
-Y: -17
-W: 220
-H: 92
+X: 73
+Y: -72
+W: 409
+H: 332
 Frame: RXPItemFrame
 FrameLevel: 1
 Anchor: CENTER

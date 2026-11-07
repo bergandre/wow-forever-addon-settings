@@ -8,6 +8,11 @@ TradeSkillMaster_AppHelperDB = {
 },
 ["updateTime"] = 0,
 },
+["fullScan"] = {
+["data"] = {
+},
+["updateTime"] = 0,
+},
 ["analytics"] = {
 ["data"] = {
 "[\"AC\",\"v4.15.3\",1793944990440,1793944990,1,\"ADDON_INITIALIZE\",0.1]",
@@ -46,12 +51,21 @@ TradeSkillMaster_AppHelperDB = {
 "[\"AC\",\"v4.15.3\",1793969430565,1793969399,3,\"UI_NAVIGATION\",\"\",\"mailing/inbox\"]",
 "[\"AC\",\"v4.15.3\",1793969430669,1793969399,4,\"UI_NAVIGATION\",\"mailing/inbox\",\"mailing\"]",
 "[\"AC\",\"v4.15.3\",1793971259660,1793969399,5,\"UI_NAVIGATION\",\"mailing\",\"\"]",
+"[\"AC\",\"v4.15.3\",1793971692355,1793971692,1,\"ADDON_INITIALIZE\",0.1]",
+"[\"AC\",\"v4.15.3\",1793971695091,1793971692,2,\"ADDON_ENABLE\",0.1]",
+"[\"AC\",\"v4.15.3\",1793971699906,1793971692,3,\"UI_NAVIGATION\",\"\",\"mailing/inbox\"]",
+"[\"AC\",\"v4.15.3\",1793971700013,1793971692,4,\"UI_NAVIGATION\",\"mailing/inbox\",\"mailing\"]",
+"[\"AC\",\"v4.15.3\",1793971701618,1793971692,5,\"UI_NAVIGATION\",\"mailing\",\"\"]",
+"[\"AC\",\"v4.15.3\",1793999900423,1793999900,1,\"UI_NAVIGATION\",\"\",\"task_list\"]",
+"[\"AC\",\"v4.15.3\",1793999900500,1793999900,2,\"ADDON_INITIALIZE\",0.1]",
+"[\"AC\",\"v4.15.3\",1793999903655,1793999900,3,\"ADDON_ENABLE\",0]",
+"[\"AC\",\"v4.15.3\",1794007251375,1794007251,1,\"UI_NAVIGATION\",\"\",\"task_list\"]",
+"[\"AC\",\"v4.15.3\",1794007251465,1794007251,2,\"ADDON_INITIALIZE\",0.2]",
+"[\"AC\",\"v4.15.3\",1794007254478,1794007251,3,\"ADDON_ENABLE\",0]",
+"[\"AC\",\"v4.15.3\",1794007304063,1794007251,4,\"UI_NAVIGATION\",\"\",\"mailing/inbox\"]",
+"[\"AC\",\"v4.15.3\",1794007304152,1794007251,5,\"UI_NAVIGATION\",\"mailing/inbox\",\"mailing\"]",
+"[\"AC\",\"v4.15.3\",1794008744965,1794007251,6,\"UI_NAVIGATION\",\"mailing\",\"\"]",
 },
-["updateTime"] = 1793971259.660986,
-},
-["fullScan"] = {
-["data"] = {
-},
-["updateTime"] = 0,
+["updateTime"] = 1794008744.965925,
 },
 }

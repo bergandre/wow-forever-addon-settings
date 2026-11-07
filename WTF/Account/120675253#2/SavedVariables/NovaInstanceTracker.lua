@@ -1,10 +1,10 @@
 
 NITdatabase = {
 ["profileKeys"] = {
-["Karums - PvP"] = "Default",
 ["Gniloe - PvP"] = "Default",
-["Hypr - PvP"] = "Default",
 ["Karums Priest"] = "Default",
+["Hypr - PvP"] = "Default",
+["Karums - PvP"] = "Default",
 },
 ["global"] = {
 ["versions"] = {
@@ -17,8 +17,8 @@ NITdatabase = {
 },
 ["myChars"] = {
 ["Gniloe Forever"] = {
-["guild"] = "No guild",
 ["guildRankName"] = "No guild rank",
+["currentXP"] = 300,
 ["classLocalized"] = "Mage",
 ["raceEnglish"] = "Scourge",
 ["durabilityAverage"] = 100,
@@ -68,7 +68,7 @@ NITdatabase = {
 [17031] = 0,
 ["quests"] = {
 },
-["currentXP"] = 300,
+["guild"] = "No guild",
 },
 ["Karums Priest"] = {
 ["cookingSkill"] = 1,
@@ -78,7 +78,7 @@ NITdatabase = {
 [20559] = 0,
 [20560] = 0,
 },
-["durabilityAverage"] = 68.57142857142857,
+["durabilityAverage"] = 96.8586387434555,
 ["level"] = 13,
 ["trackedItems"] = {
 },
@@ -87,18 +87,18 @@ NITdatabase = {
 ["maxXP"] = 11400,
 ["gender"] = "Male",
 ["prof1"] = "Herbalism",
-["restedXP"] = 860,
+["restedXP"] = 0,
 ["totalBagSlots"] = 46,
-["freeBagSlots"] = 20,
+["freeBagSlots"] = 16,
 ["questsDaily"] = {
 },
 [17056] = 0,
-["currentXP"] = 1985,
+["currentXP"] = 8446,
 ["raceEnglish"] = "Troll",
 ["profSkillMax1"] = 150,
 ["race"] = "Troll",
-["time"] = 1793972578,
-["gold"] = 1773,
+["time"] = 1794011672,
+["gold"] = 1277,
 ["levelLog"] = {
 {
 ["played"] = 3,
@@ -253,12 +253,12 @@ NITdatabase = {
 ["x"] = 0.4205580415704456,
 ["gold"] = 326,
 ["timestamp"] = 1793954964,
-["mobCount"] = 9,
-["questCount"] = 2,
+["mobCount"] = 56,
+["questCount"] = 9,
 },
 },
 ["realm"] = "PvP",
-["profSkill2"] = 74,
+["profSkill2"] = 75,
 ["profSkillMax2"] = 150,
 ["raceLocalized"] = "Troll",
 ["cookingSkillMax"] = 75,
@@ -270,12 +270,12 @@ NITdatabase = {
 },
 ["guildRankName"] = "Social",
 ["guild"] = "Event Horizon",
-["profSkill1"] = 74,
+["profSkill1"] = 75,
 ["cooking"] = "Cooking",
 ["bossKills"] = {
 },
 ["classLocalized"] = "Priest",
-["resting"] = true,
+["resting"] = false,
 },
 ["Hypr Land"] = {
 ["guild"] = "No guild",
@@ -330,7 +330,7 @@ NITdatabase = {
 ["currentXP"] = 0,
 },
 },
-["weeklyResetTime"] = 1794369598,
+["weeklyResetTime"] = 1794369599,
 ["trades"] = {
 {
 ["targetMoney"] = 0,

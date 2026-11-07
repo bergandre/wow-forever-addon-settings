@@ -33,8 +33,9 @@ _detalhes_database = {
 ["width"] = 120,
 ["ignored_cooldowns"] = {
 },
-["height"] = 18,
 ["framme_locked"] = false,
+["cooldowns"] = {
+},
 ["own_frame"] = {
 ["defensive-raid"] = false,
 ["ofensive"] = false,
@@ -42,8 +43,7 @@ _detalhes_database = {
 ["utility"] = false,
 ["defensive-personal"] = false,
 },
-["cooldowns"] = {
-},
+["height"] = 18,
 ["show_conditions"] = {
 ["only_inside_instance"] = true,
 ["only_in_group"] = true,
@@ -61,7 +61,7 @@ _detalhes_database = {
 ["utility"] = false,
 },
 },
-["combat_counter"] = 26,
+["combat_counter"] = 42,
 ["player_stats"] = {
 },
 ["force_font_outline"] = "",
@@ -69,19 +69,57 @@ _detalhes_database = {
 },
 ["arena_data_compressed"] = {
 },
-["data_harvested_for_charts"] = {
+["local_instances_config"] = {
+{
+["modo"] = 2,
+["sub_attribute"] = 1,
+["horizontalSnap"] = false,
+["verticalSnap"] = false,
+["isLocked"] = false,
+["is_open"] = true,
+["sub_atributo_last"] = {
+1,
+1,
+1,
+1,
+1,
+},
+["snap"] = {
+},
+["segment"] = 0,
+["mode"] = 2,
+["attribute"] = 1,
+["pos"] = {
+["normal"] = {
+["y"] = -350.3652038574219,
+["x"] = 1254.6650390625,
+["w"] = 313.2340393066406,
+["h"] = 86.84902954101562,
+},
+["solo"] = {
+["y"] = 2,
+["x"] = 1,
+["w"] = 300,
+["h"] = 200,
+},
+},
+},
 },
 ["arena_data_index_selected"] = 1,
-["damage_meter_sessions"] = {
+["coach"] = {
+["enabled"] = false,
+["welcome_panel_pos"] = {
+},
+["last_coach_name"] = false,
 },
 ["on_death_menu"] = false,
 ["cached_roles"] = {
 },
-["damage_meter_session_info"] = {
+["damage_meter_sessions"] = {
 },
-["nick_tag_cache"] = {
-["nextreset"] = 1795211215,
-["last_version"] = 16,
+["announce_firsthit"] = {
+["enabled"] = true,
+["channel"] = "SELF",
 },
 ["last_instance_id"] = 0,
 ["data_harvest_for_charsts"] = {
@@ -114,25 +152,11 @@ _detalhes_database = {
 ["reverse"] = false,
 },
 ["active_profile"] = "Karums-CAMWOW EU4 Realm 4 PvP",
-["mythic_dungeon_currentsaved"] = {
-["dungeon_name"] = "",
-["started"] = false,
-["segment_id"] = 0,
-["ej_id"] = 0,
-["started_at"] = 0,
-["run_id"] = 0,
-["level"] = 0,
-["dungeon_zone_id"] = 0,
-["previous_boss_killed_at"] = 0,
+["last_realversion"] = 172,
+["cached_talents"] = {
 },
-["character_data"] = {
-["logons"] = 12,
-},
-["benchmark_db"] = {
-["frame"] = {
-},
-},
-["last_instance_time"] = 0,
+["ignore_nicktag"] = false,
+["auto_combatlog"] = false,
 ["arena_data_headers"] = {
 },
 ["combat_log"] = {
@@ -145,11 +169,7 @@ _detalhes_database = {
 ["evoker_show_realtimedps"] = false,
 ["inverse_deathlog_mplus"] = false,
 },
-["announce_firsthit"] = {
-["enabled"] = true,
-["channel"] = "SELF",
-},
-["mythic_plus_log"] = {
+["damage_meter_session_info"] = {
 },
 ["plugin_database"] = {
 ["DETAILS_PLUGIN_TINY_THREAT"] = {
@@ -288,13 +308,15 @@ _detalhes_database = {
 ["scale"] = 1,
 },
 },
-["cached_talents"] = {
+["data_harvested_for_charts"] = {
 },
-["ignore_nicktag"] = false,
-["announce_damagerecord"] = {
-["enabled"] = true,
-["channel"] = "SELF",
+["mythic_plus_log"] = {
 },
+["benchmark_db"] = {
+["frame"] = {
+},
+},
+["last_instance_time"] = 0,
 ["apocalypse_hashes"] = {
 },
 ["SoloTablesSaved"] = {
@@ -304,13 +326,10 @@ _detalhes_database = {
 ["combat_id"] = 0,
 ["savedStyles"] = {
 },
-["coach"] = {
-["enabled"] = false,
-["welcome_panel_pos"] = {
+["last_day"] = "07",
+["character_data"] = {
+["logons"] = 20,
 },
-["last_coach_name"] = false,
-},
-["last_realversion"] = 172,
 ["announce_deaths"] = {
 ["enabled"] = false,
 ["last_hits"] = 1,
@@ -345,7 +364,7 @@ _detalhes_database = {
 },
 ["raid_roster"] = {
 },
-["tempo_start"] = 20254.77,
+["tempo_start"] = 11870.977,
 ["last_events_tables"] = {
 },
 ["alternate_power"] = {
@@ -413,9 +432,9 @@ _detalhes_database = {
 ["data_inicio"] = 0,
 ["amountCasts"] = {
 },
-["mapId"] = 1,
+["mapId"] = 0,
 ["instance_type"] = "none",
-["zoneName"] = "Kalimdor",
+["zoneName"] = "Eastern Kingdoms",
 ["boss_hp"] = 1,
 ["is_challenge"] = false,
 ["frags"] = {
@@ -442,47 +461,25 @@ _detalhes_database = {
 ["start_time"] = 0,
 ["TimeData"] = {
 },
-["combat_counter"] = 25,
+["combat_counter"] = 41,
 },
-["local_instances_config"] = {
-{
-["modo"] = 2,
-["sub_attribute"] = 1,
-["horizontalSnap"] = false,
-["verticalSnap"] = false,
-["isLocked"] = false,
-["is_open"] = true,
-["sub_atributo_last"] = {
-1,
-1,
-1,
-1,
-1,
-},
-["snap"] = {
-},
-["segment"] = 0,
-["mode"] = 2,
-["attribute"] = 1,
-["pos"] = {
-["normal"] = {
-["y"] = -350.3649139404297,
-["x"] = 1090.0244140625,
-["w"] = 313.2340393066406,
-["h"] = 86.8489761352539,
-},
-["solo"] = {
-["y"] = 2,
-["x"] = 1,
-["w"] = 300,
-["h"] = 200,
-},
-},
-},
+["mythic_dungeon_currentsaved"] = {
+["dungeon_name"] = "",
+["started"] = false,
+["segment_id"] = 0,
+["ej_id"] = 0,
+["started_at"] = 0,
+["run_id"] = 0,
+["level"] = 0,
+["dungeon_zone_id"] = 0,
+["previous_boss_killed_at"] = 0,
 },
 ["apocalypes_info"] = {
 },
-["last_day"] = "06",
+["nick_tag_cache"] = {
+["nextreset"] = 1795211215,
+["last_version"] = 16,
+},
 ["announce_cooldowns"] = {
 ["ignored_cooldowns"] = {
 },
@@ -494,8 +491,12 @@ _detalhes_database = {
 ["last_difficulty"] = 15,
 ["last_raid"] = "",
 },
-["auto_combatlog"] = false,
+["announce_damagerecord"] = {
+["enabled"] = true,
+["channel"] = "SELF",
+},
 ["cached_specs"] = {
+["Player-6946-0092D46A"] = 1491,
 ["Player-6938-008C0737"] = 1487,
 },
 }

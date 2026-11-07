@@ -4,7 +4,7 @@ Bagnon_Sets = {
 },
 ["global"] = {
 ["inventory"] = {
-["y"] = 100.0000457763672,
+["y"] = 100.0000381469727,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -19,7 +19,7 @@ Bagnon_Sets = {
 },
 ["activeRules"] = {
 },
-["x"] = -50.00026484683713,
+["x"] = -50.00037762221382,
 },
 ["vault"] = {
 ["color"] = {
@@ -81,33 +81,33 @@ Bagnon_Sets = {
 ["color"] = {
 ["quiver"] = {
 },
-["account"] = {
+["herb"] = {
 },
-["enchant"] = {
+["normal"] = {
 },
 ["soul"] = {
 },
-["fridge"] = {
+["leather"] = {
 },
 ["mine"] = {
 },
-["engineer"] = {
+["gem"] = {
 },
-["leather"] = {
+["inscribe"] = {
 },
 ["reagent"] = {
 },
-["gem"] = {
+["engineer"] = {
 },
 ["key"] = {
 },
 ["tackle"] = {
 },
-["inscribe"] = {
+["fridge"] = {
 },
-["normal"] = {
+["enchant"] = {
 },
-["herb"] = {
+["account"] = {
 },
 },
 ["display"] = {

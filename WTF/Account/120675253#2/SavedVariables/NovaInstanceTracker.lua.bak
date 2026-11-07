@@ -1,10 +1,10 @@
 
 NITdatabase = {
 ["profileKeys"] = {
-["Gniloe - PvP"] = "Default",
 ["Karums Priest"] = "Default",
-["Hypr - PvP"] = "Default",
 ["Karums - PvP"] = "Default",
+["Hypr - PvP"] = "Default",
+["Gniloe - PvP"] = "Default",
 },
 ["global"] = {
 ["versions"] = {
@@ -17,8 +17,8 @@ NITdatabase = {
 },
 ["myChars"] = {
 ["Gniloe Forever"] = {
-["guildRankName"] = "No guild rank",
 ["currentXP"] = 300,
+["guild"] = "No guild",
 ["quests"] = {
 },
 ["raceEnglish"] = "Scourge",
@@ -68,7 +68,7 @@ NITdatabase = {
 },
 ["durabilityAverage"] = 100,
 ["classLocalized"] = "Mage",
-["guild"] = "No guild",
+["guildRankName"] = "No guild rank",
 },
 ["Karums Priest"] = {
 ["cookingSkill"] = 1,
@@ -78,7 +78,7 @@ NITdatabase = {
 [20559] = 0,
 [20560] = 0,
 },
-["durabilityAverage"] = 68.57142857142857,
+["durabilityAverage"] = 96.8586387434555,
 ["level"] = 13,
 ["trackedItems"] = {
 },
@@ -87,18 +87,18 @@ NITdatabase = {
 ["maxXP"] = 11400,
 ["gender"] = "Male",
 ["prof1"] = "Herbalism",
-["restedXP"] = 850,
+["restedXP"] = 0,
 ["totalBagSlots"] = 46,
-["freeBagSlots"] = 20,
+["freeBagSlots"] = 16,
 ["questsDaily"] = {
 },
 [17056] = 0,
-["currentXP"] = 1985,
+["currentXP"] = 8446,
 ["raceEnglish"] = "Troll",
 ["profSkillMax1"] = 150,
 ["race"] = "Troll",
-["time"] = 1793971205,
-["gold"] = 1773,
+["time"] = 1794011478,
+["gold"] = 1277,
 ["levelLog"] = {
 {
 ["played"] = 3,
@@ -253,12 +253,12 @@ NITdatabase = {
 ["x"] = 0.4205580415704456,
 ["gold"] = 326,
 ["timestamp"] = 1793954964,
-["mobCount"] = 9,
-["questCount"] = 2,
+["mobCount"] = 56,
+["questCount"] = 9,
 },
 },
 ["realm"] = "PvP",
-["resting"] = true,
+["resting"] = false,
 ["bossKills"] = {
 },
 ["raceLocalized"] = "Troll",
@@ -268,9 +268,9 @@ NITdatabase = {
 ["cooking"] = "Cooking",
 ["questsMonthly"] = {
 },
-["profSkill1"] = 74,
+["profSkill1"] = 75,
 ["guild"] = "Event Horizon",
-["profSkill2"] = 74,
+["profSkill2"] = 75,
 ["guildRankName"] = "Social",
 ["prof2"] = "Herbalism",
 ["quests"] = {
@@ -330,7 +330,7 @@ NITdatabase = {
 ["resting"] = false,
 },
 },
-["weeklyResetTime"] = 1794369598,
+["weeklyResetTime"] = 1794369599,
 ["trades"] = {
 {
 ["targetMoney"] = 0,

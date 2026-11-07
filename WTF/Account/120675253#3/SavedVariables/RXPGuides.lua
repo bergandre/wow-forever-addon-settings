@@ -3,12 +3,12 @@ RXPData = {
 ["maxLoadTime"] = 4000,
 ["gameVersion"] = 16001,
 ["cacheVersion"] = 30,
-["defaultProfile"] = false,
-["trainGenericSpells"] = true,
-["release"] = "v4.11.32",
 ["questNames"] = {
 ["locale"] = "enUS",
 },
+["trainGenericSpells"] = true,
+["release"] = "v4.11.32",
+["defaultProfile"] = false,
 ["realmData"] = {
 ["CAMWOW EU4 Realm 8 PvP"] = {
 },
@@ -43,11 +43,11 @@ RXPSettings = {
 0,
 },
 },
-["activeTargetFrame"] = {
+["arrowFrame"] = {
 {
-"CENTER",
+"TOP",
 "UIParent",
-"CENTER",
+"TOP",
 0,
 0,
 },
@@ -57,8 +57,8 @@ RXPSettings = {
 "TOP",
 "UIParent",
 "TOP",
-399.9999694824219,
--60,
+400,
+-60.00000381469727,
 },
 },
 ["RXPFrame"] = {
@@ -66,15 +66,15 @@ RXPSettings = {
 "LEFT",
 nil,
 "LEFT",
-38.00000381469727,
-118.0000076293945,
+166,
+136.9999847412109,
 },
 },
-["arrowFrame"] = {
+["activeTargetFrame"] = {
 {
-"TOP",
+"CENTER",
 "UIParent",
-"TOP",
+"CENTER",
 0,
 0,
 },
@@ -83,20 +83,20 @@ nil,
 ["season"] = 0,
 ["frameSizes"] = {
 ["activeItemFrame"] = {
-78.25642395019531,
-43,
+79.16014099121094,
+43.00001907348633,
 },
 ["RXPFrame"] = {
 235,
-125.0000076293945,
-},
-["activeTargetFrame"] = {
-0,
-40.00000762939453,
+125.0000228881836,
 },
 ["arrowFrame"] = {
-32.00009536743164,
-32.00002670288086,
+31.99990653991699,
+31.99997520446777,
+},
+["activeTargetFrame"] = {
+84.3701171875,
+17.99997329711914,
 },
 },
 ["goblinTele"] = false,
@@ -117,11 +117,11 @@ nil,
 0,
 },
 },
-["arrowFrame"] = {
+["activeTargetFrame"] = {
 {
-"TOP",
+"CENTER",
 "UIParent",
-"TOP",
+"CENTER",
 0,
 0,
 },
@@ -144,11 +144,11 @@ nil,
 34.99992752075195,
 },
 },
-["activeTargetFrame"] = {
+["arrowFrame"] = {
 {
-"CENTER",
+"TOP",
 "UIParent",
-"CENTER",
+"TOP",
 0,
 0,
 },
@@ -158,9 +158,9 @@ nil,
 ["tbcStart"] = 2,
 ["portalTele"] = false,
 ["frameSizes"] = {
-["arrowFrame"] = {
-31.99991416931152,
-32.00002670288086,
+["activeTargetFrame"] = {
+83.99954223632812,
+17.99995040893555,
 },
 ["RXPFrame"] = {
 234.9994659423828,
@@ -170,9 +170,9 @@ nil,
 77.22542572021484,
 42.99971389770508,
 },
-["activeTargetFrame"] = {
-83.99954223632812,
-17.99995040893555,
+["arrowFrame"] = {
+31.99991416931152,
+32.00002670288086,
 },
 },
 ["goblinTele"] = false,

@@ -6,19 +6,19 @@ Prat3DB = {
 ["Default"] = {
 ["colors"] = {
 ["localdefense"] = {
-["r"] = 1,
-["g"] = 0.7529412508010864,
 ["b"] = 0.7529412508010864,
+["g"] = 0.7529412508010864,
+["r"] = 1,
 },
 ["general"] = {
-["r"] = 1,
-["g"] = 0.7529412508010864,
 ["b"] = 0.7529412508010864,
+["g"] = 0.7529412508010864,
+["r"] = 1,
 },
 ["trade"] = {
-["r"] = 1,
-["g"] = 0.7529412508010864,
 ["b"] = 0.7529412508010864,
+["g"] = 0.7529412508010864,
+["r"] = 1,
 },
 },
 },
@@ -28,10 +28,17 @@ Prat3DB = {
 ["profiles"] = {
 ["Default"] = {
 ["minchatwidthdefault"] = 250,
+["maxchatheightdefault"] = 800,
 ["initialized"] = true,
-["maxchatheightdefault"] = 800.0000610351562,
-["maxchatwidthdefault"] = 800.0000610351562,
-["minchatheightdefault"] = 119.9999847412109,
+},
+},
+},
+["Prat_Font"] = {
+["profiles"] = {
+["Default"] = {
+["size"] = {
+["ChatFrame1"] = 18,
+},
 },
 },
 },
@@ -43,7 +50,7 @@ Prat3DB = {
 ["Default"] = {
 ["modules"] = {
 ["EventNames"] = 3,
-["Alias"] = 2,
+["ChatLog"] = 2,
 ["Mentions"] = 2,
 ["PopupMessage"] = 2,
 ["AltNames"] = 2,
@@ -51,7 +58,7 @@ Prat3DB = {
 ["Paragraph"] = 2,
 ["KeyBindings"] = 2,
 ["LinkInfoIcons"] = 2,
-["ChatLog"] = 2,
+["Alias"] = 2,
 ["OriginalButtons"] = 2,
 },
 },
