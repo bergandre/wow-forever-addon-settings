@@ -1,0 +1,19 @@
+TitanRestPlus 9.0.1.2 - WoW Forever compatibility update
+
+- Adds per-character Well Rested legacy talent rank support (0-5).
+- Attempts to auto-detect a talent named "Well Rested" through the legacy talent API.
+- Adds /restplus wellrested 0-5 as a manual rank override for WoW Forever builds where
+  the custom legacy talent is not exposed through the standard talent API.
+- Applies the configured rank to offline rested-XP estimates and time-to-cap estimates.
+- Shows the saved Well Rested rank (WR0-WR5) beside each character in the tooltip.
+- Preserves the rank when the active character data is refreshed.
+
+Rate assumption carried forward from the existing RestPlus estimator: base 5% of the
+next-level XP bar per 8 hours while resting at an inn/capital, or per 32 hours otherwise;
+each Well Rested rank adds 4% to that rate (rank 5 = 1.20x). Confirm the exact custom
+server rates in-game, as WoW Forever can change server-side behavior.
+
+
+Follow-up fix: detect Well Rested through WoW Forever C_Traits Legacy tree nodes,
+entries and definitions instead of relying on removed GetTalentInfo APIs. Added an auto
+command to clear manual overrides and retry detection.

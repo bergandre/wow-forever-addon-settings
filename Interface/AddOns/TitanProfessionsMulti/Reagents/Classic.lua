@@ -1,0 +1,3 @@
+-- Classic Era registers only the shared Classic materials.
+local _, L = ...
+L.ReagentTracker.RegisterExpansion(L.CreateClassicReagentExpansion())

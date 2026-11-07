@@ -8,6 +8,9 @@ AutoLooterDB = {
 },
 ["profiles"] = {
 ["Default"] = {
+["minimap"] = {
+["minimapPos"] = 245.2592532608878,
+},
 ["typeTable"] = {
 ["Quiver"] = {
 ["Quiver"] = false,
@@ -79,9 +82,9 @@ AutoLooterDB = {
 ["Other"] = false,
 ["Reagent"] = false,
 ["Mount"] = false,
+["Pet"] = false,
 ["Junk"] = false,
 ["Holiday"] = false,
-["Pet"] = false,
 },
 ["Consumable"] = {
 ["Potions"] = false,

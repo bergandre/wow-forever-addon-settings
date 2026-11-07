@@ -1,0 +1,93 @@
+--[[
+	Do you want help us translating to your language?
+	Send me your translation in: https://www.curseforge.com/wow/addons/titan-panel-professions-multi
+	Author: Canettieri
+  Korean translator: next96
+	Last update: 24/08/2016
+--]]
+
+local _, L = ...;
+if GetLocale() == "koKR" then
+--- Profissions
+L["alchemy"] = "연금술"
+L["archaeology"] = "고고학"
+L["blacksmithing"] = "대장기술"
+L["cooking"] = "요리"
+L["enchanting"] = "마법부여"
+L["engineering"] = "기계공학"
+L["firstAid"] = "응급치료"
+L["fishing"] = "낚시"
+L["herbalism"] = "약초채집"
+L["herbalismskills"] = "약초채집 숙련도"
+L["inscription"] = "주문각인"
+L["jewelcrafting"] = "보석세공"
+L["leatherworking"] = "가죽세공"
+L["mining"] = "채광"
+L["miningskills"] = "채광 숙련도"
+L["skinning"] = "무두질"
+L["skinningskills"] = "무두질 숙련도"
+L["tailoring"] = "재봉술"
+--- Master
+L["masterPlayer"] = "|cFFFFFFFF${player}의 모든 전문 기술을 표시합니다.|r"
+L["masterTutorialBar"] = "|cFF69FF69여기에 커서를 올려 보세요! :)|r"
+L["masterTutorialIntro"] = "[소개]"
+L["masterTutorialIntroText"] = "이 플러그인은 모든 전문 기술을 한곳에 모아 보여 줍니다.\r개별 플러그인과 달리 모든 정보가 이 툴팁에 표시됩니다."
+L["masterTutorialHowTo"] = "[사용 방법]"
+L["masterTutorialHowToText"] = "먼저 이 플러그인을 오른쪽 클릭한 다음\r|cFFFFFFFF'안내 숨기기'|r를 선택하세요.\r\rTitan 패널 오른쪽에도 배치할 수 있습니다."
+L["hideTutorial"] = "안내 숨기기"
+L["masterHint"] = "|cFFB4EEB4도움말:|r |cFFFFFFFF왼쪽 클릭은 첫 번째 전문 기술 창을,\r가운데 클릭은 두 번째 전문 기술 창을 엽니다.|r\r\r"
+L["primprof"] = "주 전문 기술 표시"
+--- Fragments
+L["ready"] = "|cFF69FF69준비완료!  "
+L["archfragments"] = "고고학 조각"
+L["fragments"] = "조각"
+L["fragtooltip"] = "|cFFB4EEB4도움말:|r |cFFFFFFFF마우스 오른쪽 클릭하여 바에 표시할\r플러그인을 선택합니다.|r\r"
+L["hidehint"] = "도움말 숨기기"
+L["displaynofrag"] = "조각은 제외하고 종족만 표시"
+L["inprog"] = "\r진행 중:"
+L["nofragments"] = "\n조각 없음:\r"
+L["noarchaeology"] = "|cFFFF2e2e아직 고고학 기술을 배우지 않았습니다.|r\r\r기술자에게 고고학을 배우십시오."
+--- Shared
+L["hint"] = "|cFFB4EEB4도움말:|r |cFFFFFFFF마우스 클릭으로 전문기술 창을 엽니다."
+L["maximum"] = "최대"
+L["noprof"] = "!?"
+L["bonus"] = "(추가 효과)"
+L["hidemax"] = "최대 숙련치를 표시하지 않습니다."
+L["session"] = "현재 배운 것: "
+L["noskill"] = "|cFFFF2e2e현재 전문기술을 배우지 않았습니다.|r\r\r기술자를 만나 전문기술을 배우십시오.\r다른 전문기술을 취소해야할 수도 있습니다." -- Need test
+L["nosecskill"] = "|cFFFF2e2e현재 전문기술을 배우지 않았습니다.|r\r\r기술자를 만나 전문기술을 배우십시오." -- Need test
+L["showbb"] = "바에 수입과 지출을 표시합니다."
+L["simpleb"] = "간단한 보너스"
+L["craftsmanship"] = "총 숙련도:"
+L["goodwith"] = "|cFFFFFFFF[조합 추천]|r"
+L["info"] = "|cFFFFFFFF[정보]|r"
+L["maxskill"] = "|r최대 숙련도에 도달했습니다!"
+L["warning"] = "\r\r|cFFFF2e2e[주의!]|r\r최대 숙련도에 도달하여 더 이상\r숙련도가 오르지 않습니다.\r전문 기술 전문가를 방문하거나\r해당 지역의 기술을 배우세요."
+L["maxtext"] = "최대 수치:"
+L["bonustext"] = "활성 보너스:"
+L["totalbag"] = "가방 총합: "
+L["totalbank"] = "은행 총합: "
+L["totalbyquality"] = "품질별 (가방 + 은행)"
+L["qualityfallback"] = "%s (품질 %d)"
+L["reagents"] = "재료"
+L["rLegion"] = "재료 - Legion"
+L["rBfA"] = "재료 - BfA"
+L["rShadowlands"] = "재료 - Shadowlands"
+L["rSL"] = "재료 - SL"
+L["rMidnight"] = "재료 - Midnight"
+L["rMID"] = "재료 - Midnight"
+L["rClassic"] = "재료 - Classic"
+L["rForever"] = "재료 - Forever"
+L["rMists"] = "재료 - Mists of Pandaria"
+L["rTBC"] = "재료 - The Burning Crusade"
+L["reagentCategory"] = "전문 기술 [재료]"
+L["noreagent"] = "이 재료를 가지고 있지 않습니다."
+L["hide"] = "숨기기"
+L["totalSkill"] = "총 숙련도:"
+L["hideCombination"] = "조합 숨기기"
+L["buttonText"] = "바 텍스트"
+L["tooltip"] = "툴팁"
+L["barPosition"] = "바 위치"
+L["moveRight"] = "오른쪽으로 이동"
+L["moveLeft"] = "왼쪽으로 이동"
+end

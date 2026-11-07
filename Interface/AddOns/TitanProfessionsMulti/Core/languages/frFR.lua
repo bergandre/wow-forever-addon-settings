@@ -1,0 +1,95 @@
+--[[
+	Do you want help us translating to your language?
+	Send me your translation in: https://www.curseforge.com/wow/addons/titan-panel-professions-multi
+	Author: Canettieri
+  French translator: akirra83, aniceto
+  Last update: 07/04/2017
+--]]
+
+local _, L = ...;
+if GetLocale() == "frFR" then
+--- Profissions
+L["alchemy"] = "Alchimie"
+L["archaeology"] = "Archéologie"
+L["blacksmithing"] = "Forge"
+L["cooking"] = "Cuisine"
+L["enchanting"] = "Enchantement"
+L["engineering"] = "Ingénierie"
+L["firstAid"] = "Secourisme"
+L["fishing"] = "Pêche"
+L["herbalism"] = "Herboristerie"
+L["herbalismskills"] = "Compétences en Herboristerie"
+L["inscription"] = "Calligraphie"
+L["jewelcrafting"] = "Joaillerie"
+L["leatherworking"] = "Travail du cuir"
+L["mining"] = "Minage"
+L["miningskills"] = "Compétences en minage"
+L["skinning"] = "Dépeçage"
+L["skinningskills"] = "Compétences en Dépeçage"
+L["tailoring"] = "Couture"
+--- Master
+L["masterPlayer"] = "|cFFFFFFFFAffiche tout les métiers de ${player}|r|cFFFFFFFF.|r"
+L["masterTutorialBar"] = "|cFF69FF69Mettez votre curseur ici! :)|r"
+L["masterTutorialIntro"] = "[INTRODUCTION]"
+L["masterTutorialIntroText"] = "Ce plugin a la fonction de résumer toutes vos professions dans un seul endroit.\rContrairement aux plugins séparés, celui-ci affichera TOUT dans cette info-bulle."
+L["masterTutorialHowTo"] = "[COMMENT UTILISER]"
+L["masterTutorialHowToText"] = "Pour commencer, cliquez bouton droit sur ce plug-in et sélectionnez l'option |cFFFFFFFF'«Cacher Tutorial»'|r.\r\rPeut être affiché sur le côté droit du panneau de Titan pour devenir encore plus\ragréable visuellement!"
+L["hideTutorial"] = "Masquer le tutoriel"
+L["masterHint"] = "|cFFB4EEB4Astuces:|r |cFFFFFFFFClic gauche ouvre la fenêtre du métier\r#1 et clic du milieu ouvre la fenêtre du métier #2.|r\r\r"
+L["primprof"] = "Affiche les métiers principaux"
+
+------ Reagents pack
+--- Achaeology
+L["ready"] = "|cFF69FF69Prêt!  "
+L["archfragments"] = "Fragments d'archéologie"
+L["fragments"] = "Fragments"
+L["fragtooltip"] = "|cFFB4EEB4Conseil:|r |cFFFFFFFFcliquez avec le bouton droit de la\rsouris dans le plugin et sélectionnez le\rfragment qui sera affiché dans la barre.|r\r"
+L["hidehint"] = "Masquer les astuces"
+L["displaynofrag"] = "Affiche les races sans fragments"
+L["inprog"] = "\rEn progression:"
+L["nofragments"] = "Aucun fragment"
+L["noarchaeology"] = "|cFFFF2e2eVous n'avez pas encore appris l'archéologie ou n'avez\rpas de fragments.|r\r\rAller à l'instructeur le plus proche pour l'apprendre ou\rvisiter un champ d'excavation."
+--- Shared
+L["hint"] = "|cFFB4EEB4Astuce:|r |cFFFFFFFFClic gauche ouvre votre\n|cFFFFFFFFfenêtre des métiers."
+L["maximum"] = "Max"
+L["noprof"] = "!?"
+L["bonus"] = "(Bonus)"
+L["hidemax"] = "Masquer les valeurs Max"
+L["session"] = "|rAppris cette session: "
+L["noskill"] = "|cFFFF2e2eVouz n'avez pas encore appris cette profession.|r\r\rAllez à l'instructeur le plus proche pour l'apprendre.\rSi vous en avez besoin, vous pouvez oublier toute\rprofession primaire."
+L["nosecskill"] = "|cFFFF2e2eVouz n'avez pas encore appris cette profession.|r\r\rAllez à l'instructeur le plus proche pour l'apprendre."
+L["showbb"] = "Affiche la balance de la session dans la barre"
+L["simpleb"] = "Bonus simpliflié"
+L["craftsmanship"] = "Compétence: "
+L["goodwith"] = "|cFFFFFFFF[Combine avec]|r"
+L["info"] = "|cFFFFFFFF[Information]|r"
+L["maxskill"] = "|rVous avez atteint votre niveau maximum!"
+L["warning"] = "\r\r|cFFFF2e2e[Attention!]|r\rVous avez atteint l'expertise\rmaximale et n'apprenez plus!\rVisiter un instructeur ou apprenez\rl'expertise locale." -- Not tested!
+L["maxtext"] = "|rMaximum actuel: "
+L["bonustext"] = "Bonus actif :"
+L["totalbag"] = "Total dans les sacs: "
+L["totalbank"] = "Total en banque: "
+L["totalbyquality"] = "Par qualité (sacs + banque)"
+L["qualityfallback"] = "%s (Qualité %d)"
+L["reagents"] = "Composants"
+L["rLegion"] = "Composants - Legion"
+L["rBfA"] = "Composants - BfA"
+L["rShadowlands"] = "Composants - Shadowlands"
+L["rSL"] = "Composants - SL"
+L["rMidnight"] = "Composants - Midnight"
+L["rMID"] = "Composants - Midnight"
+L["rClassic"] = "Composants - Classic"
+L["rForever"] = "Composants - Forever"
+L["rMists"] = "Composants - Mists of Pandaria"
+L["rTBC"] = "Composants - The Burning Crusade"
+L["reagentCategory"] = "Métier [Composants]"
+L["noreagent"] = "Vous n'avez aucun de ces composants."
+L["hide"] = "Masquer"
+L["totalSkill"] = "Compétence totale :"
+L["hideCombination"] = "Masquer les combinaisons"
+L["buttonText"] = "Texte de la barre"
+L["tooltip"] = "Info-bulle"
+L["barPosition"] = "Position sur la barre"
+L["moveRight"] = "Déplacer vers la droite"
+L["moveLeft"] = "Déplacer vers la gauche"
+end

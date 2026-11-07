@@ -24,3 +24,5 @@ Bagnon: disabled
 Bagnon_Bank: disabled
 Blizzard_CombatText: enabled
 Bagnonium_Bank: enabled
+PartyGatherRadar: enabled
+Bagnonium_GuildBank: enabled

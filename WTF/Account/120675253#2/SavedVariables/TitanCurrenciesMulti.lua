@@ -1,0 +1,58 @@
+
+TitanCurrenciesMultiDb = {
+["TITAN_FOREVER_UNDERMINEREAL"] = {
+["charTable"] = {
+["Karums-Priest"] = {
+["currency"] = 0,
+["name"] = "|cffffffffKarums",
+["faction"] = "Horde",
+},
+},
+},
+["TITAN_OUROM"] = {
+["charTable"] = {
+["Karums-Priest"] = {
+["value"] = 8472,
+["realm"] = "Priest",
+["name"] = "|cffffffffKarums",
+["faction"] = "Horde",
+},
+},
+},
+["TITAN_FOREVER_RANKPOINTS"] = {
+["charTable"] = {
+["Karums-Priest"] = {
+["currency"] = 0,
+["name"] = "|cffffffffKarums",
+["faction"] = "Horde",
+},
+},
+},
+["TITAN_FOREVER_MERCHANTSFAVOR"] = {
+["charTable"] = {
+["Karums-Priest"] = {
+["currency"] = 0,
+["name"] = "|cffffffffKarums",
+["faction"] = "Horde",
+},
+},
+},
+["TITAN_DRKTKM"] = {
+["charTable"] = {
+["Karums-Priest"] = {
+["currency"] = 0,
+["name"] = "|cffffffffKarums",
+["faction"] = "Horde",
+},
+},
+},
+["TITAN_PVHNRM"] = {
+["charTable"] = {
+["Karums-Priest"] = {
+["currency"] = 0,
+["name"] = "|cffffffffKarums",
+["faction"] = "Horde",
+},
+},
+},
+}

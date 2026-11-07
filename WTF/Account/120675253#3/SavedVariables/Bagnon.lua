@@ -4,7 +4,7 @@ Bagnon_Sets = {
 },
 ["global"] = {
 ["inventory"] = {
-["y"] = 100.0000381469727,
+["y"] = 99.99999237060547,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -19,7 +19,7 @@ Bagnon_Sets = {
 },
 ["activeRules"] = {
 },
-["x"] = -50.00037762221382,
+["x"] = -50.00108233298784,
 },
 ["vault"] = {
 ["color"] = {
@@ -58,8 +58,7 @@ Bagnon_Sets = {
 },
 },
 ["bank"] = {
-["color"] = {
-},
+["y"] = 502.2691345214844,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -70,10 +69,14 @@ Bagnon_Sets = {
 "miscellaneous",
 },
 },
-["activeRules"] = {
-},
+["point"] = "BOTTOMLEFT",
 ["borderColor"] = {
 },
+["color"] = {
+},
+["activeRules"] = {
+},
+["x"] = 95,
 },
 },
 ["customRules"] = {
@@ -87,15 +90,15 @@ Bagnon_Sets = {
 },
 ["soul"] = {
 },
-["leather"] = {
+["inscribe"] = {
 },
 ["mine"] = {
 },
 ["gem"] = {
 },
-["inscribe"] = {
+["leather"] = {
 },
-["reagent"] = {
+["fridge"] = {
 },
 ["engineer"] = {
 },
@@ -103,7 +106,7 @@ Bagnon_Sets = {
 },
 ["tackle"] = {
 },
-["fridge"] = {
+["reagent"] = {
 },
 ["enchant"] = {
 },

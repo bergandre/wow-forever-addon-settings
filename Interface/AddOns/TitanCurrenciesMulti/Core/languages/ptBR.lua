@@ -1,0 +1,301 @@
+--[[
+  Oi para você que é brasileiro e está vindo até aqui ler as traduções! Se encontrar algum erro, me avise, tá bem?
+  Esse addon foi feito por um cara que não manja nada de programação, então erros podem aparecer. xD
+  Mas enfim, aproveite minhas gambiarras, foram feitas com amor para você. :)
+  Tudo aqui neste arquivo foi traduzido por mim, Paulo Canettieri! (com ajuda do wowhead, claro...)
+--]]
+
+local _, L = ...;
+if GetLocale() == "ptBR" then
+L["forever"] = "Moedas [Forever]"
+L["foreverCurrencyUnavailable"] = "Dados desta moeda indisponíveis no momento."
+L["foreverWeeklyProgress"] = "Progresso semanal"
+------ Midnight pack
+L["NoMidnightCurrency"] = "Obtida em Midnight."
+L["NoMidnightSeason2"] = "Obtida na Temporada 2 de Midnight."
+L["NoMidnightProfCurrency"] = "Obtida através da profissão de criação\rassociada de Midnight."
+L["Alchemy"] = "Alquimia"
+L["Blacksmithing"] = "Ferraria"
+L["Enchanting"] = "Encantamento"
+L["Engineering"] = "Engenharia"
+L["Herbalism"] = "Herborismo"
+L["Inscription"] = "Escrivania"
+L["Jewelcrafting"] = "Joalheria"
+L["Leatherworking"] = "Couraria"
+L["Mining"] = "Mineração"
+L["Skinning"] = "Esfolamento"
+L["Tailoring"] = "Alfaiataria"
+L["Decor Duel"] = "Duelo de Decoração"
+L["Eversong Woods"] = "Floresta do Canto Eterno"
+L["Harandar"] = "Harandar"
+L["The Coiled Isle"] = "Ilha Enrodilhada"
+L["Voidstorm"] = "Tempestade do Caos"
+L["Zul'Aman"] = "Zul'Aman"
+
+------ The War Within pack (Please describe the currency for which this is used and follow the 'NoTWWCurrency' pattern.)
+L["NoTWWCurrency"] = "Obtida em The War Within."
+L["TWWSeason3"] = "Obtida na temporada 3 de The War\rWithin."
+L["TWWUndermine"] = "Obtida na Inframina."
+L["TWWNFVisions"] = "Obtida nas Visões Horrendas do patch 11.1.5, Queda da Noite, de The War Within.\r"
+L["TWWNFEvents"] = "Obtida no cenário Queda da Noite do patch 11.1.5 de The War Within."
+L["TWWKaresh"] = "Obtida em K'aresh, adicionada no patch 11.2.0."
+L["OverchargedDelves"] = "Obtida em Imersões Sobrecarregadas de qualquer nível."
+
+------ Dragonflight pack
+L["DragonEventOnly"] = "Obtida através do evento de\rPré-Patch do Dragonflight."
+L["DragonFPvP"] = "Obtida através de quests PVP nas\rIlhas do Dragão."
+L["NoDFCurrency01"] = "Você precisa do título 'o Quebramundo' para poder adquirir."
+
+------ Classic pack
+--- Cata Defauls
+L["CataOnly"] = "Disponível no Cataclysm."
+--- Chef's Award
+L["NoCataCurrency01"] = "Recompensa de missões\rdiárias de culinária."
+--- Justice Points
+L["NoCataCurrency02"] = "Ganhe ao derrotar chefes de\rmasmorras ou raids antigas."
+--- Valor Points
+L["NoCataCurrency03"] = "Ganhe ao derrotar chefes de\rraids recentes ou completando\rmasmorras heróicas."
+--- Illustrious Jewelcrafter's Token
+L["NoCataCurrency04"] = "Recompensa de missões diárias de\rjoalheria na capital da sua facção."
+--- Fissure Stone Fragment
+L["NoCataCurrency05"] = "Disponível através da masmorra\rheróica Protocolo Inferno."
+--- Conquest Points
+L["NoCataCurrency06"] = "Recompensa de campos de\rbatalha e arena ranqueados."
+--- Obsidian Stone Fragment
+L["NoCataCurrency07"] = "Disponível nas Masmorras Heroicas\rdo Protocolo Crepúsculo."
+--- August Stone Fragment
+L["NoMoPCurrency01"] = "Disponível através das Masmorras Celestiais."
+--- Platinum Coins
+L["NoMoPCurrency02"] = "Disponível através de desafios."
+
+------ Shadowlands pack
+--- Adventure Campaign Progress
+L["NoSLCurrency13"] = "Obtido através da Mesa de Comando."
+--- Valor
+L["NoSLCurrency14"] = "Obtido através de Mítica+."
+L["seasonEarn"] = "Total da temporada:"
+L["canExpend"] = "Pode gastar:"
+--- Cataloged Research
+L["NoSLCurrency15"] = "Adquirida em Korthia."
+--- Stygian Ember
+L["NoSLCurrency17"] = "Obtido através dos chefes\rdo Sacrário da Dominação."
+--- Tower Knowledge
+L["SLCurrency18Title"] = "Saber da Torre"
+L["SLCurrency18Description"] = "Manifestação de conhecimento\rganha na Thanator. Usada para\rdesbloquear o poder da Caixa\rde Muitas Coisas."
+--- Shared
+L["SLShared01"] = "Adquirida em Zereth Mortis."
+L["SLShared02"] = "Adquirida em Thanator."
+
+------ BfA pack
+--- Artifact Power
+L["noheart"] = "|cFFFF2e2eSem o Coração de Azeroth!"
+L["AzeriteLabel"] = "Artefato: "
+L["AzeriteLevel"] = "Nível do Coração de Azeroth:|cFFFFFFFF "
+L["AzeriteXP"] = "Poder Atual:|cFFFFFFFF "
+L["AzeritetoLvL"] = "Azerita para Upar:|cFFFFFFFF "
+L["AzeritetoMaximum"] = "Pode Máximo deste Nível:|cFFFFFFFF "
+L["AzeriteTitle"] = "Poder de Artefato (Azerita)"
+L["AzeriteDescription"] = "Poder de Artefato aumenta o poder de\rseu Coração de Azeroth."
+--- Jelly
+L["thinJ"] = "|cff1eff00Geleia Rala|r"
+L["richJ"] = "|cff0070ddGeleia Rica|r"
+L["royalJ"] = "|cffa335eeGeleia Real|r"
+L["JellyTitle"] = "Geleia"
+L["NoJelly"] = "Apenas Aliança! Necessário reputação\rcom Colmeia Meleira."
+--- Prismatic Manapearl
+L["NoPpearl"] = "Disponível em Nazjatar."
+
+------ Draenor pack
+--- Dingy Iron Coins
+L["NoMaxCoin"] = "Apenas Ladino, disponível em\rWarlords of Draenor."
+--- Garrison Resources
+L["NoMaxRes"] = "Disponível através da Guarnição\rem Warlords of Draenor."
+--- Oil
+L["NoMaxOil"] = "Disponível através do Estaleiro em\rWarlords of Draenor."
+
+------ Events pack
+--- Brewfest Prize Token
+L["NoToken"] = "Disponível através do\revento 'CervaFest'."
+--- Burning Blossom
+L["NoEventCurrency01"] = "Disponível através do evento\rFestival do Fogo do Solstício."
+--- Coin of Ancestry
+L["NoAncestry"] = "Disponível através do evento\r'Festival da Lua'."
+--- Darkmoon Prize Ticket
+L["NoTickets"] = "Disponível através da 'Feira de Negraluna'."
+--- Love Token
+L["NoLove"] = "Disponível através do evento\r'O Amor Está No Ar'."
+--- Spooky Supplies and Tricky Treat
+L["HallowEnd"] = "Disponível através do\revento 'Noturnália'."
+--- Children's Week items
+L["NoChildrensWeek"] = "Disponível durante o evento\rSemana das Crianças."
+
+------ Legion pack
+--- Ancient Mana
+L["NoMana"] = "Adquirida em Suramar."
+--- Coins of Air
+L["NoCAir"] = "Apenas Ladino, disponível em\rLegion."
+--- Curious Coin
+L["NoCurious"] = "Encontrada em saques aleatórios nas\rIlhas Partidas."
+--- Drowned Mana
+L["NoDrowned"] = "Pesque no Retiro de Margoss, próximo a Dalaran."
+--- Legionfall War Supplies
+L["NoLegionfall"] = "Adquirido na Costa Partida."
+--- Nethershard
+L["NoNether"] = "Adquirido na Costa Partida e nas invasões da Legião nas Ilhas Partidas."
+--- Seal of Broken Fate
+L["NoBrokenFate"] = "Pode ser comprado com o Arquimago Lan'dalock, em\rDalaran."
+--- Sightless Eye
+L["NoSightless"] = "Adquirido nos Esgotos de Dalaran."
+--- Timeworn Artifact
+L["NoTimeworn"] = "Disponível através de Missões\rMundiais PvP nas Ilhas Partidas."
+--- Veiled Argunite
+L["NoArgunite"] = "Adquirida em Argus."
+
+------ Wrath of the Lich King
+--- Champion's Seal
+L["NoChampions"] = "Disponível no Coliseu dos\rCruzados, em Nortúndria."
+--- Epicurean's Award
+L["NoEpicurean"] = "Disponível através de missões de culinária na\rantiga Dalaran (Nortúndria) e nas capitais."
+--- Dalaran Jewelcrafter's Token
+L["NoLKCurrency04"] = "Recompensado por missões diárias\rde joalheria, no nível 80, em Dalaran."
+--- Arena Points
+L["NoLKCurrency05"] = "Ganho de missões diária ‘Chamado às\rarmas’."
+--- Sidereal Essence
+L["NoLKCurrency06"] = "Ganho em masmorras H+."
+
+------ Old pack
+--- Bloody Coin
+L["NoBloody"] = "Disponível ao usar |cff0070ddIncensário da\rAgonia Eterna|r|cFFFF2e2e ou|r |cff0070ddJuramento do\rVigilante do Fogo|r |cFFFF2e2ena Ilha Perene.|r"
+--- Ironpaw Token
+L["NoIronpaw"] = "Disponível através de missões de culinária em Pandaria."
+--- Mark of the World Tree
+L["NoWorldTree"] = "Disponível através de\rmissões diárias no Monte\rHyjal."
+--- Timeless Coin
+L["NoTimeless"] = "Disponível através da Ilha Perene."
+
+------ Others pack
+--- Brawler's Gold
+L["NoBrawler"] = "Disponível através de lutas na\rGuilda dos Brigões."
+--- Gold
+L["GoldTitle"] = "Ouro"
+L["GoldPlayerTip"] = "|cFFB4EEB4Dica:|r |cFFFFFFFFClique para abrir a janela de\rmoedas de ${player}|cFFFFFFFF.|r"
+L["GoldTotal"] = "Total:"
+L["HigherOnly"] = "Exibir Apenas Maior Valor"
+--- Polished Pet Charm
+L["NoPolPet"] = "Disponível através de Batalhas de Mascotes\rno BfA e expansões posteriores."
+--- Shiny Pet Charm
+L["NoMaxPet"] = "Disponível através de batalhas de mascote\rem Warlords of Draenor e Legion."
+--- Timewarped Badge
+L["NoBadge"] = "Entre em uma fila de masmorras\rquando o evento de Caminhada\rTemporal estiver ocorrendo."
+--- Trader's Tender
+L["TradersTender"] = "Obtidas no Posto Comercial de sua capital."
+-- Delves
+L["NoUndercoin"] = "Obtida através de Imersões."
+
+------ PvP pack
+--- Mark of Honor
+L["NoMark"] = "Disponível através de PvP."
+--- Tol Barad Commendation
+L["NoTB"] = "Disponível através de missões\rdiárias em Tol Barad."
+
+--- Shared
+L["totalbag"] = "Total na Bolsa: "
+L["totalbank"] = "Total no Banco: "
+L["full"] = "Lotado!"
+L["maximum"] = "Máx"
+L["WotLKOnly"] = "Disponível em Wrath of The Lich King."
+L["DraenorOnly"] = "Disponível em Draenor."
+L["LegionOnly"] = "Disponível nas Ilhas Partidas."
+L["DragonFOnly"] = "Disponível nas Ilhas do Dragão."
+L["PandariaOnly"] = "Disponível em Pandária."
+L["BfAOnly"] = "Disponível em Battle for Azeroth."
+L["VisionsOnly"] = "Disponível no conteúdo de Visões de N'Zoth."
+L["SLOnly"] = "Disponível em Shadowlands."
+L["session"] = "Saldo da sessão: "
+L["showbb"] = "Exibir Saldo da Sessão na Barra"
+L["mCata"] = "[|cFF198ae0Cata|r]"
+L["mEvent"] = "[|cFF198ae0Evento|r]"
+L["mLegion"] = "[|cFF198ae0Legion|r]"
+L["mMoP"] = "[|cFF198ae0MoP|r]"
+L["mPvP"] = "[|cFF198ae0PvP|r]"
+L["mPvE"] = "[|cFF198ae0PvE|r]"
+L["mWoD"] = "[|cFF198ae0WoD|r]"
+L["mWotLK"] = "[|cFF198ae0WotLK|r]"
+L["mOther"] = "[|cFF198ae0Outros|r]"
+L["mBfA"] = "[|cFF198ae0BfA|r]"
+L["mShadowlands"] = "[|cFF198ae0Shadowlands|r]"
+L["mDragonflight"] = "[|cFF198ae0Dragonflight|r]"
+L["mWarWithin"] = "[|cFF198ae0The War Within|r]"
+L["mMidnight"] = "[|cFF198ae0Midnight|r]"
+L["mMidnightS2"] = "[|cFF198ae0Midnight (T2)|r]"
+L["mDelves"] = "[|cFF198ae0Imersões|r]"
+L["mSirenIsle"] = "[|cFF198ae0Ilha das Sirenas|r]"
+L["mWarWithinS2"] = "[|cFF198ae0The War Within (S2)|r]"
+L["mWarWithinS3"] = "[|cFF198ae0The War Within (S3)|r]"
+L["mUndermine"] = "[|cFF198ae0Inframina|r]"
+L["mNightfall"] = "[|cFF198ae0Queda da Noite|r]"
+L["mHorrificVisions"] = "[|cFF198ae0Visões Horrendas|r]"
+L["mKaresh"] = "[|cFF198ae0K'aresh|r]"
+
+L["info"] = "|cFFFFFFFF[Informações]|r"
+L["totalAcquired"] = "Total adquirido: "
+L["warbandTotal"] = "Total do Bando de Guerra: "
+L["WarbandBank"] = "Banco do Bando de Guerra: "
+L["maxpermitted"] = "Máximo permitido: "
+L["canGet"] = "Ainda pode pegar: "
+L["maxBar"] = "Exibir Valor Máximo na Barra"
+L["showWarbandTotal"] = "Mostrar valor total da conta na barra"
+L["simpleText"] = "Exibir Texto Simples"
+L["showAltText"] = "Mostrar Alts"
+L["TotalAlt"] = "Total da Moeda:"
+L["AltChars"] = "|cFFFFFFFF[Todos Personagens]|r"
+L["buttonText"] = "Texto da Barra"
+L["tooltip"] = "Texto de Ajuda"
+L["barPosition"] = "Posição na Barra"
+L["moveRight"] = "Mover à Direita"
+L["moveLeft"] = "Mover à Esquerda"
+L["showAllFactions"] = "Personagens de Ambas Facções"
+L["useHyperlink"] = "Mostrar Tooltip como Hyperlink"
+L["hideInfoWhenHyperlink"] = "Esconder Infos Extras com Hyperlink"
+L["sortByAmount"] = "Ordenar por Quantidade"
+L["addDigitSeparator"] = "Adicionar Separador de Centenas aos Números"
+
+--- Menus
+L["bfa"] = "Moeda [BfA]"
+L["legacy"] = "Moeda [Legado]"
+L["misc"] = "Moeda [Outros]"
+L["shadowl"] = "Moeda [Shadowlands]"
+L["dragonf"] = "Moeda [Dragonflight]"
+L["warwithin"] = "Moeda [The War Within]"
+L["midnight"] = "Moeda [Midnight]"
+L["midnightprofs"] = "Moeda [Profissões de Midnight]"
+L["wotlk"] = "Moeda [WotLK]"
+L["cata"] = "Moeda [Cataclysm]"
+L["mop"] = "Moeda [Mists of Pandaria]"
+L["remix"] = "Moeda [Remix]"
+L["housing"] = "Moeda [Moradia]"
+
+--- Character List Plugin strings
+L["charListPluginDisplayName"] = "Gerenciamento de Dados"
+L["purgeDataMenu"] = "Limpar dados de personagens"
+L["charsChunkMenu"] = "Grupo de Personagens nº %d"
+L["purgeDataQuestion"] = "Tem certeza de que deseja limpar os dados de %s?"
+L["charMgmtTooltip"] = "Clique com o botão direito para limpar\rseletivamente dados de personagens\rexceto os do personagem atual."
+
+--- Housing strings
+L["mEndeavors"] = "Empreitadas"
+L["noCurrCommCoupons"] = "Obtidos através de Empreitadas da Vizinhança."
+L["mLumber"] = "[|cFF198ae0Madeira|r]"
+L["IronwoodLumber"] = "Coletada nas áreas do Classic."
+L["OlembaLumber"] = "Coletada nas áreas de Burning Crusade (Terralém)."
+L["ColdwindLumber"] = "Coletada nas áreas de Wrath of\rthe Lich King (Nortúndria)."
+L["AshwoodLumber"] = "Coletada nas áreas de Cataclysm."
+L["BambooLumber"] = "Coletada nas áreas de Pandaria."
+L["ShadowmoonLumber"] = "Coletada nas áreas de Warlords of Draenor."
+L["FelTouchedLumber"] = "Coletada nas áreas de Legion (Ilhas Partidas e Argus)."
+L["DarkpineLumber"] = "Coletada nas áreas de Battle for\rAzeroth (Kul Tiraz e Zandalar)."
+L["ArdenLumber"] = "Coletada nas áreas de Shadowlands."
+L["DragonpineLumber"] = "Coletada nas áreas de Dragonflight (Ilhas do Dragão)."
+L["DornicFirLumber"] = "Coletada nas áreas de The War Within (Khaz Algar)."
+L["ThalassianLumber"] = "Coletada nas áreas de Midnight (Harandar)."
+end

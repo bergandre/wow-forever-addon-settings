@@ -23,16 +23,14 @@ Bagnonium_Sets = {
 },
 ["color"] = {
 },
-["height"] = 500.0001831054688,
+["height"] = 500.0005187988281,
 ["activeRules"] = {
 ["tabs"] = "all",
 ["sidebar"] = "all",
 },
-["width"] = 399.9998474121094,
+["width"] = 400.0002136230469,
 },
 ["guild"] = {
-["color"] = {
-},
 ["rules"] = {
 ["tabs"] = {
 "all",
@@ -46,10 +44,16 @@ Bagnonium_Sets = {
 "miscellaneous",
 },
 },
-["activeRules"] = {
-},
 ["borderColor"] = {
 },
+["color"] = {
+},
+["height"] = 448.0000305175781,
+["activeRules"] = {
+["tabs"] = "all",
+["sidebar"] = "all",
+},
+["width"] = 637,
 },
 ["bank"] = {
 ["rules"] = {
@@ -67,6 +71,7 @@ Bagnonium_Sets = {
 "miscellaneous",
 },
 },
+["showBags"] = true,
 ["borderColor"] = {
 },
 ["color"] = {

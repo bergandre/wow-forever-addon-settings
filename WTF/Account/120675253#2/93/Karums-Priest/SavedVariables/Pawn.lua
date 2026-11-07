@@ -1,0 +1,56 @@
+
+PawnOptions = {
+["LastVersion"] = 2.1401,
+["LastPlayerFullName"] = "Karums Priest",
+["AutoSelectScales"] = false,
+["ItemLevels"] = {
+[15] = {
+["ID"] = 6508,
+["Level"] = 9,
+["Link"] = "|cnIQ1:|Hitem:6508::::::::14:1487:::::::::|h[Infantry Cloak]|h|r",
+},
+[17] = {
+["ID"] = 286728,
+["Level"] = 8,
+["AlsoFitsIn"] = 16,
+["Link"] = "|cnIQ1:|Hitem:286728::::::::15:1487::11:::::::|h[Kolkar Hammer]|h|r",
+},
+[8] = {
+["ID"] = 4936,
+["Level"] = 8,
+["Link"] = "|cnIQ1:|Hitem:4936::::::::14:1487::11:::::::|h[Dirt-trodden Boots]|h|r",
+},
+[18] = {
+["ID"] = 11288,
+["Level"] = 23,
+["Link"] = "|cnIQ2:|Hitem:11288::::::::14:1487:::::::::|h[Greater Magic Wand]|h|r",
+},
+[16] = {
+["ID"] = 286728,
+["Level"] = 8,
+["AlsoFitsIn"] = 17,
+["Link"] = "|cnIQ1:|Hitem:286728::::::::14:1487::11:::::::|h[Kolkar Hammer]|h|r",
+},
+[5] = {
+["ID"] = 16606,
+["Level"] = 5,
+["Link"] = "|cnIQ2:|Hitem:16606::::::::14:1487::11:::::::|h[Juju Hex Robes]|h|r",
+},
+[9] = {
+["ID"] = 281269,
+["Level"] = 10,
+["Link"] = "|cnIQ2:|Hitem:281269::::::::14:1487::11:::::::|h[Mogra's Friendship Bracelet]|h|r",
+},
+[7] = {
+["ID"] = 3291,
+["Level"] = 13,
+["Link"] = "|cnIQ2:|Hitem:3291::::::::14:1487:::::::::|h[Ancestral Woollies]|h|r",
+},
+},
+["LastKeybindingsSet"] = 1,
+}
+PawnMrRobotScaleProviderOptions = nil
+PawnClassicScaleProviderOptions = {
+["LastClass"] = "PRIEST",
+["LastAdded"] = 3,
+}

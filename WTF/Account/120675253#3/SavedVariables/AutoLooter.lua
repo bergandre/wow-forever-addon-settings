@@ -3,8 +3,9 @@ AutoLooterDB = {
 ["namespaces"] = {
 },
 ["profileKeys"] = {
-["Invited - CAMWOW EU4 Realm 8 PvP"] = "Default",
-["Invited Friend"] = "Default",
+["Karums Warrior"] = "Default",
+["Karums - CAMWOW EU5 Realm 4 PvP"] = "Default",
+["Invited Undead"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {
@@ -20,12 +21,12 @@ AutoLooterDB = {
 ["Other"] = false,
 ["Elemental"] = false,
 ["Cooking"] = false,
-["Parts"] = false,
+["Enchanting"] = false,
 ["Leather"] = false,
 ["Cloth"] = false,
 ["Herb"] = false,
 ["Metal & Stone"] = false,
-["Enchanting"] = false,
+["Parts"] = false,
 },
 ["Recipe"] = {
 ["Tailoring"] = false,
@@ -79,9 +80,9 @@ AutoLooterDB = {
 ["Other"] = false,
 ["Reagent"] = false,
 ["Mount"] = false,
+["Junk"] = false,
 ["Holiday"] = false,
 ["Pet"] = false,
-["Junk"] = false,
 },
 ["Consumable"] = {
 ["Potions"] = false,
@@ -101,8 +102,8 @@ AutoLooterDB = {
 ["Generic(OBSOLETE)"] = false,
 },
 ["Projectile"] = {
-["Arrow"] = false,
 ["Bullet"] = false,
+["Arrow"] = false,
 },
 ["Jewelry(OBSOLETE)"] = {
 ["Jewelry(OBSOLETE)"] = false,
@@ -124,12 +125,13 @@ AutoLooterDB = {
 ["Two-Handed Maces"] = false,
 ["Guns"] = false,
 ["Fist Weapons"] = false,
-["Daggers"] = false,
-["Wands"] = false,
 ["Thrown"] = false,
+["Wands"] = false,
+["Daggers"] = false,
 ["Two-Handed Axes"] = false,
 },
 },
+["lootAll"] = true,
 },
 },
 }

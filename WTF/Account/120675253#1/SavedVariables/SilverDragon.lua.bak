@@ -4,6 +4,15 @@ SilverDragon3DB = {
 ["Karums Warrior"] = "Default",
 },
 ["namespaces"] = {
+["ClickTarget"] = {
+["profiles"] = {
+["Default"] = {
+["anchor"] = {
+["x"] = -259.999755859375,
+},
+},
+},
+},
 ["History"] = {
 ["profiles"] = {
 ["Default"] = {
@@ -14,6 +23,14 @@ SilverDragon3DB = {
 },
 },
 },
+},
+},
+["global"] = {
+["mob_count"] = {
+[12431] = 1,
+},
+["mob_seen"] = {
+[12431] = 1794017051,
 },
 },
 ["profiles"] = {

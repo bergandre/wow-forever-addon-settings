@@ -1,11 +1,10 @@
 
 TipTac_Config = {
 ["profileKeys"] = {
-["Gniloe - PvP"] = "Default",
-["Hypr - PvP"] = "Default",
-["Gniloe Forever"] = "Default",
-["Karums Priest"] = "Default",
+["Karums Warrior"] = "Default",
 ["Karums - PvP"] = "Default",
+["Opikol - PvP"] = "Default",
+["Karums Priest"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {

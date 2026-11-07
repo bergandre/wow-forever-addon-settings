@@ -35,7 +35,11 @@ _detalhes_global = {
 ["boss_wipe_min_time"] = 20,
 ["plater"] = {
 ["realtime_dps_enabled"] = false,
-["realtime_dps_size"] = 12,
+["damage_taken_anchor"] = {
+["y"] = 0,
+["x"] = 0,
+["side"] = 7,
+},
 ["realtime_dps_player_shadow"] = true,
 ["damage_taken_enabled"] = false,
 ["realtime_dps_player_size"] = 12,
@@ -51,12 +55,8 @@ _detalhes_global = {
 ["x"] = 0,
 ["side"] = 7,
 },
+["realtime_dps_size"] = 12,
 ["damage_taken_shadow"] = true,
-["damage_taken_anchor"] = {
-["y"] = 0,
-["x"] = 0,
-["side"] = 7,
-},
 ["damage_taken_color"] = {
 1,
 1,
@@ -121,20 +121,20 @@ _detalhes_global = {
 1,
 0.7,
 },
-["blockcontainer_width"] = 456.0000610351563,
+["blockcontainer_width"] = 455.9999084472656,
 ["spellbar_background_alpha"] = 0.92,
-["spellcontainer_width"] = 429.0000915527344,
+["spellcontainer_width"] = 429.0001831054688,
 ["spellcontainer_header_fontcolor"] = {
 1,
 1,
 1,
 1,
 },
-["phasecontainer_height"] = 140.0000610351563,
+["phasecontainer_height"] = 140.0000457763672,
 ["phasecontainer_enabled"] = true,
 ["genericcontainer_headers_right"] = {
 },
-["phasecontainer_width"] = 289.9999389648438,
+["phasecontainer_width"] = 290.0000915527344,
 ["phasecontainer_headers"] = {
 },
 ["statusbar_texture"] = "Interface\\AddOns\\Details\\images\\bar_skyline",
@@ -171,7 +171,7 @@ _detalhes_global = {
 ["genericcontainer_islocked"] = true,
 ["genericcontainer_right_height"] = 460,
 ["statusbar_alpha"] = 0.7,
-["targetcontainer_height"] = 140.0000610351563,
+["targetcontainer_height"] = 140.0000457763672,
 ["section_background_color"] = {
 0.1,
 0.1,
@@ -183,25 +183,25 @@ _detalhes_global = {
 ["genericcontainer_enabled"] = true,
 ["genericcontainer_headers"] = {
 },
-["targetcontainer_width"] = 429.0000915527344,
+["targetcontainer_width"] = 429.0001831054688,
 ["statusbar_background_alpha"] = 0.7,
 ["spellcontainer_headers"] = {
 },
-["blockcontainer_height"] = 270.0000305175781,
+["blockcontainer_height"] = 270.0000610351563,
 ["genericcontainer_height"] = 481,
 },
 ["always_use_profile"] = false,
 ["always_use_profile_name"] = "",
 ["slashk_dnd"] = false,
 ["immersion_unit_special_icons"] = true,
-["combat_id_global"] = 148,
+["combat_id_global"] = 354,
 ["displays_by_spec"] = {
 },
 ["recent_players"] = {
 },
 ["plugin_window_pos"] = {
-["y"] = -0.00018310546875,
-["x"] = 3.0517578125e-05,
+["y"] = -0.00048828125,
+["x"] = 9.1552734375e-05,
 ["point"] = "CENTER",
 ["scale"] = 1,
 },
@@ -212,7 +212,7 @@ _detalhes_global = {
 ["last_changelog_size"] = 0,
 ["encounter_journal_cache"] = {
 },
-["lastUpdateWarning"] = 0,
+["lastUpdateWarning"] = 1794031486,
 ["custom"] = {
 },
 ["npcid_pool"] = {
@@ -274,18 +274,6 @@ _detalhes_global = {
 ["switch_post_apoc"] = true,
 ["got_first_run"] = true,
 ["show_totalhitdamage_on_overkill"] = false,
-["item_level_pool"] = {
-},
-["transcriptor_frame"] = {
-["scale"] = 1,
-},
-["keystone_alts_cache"] = {
-},
-["spell_category_latest_query"] = 0,
-["all_switch_config"] = {
-["scale"] = 1,
-["font_size"] = 10,
-},
 ["switchSaved"] = {
 ["slots"] = 24,
 ["table"] = {
@@ -376,6 +364,24 @@ _detalhes_global = {
 {
 },
 },
+},
+["transcriptor_frame"] = {
+["scale"] = 1,
+},
+["keystone_alts_cache"] = {
+},
+["spell_category_latest_query"] = 0,
+["all_switch_config"] = {
+["scale"] = 1,
+["font_size"] = 10,
+},
+["data_wipes_exp"] = {
+["9"] = false,
+["14"] = false,
+["13"] = false,
+["12"] = false,
+["11"] = false,
+["10"] = false,
 },
 ["__profiles"] = {
 ["Karums-CAMWOW EU5 Realm 4 PvP"] = {
@@ -617,10 +623,10 @@ false,
 {
 ["__pos"] = {
 ["normal"] = {
-["y"] = -502.3107757568359,
-["x"] = 832.71533203125,
+["y"] = -502.3112640380859,
+["x"] = 471.691650390625,
 ["w"] = 249.3918151855469,
-["h"] = 169.7704467773438,
+["h"] = 169.7705383300781,
 },
 ["solo"] = {
 ["y"] = 2,
@@ -1165,8 +1171,8 @@ false,
 ["micro_displays_side"] = 2,
 ["rounded_corner_enabled"] = false,
 ["libwindow"] = {
-["y"] = 3.573290348052979,
-["x"] = -453.87060546875,
+["y"] = 3.572694301605225,
+["x"] = -453.868896484375,
 ["point"] = "BOTTOMRIGHT",
 ["scale"] = 1,
 },
@@ -1222,10 +1228,10 @@ false,
 ["hide_in_combat"] = false,
 ["posicao"] = {
 ["normal"] = {
-["y"] = -502.3107757568359,
-["x"] = 832.71533203125,
+["y"] = -502.3112640380859,
+["x"] = 471.691650390625,
 ["w"] = 249.3918151855469,
-["h"] = 169.7704467773438,
+["h"] = 169.7705383300781,
 },
 ["solo"] = {
 ["y"] = 2,
@@ -1892,10 +1898,10 @@ false,
 {
 ["__pos"] = {
 ["normal"] = {
-["y"] = -502.3107757568359,
-["x"] = 1068.923828125,
+["y"] = -502.3112640380859,
+["x"] = 707.9005126953125,
 ["w"] = 223.0257415771484,
-["h"] = 169.7704467773438,
+["h"] = 169.7705383300781,
 },
 ["solo"] = {
 ["y"] = 2,
@@ -2201,8 +2207,8 @@ false,
 ["micro_displays_side"] = 2,
 ["rounded_corner_enabled"] = false,
 ["libwindow"] = {
-["y"] = 3.573290348052979,
-["x"] = -230.844970703125,
+["y"] = 3.572694301605225,
+["x"] = -230.8431396484375,
 ["point"] = "BOTTOMRIGHT",
 ["scale"] = 1,
 },
@@ -2497,10 +2503,10 @@ false,
 ["hide_in_combat"] = false,
 ["posicao"] = {
 ["normal"] = {
-["y"] = -502.3107757568359,
-["x"] = 1068.923828125,
+["y"] = -502.3112640380859,
+["x"] = 707.9005126953125,
 ["w"] = 223.0257415771484,
-["h"] = 169.7704467773438,
+["h"] = 169.7705383300781,
 },
 ["solo"] = {
 ["y"] = 2,
@@ -2530,16 +2536,19 @@ false,
 },
 ["overall_clear_pvp"] = true,
 ["deny_score_messages"] = false,
-["overall_clear_logout"] = false,
+["minimum_combat_time"] = 5,
 ["skin"] = "Minimalistic",
 ["override_spellids"] = true,
-["font_sizes"] = {
-["menus"] = 10,
-},
-["minimum_combat_time"] = 5,
 ["new_window_size"] = {
 ["height"] = 158,
 ["width"] = 310,
+},
+["realtimedps_always_arena"] = false,
+["window_clamp"] = {
+-8,
+0,
+21,
+-14,
 },
 ["chat_tab_embed"] = {
 ["enabled"] = false,
@@ -2548,22 +2557,17 @@ false,
 ["tab_name"] = "",
 ["single_window"] = false,
 },
-["realtimedps_always_arena"] = false,
+["overall_clear_logout"] = false,
 ["broadcaster_enabled"] = false,
 ["cloud_capture"] = true,
 ["damage_taken_everything"] = false,
 ["scroll_speed"] = 2,
-["window_clamp"] = {
--8,
-0,
-21,
--14,
+["font_sizes"] = {
+["menus"] = 10,
 },
 ["memory_threshold"] = 3,
 ["deadlog_events"] = 32,
-["hotcorner_topleft"] = {
-["hide"] = false,
-},
+["total_abbreviation"] = 2,
 ["close_shields"] = false,
 ["class_coords"] = {
 ["HUNTER"] = {
@@ -2689,7 +2693,7 @@ false,
 },
 ["segments_auto_erase"] = 1,
 ["disable_alldisplays_window"] = false,
-["total_abbreviation"] = 2,
+["trash_auto_remove"] = false,
 ["segments_boss_wipes_keep_best_performance"] = true,
 ["class_colors"] = {
 ["HUNTER"] = {
@@ -2702,10 +2706,10 @@ false,
 0.61,
 0.43,
 },
-["SHAMAN"] = {
-0,
-0.44,
-0.87,
+["PALADIN"] = {
+0.96,
+0.55,
+0.73,
 },
 ["MAGE"] = {
 0.41,
@@ -2747,10 +2751,10 @@ false,
 0.372,
 0.905,
 },
-["ROGUE"] = {
-1,
-0.96,
-0.41,
+["SHAMAN"] = {
+0,
+0.44,
+0.87,
 },
 ["UNKNOW"] = {
 0.2,
@@ -2794,10 +2798,10 @@ false,
 0.5764,
 0.498,
 },
-["PALADIN"] = {
+["ROGUE"] = {
+1,
 0.96,
-0.55,
-0.73,
+0.41,
 },
 },
 ["death_log_colors"] = {
@@ -2809,7 +2813,9 @@ false,
 ["damage"] = "red",
 },
 ["clear_graphic"] = true,
-["trash_auto_remove"] = false,
+["hotcorner_topleft"] = {
+["hide"] = false,
+},
 ["animation_speed_triggertravel"] = 5,
 ["options_group_edit"] = true,
 ["segments_amount_to_save"] = 15,
@@ -3205,7 +3211,7 @@ false,
 },
 ["class_time_played"] = {
 [0] = {
-["WARRIOR"] = 32453.213,
+["WARRIOR"] = 55269.14700000001,
 },
 },
 ["run_code"] = {
@@ -3216,13 +3222,7 @@ false,
 ["on_leavecombat"] = "\n-- this code runs when the player leave combat",
 ["on_entercombat"] = "\n-- this code runs when the player enters in combat",
 },
-["aura_tracker_frame"] = {
-["scaletable"] = {
-["scale"] = 1,
-},
-["position"] = {
-},
-},
+["slash_me_used"] = false,
 ["latest_npcid_pool_access"] = 1793915104,
 ["debug_options_panel"] = {
 ["position"] = {
@@ -3231,7 +3231,7 @@ false,
 ["scale"] = 1,
 },
 },
-["spell_category_latest_save"] = 0,
+["show_warning_id1"] = true,
 ["mythic_plus"] = {
 ["make_overall_boss_only"] = false,
 ["mythicrun_chart_frame"] = {
@@ -3262,7 +3262,7 @@ false,
 },
 ["exit_errors"] = {
 },
-["show_warning_id1"] = true,
+["auto_change_to_standard"] = true,
 ["realm_sync"] = true,
 ["cleu_debug_panel"] = {
 ["scaletable"] = {
@@ -3271,20 +3271,11 @@ false,
 ["position"] = {
 },
 },
-["data_wipes_exp"] = {
-["9"] = false,
-["14"] = false,
-["13"] = false,
-["12"] = false,
-["11"] = false,
-["10"] = false,
+["item_level_pool"] = {
 },
-["slash_me_used"] = false,
-["auto_change_to_standard"] = true,
-["last_10days_cache_cleanup"] = 1794779112,
 ["tutorial"] = {
 ["bookmark_tutorial"] = false,
-["main_help_button"] = 16,
+["main_help_button"] = 32,
 ["FULL_DELETE_WINDOW"] = true,
 ["WINDOW_GROUP_MAKING1"] = true,
 ["alert_frames"] = {
@@ -3295,10 +3286,19 @@ false,
 false,
 false,
 },
-["logons"] = 16,
+["logons"] = 32,
 ["version_announce"] = 0,
 ["ctrl_click_close_tutorial"] = false,
 ["unlock_button"] = 1,
+},
+["spell_category_latest_save"] = 0,
+["last_10days_cache_cleanup"] = 1794779112,
+["aura_tracker_frame"] = {
+["scaletable"] = {
+["scale"] = 1,
+},
+["position"] = {
+},
 },
 ["breakdown_general"] = {
 ["font_size"] = 11,
@@ -3473,11 +3473,11 @@ false,
 ["deathlog_healingdone_min"] = 1,
 }
 __details_backup = {
+["_exit_error"] = {
+},
 ["_instance_backup"] = {
 },
 ["_general_logs"] = {
-},
-["_exit_error"] = {
 },
 }
 __details_debug = {

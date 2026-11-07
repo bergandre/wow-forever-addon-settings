@@ -1,24 +1,17 @@
 
 AutoLooterDB = {
 ["namespaces"] = {
-["RarityModule"] = {
-["profiles"] = {
-["Default"] = {
-["rarity"] = {
-true,
-[0] = true,
-},
-},
-},
-},
 },
 ["profileKeys"] = {
-["Karums - CAMWOW EU4 Realm 4 PvP"] = "Default",
-["Gniloe - CAMWOW EU4 Realm 4 PvP"] = "Default",
+["Karums Warrior"] = "Default",
 ["Karums Priest"] = "Default",
+["Karums - CAMWOW EU5 Realm 4 PvP"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {
+["minimap"] = {
+["minimapPos"] = 245.4338330532983,
+},
 ["typeTable"] = {
 ["Quiver"] = {
 ["Quiver"] = false,
@@ -90,9 +83,9 @@ true,
 ["Other"] = false,
 ["Reagent"] = false,
 ["Mount"] = false,
-["Pet"] = false,
 ["Junk"] = false,
 ["Holiday"] = false,
+["Pet"] = false,
 },
 ["Consumable"] = {
 ["Potions"] = false,
@@ -141,6 +134,7 @@ true,
 ["Two-Handed Axes"] = false,
 },
 },
+["lootAll"] = true,
 },
 },
 }

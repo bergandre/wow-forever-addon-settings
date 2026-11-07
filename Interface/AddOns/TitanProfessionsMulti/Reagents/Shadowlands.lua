@@ -1,0 +1,140 @@
+-- Shadowlands reagent definitions.
+
+local _, L = ...
+local RegisterExpansion = L.ReagentTracker and L.ReagentTracker.RegisterExpansion
+if not RegisterExpansion then return end
+
+RegisterExpansion({
+	name = "Shadowlands",
+	labelKey = "rShadowlands",
+	shortLabelKey = "rSL",
+	professions = {
+		{
+			id = "TITAN_RESCOOMM_SL",
+			professionKey = "cooking",
+			professionName = "Cooking",
+			icon = "Interface\\Icons\\Inv_misc_food_15.blp",
+			items = {
+				{ name = "Aethereal Meat", ids = { 172052 }, hideVariable = "HideReagentOneSL" },
+				{ name = "Creeping Crawler Meat", ids = { 179314 }, hideVariable = "HideReagentTwoSL" },
+				{ name = "Phantasmal Haunch", ids = { 172055 }, hideVariable = "HideReagentThreeSL" },
+				{ name = "Raw Seraphic Wing", ids = { 172054 }, hideVariable = "HideReagentFourSL" },
+				{ name = "Shadowy Shank", ids = { 179315 }, hideVariable = "HideReagentFiveSL" },
+				{ name = "Tenebrous Ribs", ids = { 172053 }, hideVariable = "HideReagentSixSL" },
+			},
+		},
+		{
+			id = "TITAN_RESENCHM_SL",
+			professionKey = "enchanting",
+			professionName = "Enchanting",
+			icon = "Interface\\Icons\\Trade_engraving.blp",
+			items = {
+				{ name = "Soul Dust", ids = { 172230 }, hideVariable = "HideReagentOneSL" },
+				{ name = "Sacred Shard", ids = { 172231 }, hideVariable = "HideReagentTwoSL" },
+				{ name = "Eternal Crystal", ids = { 172232 }, hideVariable = "HideReagentThreeSL" },
+			},
+		},
+		{
+			id = "TITAN_RESFISHM_SL",
+			professionKey = "fishing",
+			professionName = "Fishing",
+			icon = "Interface\\Icons\\Trade_fishing.blp",
+			items = {
+				{ name = "Lost Sole", ids = { 173032 }, hideVariable = "HideReagentOneSL" },
+				{ name = "Silvergill Pike", ids = { 173034 }, hideVariable = "HideReagentTwoSL" },
+				{ name = "Pocked Bonefish", ids = { 173035 }, hideVariable = "HideReagentThreeSL" },
+				{ name = "Iridescent Amberjack", ids = { 173033 }, hideVariable = "HideReagentFourSL" },
+				{ name = "Spinefin Piranha", ids = { 173036 }, hideVariable = "HideReagentFiveSL" },
+				{ name = "Elysian Thade", ids = { 173037 }, hideVariable = "HideReagentSixSL" },
+			},
+		},
+		{
+			id = "TITAN_RESHERBM_SL",
+			professionKey = "herbalism",
+			professionName = "Herbalism",
+			icon = "Interface\\Icons\\Trade_herbalism",
+			items = {
+				{ name = "Rising Glory", ids = { 168586 }, hideVariable = "HideReagentOneSL" },
+				{ name = "Marrowroot", ids = { 168589 }, hideVariable = "HideReagentTwoSL" },
+				{ name = "Vigil's Torch", ids = { 170554 }, hideVariable = "HideReagentThreeSL" },
+				{ name = "Widowbloom", ids = { 168583 }, hideVariable = "HideReagentFourSL" },
+				{ name = "Death Blossom", ids = { 169701 }, hideVariable = "HideReagentFiveSL" },
+				{ name = "Nightshade", ids = { 171315 }, hideVariable = "HideReagentSixSL" },
+			},
+		},
+		{
+			id = "TITAN_RESISCPM_SL",
+			professionKey = "inscription",
+			professionName = "Inscription",
+			icon = "Interface\\Icons\\Inv_inscription_tradeskill01.blp",
+			items = {
+				{ name = "Luminous Ink", ids = { 173059 }, hideVariable = "HideReagentOneSL" },
+				{ name = "Umbral Ink", ids = { 173058 }, hideVariable = "HideReagentTwoSL" },
+				{ name = "Tranquil Ink", ids = { 175970 }, hideVariable = "HideReagentThreeSL" },
+				{ name = "Luminous Pigment", ids = { 173057 }, hideVariable = "HideReagentFourSL" },
+				{ name = "Umbral Pigment", ids = { 173056 }, hideVariable = "HideReagentFiveSL" },
+				{ name = "Tranquil Pigment", ids = { 175788 }, hideVariable = "HideReagentSixSL" },
+				{ name = "Ardenwood", ids = { 175923 }, hideVariable = "HideReagentSevenSL" },
+				{ name = "Dark Parchment", ids = { 175886 }, hideVariable = "HideReagentEightSL" },
+			},
+		},
+		{
+			id = "TITAN_RESJEWCM_SL",
+			professionKey = "jewelcrafting",
+			professionName = "Jewelcrafting",
+			icon = "Interface\\Icons\\Inv_misc_gem_02.blp",
+			items = {
+				{ name = "Angerseye", ids = { 173109 }, hideVariable = "HideReagentOneSL" },
+				{ name = "Oriblase", ids = { 173108 }, hideVariable = "HideReagentTwoSL" },
+				{ name = "Umbryl", ids = { 173110 }, hideVariable = "HideReagentThreeSL" },
+			},
+		},
+		{
+			id = "TITAN_RESMINIM_SL",
+			professionKey = "mining",
+			professionName = "Mining",
+			icon = "Interface\\Icons\\Trade_mining.blp",
+			items = {
+				{ name = "Laestrite Ore", ids = { 171828 }, hideVariable = "HideReagentOneSL" },
+				{ name = "Elethium Ore", ids = { 171833 }, hideVariable = "HideReagentTwoSL" },
+				{ name = "Solenium Ore", ids = { 171829 }, hideVariable = "HideReagentThreeSL" },
+				{ name = "Oxxein Ore", ids = { 171830 }, hideVariable = "HideReagentFourSL" },
+				{ name = "Phaedrum Ore", ids = { 171831 }, hideVariable = "HideReagentFiveSL" },
+				{ name = "Sinvyr Ore", ids = { 171832 }, hideVariable = "HideReagentSixSL" },
+				{ name = "Porous Stone", ids = { 171840 }, hideVariable = "HideReagentSevenSL" },
+				{ name = "Shaded Stone", ids = { 171841 }, hideVariable = "HideReagentEightSL" },
+				{ name = "Twilight Bark", ids = { 177061 }, hideVariable = "HideReagentNineSL" },
+			},
+		},
+		{
+			id = "TITAN_RESSKINM_SL",
+			professionKey = "skinning",
+			professionName = "Skinning",
+			icon = "Interface\\Icons\\Inv_misc_pelt_wolf_01.blp",
+			items = {
+				{ name = "Desolate Leather", ids = { 172089 }, hideVariable = "HideReagentOneSL" },
+				{ name = "Callous Hide", ids = { 172094 }, hideVariable = "HideReagentTwoSL" },
+				{ name = "Pallid Bone", ids = { 172092 }, hideVariable = "HideReagentThreeSL" },
+				{ name = "Gaunt Sinew", ids = { 177279 }, hideVariable = "HideReagentFourSL" },
+				{ name = "Heavy Desolate Leather", ids = { 172096 }, hideVariable = "HideReagentFiveSL" },
+				{ name = "Heavy Callous Hide", ids = { 172097 }, hideVariable = "HideReagentSixSL" },
+				{ name = "Purified Leather", ids = { 172333 }, hideVariable = "HideReagentSevenSL" },
+				{ name = "Necrotic Leather", ids = { 172332 }, hideVariable = "HideReagentEightSL" },
+				{ name = "Unseelie Leather", ids = { 172330 }, hideVariable = "HideReagentNineSL" },
+				{ name = "Sinful Leather", ids = { 172331 }, hideVariable = "HideReagentTenSL" },
+			},
+		},
+		{
+			id = "TITAN_RESTAILM_SL",
+			professionKey = "tailoring",
+			professionName = "Tailoring",
+			icon = "Interface\\Icons\\Trade_tailoring.blp",
+			items = {
+				{ name = "Shrouded Cloth", ids = { 173202 }, hideVariable = "HideReagentOneSL" },
+				{ name = "Lightless Silk", ids = { 173204 }, hideVariable = "HideReagentTwoSL" },
+				{ name = "Enchanted Lightless Silk", ids = { 172439 }, hideVariable = "HideReagentThreeSL" },
+				{ name = "Penumbra Thread", ids = { 177062 }, hideVariable = "HideReagentFourSL" },
+			},
+		},
+	},
+})

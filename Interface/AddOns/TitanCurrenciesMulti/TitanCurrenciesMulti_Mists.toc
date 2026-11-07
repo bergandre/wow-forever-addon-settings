@@ -1,0 +1,65 @@
+## Interface: 50504
+## Title: Titan Panel [|cff336699Currencies|r] Multi! |cff00aa00v12.0.0|r
+## Notes: Track a lot of currencies! Right-click on Titan Panel, go to "Information" tab and enjoy.
+## Notes-ptBR: Rastreie várias moedas! Clique com o botão direito no Painel Titan, vá na aba "Informação" e aproveite.
+## Notes-esES: Sigue un monton de monedas! Click-Dcho en Titan Panel, para ir a ventana de "Información" y disfruta.
+## Author: Canettieri
+## Version: v12.0.0
+## Dependencies: Titan
+## SavedVariables: TitanCurrenciesMultiDb
+## X-Curse-Project-ID: 94508
+## X-Wago-ID: xZKxeyGk
+Core\languages\enUS-default.lua
+Core\languages\deDE.lua
+Core\languages\esES.lua
+Core\languages\frFR.lua
+Core\languages\koKR.lua
+Core\languages\ptBR.lua
+Core\languages\ruRU.lua
+Core\ElioteDropDownMenu-1.0.lua
+Core\Elib-4.0.lua
+Core\Utils.lua
+Core\CurrenciesCore.lua
+Core\CurrenciesCorewMax.lua
+Core\Menus-Classic.lua
+Core\SimpleCurrencyPlugin.lua
+Core\SimpleItemPlugin.lua
+#c.Legacy\Cataclysm\TitanChefAward.lua
+c.Legacy\Cataclysm\TitanConquestPoints.lua
+c.Legacy\Cataclysm\TitanFissureStoneFragment.lua
+c.Legacy\Cataclysm\TitanObsidianStoneFragment.lua
+c.Legacy\Cataclysm\TitanIllustriousJCToken.lua
+c.Legacy\Cataclysm\TitanJusticePoints.lua
+c.Legacy\Cataclysm\TitanMarkWorldTree.lua
+c.Legacy\Cataclysm\TitanValorPoints.lua
+c.Legacy\MoP\TitanBloodyCoin.lua
+c.Legacy\MoP\TitanGoodFortune.lua
+c.Legacy\MoP\TitanIronpawToken.lua
+c.Legacy\MoP\TitanLGoodFortune.lua
+c.Legacy\MoP\TitanMoguRune.lua
+c.Legacy\MoP\TitanPlatinumCoins.lua
+c.Legacy\MoP\TitanTimelessCoin.lua
+c.Legacy\MoP\TitanWarforgedSeal.lua
+c.Legacy\MoP\TitanAugustStoneCluster.lua
+c.Legacy\MoP\TitanAugustStoneFragment.lua
+c.Legacy\MoP\TitanAugustStoneShard.lua
+#c.Legacy\WotLK\TitanArenaPoints.lua
+#c.Legacy\WotLK\TitanBadgeofJustice.lua
+c.Legacy\WotLK\TitanChampionsSeal.lua
+#c.Legacy\WotLK\TitanEmblemofFrost.lua
+#c.Legacy\WotLK\TitanEmblemofTriumph.lua
+#c.Legacy\WotLK\TitanEmblemofConquest.lua
+#c.Legacy\WotLK\TitanEmblemofHeroism.lua
+#c.Legacy\WotLK\TitanEmblemofValor.lua
+c.Legacy\WotLK\TitanEpicureansAward.lua
+c.Legacy\WotLK\TitanHonorPoints.lua
+c.Legacy\WotLK\TitanJewelcrafterToken.lua
+c.Legacy\WotLK\TitanSiderealEssence.lua
+#c.Legacy\WotLK\TitanStoneKeepersShard.lua
+#c.Legacy\WotLK\TitanVentureCoin.lua
+#c.Legacy\WotLK\TitanWintergraspMark.lua
+c.Legacy\WotLK\TitanDefilarsScourgestone.lua
+c.Misc\TitanBrewfestToken.lua
+c.Misc\TitanDarkmoonTicket.lua
+c.Misc\TitanGold.lua
+c.Misc\TitanTolBaradComm.lua

@@ -10,8 +10,13 @@ VER 3 0000000000000004 "RXP ITEM" "134400"
 /click RXPItemFrameButton1 LeftButton 1
 /click RXPItemFrameButton1 LeftButton
 END
+VER 3 0000000000000005 "RXPFollow" "Inv_boots_02"
+//Party Leader
+END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact High Executor Hadrec
+/targetexact Dalar Dawnweaver
+/targetexact Shadow Priest Allister
+/targetexact Spirit Healer
 /tm !7
 /targetlasttarget [dead]
 END

@@ -10,6 +10,11 @@ Prat3DB = {
 ["g"] = 0.7529412508010864,
 ["r"] = 1,
 },
+["layer"] = {
+["r"] = 1,
+["g"] = 0.7529412508010864,
+["b"] = 0.7529412508010864,
+},
 ["general"] = {
 ["b"] = 0.7529412508010864,
 ["g"] = 0.7529412508010864,
@@ -27,9 +32,11 @@ Prat3DB = {
 ["Prat_Frames"] = {
 ["profiles"] = {
 ["Default"] = {
-["minchatwidthdefault"] = 250,
-["maxchatheightdefault"] = 800,
 ["initialized"] = true,
+["minchatheightdefault"] = 119.9999847412109,
+["maxchatheightdefault"] = 800.0000610351562,
+["maxchatwidthdefault"] = 800.0000610351562,
+["minchatwidthdefault"] = 250,
 },
 },
 },

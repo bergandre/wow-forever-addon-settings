@@ -1,0 +1,18 @@
+tag 6a5d5c24305231ddc588240cfefbaa0f5d64c19c v1.1.1
+Author:	spotnick2 <nicolas_leblanc@hotmail.com>
+Date:	Fri Oct 23 12:12:22 2026 -0400
+
+TitanLayer 1.1.1 stable release
+
+commit be8e100358074a732f803f6e0e9541f36b5649c5
+Author: spotnick2 <nicolas_leblanc@hotmail.com>
+Date:   Fri Oct 23 12:11:59 2026 -0400
+
+    Release TitanLayer 1.1.1
+
+commit 0569599d9d6520bab2ffbcfc144d522d9da50c46
+Author: spotnick2 <nicolas_leblanc@hotmail.com>
+Date:   Fri Oct 23 12:09:46 2026 -0400
+
+    Document TitanLayer 1.1.0 features and Forever support
+

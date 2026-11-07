@@ -1,14 +1,24 @@
 
 TipTac_Config = {
 ["profileKeys"] = {
-["Invited Friend"] = "Default",
-["Invited - PvP"] = "Default",
+["Karums Warrior"] = "Default",
+["Karums - PvP"] = "Default",
+["Opikol - PvP"] = "Default",
+["Invited Undead"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {
+["left"] = 1711.666748046875,
+["top"] = 108.9999847412109,
+["optionsLeft"] = 1132.781982421875,
+["alwaysCompareItems"] = true,
+["anchorFrameTipType"] = "mouse",
+["showPlayerGender"] = true,
+["anchorFrameUnitType"] = "mouse",
 ["version_TipTac_Config"] = "25.08.13",
-["left"] = 2010.33349609375,
-["top"] = 109,
+["optionsBottom"] = 391.7692565917969,
+["anchorWorldTipType"] = "mouse",
+["anchorWorldUnitType"] = "mouse",
 },
 },
 }

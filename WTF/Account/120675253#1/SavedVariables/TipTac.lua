@@ -7,9 +7,17 @@ TipTac_Config = {
 },
 ["profiles"] = {
 ["Default"] = {
+["left"] = 1711.666748046875,
+["top"] = 108.9999847412109,
+["optionsLeft"] = 1132.781982421875,
+["alwaysCompareItems"] = true,
+["anchorFrameTipType"] = "mouse",
+["showPlayerGender"] = true,
+["anchorFrameUnitType"] = "mouse",
 ["version_TipTac_Config"] = "25.08.13",
-["left"] = 1711.666625976563,
-["top"] = 108.9999923706055,
+["optionsBottom"] = 391.7692565917969,
+["anchorWorldTipType"] = "mouse",
+["anchorWorldUnitType"] = "mouse",
 },
 },
 }

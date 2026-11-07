@@ -4,13 +4,16 @@ AtlasLootDB = {
 ["__addonrevision"] = 12920,
 },
 ["profileKeys"] = {
-["Invited - CAMWOW EU4 Realm 8 PvP"] = "Invited - CAMWOW EU4 Realm 8 PvP",
 ["Invited Friend"] = "Invited Friend",
+["Invited - CAMWOW EU4 Realm 8 PvP"] = "Invited - CAMWOW EU4 Realm 8 PvP",
+["Invited Undead"] = "Invited Undead",
 },
 ["profiles"] = {
+["Invited Friend"] = {
+},
 ["Invited - CAMWOW EU4 Realm 8 PvP"] = {
 },
-["Invited Friend"] = {
+["Invited Undead"] = {
 },
 },
 }

@@ -61,7 +61,7 @@ AccWideUIAceDB = {
 ["showPlayers"] = true,
 ["position"] = {
 ["y"] = 336.0000610351563,
-["x"] = 2344.817138671875,
+["x"] = 2344.81689453125,
 },
 },
 ["cvars"] = {
@@ -90,274 +90,6 @@ AccWideUIAceDB = {
 },
 },
 ["chat"] = {
-["windows"] = {
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["isDocked"] = 1,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "General",
-["isShown"] = true,
-["b"] = 0,
-["size"] = 18,
-},
-["MessageTypes"] = {
-"SYSTEM",
-"SYSTEM_NOMENU",
-"SAY",
-"EMOTE",
-"YELL",
-"WHISPER",
-"PARTY",
-"PARTY_LEADER",
-"RAID",
-"RAID_LEADER",
-"RAID_WARNING",
-"GUILD",
-"OFFICER",
-"MONSTER_SAY",
-"MONSTER_YELL",
-"MONSTER_EMOTE",
-"MONSTER_WHISPER",
-"MONSTER_BOSS_EMOTE",
-"MONSTER_BOSS_WHISPER",
-"ERRORS",
-"AFK",
-"DND",
-"IGNORED",
-"BG_HORDE",
-"BG_ALLIANCE",
-"BG_NEUTRAL",
-"COMBAT_FACTION_CHANGE",
-"SKILL",
-"LOOT",
-"MONEY",
-"CHANNEL",
-"ACHIEVEMENT",
-"GUILD_ACHIEVEMENT",
-"BN_WHISPER",
-"BN_WHISPER_INFORM",
-"BN_CONVERSATION",
-"BN_INLINE_TOAST_ALERT",
-"CURRENCY",
-"BN_WHISPER_PLAYER_OFFLINE",
-"PET_BATTLE_INFO",
-"INSTANCE_CHAT",
-"INSTANCE_CHAT_LEADER",
-"GUILD_ITEM_LOOTED",
-"COMBAT_HONOR_GAIN",
-"PING",
-"ENCOUNTER_EVENT",
-"GUILD_DISCORD",
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["isDocked"] = 2,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "Combat Log",
-["isShown"] = false,
-["b"] = 0,
-["size"] = 12,
-},
-["MessageTypes"] = {
-"OPENING",
-"TRADESKILLS",
-"PET_INFO",
-"COMBAT_XP_GAIN",
-"COMBAT_HONOR_GAIN",
-"COMBAT_MISC_INFO",
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "Voice",
-["isShown"] = false,
-["b"] = 0,
-["size"] = 12,
-},
-["MessageTypes"] = {
-"VOICE_TEXT",
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "",
-["isShown"] = false,
-["b"] = 0,
-["size"] = 12,
-},
-["MessageTypes"] = {
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "",
-["isShown"] = false,
-["b"] = 0,
-["size"] = 12,
-},
-["MessageTypes"] = {
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "",
-["isShown"] = false,
-["b"] = 0,
-["size"] = 12,
-},
-["MessageTypes"] = {
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "",
-["isShown"] = false,
-["b"] = 0,
-["size"] = 12,
-},
-["MessageTypes"] = {
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "",
-["isShown"] = false,
-["b"] = 0,
-["size"] = 12,
-},
-["MessageTypes"] = {
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "",
-["isShown"] = false,
-["b"] = 0,
-["size"] = 12,
-},
-["MessageTypes"] = {
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-{
-["ChatWindowInfo"] = {
-["a"] = 0.1568627506494522,
-["isUninteractable"] = false,
-["r"] = 0,
-["g"] = 0,
-["isLocked"] = true,
-["name"] = "",
-["isShown"] = false,
-["b"] = 0,
-["size"] = 12,
-},
-["MessageTypes"] = {
-},
-["Positions"] = {
-},
-["Dimensions"] = {
-["height"] = 120,
-["width"] = 430,
-},
-},
-},
 ["info"] = {
 ["CHANNEL12"] = {
 {
@@ -1526,6 +1258,277 @@ AccWideUIAceDB = {
 },
 },
 },
+["channelsJoined"] = {
+[2] = "layer",
+},
+["windows"] = {
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["isDocked"] = 1,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "General",
+["isShown"] = true,
+["b"] = 0,
+["size"] = 18,
+},
+["MessageTypes"] = {
+"SYSTEM",
+"SYSTEM_NOMENU",
+"SAY",
+"EMOTE",
+"YELL",
+"WHISPER",
+"PARTY",
+"PARTY_LEADER",
+"RAID",
+"RAID_LEADER",
+"RAID_WARNING",
+"GUILD",
+"OFFICER",
+"MONSTER_SAY",
+"MONSTER_YELL",
+"MONSTER_EMOTE",
+"MONSTER_WHISPER",
+"MONSTER_BOSS_EMOTE",
+"MONSTER_BOSS_WHISPER",
+"ERRORS",
+"AFK",
+"DND",
+"IGNORED",
+"BG_HORDE",
+"BG_ALLIANCE",
+"BG_NEUTRAL",
+"COMBAT_FACTION_CHANGE",
+"SKILL",
+"LOOT",
+"MONEY",
+"CHANNEL",
+"ACHIEVEMENT",
+"GUILD_ACHIEVEMENT",
+"BN_WHISPER",
+"BN_WHISPER_INFORM",
+"BN_CONVERSATION",
+"BN_INLINE_TOAST_ALERT",
+"CURRENCY",
+"BN_WHISPER_PLAYER_OFFLINE",
+"PET_BATTLE_INFO",
+"INSTANCE_CHAT",
+"INSTANCE_CHAT_LEADER",
+"GUILD_ITEM_LOOTED",
+"COMBAT_HONOR_GAIN",
+"PING",
+"ENCOUNTER_EVENT",
+"GUILD_DISCORD",
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["isDocked"] = 2,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "Combat Log",
+["isShown"] = false,
+["b"] = 0,
+["size"] = 12,
+},
+["MessageTypes"] = {
+"OPENING",
+"TRADESKILLS",
+"PET_INFO",
+"COMBAT_XP_GAIN",
+"COMBAT_HONOR_GAIN",
+"COMBAT_MISC_INFO",
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "Voice",
+["isShown"] = false,
+["b"] = 0,
+["size"] = 12,
+},
+["MessageTypes"] = {
+"VOICE_TEXT",
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "",
+["isShown"] = false,
+["b"] = 0,
+["size"] = 12,
+},
+["MessageTypes"] = {
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "",
+["isShown"] = false,
+["b"] = 0,
+["size"] = 12,
+},
+["MessageTypes"] = {
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "",
+["isShown"] = false,
+["b"] = 0,
+["size"] = 12,
+},
+["MessageTypes"] = {
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "",
+["isShown"] = false,
+["b"] = 0,
+["size"] = 12,
+},
+["MessageTypes"] = {
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "",
+["isShown"] = false,
+["b"] = 0,
+["size"] = 12,
+},
+["MessageTypes"] = {
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "",
+["isShown"] = false,
+["b"] = 0,
+["size"] = 12,
+},
+["MessageTypes"] = {
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+{
+["ChatWindowInfo"] = {
+["a"] = 0.1568627506494522,
+["isUninteractable"] = false,
+["r"] = 0,
+["g"] = 0,
+["isLocked"] = true,
+["name"] = "",
+["isShown"] = false,
+["b"] = 0,
+["size"] = 12,
+},
+["MessageTypes"] = {
+},
+["Positions"] = {
+},
+["Dimensions"] = {
+["height"] = 120,
+["width"] = 430,
+},
+},
+},
 },
 ["raidFrames"] = {
 ["cvars"] = {
@@ -1598,10 +1601,9 @@ AccWideUIAceDB = {
 ["showHonorAsExperience"] = "0",
 },
 },
-["damageMeter"] = {
+["blockTrades"] = {
 ["cvars"] = {
-["damageMeterResetOnNewInstance"] = "0",
-["damageMeterEnabled"] = "0",
+["blockTrades"] = "0",
 },
 },
 ["blockGuildInvites"] = {
@@ -1615,9 +1617,9 @@ AccWideUIAceDB = {
 ["displaySpellActivationOverlays"] = "1",
 },
 },
-["blockTrades"] = {
+["empowerTap"] = {
 ["cvars"] = {
-["blockTrades"] = "0",
+["empowerTapControls"] = "0",
 },
 },
 ["blockChannelInvites"] = {
@@ -1625,14 +1627,10 @@ AccWideUIAceDB = {
 ["blockChannelInvites"] = "0",
 },
 },
-["lossOfControl"] = {
+["damageMeter"] = {
 ["cvars"] = {
-["lossOfControlInterrupt"] = "2",
-["lossOfControl"] = "1",
-["lossOfControlDisarm"] = "2",
-["lossOfControlFull"] = "2",
-["lossOfControlRoot"] = "2",
-["lossOfControlSilence"] = "2",
+["damageMeterResetOnNewInstance"] = "0",
+["damageMeterEnabled"] = "0",
 },
 },
 ["camera"] = {
@@ -1658,23 +1656,23 @@ AccWideUIAceDB = {
 ["questPOIWQ"] = "1",
 ["scrollToLogQuest"] = "0",
 ["dragonRidingRacesFilter"] = "0",
-["miniWorldMap"] = "1",
+["worldQuestFilterProfessionMaterials"] = "1",
 ["worldQuestFilterEquipment"] = "1",
 ["primaryProfessionsFilter"] = "1",
 ["questPOI"] = "1",
 ["showDelveEntrancesOnMap"] = "1",
 ["dragonRidingRacesFilterWQ"] = "1",
 ["contentTrackingFilter"] = "1",
-["worldQuestFilterResources"] = "1",
+["questLogOpen"] = "1",
 ["worldQuestFilterReputation"] = "1",
 ["worldQuestFilterAnima"] = "1",
-["worldQuestFilterProfessionMaterials"] = "1",
 ["digSites"] = "1",
+["miniWorldMap"] = "1",
 ["showQuestObjectivesInLog"] = "1",
-["secondaryProfessionsFilter"] = "1",
+["worldQuestFilterResources"] = "1",
 ["worldQuestFilterGold"] = "1",
 ["showTamersWQ"] = "1",
-["questLogOpen"] = "1",
+["secondaryProfessionsFilter"] = "1",
 ["showTamers"] = "1",
 ["worldQuestFilterArtifactPower"] = "1",
 },
@@ -1743,9 +1741,14 @@ AccWideUIAceDB = {
 ["GamepadCompassCustomFilterFriendly"] = "0",
 },
 },
-["empowerTap"] = {
+["lossOfControl"] = {
 ["cvars"] = {
-["empowerTapControls"] = "0",
+["lossOfControlInterrupt"] = "2",
+["lossOfControl"] = "1",
+["lossOfControlDisarm"] = "2",
+["lossOfControlFull"] = "2",
+["lossOfControlRoot"] = "2",
+["lossOfControlSilence"] = "2",
 },
 },
 ["cooldownViewer"] = {
@@ -1755,7 +1758,7 @@ AccWideUIAceDB = {
 },
 },
 ["lastSaved"] = {
-["unixTime"] = 1794011739,
+["unixTime"] = 1794044938,
 ["character"] = "Karums Warrior",
 },
 ["profileSaveVer"] = 6,

@@ -23,12 +23,12 @@ Bagnonium_Sets = {
 },
 ["color"] = {
 },
-["height"] = 500.0001831054688,
+["height"] = 500.0005187988281,
 ["activeRules"] = {
 ["tabs"] = "all",
 ["sidebar"] = "all",
 },
-["width"] = 399.9998474121094,
+["width"] = 400.0001525878906,
 },
 ["guild"] = {
 ["color"] = {

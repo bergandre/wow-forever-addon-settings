@@ -10,6 +10,11 @@ Prat3DB = {
 ["g"] = 0.7529412508010864,
 ["b"] = 0.7529412508010864,
 },
+["layer"] = {
+["b"] = 0.7529412508010864,
+["g"] = 0.7529412508010864,
+["r"] = 1,
+},
 ["general"] = {
 ["r"] = 1,
 ["g"] = 0.7529412508010864,
@@ -27,22 +32,24 @@ Prat3DB = {
 ["Prat_Frames"] = {
 ["profiles"] = {
 ["Default"] = {
+["minchatwidthdefault"] = 249.9999847412109,
 ["initialized"] = true,
-["minchatheightdefault"] = 120.0000076293945,
-["maxchatheightdefault"] = 800,
-["minchatwidthdefault"] = 250,
+["maxchatheightdefault"] = 800.0000610351562,
+["maxchatwidthdefault"] = 800.0000610351562,
+["minchatheightdefault"] = 119.9999923706055,
 },
 },
 },
 },
 ["profileKeys"] = {
-["Invited Friend"] = "Default",
+["Karums Warrior"] = "Default",
+["Invited Undead"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {
 ["modules"] = {
 ["EventNames"] = 3,
-["ChatLog"] = 2,
+["Alias"] = 2,
 ["Mentions"] = 2,
 ["PopupMessage"] = 2,
 ["AltNames"] = 2,
@@ -50,7 +57,7 @@ Prat3DB = {
 ["Paragraph"] = 2,
 ["KeyBindings"] = 2,
 ["LinkInfoIcons"] = 2,
-["Alias"] = 2,
+["ChatLog"] = 2,
 ["OriginalButtons"] = 2,
 },
 },
