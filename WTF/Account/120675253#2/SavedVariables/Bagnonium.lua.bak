@@ -28,7 +28,7 @@ Bagnonium_Sets = {
 ["tabs"] = "all",
 ["sidebar"] = "all",
 },
-["width"] = 399.9999084472656,
+["width"] = 399.9998474121094,
 },
 ["guild"] = {
 ["color"] = {
@@ -69,6 +69,7 @@ Bagnonium_Sets = {
 },
 ["borderColor"] = {
 },
+["showBags"] = true,
 ["color"] = {
 },
 ["height"] = 674,
@@ -76,7 +77,7 @@ Bagnonium_Sets = {
 ["tabs"] = "all",
 ["sidebar"] = "all",
 },
-["width"] = 926.9999389648438,
+["width"] = 927.0000610351562,
 },
 },
 ["customRules"] = {
@@ -84,33 +85,33 @@ Bagnonium_Sets = {
 ["color"] = {
 ["quiver"] = {
 },
-["account"] = {
+["herb"] = {
 },
-["enchant"] = {
+["normal"] = {
 },
 ["soul"] = {
 },
-["fridge"] = {
+["inscribe"] = {
 },
 ["mine"] = {
 },
-["engineer"] = {
+["gem"] = {
 },
 ["leather"] = {
 },
-["reagent"] = {
+["fridge"] = {
 },
-["gem"] = {
+["engineer"] = {
 },
 ["key"] = {
 },
 ["tackle"] = {
 },
-["inscribe"] = {
+["reagent"] = {
 },
-["normal"] = {
+["enchant"] = {
 },
-["herb"] = {
+["account"] = {
 },
 },
 ["display"] = {

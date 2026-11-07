@@ -1,11 +1,4 @@
 Version: 1
-Frame: RXPTargetFrame
-FrameLevel: 1
-Anchor: TOP
-X: 261
-Y: -134
-W: 84
-H: 43
 Frame: RXPG_ARROW
 FrameLevel: 1
 Anchor: TOP
@@ -13,6 +6,13 @@ X: 15
 Y: -96
 W: 50
 H: 50
+Frame: RXPTargetFrame
+FrameLevel: 1
+Anchor: TOP
+X: 261
+Y: -134
+W: 84
+H: 43
 Frame: RXPFrame
 FrameLevel: 1
 Anchor: LEFT

@@ -1,16 +1,10 @@
-lightweight tag 74958e0f01c6c7b1fe2b7fbecdd374840901153f 4.1.2
+lightweight tag 3295400bf63ba0c93e72c6f37d8116212faca95f 4.1.3
 Author:	Finlay McKinnon <finlay.mckinnon@protonmail.com>
-Date:	Mon Oct 19 19:44:13 2026 +0100
+Date:	Fri Nov 6 08:08:52 2026 +0000
 
-commit 22497d8cea8cde015dca531a5143f0d907b79018
+commit 3295400bf63ba0c93e72c6f37d8116212faca95f
 Author: Finlay McKinnon <finlay.mckinnon@protonmail.com>
-Date:   Mon Oct 19 19:44:04 2026 +0100
+Date:   Fri Nov 6 08:08:52 2026 +0000
 
-    Bugfix for combat
-
-commit 22497d8cea8cde015dca531a5143f0d907b79018
-Author: Finlay McKinnon <finlay.mckinnon@protonmail.com>
-Date:   Mon Oct 19 19:44:04 2026 +0100
-
-    Bugfix for combat
+    upgrade arrow no longer shows on gear your class can't use
 

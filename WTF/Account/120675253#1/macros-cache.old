@@ -14,9 +14,7 @@ VER 3 0000000000000005 "RXPFollow" "Inv_boots_02"
 //Party Leader
 END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Dalar Dawnweaver
-/targetexact Shadow Priest Allister
-/targetexact Spirit Healer
+/targetexact Alessandro Luca
 /tm !7
 /targetlasttarget [dead]
 END

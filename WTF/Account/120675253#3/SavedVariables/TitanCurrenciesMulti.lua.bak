@@ -12,10 +12,10 @@ TitanCurrenciesMultiDb = {
 ["TITAN_OUROM"] = {
 ["charTable"] = {
 ["Invited-Undead"] = {
-["value"] = 0,
-["faction"] = "Horde",
-["name"] = "|cff8788eeInvited",
+["value"] = 2889,
 ["realm"] = "Undead",
+["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
 },
 },
 },

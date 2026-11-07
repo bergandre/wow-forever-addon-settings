@@ -1,16 +1,16 @@
 
 RestPlus_Data = {
 ["Karums=CAMWOW EU5 Realm 4 PvP"] = {
-["restXP"] = 150,
-["currXP"] = 9411,
+["restXP"] = 258,
+["currXP"] = 11571,
 ["nextXP"] = 14400,
 ["class"] = "War",
-["logtime"] = 11484701,
+["logtime"] = 11484773,
 ["resting"] = true,
 ["AlertStatus"] = 0,
 ["level"] = 15,
-["wellRestedRank"] = 0,
 ["race"] = "Trl",
+["wellRestedRank"] = 0,
 },
 }
 RestPlus_Settings = {

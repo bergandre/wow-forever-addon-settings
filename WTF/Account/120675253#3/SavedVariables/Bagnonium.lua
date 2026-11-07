@@ -22,12 +22,12 @@ Bagnonium_Sets = {
 ["point"] = "BOTTOMRIGHT",
 ["color"] = {
 },
-["width"] = 399.9998168945313,
+["width"] = 399.9997863769531,
 ["y"] = 0,
 ["x"] = 1.629982466511137e-05,
 ["borderColor"] = {
 },
-["height"] = 500,
+["height"] = 499.9999084472656,
 ["activeRules"] = {
 ["tabs"] = "all",
 ["sidebar"] = "all",

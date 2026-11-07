@@ -3,1110 +3,6 @@ Blizzard_Console_SavedVars = {
 ["version"] = 3,
 ["messageHistory"] = {
 {
-"Battle.net login session initialization requested",
-0,
-},
-{
-"Battle.net logon requested host=\"eu.actual.battle.net\" port=\"1119\"",
-0,
-},
-{
-"Battle.net login waiting for server response",
-0,
-},
-{
-"Battle.net front connected connectionId=\"2\" title_id=\"5730135\" platform=\"Wn64\" locale=\"enUS\" usedToken=\"true\"",
-0,
-},
-{
-"Battle.net login waiting for server response",
-0,
-},
-{
-"Battle.net logon queue update received position=\"1\" estimatedQueueExitTime=\"1794037447\"",
-0,
-},
-{
-"Battle.net logon response received result=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Battle.net logon completed result=\"ERROR_OK (0)\" numGameAccounts=\"3\"",
-0,
-},
-{
-"Battle.net login waiting for server response",
-0,
-},
-{
-"Battle.net account service response received responseType=\"BNetInfo\" responseTypeValue=\"1\" code=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Battle.net account service response received responseType=\"BNetRestriction\" responseTypeValue=\"2\" code=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Battle.net account service response received responseType=\"GameInfo\" responseTypeValue=\"4\" code=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Battle.net account service game info received responseType=\"GameInfo\" responseTypeValue=\"4\" code=\"ERROR_OK (0)\" name=\"WoW2\" numGameAccounts=\"3\" numGameAccountNames=\"0\"",
-0,
-},
-{
-"Battle.net account service response received responseType=\"GameRestriction\" responseTypeValue=\"8\" code=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Battle.net account service response received responseType=\"GameInfo\" responseTypeValue=\"4\" code=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Battle.net account service game info received responseType=\"GameInfo\" responseTypeValue=\"4\" code=\"ERROR_OK (0)\" name=\"WoW1\" numGameAccounts=\"3\" numGameAccountNames=\"1\"",
-0,
-},
-{
-"Battle.net account service response received responseType=\"GameRestriction\" responseTypeValue=\"8\" code=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Battle.net account service response received responseType=\"GameInfo\" responseTypeValue=\"4\" code=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Battle.net account service game info received responseType=\"GameInfo\" responseTypeValue=\"4\" code=\"ERROR_OK (0)\" name=\"WoW3\" numGameAccounts=\"3\" numGameAccountNames=\"2\"",
-0,
-},
-{
-"Battle.net account service response received responseType=\"GameRestriction\" responseTypeValue=\"8\" code=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Battle.net auth token response received code=\"ERROR_OK (0)\" gotCredentials=\"true\"",
-0,
-},
-{
-"Battle.net complete login requested hasGameAccount=\"true\"",
-0,
-},
-{
-"Game account list not saved because accountName CVar is empty",
-0,
-},
-{
-"Battle.net logon completed in glue",
-0,
-},
-{
-"Reconnect token saved creationTime=\"1794037447\" expirationTime=\"1794051847\"",
-0,
-},
-{
-"Character selection waiting for account item collection data collectionListType=\"7\"",
-0,
-},
-{
-"Battle.net login waiting for realm list",
-0,
-},
-{
-"Battle.net realm list ticket requested",
-0,
-},
-{
-"Battle.net realm list ticket received code=\"ERROR_OK (0)\" realmListRequestToken=\"5\" isCurrentToken=\"true\" hasTicket=\"true\"",
-0,
-},
-{
-"Battle.net login waiting for realm list",
-0,
-},
-{
-"Battle.net subregion list received code=\"ERROR_OK (0)\" realmListRequestToken=\"5\" isCurrentToken=\"true\" subRegionCount=\"1\"",
-0,
-},
-{
-"Battle.net last played character requests sent numSubRegions=\"1\" selectedSubRegion=\"93-4-89\"",
-0,
-},
-{
-"Battle.net last played character received code=\"ERROR_OK (0)\" subRegion=\"93-4-89\" lastPlayedTime=\"1794037433\" realmListRequestToken=\"5\" isCurrentToken=\"true\" contentSetIDFilter=\"-1\" numRegions=\"1\" selectedSubRegion=\"93-4-89\" numRegionsWithData=\"0\" realmPermissions=\"67\" licensesCount=\"1\" realmEntry=\"{\"wowRealmAddress\":1560543236,\"useBleepChance\":0.0,\"cfgTimezonesID\":21,\"populationState\":2,\"cfgCategoriesID\":8,\"version\":{\"versionMajor\":1,\"versionBuild\":70399,\"versionMinor\":60,\"versionRevision\":1},\"cfgRealmsID\":6938,\"gameServiceRegionId\":2,\"flags\":0,\"name\":\"CAMWOW EU4 Realm 4 PvP\",\"cfgConfigsID\":2,\"cfgContentSetID\":136,\"cfgLanguagesID\":3,\"superDistrictID\":1}\"",
-0,
-},
-{
-"Battle.net realm list ready in glue",
-0,
-},
-{
-"Battle.net most recent character found; joining realm lastPlayedRegion=\"93-4-89\" realmAddress=\"1560543236\" lastActiveTime=\"1794037433\"",
-0,
-},
-{
-"Battle.net realm join requested subRegion=\"93-4-89\" realmAddress=\"93-4-4\"",
-0,
-},
-{
-"Battle.net realm join response received code=\"ERROR_OK (0)\" joinToken=\"2\" isLatestJoinToken=\"true\" hasJoinData=\"true\"",
-0,
-},
-{
-"Realm connection change requested",
-0,
-},
-{
-"Realm connection requested realmAddress=\"93-4-4\"",
-0,
-},
-{
-"Killing connection connection=\"0000000018237b40\" state=\"(enum)7\"",
-0,
-},
-{
-"Opening game realm connection realmAddress=\"93-4-4\" connection=\"0000000053f49ca0\" protocol=\"(enum)0\" directAddressCount=\"6\" bleepProxyCount=\"0\"",
-0,
-},
-{
-"Opening network connection connectionIndex=\"(enum)0\" connection=\"0000000053f49ca0\" protocol=\"(enum)0\" directAddressCount=\"6\" bleepProxyCount=\"0\"",
-0,
-},
-{
-"Realm connection connected realmAddress=\"93-4-4\"",
-0,
-},
-{
-"Client connected",
-0,
-},
-{
-"Authentication response received result=\"0\" hasSuccessInfo=\"true\" hasWaitInfo=\"false\"",
-0,
-},
-{
-"Realm authentication completed result=\"ERROR_OK (0)\"",
-0,
-},
-{
-"Character list request sent fastLogin=\"false\"",
-0,
-},
-{
-"CVar 'encounterTimelineHighlightDuration' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'encounterTimelineIconographyHiddenMask' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'encounterTimelineIconographyEnabled' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'encounterTimelineHideForOtherRoles' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'encounterTimelineHideQueuedCountdowns' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'encounterTimelineHideLongCountdowns' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'encounterTimelineEnabled' failed validation for its initial value.",
-0,
-},
-{
-"Screen invalid. Changing from=\"login\" to=\"charselect\"",
-0,
-},
-{
-"Switching to screen=\"CharacterSelect\" (from \"login\")",
-0,
-},
-{
-"Character list request sent fastLogin=\"false\"",
-0,
-},
-{
-"From EnsureValidScreen",
-0,
-},
-{
-"Battle.net connected to realm; disconnecting from front",
-0,
-},
-{
-"Battle.net front disconnecting connectionId=\"2\"",
-0,
-},
-{
-"Battle.net authentication server disconnect started",
-0,
-},
-{
-"AccountData_RequestLoad type=\"0\" fromAuth=\"true\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"0\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"10\" fromAuth=\"true\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"10\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"16\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"16\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"Glue feature system status received",
-0,
-},
-{
-"Connecting to sourceRealmAddress=\"93-4-4\" connection=\"00000000558d7b90\" serial=\"14\" protocol=\"(enum)0\"",
-0,
-},
-{
-"Opening network connection connectionIndex=\"(enum)2\" connection=\"00000000558d7b90\" protocol=\"(enum)0\" directAddressCount=\"1\" bleepProxyCount=\"0\"",
-0,
-},
-{
-"Session with Battle.net established.",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"0\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"10\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"16\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"19\" pendingBefore=\"false\" hasCallback=\"false\" param=\"0\"",
-0,
-},
-{
-"Glue feature system status received",
-0,
-},
-{
-"[WowEntitlements] [BNetAccount-0-000007315BB5] [WowAccount-0-000077A24898] Initialized with 12 entitlements.",
-0,
-},
-{
-"Battle.net front disconnected connectionId=\"2\" reason=\"ERROR_NETWORK_MODULE_SOCKET_CLOSED (1016)\"",
-0,
-},
-{
-"Battle.net authentication server disconnected",
-0,
-},
-{
-"Resuming communications connectionIndex=\"(enum)2\"",
-0,
-},
-{
-"Killing connection connection=\"0000000053f49ca0\" state=\"(enum)6\"",
-0,
-},
-{
-"Character list response received success=\"true\" isRegionwideData=\"true\" isDeletedCharacters=\"false\" characterCount=\"3\" hadPendingResult=\"false\"",
-0,
-},
-{
-"Character list update waiting on startup prerequisites waitingForHotfixesReady=\"false\" tactEncryptionConnectedReady=\"false\" tactKeyPendingPatchesReady=\"false\" sectionLoadsReady=\"true\" preloadAccountSettingsDataReady=\"true\"",
-0,
-},
-{
-"Initial hotfixes applied",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"0\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"10\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"16\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"19\" pendingBefore=\"false\" hasCallback=\"false\" param=\"0\"",
-0,
-},
-{
-"Account item collection data received for character selection collectionListType=\"7\" itemCount=\"0\" wasWaiting=\"true\"",
-0,
-},
-{
-"Character selection updating character list success=\"true\" isRegionwideData=\"true\" isDeletedCharacters=\"false\" count=\"3\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"19\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"true\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"19\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad forcing local file load type=\"19\" isReloadingUI=\"false\" loadOnDemandOnly=\"true\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"19\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"Session with Battle.net destroyed.",
-0,
-},
-{
-"Game time state update received wasTrial=\"0\" isTrial=\"0\"",
-0,
-},
-{
-"Glue feature system status received",
-0,
-},
-{
-"Session with Battle.net established.",
-0,
-},
-{
-"Character list response received success=\"true\" isRegionwideData=\"true\" isDeletedCharacters=\"false\" characterCount=\"3\" hadPendingResult=\"false\"",
-0,
-},
-{
-"Character selection updating character list success=\"true\" isRegionwideData=\"true\" isDeletedCharacters=\"false\" count=\"3\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"0\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"10\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"16\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"19\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"Account item collection data received for character selection collectionListType=\"7\" itemCount=\"0\" wasWaiting=\"false\"",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"Suspend()",
-0,
-},
-{
-"LimitedLuaResources: Reset Timer",
-0,
-},
-{
-"Attempted to register existing command: SetDifficulty",
-0,
-},
-{
-"AccountData_RequestLoad type=\"12\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"123145098605328\" newParam=\"123145098605328\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"12\" pending=\"false\" hasCallback=\"true\" param=\"123145098605328\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"13\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"13\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"14\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"14\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"8\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"123145098615424\" newParam=\"123145098615424\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"8\" pending=\"false\" hasCallback=\"true\" param=\"123145098615424\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"9\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"123145098615424\" newParam=\"123145098615424\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"9\" pending=\"false\" hasCallback=\"true\" param=\"123145098615424\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"18\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"18\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"PreLoadGameCVars initialized pending mask pendingMask=\"32\" initCounter=\"5\" characterlessLogin=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"2\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"458753\" newParam=\"720897\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"2\" pending=\"false\" hasCallback=\"true\" param=\"720897\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"3\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"458754\" newParam=\"720898\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"3\" pending=\"false\" hasCallback=\"true\" param=\"720898\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"6\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"6\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"11\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"11\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadGameCVars request dispatch initCounter=\"5\" pendingMask=\"32\" characterlessLogin=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"1\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"196640\" newParam=\"327712\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"327712\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"4\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"65541\" newParam=\"65543\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"4\" pending=\"false\" hasCallback=\"true\" param=\"65543\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"5\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"131077\" newParam=\"131079\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"5\" pending=\"false\" hasCallback=\"true\" param=\"131079\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"7\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"false\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"false\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"7\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"Connecting to sourceRealmAddress=\"93-4-4\" connection=\"000000000b22e350\" serial=\"17\" protocol=\"(enum)0\"",
-0,
-},
-{
-"Opening network connection connectionIndex=\"(enum)3\" connection=\"000000000b22e350\" protocol=\"(enum)0\" directAddressCount=\"1\" bleepProxyCount=\"0\"",
-0,
-},
-{
-"Resuming communications connectionIndex=\"(enum)3\"",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000021",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000004000",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000004010",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000084010",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000023",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000084010",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000023",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Time set to 11/7/2026 (Sat) 8:49",
-0,
-},
-{
-"Gamespeed set from 0.017 to 0.017",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"1\" pendingBefore=\"false\" hasCallback=\"true\" param=\"327712\"",
-0,
-},
-{
-"LoadGameCVarsCallback received callbackInitCounter=\"5\" currentInitCounter=\"5\" mask=\"32\" buffsize=\"780\" pendingMaskBefore=\"32\"",
-0,
-},
-{
-"LoadGameCVarsCallback applied response mask=\"32\" pendingMaskAfter=\"0\"",
-0,
-},
-{
-"LoadGameCVarsCheckDone areCVarsLoaded=\"true\" pendingMask=\"0\"",
-0,
-},
-{
-"LoadGameCVarsCheckDone signaled variables loaded pendingMask=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"2\" pendingBefore=\"false\" hasCallback=\"true\" param=\"720897\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"3\" pendingBefore=\"false\" hasCallback=\"true\" param=\"720898\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"4\" pendingBefore=\"false\" hasCallback=\"true\" param=\"65543\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"5\" pendingBefore=\"false\" hasCallback=\"true\" param=\"131079\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"6\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"7\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"8\" pendingBefore=\"false\" hasCallback=\"true\" param=\"123145098615424\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"9\" pendingBefore=\"false\" hasCallback=\"true\" param=\"123145098615424\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"11\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"12\" pendingBefore=\"false\" hasCallback=\"true\" param=\"123145098605328\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"13\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"14\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"15\" pendingBefore=\"false\" hasCallback=\"false\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"17\" pendingBefore=\"false\" hasCallback=\"false\" param=\"0\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"18\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"Connecting to sourceRealmAddress=\"93-4-4\" connection=\"0000000057bb7b50\" serial=\"43\" protocol=\"(enum)0\"",
-0,
-},
-{
-"Opening network connection connectionIndex=\"(enum)3\" connection=\"0000000057bb7b50\" protocol=\"(enum)0\" directAddressCount=\"1\" bleepProxyCount=\"0\"",
-0,
-},
-{
-"Resuming communications connectionIndex=\"(enum)3\"",
-0,
-},
-{
-"Killing connection connection=\"000000000b22e350\" state=\"(enum)6\"",
-0,
-},
-{
-"Weather changed to 1, intensity 0.669728\n",
-0,
-},
-{
-"Time played:",
-0,
-},
-{
-"Total: 1d 4h 59m 19s",
-0,
-},
-{
-"Level: 0d 0h 59m 18s",
-0,
-},
-{
-"Time played:",
-0,
-},
-{
-"Total: 1d 4h 59m 19s",
-0,
-},
-{
-"Level: 0d 0h 59m 18s",
-0,
-},
-{
-"Time played:",
-0,
-},
-{
-"Total: 1d 4h 59m 19s",
-0,
-},
-{
-"Level: 0d 0h 59m 18s",
-0,
-},
-{
-"Time played:",
-0,
-},
-{
-"Total: 1d 4h 59m 22s",
-0,
-},
-{
-"Level: 0d 0h 59m 21s",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"GameUI::Shutdown invalidated load generation initCounter=\"6\" isClosingClient=\"false\"",
-0,
-},
-{
-"LimitedLuaResources: Reset Timer",
-0,
-},
-{
-"AccountData_CancelRequestLoad type=\"0\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_CancelRequestLoad type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"327712\"",
-0,
-},
-{
-"GameUI::Shutdown canceled CVar account-data loads initCounter=\"6\" pendingMask=\"0\"",
-0,
-},
-{
-"LimitedLuaResources: Reset All",
-0,
-},
-{
-"PreLoadGameCVars initialized pending mask pendingMask=\"32\" initCounter=\"6\" characterlessLogin=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"2\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"720897\" newParam=\"851969\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"2\" pending=\"false\" hasCallback=\"true\" param=\"851969\"",
-0,
-},
-{
-"AccountData_RequestLoad forcing local file load type=\"2\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"2\" pendingBefore=\"false\" hasCallback=\"true\" param=\"851969\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"3\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"720898\" newParam=\"851970\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"3\" pending=\"false\" hasCallback=\"true\" param=\"851970\"",
-0,
-},
-{
-"AccountData_RequestLoad forcing local file load type=\"3\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"3\" pendingBefore=\"false\" hasCallback=\"true\" param=\"851970\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"6\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"6\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad forcing local file load type=\"6\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"6\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"11\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"11\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad forcing local file load type=\"11\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"11\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"LoadGameCVars request dispatch initCounter=\"6\" pendingMask=\"32\" characterlessLogin=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"1\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"327712\" newParam=\"393248\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"393248\"",
-0,
-},
-{
-"AccountData_RequestLoad forcing local file load type=\"1\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"1\" pendingBefore=\"false\" hasCallback=\"true\" param=\"393248\"",
-0,
-},
-{
-"LoadGameCVarsCallback received callbackInitCounter=\"6\" currentInitCounter=\"6\" mask=\"32\" buffsize=\"780\" pendingMaskBefore=\"32\"",
-0,
-},
-{
-"LoadGameCVarsCallback applied response mask=\"32\" pendingMaskAfter=\"0\"",
-0,
-},
-{
-"LoadGameCVarsCheckDone areCVarsLoaded=\"true\" pendingMask=\"0\"",
-0,
-},
-{
-"LoadGameCVarsCheckDone signaled variables loaded pendingMask=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"4\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"65543\" newParam=\"65545\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"4\" pending=\"false\" hasCallback=\"true\" param=\"65545\"",
-0,
-},
-{
-"AccountData_RequestLoad forcing local file load type=\"4\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"4\" pendingBefore=\"false\" hasCallback=\"true\" param=\"65545\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"5\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"131079\" newParam=\"131081\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"5\" pending=\"false\" hasCallback=\"true\" param=\"131081\"",
-0,
-},
-{
-"AccountData_RequestLoad forcing local file load type=\"5\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"5\" pendingBefore=\"false\" hasCallback=\"true\" param=\"131081\"",
-0,
-},
-{
-"AccountData_RequestLoad type=\"7\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"AccountData_RequestLoad updated callback state type=\"7\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_RequestLoad forcing local file load type=\"7\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
-0,
-},
-{
-"LoadAccountDataFromFile type=\"7\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"Logout abort acknowledged",
-0,
-},
-{
-"Time played:",
-0,
-},
-{
-"Total: 1d 5h 4m 32s",
-0,
-},
-{
-"Level: 0d 1h 4m 31s",
-0,
-},
-{
-"Time played:",
-0,
-},
-{
-"Total: 1d 5h 4m 32s",
-0,
-},
-{
-"Level: 0d 1h 4m 31s",
-0,
-},
-{
-"Time played:",
-0,
-},
-{
-"Total: 1d 5h 4m 32s",
-0,
-},
-{
-"Level: 0d 1h 4m 31s",
-0,
-},
-{
-"Time played:",
-0,
-},
-{
-"Total: 1d 5h 4m 36s",
-0,
-},
-{
-"Level: 0d 1h 4m 35s",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Connecting to sourceRealmAddress=\"93-4-4\" connection=\"0000000057b6b0f0\" serial=\"73\" protocol=\"(enum)0\"",
-0,
-},
-{
-"Opening network connection connectionIndex=\"(enum)3\" connection=\"0000000057b6b0f0\" protocol=\"(enum)0\" directAddressCount=\"1\" bleepProxyCount=\"0\"",
-0,
-},
-{
-"Resuming communications connectionIndex=\"(enum)3\"",
-0,
-},
-{
-"Killing connection connection=\"0000000057bb7b50\" state=\"(enum)6\"",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Sending ping results from timeout timeoutNs=\"39561229582900\" nowNs=\"39561234411900\"",
-0,
-},
-{
-"Lua Error: Interface/AddOns/Details/frames/window_main.lua:1022: attempt to perform boolean test on a secret boolean value (execution tainted by 'Details')\n[C]: ?\n[Interface/AddOns/Details/frames/window_main.lua]:1022: in function <Interface/AddOns/Details/frames/window_main.lua:996>\n[C]: ?\n",
-3,
-},
-{
-"Lua Error: Interface/AddOns/Details/frames/window_main.lua:1022: attempt to perform boolean test on a secret boolean value (execution tainted by 'Details')\n[C]: ?\n[Interface/AddOns/Details/frames/window_main.lua]:1022: in function <Interface/AddOns/Details/frames/window_main.lua:996>\n[C]: ?\n",
-3,
-},
-{
-"Lua Error: Interface/AddOns/Details/frames/window_main.lua:1022: attempt to perform boolean test on a secret boolean value (execution tainted by 'Details')\n[C]: ?\n[Interface/AddOns/Details/frames/window_main.lua]:1022: in function <Interface/AddOns/Details/frames/window_main.lua:996>\n[C]: ?\n",
-3,
-},
-{
-"Lua Error: Interface/AddOns/Details/Libs/DF/cooltip.lua:2517: attempt to perform arithmetic on a secret number value (execution tainted by 'Details')\n[C]: ?\n[Interface/AddOns/Details/Libs/DF/cooltip.lua]:2517: in function <Interface/AddOns/Details/Libs/DF/cooltip.lua:2495>\n[C]: in function 'SetMyPoint'\n[Interface/AddOns/Details/Libs/DF/cooltip.lua]:2279: in function 'BuildTooltip'\n[Interface/AddOns/Details/Libs/DF/cooltip.lua]:3831: in function 'ShowCooltip'\n[Interface/AddOns/Details/frames/window_main.lua]:1492: in function <Interface/AddOns/Details/frames/window_main.lua:1236>\n",
-3,
-},
-{
-"Lua Error: Interface/AddOns/Details/Libs/DF/rounded_panel.lua:432: attempt to perform arithmetic on a secret number value (execution tainted by 'Details')\n[C]: ?\n[Interface/AddOns/Details/Libs/DF/rounded_panel.lua]:432: in function 'CalculateBorderEdgeSize'\n[Interface/AddOns/Details/Libs/DF/rounded_panel.lua]:353: in function <Interface/AddOns/Details/Libs/DF/rounded_panel.lua:294>\n[C]: ?\n",
-3,
-},
-{
-"Killing connection connection=\"0000000057b6b0f0\" state=\"(enum)7\"",
-0,
-},
-{
-"Logout response received result=\"0\" instant=\"1\"",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"Logout completed",
-0,
-},
-{
-"GameUI::Shutdown invalidated load generation initCounter=\"7\" isClosingClient=\"false\"",
-0,
-},
-{
-"LimitedLuaResources: Reset Timer",
-0,
-},
-{
-"AccountData_CancelRequestLoad type=\"0\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
-0,
-},
-{
-"AccountData_CancelRequestLoad type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"393248\"",
-0,
-},
-{
-"GameUI::Shutdown canceled CVar account-data loads initCounter=\"7\" pendingMask=\"0\"",
-0,
-},
-{
-"Resume()",
-0,
-},
-{
-"Screen invalid. Changing from=\"none\" to=\"charselect\"",
-0,
-},
-{
-"Switching to screen=\"CharacterSelect\" (from \"none\")",
-0,
-},
-{
-"Character list request sent fastLogin=\"false\"",
-0,
-},
-{
-"From EnsureValidScreen",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"Linear: 1. 0- disabled (live), 1- linear",
-0,
-},
-{
-"Multithreaded rendering enabled.",
-0,
-},
-{
 "Multithreaded BeginDraw enabled.",
 0,
 },
@@ -4370,8 +3266,928 @@ Blizzard_Console_SavedVars = {
 "Sending ping results from timeout timeoutNs=\"6229179723600\" nowNs=\"6229183343700\"",
 0,
 },
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
 },
-["height"] = 299.9998779296875,
+{
+"GameUI::Shutdown invalidated load generation initCounter=\"2\" isClosingClient=\"false\"",
+0,
+},
+{
+"LimitedLuaResources: Reset Timer",
+0,
+},
+{
+"AccountData_CancelRequestLoad type=\"0\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_CancelRequestLoad type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"65568\"",
+0,
+},
+{
+"GameUI::Shutdown canceled CVar account-data loads initCounter=\"2\" pendingMask=\"0\"",
+0,
+},
+{
+"LimitedLuaResources: Reset All",
+0,
+},
+{
+"PreLoadGameCVars initialized pending mask pendingMask=\"32\" initCounter=\"2\" characterlessLogin=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"2\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"196609\" newParam=\"327681\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"2\" pending=\"false\" hasCallback=\"true\" param=\"327681\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"2\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"2\" pendingBefore=\"false\" hasCallback=\"true\" param=\"327681\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"3\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"196610\" newParam=\"327682\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"3\" pending=\"false\" hasCallback=\"true\" param=\"327682\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"3\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"3\" pendingBefore=\"false\" hasCallback=\"true\" param=\"327682\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"6\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"6\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"6\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"6\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"11\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"11\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"11\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"11\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"LoadGameCVars request dispatch initCounter=\"2\" pendingMask=\"32\" characterlessLogin=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"1\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"65568\" newParam=\"131104\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"131104\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"1\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"1\" pendingBefore=\"false\" hasCallback=\"true\" param=\"131104\"",
+0,
+},
+{
+"LoadGameCVarsCallback received callbackInitCounter=\"2\" currentInitCounter=\"2\" mask=\"32\" buffsize=\"656\" pendingMaskBefore=\"32\"",
+0,
+},
+{
+"LoadGameCVarsCallback applied response mask=\"32\" pendingMaskAfter=\"0\"",
+0,
+},
+{
+"LoadGameCVarsCheckDone areCVarsLoaded=\"true\" pendingMask=\"0\"",
+0,
+},
+{
+"LoadGameCVarsCheckDone signaled variables loaded pendingMask=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"4\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"65537\" newParam=\"65539\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"4\" pending=\"false\" hasCallback=\"true\" param=\"65539\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"4\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"4\" pendingBefore=\"false\" hasCallback=\"true\" param=\"65539\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"5\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"131073\" newParam=\"131075\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"5\" pending=\"false\" hasCallback=\"true\" param=\"131075\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"5\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"5\" pendingBefore=\"false\" hasCallback=\"true\" param=\"131075\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"7\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"7\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"7\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"7\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"Logout abort acknowledged",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 9m 51s",
+0,
+},
+{
+"Level: 0d 3h 9m 51s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 9m 51s",
+0,
+},
+{
+"Level: 0d 3h 9m 51s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 9m 51s",
+0,
+},
+{
+"Level: 0d 3h 9m 51s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 9m 52s",
+0,
+},
+{
+"Level: 0d 3h 9m 52s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 9m 53s",
+0,
+},
+{
+"Level: 0d 3h 9m 53s",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"GameUI::Shutdown invalidated load generation initCounter=\"3\" isClosingClient=\"false\"",
+0,
+},
+{
+"LimitedLuaResources: Reset Timer",
+0,
+},
+{
+"AccountData_CancelRequestLoad type=\"0\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_CancelRequestLoad type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"131104\"",
+0,
+},
+{
+"GameUI::Shutdown canceled CVar account-data loads initCounter=\"3\" pendingMask=\"0\"",
+0,
+},
+{
+"LimitedLuaResources: Reset All",
+0,
+},
+{
+"PreLoadGameCVars initialized pending mask pendingMask=\"32\" initCounter=\"3\" characterlessLogin=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"2\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"327681\" newParam=\"458753\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"2\" pending=\"false\" hasCallback=\"true\" param=\"458753\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"2\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"2\" pendingBefore=\"false\" hasCallback=\"true\" param=\"458753\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"3\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"327682\" newParam=\"458754\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"3\" pending=\"false\" hasCallback=\"true\" param=\"458754\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"3\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"3\" pendingBefore=\"false\" hasCallback=\"true\" param=\"458754\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"6\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"6\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"6\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"6\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"11\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"11\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"11\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"11\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"LoadGameCVars request dispatch initCounter=\"3\" pendingMask=\"32\" characterlessLogin=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"1\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"131104\" newParam=\"196640\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"196640\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"1\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"1\" pendingBefore=\"false\" hasCallback=\"true\" param=\"196640\"",
+0,
+},
+{
+"LoadGameCVarsCallback received callbackInitCounter=\"3\" currentInitCounter=\"3\" mask=\"32\" buffsize=\"656\" pendingMaskBefore=\"32\"",
+0,
+},
+{
+"LoadGameCVarsCallback applied response mask=\"32\" pendingMaskAfter=\"0\"",
+0,
+},
+{
+"LoadGameCVarsCheckDone areCVarsLoaded=\"true\" pendingMask=\"0\"",
+0,
+},
+{
+"LoadGameCVarsCheckDone signaled variables loaded pendingMask=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"4\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"65539\" newParam=\"65541\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"4\" pending=\"false\" hasCallback=\"true\" param=\"65541\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"4\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"4\" pendingBefore=\"false\" hasCallback=\"true\" param=\"65541\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"5\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"131075\" newParam=\"131077\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"5\" pending=\"false\" hasCallback=\"true\" param=\"131077\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"5\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"5\" pendingBefore=\"false\" hasCallback=\"true\" param=\"131077\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"7\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"7\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"7\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"7\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"Logout abort acknowledged",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 33m 16s",
+0,
+},
+{
+"Level: 0d 3h 33m 16s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 33m 16s",
+0,
+},
+{
+"Level: 0d 3h 33m 16s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 33m 16s",
+0,
+},
+{
+"Level: 0d 3h 33m 16s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 33m 16s",
+0,
+},
+{
+"Level: 0d 3h 33m 16s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 33m 18s",
+0,
+},
+{
+"Level: 0d 3h 33m 18s",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"GameUI::Shutdown invalidated load generation initCounter=\"4\" isClosingClient=\"false\"",
+0,
+},
+{
+"LimitedLuaResources: Reset Timer",
+0,
+},
+{
+"AccountData_CancelRequestLoad type=\"0\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_CancelRequestLoad type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"196640\"",
+0,
+},
+{
+"GameUI::Shutdown canceled CVar account-data loads initCounter=\"4\" pendingMask=\"0\"",
+0,
+},
+{
+"LimitedLuaResources: Reset All",
+0,
+},
+{
+"PreLoadGameCVars initialized pending mask pendingMask=\"32\" initCounter=\"4\" characterlessLogin=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"2\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"458753\" newParam=\"589825\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"2\" pending=\"false\" hasCallback=\"true\" param=\"589825\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"2\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"2\" pendingBefore=\"false\" hasCallback=\"true\" param=\"589825\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"3\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"458754\" newParam=\"589826\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"3\" pending=\"false\" hasCallback=\"true\" param=\"589826\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"3\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"3\" pendingBefore=\"false\" hasCallback=\"true\" param=\"589826\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"6\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"6\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"6\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"6\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"11\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"11\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"11\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"11\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"LoadGameCVars request dispatch initCounter=\"4\" pendingMask=\"32\" characterlessLogin=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"1\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"196640\" newParam=\"262176\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"262176\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"1\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"1\" pendingBefore=\"false\" hasCallback=\"true\" param=\"262176\"",
+0,
+},
+{
+"LoadGameCVarsCallback received callbackInitCounter=\"4\" currentInitCounter=\"4\" mask=\"32\" buffsize=\"656\" pendingMaskBefore=\"32\"",
+0,
+},
+{
+"LoadGameCVarsCallback applied response mask=\"32\" pendingMaskAfter=\"0\"",
+0,
+},
+{
+"LoadGameCVarsCheckDone areCVarsLoaded=\"true\" pendingMask=\"0\"",
+0,
+},
+{
+"LoadGameCVarsCheckDone signaled variables loaded pendingMask=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"4\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"65541\" newParam=\"65543\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"4\" pending=\"false\" hasCallback=\"true\" param=\"65543\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"4\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"4\" pendingBefore=\"false\" hasCallback=\"true\" param=\"65543\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"5\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"131077\" newParam=\"131079\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"5\" pending=\"false\" hasCallback=\"true\" param=\"131079\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"5\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"5\" pendingBefore=\"false\" hasCallback=\"true\" param=\"131079\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"7\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"7\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"7\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"7\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"Logout abort acknowledged",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 38m 9s",
+0,
+},
+{
+"Level: 0d 3h 38m 9s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 38m 9s",
+0,
+},
+{
+"Level: 0d 3h 38m 9s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 38m 9s",
+0,
+},
+{
+"Level: 0d 3h 38m 9s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 38m 9s",
+0,
+},
+{
+"Level: 0d 3h 38m 9s",
+0,
+},
+{
+"Time played:",
+0,
+},
+{
+"Total: 0d 3h 38m 12s",
+0,
+},
+{
+"Level: 0d 3h 38m 12s",
+0,
+},
+{
+"Sending ping results from timeout timeoutNs=\"8028441938900\" nowNs=\"8028443173700\"",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"GameUI::Shutdown invalidated load generation initCounter=\"5\" isClosingClient=\"false\"",
+0,
+},
+{
+"LimitedLuaResources: Reset Timer",
+0,
+},
+{
+"AccountData_CancelRequestLoad type=\"0\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_CancelRequestLoad type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"262176\"",
+0,
+},
+{
+"GameUI::Shutdown canceled CVar account-data loads initCounter=\"5\" pendingMask=\"0\"",
+0,
+},
+{
+"LimitedLuaResources: Reset All",
+0,
+},
+{
+"PreLoadGameCVars initialized pending mask pendingMask=\"32\" initCounter=\"5\" characterlessLogin=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"2\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"589825\" newParam=\"720897\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"2\" pending=\"false\" hasCallback=\"true\" param=\"720897\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"2\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"2\" pendingBefore=\"false\" hasCallback=\"true\" param=\"720897\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"3\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"589826\" newParam=\"720898\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"3\" pending=\"false\" hasCallback=\"true\" param=\"720898\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"3\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"3\" pendingBefore=\"false\" hasCallback=\"true\" param=\"720898\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"6\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"6\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"6\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"6\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"11\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"11\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"11\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"11\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"LoadGameCVars request dispatch initCounter=\"5\" pendingMask=\"32\" characterlessLogin=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"1\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"262176\" newParam=\"327712\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"1\" pending=\"false\" hasCallback=\"true\" param=\"327712\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"1\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"1\" pendingBefore=\"false\" hasCallback=\"true\" param=\"327712\"",
+0,
+},
+{
+"LoadGameCVarsCallback received callbackInitCounter=\"5\" currentInitCounter=\"5\" mask=\"32\" buffsize=\"656\" pendingMaskBefore=\"32\"",
+0,
+},
+{
+"LoadGameCVarsCallback applied response mask=\"32\" pendingMaskAfter=\"0\"",
+0,
+},
+{
+"LoadGameCVarsCheckDone areCVarsLoaded=\"true\" pendingMask=\"0\"",
+0,
+},
+{
+"LoadGameCVarsCheckDone signaled variables loaded pendingMask=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"4\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"65543\" newParam=\"65545\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"4\" pending=\"false\" hasCallback=\"true\" param=\"65545\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"4\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"4\" pendingBefore=\"false\" hasCallback=\"true\" param=\"65545\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"5\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"131079\" newParam=\"131081\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"5\" pending=\"false\" hasCallback=\"true\" param=\"131081\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"5\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"5\" pendingBefore=\"false\" hasCallback=\"true\" param=\"131081\"",
+0,
+},
+{
+"AccountData_RequestLoad type=\"7\" fromAuth=\"false\" pending=\"false\" existingHasCallback=\"true\" newHasCallback=\"true\" existingParam=\"0\" newParam=\"0\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"AccountData_RequestLoad updated callback state type=\"7\" pending=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"AccountData_RequestLoad forcing local file load type=\"7\" isReloadingUI=\"true\" loadOnDemandOnly=\"false\"",
+0,
+},
+{
+"LoadAccountDataFromFile type=\"7\" pendingBefore=\"false\" hasCallback=\"true\" param=\"0\"",
+0,
+},
+{
+"Logout abort acknowledged",
+0,
+},
+},
+["height"] = 299.9998168945313,
 ["fontHeight"] = 14,
 ["isShown"] = false,
 ["commandHistory"] = {

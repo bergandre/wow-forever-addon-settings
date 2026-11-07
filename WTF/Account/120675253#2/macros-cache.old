@@ -40,9 +40,7 @@ VER 3 0000000000000018 "RXPFollow" "Inv_boots_02"
 /follow
 END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Dalar Dawnweaver
-/targetexact Shadow Priest Allister
-/targetexact Spirit Healer
+/targetexact Karos Razok
 /tm !7
 /targetlasttarget [dead]
 END

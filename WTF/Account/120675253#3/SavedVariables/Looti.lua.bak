@@ -26,42 +26,42 @@ LootiConfig = {
 ["maximumNotifications"] = 0,
 ["notificationFrameY"] = 0,
 ["notificationThreshold"] = 0,
-["notificationScale"] = 1,
+["showText"] = true,
 ["textOutline"] = "NONE",
 ["displayBackground"] = true,
-["iconZoom"] = false,
-["displayDuration"] = 1,
 ["textDisplay"] = "CENTER",
-["iconSize"] = 32,
+["displayDuration"] = 1,
 ["showQuantity"] = true,
+["iconSize"] = 32,
+["iconZoom"] = false,
 ["iconDisplay"] = "LEFT",
-["showText"] = true,
+["notificationScale"] = 1,
 }
 LootiFilters = {
-["whitelist"] = {
-["items"] = {
-},
-["categories"] = {
-["Consumables"] = false,
-["Miscellaneous"] = false,
-["CraftingMats"] = false,
-["Gear"] = false,
-["QuestItems"] = false,
-["BoP"] = false,
-["BoE"] = false,
-},
-},
 ["watchlist"] = {
 ["items"] = {
 },
 ["categories"] = {
 ["Consumables"] = false,
-["Miscellaneous"] = false,
-["CraftingMats"] = false,
-["Gear"] = false,
-["QuestItems"] = false,
-["BoP"] = false,
 ["BoE"] = false,
+["Gear"] = false,
+["BoP"] = false,
+["QuestItems"] = false,
+["CraftingMats"] = false,
+["Miscellaneous"] = false,
+},
+},
+["whitelist"] = {
+["items"] = {
+},
+["categories"] = {
+["Consumables"] = false,
+["BoE"] = false,
+["Gear"] = false,
+["BoP"] = false,
+["QuestItems"] = false,
+["CraftingMats"] = false,
+["Miscellaneous"] = false,
 },
 },
 ["blacklist"] = {
@@ -69,12 +69,12 @@ LootiFilters = {
 },
 ["categories"] = {
 ["Consumables"] = false,
-["Miscellaneous"] = false,
-["CraftingMats"] = false,
-["Gear"] = false,
-["QuestItems"] = false,
-["BoP"] = false,
 ["BoE"] = false,
+["Gear"] = false,
+["BoP"] = false,
+["QuestItems"] = false,
+["CraftingMats"] = false,
+["Miscellaneous"] = false,
 },
 },
 }

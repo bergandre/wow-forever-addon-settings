@@ -1,6 +1,8 @@
 
 Bagnonium_Sets = {
 ["latest"] = {
+["id"] = "12.1.8",
+["who"] = "Karums Priest",
 },
 ["global"] = {
 ["inventory"] = {
@@ -71,9 +73,9 @@ Bagnonium_Sets = {
 "miscellaneous",
 },
 },
-["showBags"] = true,
 ["borderColor"] = {
 },
+["showBags"] = true,
 ["color"] = {
 },
 ["height"] = 674,
@@ -89,33 +91,33 @@ Bagnonium_Sets = {
 ["color"] = {
 ["quiver"] = {
 },
-["account"] = {
+["herb"] = {
 },
-["enchant"] = {
+["normal"] = {
 },
 ["soul"] = {
 },
-["reagent"] = {
+["leather"] = {
 },
 ["mine"] = {
 },
-["engineer"] = {
+["gem"] = {
 },
 ["inscribe"] = {
 },
-["fridge"] = {
+["reagent"] = {
 },
-["gem"] = {
+["engineer"] = {
 },
 ["key"] = {
 },
 ["tackle"] = {
 },
-["leather"] = {
+["fridge"] = {
 },
-["normal"] = {
+["enchant"] = {
 },
-["herb"] = {
+["account"] = {
 },
 },
 ["display"] = {

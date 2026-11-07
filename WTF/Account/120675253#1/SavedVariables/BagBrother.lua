@@ -1,50 +1,48 @@
 
 BrotherBags = {
 ["forever"] = {
-["Event Horizon*"] = {
-["faction"] = false,
-},
 ["Karums Warrior"] = {
 {
 ["items"] = {
 },
-["size"] = 6,
 ["link"] = "5572",
+["size"] = 6,
 },
 {
 ["items"] = {
 },
-["size"] = 6,
 ["link"] = "4496",
+["size"] = 6,
 },
 {
 ["items"] = {
 },
-["size"] = 6,
 ["link"] = "4238",
+["size"] = 6,
 },
 {
 ["items"] = {
 },
-["size"] = 6,
 ["link"] = "11845",
+["size"] = 6,
 },
 {
 ["items"] = {
 "2901::::::::15:1491::14:::::::",
 },
-["link"] = "277115",
 ["size"] = 4,
+["link"] = "277115",
 },
 {
 ["link"] = "242709",
 ["bankType"] = 0,
 ["items"] = {
+"929",
 },
 ["name"] = "Tab 1",
 ["ID"] = 6,
-["depositFlags"] = 0,
 ["icon"] = 134400,
+["depositFlags"] = 0,
 ["size"] = 48,
 },
 {
@@ -60,13 +58,13 @@ BrotherBags = {
 "4941;10",
 "2862;14",
 "4605;20",
-"929",
+nil,
 "5956::::::::15:1491::14:::::::",
-"2672;19",
+nil,
 "210177",
-"10283",
-"3254;6",
-"3253;6",
+"6016",
+"3448;20",
+"2679;19",
 "3234",
 },
 ["size"] = 20,
@@ -76,16 +74,20 @@ BrotherBags = {
 "Member",
 4,
 },
-["money"] = 8210,
+["money"] = 6910,
 ["class"] = "WARRIOR",
+["race"] = "Troll",
+[-1] = {
+},
 ["currency"] = {
 [3499] = 10,
 [3498] = 10,
 ["tracked"] = {
 },
 },
-["sex"] = 2,
-["race"] = "Troll",
+["mail"] = {
+},
+["faction"] = false,
 ["equip"] = {
 nil,
 nil,
@@ -106,11 +108,10 @@ nil,
 nil,
 "287060::::::::15:1491::11:::::::",
 },
-[-1] = {
-},
-["mail"] = {
-},
 ["level"] = 15,
+["sex"] = 2,
+},
+["Event Horizon*"] = {
 ["faction"] = false,
 },
 },

@@ -24,6 +24,16 @@ PawnOptions = {
 ["Level"] = 11,
 ["Link"] = "|cnIQ2:|Hitem:287060::::::::14:1491::11:::::::|h[Rezlak's Spare Knife]|h|r",
 },
+[15] = {
+["ID"] = 4689,
+["Level"] = 13,
+["Link"] = "|cnIQ1:|Hitem:4689::::::::14:1491:::::::::|h[Hunting Cloak]|h|r",
+},
+[16] = {
+["ID"] = 3488,
+["Level"] = 13,
+["Link"] = "|cnIQ2:|Hitem:3488::::::::14:1491:::::::::|h[Copper Battle Axe]|h|r",
+},
 [9] = {
 ["ID"] = 281271,
 ["Level"] = 10,
@@ -33,16 +43,6 @@ PawnOptions = {
 ["ID"] = 2965,
 ["Level"] = 11,
 ["Link"] = "|cnIQ2:|Hitem:2965::::::::14:1491:::::::::|h[Warrior's Tunic]|h|r",
-},
-[16] = {
-["ID"] = 3488,
-["Level"] = 13,
-["Link"] = "|cnIQ2:|Hitem:3488::::::::14:1491:::::::::|h[Copper Battle Axe]|h|r",
-},
-[15] = {
-["ID"] = 4689,
-["Level"] = 13,
-["Link"] = "|cnIQ1:|Hitem:4689::::::::14:1491:::::::::|h[Hunting Cloak]|h|r",
 },
 },
 ["LastKeybindingsSet"] = 1,

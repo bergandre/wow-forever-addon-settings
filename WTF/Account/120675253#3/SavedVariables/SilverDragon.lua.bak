@@ -18,9 +18,9 @@ SilverDragon3DB = {
 ["profiles"] = {
 ["Default"] = {
 ["position"] = {
-["y"] = 131.2825012207031,
-["x"] = -550.20556640625,
-["point"] = "RIGHT",
+["y"] = 13.36409187316895,
+["x"] = -15.9034423828125,
+["point"] = "BOTTOMRIGHT",
 },
 },
 },

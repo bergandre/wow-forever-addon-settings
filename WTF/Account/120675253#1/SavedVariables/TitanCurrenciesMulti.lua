@@ -12,10 +12,10 @@ TitanCurrenciesMultiDb = {
 ["TITAN_OUROM"] = {
 ["charTable"] = {
 ["Karums-Warrior"] = {
-["value"] = 9210,
-["faction"] = "Horde",
-["name"] = "|cffc69b6dKarums",
+["value"] = 6910,
 ["realm"] = "Warrior",
+["name"] = "|cffc69b6dKarums",
+["faction"] = "Horde",
 },
 },
 },
