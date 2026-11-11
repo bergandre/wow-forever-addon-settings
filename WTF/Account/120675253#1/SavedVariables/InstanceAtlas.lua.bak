@@ -1,0 +1,4 @@
+
+InstanceAtlasDB = {
+["showOnEnter"] = false,
+}

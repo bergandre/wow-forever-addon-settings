@@ -15,6 +15,8 @@ SUBS = [
     (r'(\["maxRestock"\] = )"[^"]*"', r'\1"5"'),
     # Auctioning op: beat the lowest auction by 1c instead of tying
     (r'(\["undercut"\] = )"[^"]*"', r'\1"1c"'),
+    # Commodity AH: post the whole pile instead of 5 at a time
+    (r'(\["postCap"\] = )"[^"]*"', r'\1"1000"'),
     # Sounds
     (r'(\["g@ @coreOptions@auctionSaleSound"\] = )"TSM_NO_SOUND"', r'\1"TSM_CASH_REGISTER"'),
     (r'(\["g@ @sniperOptions@sniperSound"\] = )"TSM_NO_SOUND"', r'\1"TSM_CASH_REGISTER"'),

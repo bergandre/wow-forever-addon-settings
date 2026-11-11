@@ -69,6 +69,7 @@
 
     <Script file="Source\Sync\Internal\Constants.lua" />
     <Script file="Source\Sync\Internal\Comm.lua" />
+    <Script file="Source\Sync\Internal\Presence.lua" />
     <Script file="Source\Sync\Internal\Connection.lua" />
     <Script file="Source\Sync\Internal\RPC.lua" />
     <Script file="Source\Sync\Internal\Mirror.lua" />

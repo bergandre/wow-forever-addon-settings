@@ -60,7 +60,11 @@ end
 ---Adds a filter function for chat messages.
 ---@param func function
 function ChatFrame.AddMessageFilter(func)
-	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", func)
+	if LibTSMWoW.IsForever() then
+		ChatFrameUtil.AddMessageEventFilter("CHAT_MSG_SYSTEM", func)
+	else
+		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", func)
+	end
 end
 
 ---Suppresses auction messages from showing in chat.

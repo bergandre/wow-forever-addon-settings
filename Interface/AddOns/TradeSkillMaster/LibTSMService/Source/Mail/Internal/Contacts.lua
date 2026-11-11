@@ -51,7 +51,9 @@ function Contacts.AltIterator(regionWide)
 		assert(realm)
 		realm = gsub(realm, "%-", "")
 		for _, character in private.settingsDB:AccessibleCharacterIterator(nil, factionrealm) do
-			character = CharacterInfo.Ambiguate(gsub(character.."-"..realm, " ", ""))
+			if not LibTSMService.IsForever() then
+				character = CharacterInfo.Ambiguate(gsub(character.."-"..realm, " ", ""))
+			end
 			if character ~= SessionInfo.GetCharacterName() then
 				result[character] = true
 			end

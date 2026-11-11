@@ -1,0 +1,97 @@
+
+ForeverDungeonJournalCharacterDB = {
+["favouriteItems"] = {
+},
+["trackedDungeons"] = {
+},
+["trackerSlots"] = {
+},
+["rpgKills"] = {
+},
+["runTracker"] = {
+},
+["arrowChains"] = {
+},
+["journalMode"] = "gamer",
+["runLog"] = {
+["nextID"] = 2,
+["runs"] = {
+{
+["deathTimes"] = {
+},
+["lastSeen"] = 1794382227,
+["dungeon"] = "Shadowfang Keep",
+["kills"] = {
+{
+["m"] = "Bleak Worg",
+["t"] = 1794382175,
+["x"] = 40,
+},
+{
+["m"] = "Shadowfang Whitescalp",
+["t"] = 1794382183,
+["x"] = 37,
+},
+{
+["m"] = "Bleak Worg",
+["t"] = 1794382189,
+["x"] = 37,
+},
+{
+["m"] = "Bleak Worg",
+["t"] = 1794382192,
+["x"] = 37,
+},
+},
+["killedG"] = {
+},
+["created"] = 1794382175,
+["deaths"] = 0,
+["id"] = 1,
+["firstKill"] = 1794382175,
+["needs"] = {
+},
+["money"] = 49,
+["map"] = 33,
+["party"] = {
+["Karums-Priest"] = "PRIEST",
+["Vec-Galore"] = "ROGUE",
+["Chungus-Shrimp"] = "DRUID",
+["Karums-Warrior"] = "WARRIOR",
+["Stormhelm-Stormhelm"] = "WARLOCK",
+},
+["otherXP"] = 113,
+["exits"] = {
+},
+["seen"] = {
+},
+["instanceName"] = "Shadowfang Keep",
+["firstTrash"] = 1794382175,
+},
+},
+},
+["rpgQuests"] = {
+[5722] = true,
+[95204] = true,
+[5761] = true,
+[959] = true,
+[95216] = true,
+[5723] = true,
+[92401] = true,
+[1491] = true,
+[5724] = true,
+[5728] = true,
+[1013] = true,
+[92421] = true,
+[1221] = true,
+[1098] = true,
+[5725] = true,
+[1486] = true,
+[1487] = true,
+[97288] = true,
+[6981] = true,
+[914] = true,
+[962] = true,
+[1014] = true,
+},
+}

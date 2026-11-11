@@ -39,6 +39,7 @@ Prat3DB = {
 ["profileKeys"] = {
 ["Karums Warrior"] = "Default",
 ["Karums Priest"] = "Default",
+["Gniloe Forever"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {

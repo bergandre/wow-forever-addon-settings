@@ -1,0 +1,38 @@
+## Interface: 16001
+## Title: NodeRadar
+## Notes: Pings the minimap when a herb or ore node comes into range. Needs Find Herbs or Find Minerals. /nr
+## Author: Spotnick
+## Version: v1.8.1
+## X-License: MIT
+## X-Curse-Project-ID: 1751109
+## X-Wago-ID: mNwwoLNo
+## SavedVariables: NodeRadarDB
+## SavedVariablesPerCharacter: NodeRadarCharDB
+## IconTexture: Interface\Icons\INV_Misc_Flower_02
+## AddonCompartmentFunc: NodeRadar_OnAddonCompartmentClick
+## AddonCompartmentFuncOnEnter: NodeRadar_OnAddonCompartmentEnter
+## AddonCompartmentFuncOnLeave: NodeRadar_OnAddonCompartmentLeave
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+Compat.lua
+Data\Nodes.lua
+Scan.lua
+Learn.lua
+Alert.lua
+Track.lua
+Icons.lua
+Share.lua
+Compass.lua
+Marker.lua
+FarMarker.lua
+Options.lua
+TrackOptions.lua
+Tooltip.lua
+Minimap.lua
+Locate.lua
+ScanFace.lua
+MoveScan.lua
+NodeRadar.lua

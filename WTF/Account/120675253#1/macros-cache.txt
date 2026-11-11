@@ -5,6 +5,9 @@ VER 3 0000000000000003 "charge + rend" "134400"
 /cast [nocombat,stance:1] Charge
 /cast [combat] Rend
 END
+VER 3 0000000000000007 "Decursive" "INV_MISC_QUESTIONMARK"
+/script DecursiveRootTable.Dcr:Println('No spell available')
+END
 VER 3 0000000000000004 "RXP ITEM" "134400"
 #showtooltip
 /click RXPItemFrameButton1 LeftButton 1
@@ -14,7 +17,10 @@ VER 3 0000000000000005 "RXPFollow" "Inv_boots_02"
 //Party Leader
 END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Varimathras
+/targetexact Angela Curthas
 /tm !7
 /targetlasttarget [dead]
+END
+VER 3 0000000000000006 "testes" "134400"
+/run local t,id=GetCursorInfo() if t~="item" then local _,l=GameTooltip:GetItem() id=l and tonumber(l:match("item:(%d+)")) end if id then Scrap:ToggleJunk(id) ClearCursor() end
 END

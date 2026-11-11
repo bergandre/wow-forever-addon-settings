@@ -3,6 +3,7 @@ AtlasLootDB = {
 ["profileKeys"] = {
 ["Karums - CAMWOW EU4 Realm 4 PvP"] = "Karums - CAMWOW EU4 Realm 4 PvP",
 ["Gniloe - CAMWOW EU4 Realm 4 PvP"] = "Gniloe - CAMWOW EU4 Realm 4 PvP",
+["Gniloe Forever"] = "Gniloe Forever",
 ["Karums Priest"] = "Karums Priest",
 },
 ["global"] = {
@@ -12,6 +13,8 @@ AtlasLootDB = {
 ["Karums - CAMWOW EU4 Realm 4 PvP"] = {
 },
 ["Gniloe - CAMWOW EU4 Realm 4 PvP"] = {
+},
+["Gniloe Forever"] = {
 },
 ["Karums Priest"] = {
 ["minimap"] = {

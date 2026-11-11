@@ -189,10 +189,10 @@ local function Scan()
                 local coord, isNew, temp = ns.AddNode(kind, map, x, y, id, "seen")
                 if coord then
                     ns.MarkLive(kind, map, coord)
-                    if isNew and ns.OnNewNode then ns.OnNewNode(kind, map, coord, id) end
-                    -- multibox patch: re-share every live sighting (throttled in Comm), not only new
-                    -- nodes, so the partner's "live" pin (8s TTL) stays up while the node is tracked
-                    if ns.ShareNode then ns.ShareNode(kind, map, coord, id) end
+                    if isNew then
+                        if ns.OnNewNode then ns.OnNewNode(kind, map, coord, id) end
+                        if not temp and ns.ShareNode then ns.ShareNode(kind, map, coord, id) end
+                    end
                 end
             end
         end

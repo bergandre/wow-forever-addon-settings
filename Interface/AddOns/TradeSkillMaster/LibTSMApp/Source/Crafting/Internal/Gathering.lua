@@ -79,7 +79,7 @@ AddonSettings.RegisterOnLoad(Gathering, function(db)
 		Table.RemoveByValue(private.settings.sources, "guildBank")
 		Table.RemoveByValue(private.settings.sources, "altGuildBank")
 	end
-	if LibTSMApp.IsRetail() or LibTSMApp.IsForever() then
+	if LibTSMApp.IsRetail() then
 		Table.RemoveByValue(private.settings.sources, "bank")
 	end
 end)
@@ -567,7 +567,7 @@ end
 function private.GetCrafterInventoryQuantity(itemString)
 	local crafter = private.settings.crafter
 	local quantity = AltTracking.GetBagQuantity(itemString, crafter)
-	if LibTSMApp.IsRetail() or LibTSMApp.IsForever() then
+	if LibTSMApp.IsRetail() then
 		quantity = quantity + AltTracking.GetBankQuantity(itemString, crafter)
 		quantity = quantity + WarbankTracking.GetQuantity(itemString)
 	end

@@ -11,7 +11,6 @@ local BinarySearch = LibTSMTypes:From("LibTSMUtil"):Include("Util.BinarySearch")
 local private = {}
 local CSV_KEYS = { "minute", "copper" }
 local COPPER_PER_GOLD = 100 * 100
-local MAX_COPPER_VALUE = 10 * 1000 * 1000 * COPPER_PER_GOLD
 local ERRONEOUS_ZERO_THRESHOLD = 5 * 1000 * COPPER_PER_GOLD
 
 
@@ -57,7 +56,8 @@ end
 -- ============================================================================
 
 -- Clean up any erroneous 0 entries, entries which are too high, and duplicate entries
-function GoldLog:Clean()
+---@param maxCopper number The maximum valid copper value
+function GoldLog:Clean(maxCopper)
 	local didChange = true
 	while didChange do
 		didChange = false
@@ -75,7 +75,7 @@ function GoldLog:Clean()
 		for i = #self._minutes, 2, -1 do
 			local prevValue = self._values[i - 1]
 			local value = self._values[i]
-			if prevValue == value or value > MAX_COPPER_VALUE then
+			if prevValue == value or value > maxCopper then
 				-- This is either a duplicate or invalid value
 				didChange = true
 				tremove(self._minutes, i)

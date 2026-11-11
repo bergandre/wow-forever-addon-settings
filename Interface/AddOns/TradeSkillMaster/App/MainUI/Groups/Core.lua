@@ -51,6 +51,8 @@ local STATE_SCHEMA = Reactive.CreateStateSchema("GroupsUIState")
 ---| "ACTION_HANDLE_GROUP_SEARCH_CHANGED"
 ---| "ACTION_HANDLE_NAME_CHANGED" -> newValue: string
 ---| "ACTION_SHOW_IMPORT_DIALOG"
+---| "ACTION_REVIEW_APP_GROUP_IMPORT" -> id: string
+---| "ACTION_HANDLE_GROUP_IMPORTED" -> groupPath: GroupPathValue
 ---| "ACTION_TOGGLE_EXPAND_ALL"
 ---| "ACTION_START_EDITING_NAME"
 ---| "ACTION_EXPORT"
@@ -114,6 +116,12 @@ end
 ---@param groupPath GroupPathValue The group path
 function Groups.SetSelectedGroup(groupPath)
 	private.manager:ProcessAction("ACTION_SET_SELECTED_GROUP", groupPath)
+end
+
+---Shows the import dialog for a group import sent from the website.
+---@param id string The id of the group import
+function Groups.ReviewAppGroupImport(id)
+	private.manager:ProcessAction("ACTION_REVIEW_APP_GROUP_IMPORT", id)
 end
 
 
@@ -342,11 +350,14 @@ function private.ActionHandler(manager, state, action, ...)
 			state.groupTree:SetSelectedGroup(newPath, true)
 		end
 	elseif action == "ACTION_SHOW_IMPORT_DIALOG" then
-		state.frame:GetBaseElement():ShowDialogFrame(UIElements.New("GroupImportDialog", "frame")
-			:AddAnchor("CENTER")
-			:SetManager(private.manager)
-			:Configure(private.importExportGroupDB)
-	)
+		private.ShowImportDialog(state)
+	elseif action == "ACTION_REVIEW_APP_GROUP_IMPORT" then
+		local id = ...
+		state.frame:GetBaseElement():HideDialog()
+		private.ShowImportDialog(state):ReviewAppGroupImport(id)
+	elseif action == "ACTION_HANDLE_GROUP_IMPORTED" then
+		local groupPath = ...
+		state.groupTree:SetSelectedGroup(groupPath, true)
 	elseif action == "ACTION_TOGGLE_EXPAND_ALL" then
 		state.groupTree:ToggleExpandAll()
 	elseif action == "ACTION_START_EDITING_NAME" then
@@ -367,6 +378,18 @@ end
 -- ============================================================================
 -- Private Helper Functions
 -- ============================================================================
+
+---@param state GroupsUIState
+---@return GroupImportDialog
+function private.ShowImportDialog(state)
+	local dialog = UIElements.New("GroupImportDialog", "frame")
+		:AddAnchor("CENTER")
+		:SetManager(private.manager)
+		:SetAction("OnGroupImported", "ACTION_HANDLE_GROUP_IMPORTED")
+		:Configure(private.importExportGroupDB)
+	state.frame:GetBaseElement():ShowDialogFrame(dialog)
+	return dialog
+end
 
 function private.GroupColorKeyToFolderTexture(groupColorKey)
 	return TextureAtlas.GetColoredKey("iconPack.18x18/Folder", groupColorKey)

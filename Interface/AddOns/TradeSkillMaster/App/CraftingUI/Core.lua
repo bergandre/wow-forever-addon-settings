@@ -277,7 +277,9 @@ function private.ActionHandler(manager, state, action, ...)
 			return manager:ProcessAction(shouldOpen and "ACTION_SHOW_FRAME" or "ACTION_SHOW_DEFAULT_UI", isIgnored)
 		elseif state.frameState == FRAME_STATE.OPEN then
 			if isIgnored then
+				state.switching = true
 				manager:ProcessAction("ACTION_HIDE_FRAME")
+				state.switching = false
 				state.frameState = FRAME_STATE.DEFAULT
 				manager:ProcessAction("ACTION_SHOW_DEFAULT_UI", true)
 				return

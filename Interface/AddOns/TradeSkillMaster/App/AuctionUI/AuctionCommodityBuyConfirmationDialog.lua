@@ -415,16 +415,17 @@ function AuctionCommodityBuyConfirmationDialog.__private:_ActionHandler(manager,
 		if state.future then
 			manager:CancelFuture("future")
 		end
-		state.prepareQuantity = state.quantity
-		state.prepareSuccess = false
 		private.UpdateStatePrices(state)
-		state.prepareTotalBuyout = state.totalPrice
 		local itemBuyout = state.quantity > 0 and Math.Ceil(state.totalPrice / state.quantity, (App.IsMistsClassic() or App.IsForever()) and 1 or COPPER_PER_SILVER) or nil
 		local result, future = state.auctionScan:PrepareForBidOrBuyout(nil, state.subRow, true, state.quantity, itemBuyout)
+		state.prepareSuccess = false
 		if not result then
 			state.prepareQuantity = nil
 			return
-		elseif future then
+		end
+		state.prepareQuantity = state.quantity
+		state.prepareTotalBuyout = state.totalPrice
+		if future then
 			self._childManager:ManageFuture("future", future, "ACTION_FUTURE_DONE")
 		end
 		private.UpdateStateQuoteDuration(state)

@@ -3,12 +3,12 @@ RXPData = {
 ["maxLoadTime"] = 4000,
 ["gameVersion"] = 16001,
 ["cacheVersion"] = 30,
-["defaultProfile"] = false,
-["trainGenericSpells"] = true,
-["release"] = "v4.11.32",
 ["questNames"] = {
 ["locale"] = "enUS",
 },
+["trainGenericSpells"] = true,
+["release"] = "v4.11.32",
+["defaultProfile"] = false,
 ["realmData"] = {
 ["CAMWOW EU5 Realm 4 PvP"] = {
 },
@@ -19,6 +19,7 @@ RXPDB = {
 ["Karums Warrior"] = "global",
 ["Karums - PvP"] = "global",
 ["Opikol - PvP"] = "global",
+["Opikol Forever"] = "global",
 },
 ["profiles"] = {
 ["global"] = {
@@ -26,36 +27,89 @@ RXPDB = {
 ["splits"] = {
 ["Karums Warrior|WARRIOR|CAMWOW EU5 Realm 4 PvP"] = {
 ["current"] = {
-["duration"] = 15498,
-["text"] = "Level Time: 04:18:18",
+["duration"] = 10068,
+["text"] = "Level Time: 02:47:48",
 },
 ["title"] = "Karums Warrior (WARRIOR) - CAMWOW EU5 Realm 4 PvP",
 ["history"] = {
 ["levels"] = {
-[11] = {
-["text"] = "Level 12           -",
+[24] = {
+["text"] = "Level 25           -",
 },
 [13] = {
 ["totalDuration"] = 88090,
 ["text"] = "Level 14    24:28:10",
 ["duration"] = 22388,
 },
-[12] = {
-["totalDuration"] = 65702,
-["text"] = "Level 13    18:15:02",
-["duration"] = 65702,
-},
 [14] = {
 ["totalDuration"] = 101295,
 ["text"] = "Level 15    28:08:15",
 ["duration"] = 13205,
 },
+[25] = {
+["totalDuration"] = 521827,
+["text"] = "Level 26   144:57:07",
+["duration"] = 280491,
+},
+[15] = {
+["totalDuration"] = 128332,
+["text"] = "Level 16    35:38:52",
+["duration"] = 27037,
+},
+[23] = {
+["totalDuration"] = 241336,
+["text"] = "Level 24    67:02:16",
+["duration"] = 8174,
+},
+[16] = {
+["totalDuration"] = 155890,
+["text"] = "Level 17    43:18:10",
+["duration"] = 27558,
+},
+[17] = {
+["totalDuration"] = 168712,
+["text"] = "Level 18    46:51:52",
+["duration"] = 12822,
+},
+[18] = {
+["totalDuration"] = 176498,
+["text"] = "Level 19    49:01:38",
+["duration"] = 7786,
+},
+[19] = {
+["totalDuration"] = 187329,
+["text"] = "Level 20    52:02:09",
+["duration"] = 10831,
+},
+[20] = {
+["totalDuration"] = 199185,
+["text"] = "Level 21    55:19:45",
+["duration"] = 11856,
+},
+[11] = {
+["text"] = "Level 12           -",
+},
+[22] = {
+["totalDuration"] = 233162,
+["text"] = "Level 23    64:46:02",
+["duration"] = 23280,
+},
+[12] = {
+["totalDuration"] = 65702,
+["text"] = "Level 13    18:15:02",
+["duration"] = 65702,
+},
+[21] = {
+["totalDuration"] = 209882,
+["text"] = "Level 22    58:18:02",
+["duration"] = 10697,
+},
 },
 },
 ["reportKey"] = "Karums Warrior|WARRIOR|CAMWOW EU5 Realm 4 PvP",
 ["total"] = {
-["duration"] = 116795,
-["text"] = "Total Time: 32:26:35",
+["duration"] = 290561,
+["text"] = "Total Time: 80:42:41",
 },
 },
 },
@@ -68,55 +122,57 @@ RXPSettings = {
 ["Karums Warrior"] = "Karums Warrior",
 ["Karums - PvP"] = "Karums - PvP",
 ["Opikol - PvP"] = "Opikol - PvP",
+["Opikol Forever"] = "Opikol Forever",
 },
 ["profiles"] = {
 ["Karums Warrior"] = {
 ["groupMode"] = true,
 ["tbcStart"] = 2,
 ["windowScale"] = 1.05,
-["hardcore"] = false,
-["openTrackerReportOnCharOpen"] = true,
 ["enableTrainerAutomation"] = true,
+["hardcore"] = false,
+["enableQuestRewardAutomation"] = true,
 ["season"] = 0,
-["guideFontSize"] = 11,
+["guideFontSize"] = 10,
 ["createFollowMacro"] = true,
 ["enablelevelSplits"] = true,
 ["frameSizes"] = {
 ["activeItemFrame"] = {
-78.25634765625,
-42.99980926513672,
-},
-["levelSplits"] = {
-153.8462524414063,
-129.3846130371094,
-},
-["RXPFrame"] = {
-445.102783203125,
-271.9621276855469,
-},
-["activeTargetFrame"] = {
-84.00032806396484,
-42.9999885559082,
+80.61357116699219,
+42.99991226196289,
 },
 ["arrowFrame"] = {
-49.59989929199219,
-49.59999084472656,
+49.60013961791992,
+49.60002517700195,
+},
+["RXPFrame"] = {
+445.000244140625,
+271.9620971679688,
+},
+["activeTargetFrame"] = {
+84.36995697021484,
+17.99995994567871,
+},
+["levelSplits"] = {
+160.2774658203125,
+230.8910522460938,
 },
 },
 ["hideCompletedSteps"] = true,
-["enableQuestRewardAutomation"] = true,
-["activeTheme"] = "DarkMode",
+["goblinTele"] = false,
+["activeTheme"] = "RXP Green",
 ["arrowScale"] = 1.55,
 ["shareQuests"] = true,
 ["enableLevelUpAnnounceGroup"] = true,
 ["soloSelfFound"] = false,
-["goblinTele"] = false,
+["openTrackerReportOnCharOpen"] = true,
 ["tbcWBF"] = true,
 ["gnomeTele"] = false,
 ["levelSplitsFontSize"] = 17,
 ["portalTele"] = false,
 ["enableGroupQuests"] = true,
 ["autoDiscardItems"] = true,
+["enableInventoryManager"] = false,
 ["arrowText"] = 11,
 ["frameHeight"] = 271.9621276855469,
 ["macroAnnounced"] = true,
@@ -128,35 +184,8 @@ RXPSettings = {
 "CENTER",
 nil,
 "CENTER",
--135.9999847412109,
--179.0000152587891,
-},
-},
-["levelSplits"] = {
-{
-"TOPRIGHT",
-nil,
-"TOPRIGHT",
--233.7757263183594,
--131.4101409912109,
-},
-},
-["RXPFrame"] = {
-{
-"LEFT",
-nil,
-"LEFT",
-20.00000190734863,
--87.82054138183594,
-},
-},
-["activeTargetFrame"] = {
-{
-"TOP",
-nil,
-"TOP",
-260.84619140625,
--133.8205413818359,
+189.4908447265625,
+35.85597229003906,
 },
 },
 ["arrowFrame"] = {
@@ -164,8 +193,35 @@ nil,
 "TOP",
 nil,
 "TOP",
-0.5638384819030762,
--86.79478454589844,
+568.876220703125,
+-48.91668319702148,
+},
+},
+["RXPFrame"] = {
+{
+"TOPLEFT",
+nil,
+"TOPLEFT",
+69.26995086669922,
+-130.4429321289063,
+},
+},
+["activeTargetFrame"] = {
+{
+"RIGHT",
+nil,
+"RIGHT",
+-556.4912719726562,
+-263.1686401367188,
+},
+},
+["levelSplits"] = {
+{
+"LEFT",
+nil,
+"LEFT",
+45.62715148925781,
+-76.33355712890625,
 },
 },
 },
@@ -175,44 +231,23 @@ nil,
 ["activeTargetScale"] = 1.15,
 ["gnomeTele"] = false,
 ["groupMode"] = true,
-["tbcWBF"] = true,
-["portalTele"] = false,
-["season"] = 0,
-["frameSizes"] = {
-["activeItemFrame"] = {
-78.16057586669922,
-42.99994277954102,
-},
-["activeTargetFrame"] = {
-85.80768585205078,
-18.00002479553223,
-},
-["RXPFrame"] = {
-383.0000305175781,
-230.8327331542969,
-},
-["arrowFrame"] = {
-40.00001525878906,
-39.99998474121094,
-},
-["levelSplits"] = {
-109.8978118896484,
-160.5401458740234,
-},
-},
+["enableCompleteStepAnnouncements"] = true,
 ["tbcStart"] = 2,
+["season"] = 0,
+["enableQuestRewardAutomation"] = true,
+["portalTele"] = false,
 ["enableGroupQuests"] = true,
 ["autoDiscardItems"] = true,
 ["windowScale"] = 1.25,
-["enablelevelSplits"] = true,
+["autoSellJunk"] = true,
 ["enableTrainerAutomation"] = true,
-["frameHeight"] = 230.8327331542969,
-["shareQuests"] = true,
-["arrowScale"] = 1.25,
 ["guideFontSize"] = 10,
+["hardcore"] = false,
+["arrowScale"] = 1.25,
+["enableCollectStepAnnouncements"] = true,
 ["disableArrow"] = false,
 ["macroAnnounced"] = true,
-["hardcore"] = false,
+["shareQuests"] = true,
 ["framePositions"] = {
 ["activeItemFrame"] = {
 {
@@ -221,42 +256,6 @@ nil,
 "BOTTOMRIGHT",
 -450.0000305175781,
 184,
-},
-},
-["activeTargetFrame"] = {
-{
-"TOPRIGHT",
-nil,
-"TOPRIGHT",
--237.0000152587891,
--68.99999237060547,
-},
-},
-["RXPV2GuideConfigurator"] = {
-{
-"TOP",
-"UIParent",
-"TOP",
-399.9999084472656,
--59.99968338012695,
-},
-},
-["RXPFrame"] = {
-{
-"LEFT",
-nil,
-"LEFT",
-109,
--67,
-},
-},
-["arrowFrame"] = {
-{
-"RIGHT",
-nil,
-"RIGHT",
--185.0000152587891,
-173,
 },
 },
 ["levelSplits"] = {
@@ -268,9 +267,46 @@ nil,
 -146,
 },
 },
+["arrowFrame"] = {
+{
+"RIGHT",
+nil,
+"RIGHT",
+-185.0000152587891,
+173,
+},
+},
+["RXPFrame"] = {
+{
+"LEFT",
+nil,
+"LEFT",
+109,
+-67,
+},
+},
+["RXPV2GuideConfigurator"] = {
+{
+"TOP",
+"UIParent",
+"TOP",
+399.9999084472656,
+-59.99968338012695,
+},
+},
+["activeTargetFrame"] = {
+{
+"TOPRIGHT",
+nil,
+"TOPRIGHT",
+-237.0000152587891,
+-68.99999237060547,
+},
+},
 },
 ["enableLevelUpAnnounceGroup"] = true,
 ["createFollowMacro"] = true,
+["compareNextLevelSplit"] = true,
 ["dungeons"] = {
 ["ULDA"] = true,
 ["SFK"] = true,
@@ -287,43 +323,44 @@ nil,
 ["ST"] = true,
 ["ZF"] = true,
 },
-["compareNextLevelSplit"] = true,
 ["soloSelfFound"] = false,
-["enableCollectStepAnnouncements"] = true,
-["autoSellJunk"] = true,
-["enableQuestRewardAutomation"] = true,
+["frameHeight"] = 230.8327331542969,
+["enablelevelSplits"] = true,
+["frameSizes"] = {
+["activeItemFrame"] = {
+78.16057586669922,
+42.99994277954102,
+},
+["levelSplits"] = {
+109.8978118896484,
+160.5401458740234,
+},
+["RXPFrame"] = {
+383.0000305175781,
+230.8327331542969,
+},
+["arrowFrame"] = {
+40.00001525878906,
+39.99998474121094,
+},
+["activeTargetFrame"] = {
+85.80768585205078,
+18.00002479553223,
+},
+},
 ["goblinTele"] = false,
-["enableCompleteStepAnnouncements"] = true,
+["tbcWBF"] = true,
 },
 ["Opikol - PvP"] = {
 ["tbcStart"] = 2,
 ["gnomeTele"] = false,
 ["portalTele"] = false,
-["frameSizes"] = {
-["arrowFrame"] = {
-31.99995231628418,
-31.99995231628418,
-},
-["RXPFrame"] = {
-235.0000152587891,
-125.0000610351563,
-},
-["activeItemFrame"] = {
-0,
-43.00000381469727,
-},
-["activeTargetFrame"] = {
-83.9999008178711,
-17.99993896484375,
-},
-},
-["hardcore"] = false,
 ["framePositions"] = {
-["arrowFrame"] = {
+["activeTargetFrame"] = {
 {
-"TOP",
+"CENTER",
 "UIParent",
-"TOP",
+"CENTER",
 0,
 0,
 },
@@ -346,6 +383,51 @@ nil,
 0,
 },
 },
+["arrowFrame"] = {
+{
+"TOP",
+"UIParent",
+"TOP",
+0,
+0,
+},
+},
+},
+["hardcore"] = false,
+["frameSizes"] = {
+["activeTargetFrame"] = {
+83.9999008178711,
+17.99993896484375,
+},
+["RXPFrame"] = {
+235.0000152587891,
+125.0000610351563,
+},
+["activeItemFrame"] = {
+0,
+43.00000381469727,
+},
+["arrowFrame"] = {
+31.99995231628418,
+31.99995231628418,
+},
+},
+["goblinTele"] = false,
+["tbcWBF"] = true,
+},
+["Opikol Forever"] = {
+["gnomeTele"] = false,
+["hardcore"] = false,
+["framePositions"] = {
+["activeItemFrame"] = {
+{
+"CENTER",
+"UIParent",
+"CENTER",
+0,
+0,
+},
+},
 ["activeTargetFrame"] = {
 {
 "CENTER",
@@ -354,6 +436,54 @@ nil,
 0,
 0,
 },
+},
+["RXPV2GuideConfigurator"] = {
+{
+"TOP",
+"UIParent",
+"TOP",
+400.0000610351563,
+-60,
+},
+},
+["RXPFrame"] = {
+{
+"LEFT",
+"UIParent",
+"LEFT",
+0,
+35,
+},
+},
+["arrowFrame"] = {
+{
+"TOP",
+"UIParent",
+"TOP",
+0,
+0,
+},
+},
+},
+["season"] = 0,
+["tbcStart"] = 2,
+["portalTele"] = false,
+["frameSizes"] = {
+["activeTargetFrame"] = {
+84.37007904052734,
+18.00006484985352,
+},
+["RXPFrame"] = {
+235,
+124.9999923706055,
+},
+["activeItemFrame"] = {
+80.61363983154297,
+43.00000762939453,
+},
+["arrowFrame"] = {
+32.00000762939453,
+32.00000762939453,
 },
 },
 ["goblinTele"] = false,

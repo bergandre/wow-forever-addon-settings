@@ -1,0 +1,9 @@
+
+NodeRadarCharDB = {
+["track"] = {
+["ignored"] = {
+},
+["last"] = {
+},
+},
+}

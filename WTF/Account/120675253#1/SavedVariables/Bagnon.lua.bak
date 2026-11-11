@@ -1,10 +1,13 @@
 
 Bagnon_Sets = {
 ["latest"] = {
+["id"] = "12.1.9",
+["cooldown"] = 1794957210,
+["who"] = "Yaholl Ironhorn",
 },
 ["global"] = {
 ["inventory"] = {
-["y"] = 100.0000228881836,
+["y"] = -89.00041893953562,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -12,14 +15,15 @@ Bagnon_Sets = {
 "trade",
 },
 },
-["point"] = "BOTTOMRIGHT",
+["point"] = "TOPLEFT",
 ["borderColor"] = {
 },
 ["color"] = {
 },
+["x"] = 483.9999389648438,
 ["activeRules"] = {
 },
-["x"] = -50.00016325712204,
+["showBags"] = true,
 },
 ["vault"] = {
 ["color"] = {
@@ -58,8 +62,7 @@ Bagnon_Sets = {
 },
 },
 ["bank"] = {
-["color"] = {
-},
+["y"] = -282.8651039981294,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -70,10 +73,14 @@ Bagnon_Sets = {
 "miscellaneous",
 },
 },
-["activeRules"] = {
-},
+["point"] = "TOPLEFT",
 ["borderColor"] = {
 },
+["color"] = {
+},
+["activeRules"] = {
+},
+["x"] = 798.4593505859375,
 },
 },
 ["customRules"] = {

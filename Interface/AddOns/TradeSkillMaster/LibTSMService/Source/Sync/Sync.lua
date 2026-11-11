@@ -10,6 +10,7 @@ local Comm = LibTSMService:Include("Sync.Comm")
 local Mirror = LibTSMService:Include("Sync.Mirror")
 local RPC = LibTSMService:Include("Sync.RPC")
 local Connection = LibTSMService:Include("Sync.Connection")
+local Presence = LibTSMService:Include("Sync.Presence")
 local SessionInfo = LibTSMService:From("LibTSMWoW"):Include("Util.SessionInfo")
 Sync.CONNECTION_ERROR = Connection.ERROR
 
@@ -36,6 +37,8 @@ function Sync.Load(db, svCopyError)
 	if db:WipedFromUserError() then
 		Comm.ShowSVCopyError()
 	end
+
+	Presence.Load(db)
 
 	-- Load the connection code
 	local function AccountIteratorFunc()

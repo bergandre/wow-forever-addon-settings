@@ -7,14 +7,25 @@ TitanCurrenciesMultiDb = {
 ["name"] = "|cffc69b6dKarums",
 ["faction"] = "Horde",
 },
+["Opikol-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff8788eeOpikol",
+["faction"] = "Horde",
+},
 },
 },
 ["TITAN_OUROM"] = {
 ["charTable"] = {
 ["Karums-Warrior"] = {
-["value"] = 6910,
-["realm"] = "Warrior",
+["value"] = 84935,
+["faction"] = "Horde",
 ["name"] = "|cffc69b6dKarums",
+["realm"] = "Warrior",
+},
+["Opikol-Forever"] = {
+["value"] = 0,
+["realm"] = "Forever",
+["name"] = "|cff8788eeOpikol",
 ["faction"] = "Horde",
 },
 },
@@ -26,6 +37,11 @@ TitanCurrenciesMultiDb = {
 ["name"] = "|cffc69b6dKarums",
 ["faction"] = "Horde",
 },
+["Opikol-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff8788eeOpikol",
+["faction"] = "Horde",
+},
 },
 },
 ["TITAN_FOREVER_MERCHANTSFAVOR"] = {
@@ -33,6 +49,11 @@ TitanCurrenciesMultiDb = {
 ["Karums-Warrior"] = {
 ["currency"] = 0,
 ["name"] = "|cffc69b6dKarums",
+["faction"] = "Horde",
+},
+["Opikol-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff8788eeOpikol",
 ["faction"] = "Horde",
 },
 },
@@ -44,6 +65,11 @@ TitanCurrenciesMultiDb = {
 ["name"] = "|cffc69b6dKarums",
 ["faction"] = "Horde",
 },
+["Opikol-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff8788eeOpikol",
+["faction"] = "Horde",
+},
 },
 },
 ["TITAN_PVHNRM"] = {
@@ -51,6 +77,11 @@ TitanCurrenciesMultiDb = {
 ["Karums-Warrior"] = {
 ["currency"] = 0,
 ["name"] = "|cffc69b6dKarums",
+["faction"] = "Horde",
+},
+["Opikol-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff8788eeOpikol",
 ["faction"] = "Horde",
 },
 },

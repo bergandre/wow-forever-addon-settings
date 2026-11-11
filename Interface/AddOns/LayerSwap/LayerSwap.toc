@@ -1,7 +1,7 @@
 ## Interface: 11509, 16001, 20506
 ## Title: LayerSwap
 ## Notes: Shows the layer you are on, asks a host for a swap, and hosts swaps for others - Forever, Classic Era and TBC Anniversary. /ls
-## Version: 1.14.1
+## Version: 1.14.14
 ## Author: Adam5288
 ## SavedVariables: LayerSwapDB
 ## IconTexture: Interface\AddOns\LayerSwap\Media\logo

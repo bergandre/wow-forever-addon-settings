@@ -9,6 +9,17 @@ RXPCData = {
 },
 ["questNameCache"] = {
 },
+["guideDisabled"] = {
+[0] = 481,
+},
+["flightPaths"] = {
+},
+["guideProgress"] = {
+},
+["stepSkip"] = {
+},
+["discardPile"] = {
+},
 ["guideMetaData"] = {
 ["RestedXP Forever Guide (H)||50-51 Stranglethorn/Blasted Lands"] = {
 ["guideId"] = 2342917451,
@@ -1689,17 +1700,6 @@ RXPCData = {
 ["displayname"] = "6-10 Durotar",
 },
 },
-["flightPaths"] = {
-},
-["guideProgress"] = {
-},
-["stepSkip"] = {
-},
-["discardPile"] = {
-},
-["guideDisabled"] = {
-[0] = 481,
-},
 }
 RXPCTrackingData = {
 ["profileKeys"] = {
@@ -1724,7 +1724,6 @@ RXPCTrackingData = {
 ["trackedGuid"] = "Player-6942-00A4D9A1",
 },
 ["Invited - PvP"] = {
-["trackedGuid"] = "Player-6942-00A4D9A1",
 ["levels"] = {
 {
 ["groupExperience"] = 0,
@@ -1736,9 +1735,9 @@ RXPCTrackingData = {
 ["monthDay"] = 5,
 ["weekday"] = 5,
 ["month"] = 11,
-["year"] = 2026,
-["hour"] = 13,
 ["minute"] = 51,
+["hour"] = 13,
+["year"] = 2026,
 },
 ["started"] = 0,
 },
@@ -1746,6 +1745,7 @@ RXPCTrackingData = {
 },
 },
 },
+["trackedGuid"] = "Player-6942-00A4D9A1",
 },
 },
 }
@@ -1758,78 +1758,78 @@ RXPCComms = {
 ["Invited Friend"] = {
 ["players"] = {
 ["Karums Warrior"] = {
-["level"] = 13,
-["isRxp"] = true,
-["version"] = 1,
-["lastSeen"] = 11975.238,
 ["timePlayed"] = 0,
 ["class"] = "WARRIOR",
-["xp"] = 0,
+["version"] = 1,
+["lastSeen"] = 11975.238,
 ["xpPercentage"] = 89,
+["isRxp"] = true,
+["xp"] = 0,
+["level"] = 13,
 },
 ["Karums Priest"] = {
-["level"] = 13,
-["isRxp"] = true,
-["version"] = 1,
-["lastSeen"] = 11975.471,
 ["timePlayed"] = 0,
 ["class"] = "PRIEST",
+["version"] = 1,
+["lastSeen"] = 23829.948,
+["xpPercentage"] = 0,
+["isRxp"] = true,
 ["xp"] = 0,
-["xpPercentage"] = 74,
+["level"] = 24,
 },
 ["Langemann Durek"] = {
-["timePlayed"] = 0,
-["class"] = "SHAMAN",
+["isRxp"] = true,
+["level"] = 11,
 ["version"] = 1,
 ["lastSeen"] = 1522.785,
 ["xpPercentage"] = 82,
-["isRxp"] = true,
+["class"] = "SHAMAN",
 ["xp"] = 0,
-["level"] = 11,
+["timePlayed"] = 0,
 },
 },
 },
 ["Invited - PvP"] = {
 ["players"] = {
 ["Karums Warrior"] = {
-["level"] = 10,
-["isRxp"] = true,
-["version"] = 1,
-["lastSeen"] = 56279.066,
 ["timePlayed"] = 0,
 ["class"] = "WARRIOR",
-["xp"] = 0,
-["xpPercentage"] = 48,
-},
-["Karums Priest"] = {
-["level"] = 10,
-["isRxp"] = true,
 ["version"] = 1,
 ["lastSeen"] = 56279.066,
+["xpPercentage"] = 48,
+["isRxp"] = true,
+["xp"] = 0,
+["level"] = 10,
+},
+["Karums Priest"] = {
 ["timePlayed"] = 0,
 ["class"] = "PRIEST",
-["xp"] = 0,
+["version"] = 1,
+["lastSeen"] = 56279.066,
 ["xpPercentage"] = 46,
+["isRxp"] = true,
+["xp"] = 0,
+["level"] = 10,
 },
 ["Gniloe Forever"] = {
-["isRxp"] = true,
-["level"] = 1,
-["version"] = 1,
-["lastSeen"] = 37784.107,
 ["xpPercentage"] = 75,
 ["class"] = "MAGE",
-["xp"] = 0,
+["version"] = 1,
+["lastSeen"] = 37784.107,
 ["timePlayed"] = 0,
+["level"] = 1,
+["xp"] = 0,
+["isRxp"] = true,
 },
 ["Frosty Dan"] = {
-["level"] = 5,
-["isRxp"] = true,
-["version"] = 1,
-["lastSeen"] = 36584.611,
 ["timePlayed"] = 0,
 ["class"] = "MAGE",
-["xp"] = 0,
+["version"] = 1,
+["lastSeen"] = 36584.611,
 ["xpPercentage"] = 66,
+["isRxp"] = true,
+["xp"] = 0,
+["level"] = 5,
 },
 },
 },

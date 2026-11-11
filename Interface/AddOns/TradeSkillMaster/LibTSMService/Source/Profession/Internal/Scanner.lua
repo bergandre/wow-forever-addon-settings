@@ -24,6 +24,7 @@ local TradeSkill = LibTSMService:From("LibTSMWoW"):Include("API.TradeSkill")
 local DelayTimer = LibTSMService:From("LibTSMWoW"):IncludeClassType("DelayTimer")
 local CombatLockdown = LibTSMService:From("LibTSMWoW"):Include("Service.CombatLockdown")
 local Event = LibTSMService:From("LibTSMWoW"):Include("Service.Event")
+local ChatEvent = LibTSMService:From("LibTSMWoW"):Include("Service.ChatEvent")
 local private = {
 	db = nil,
 	matDB = nil,
@@ -122,7 +123,7 @@ Scanner:OnModuleLoad(function()
 		Event.Register("CRAFT_UPDATE", private.OnTradeSkillUpdateEvent)
 		Event.Register("TRADE_SKILL_UPDATE", private.OnTradeSkillUpdateEvent)
 	end
-	Event.Register("CHAT_MSG_SKILL", private.ChatMsgSkillEventHandler)
+	ChatEvent.RegisterSkillHandler(private.SkillMessageHandler)
 end)
 
 
@@ -470,7 +471,7 @@ function private.OnTradeSkillUpdateEvent()
 	private.QueueProfessionScan()
 end
 
-function private.ChatMsgSkillEventHandler(_, msg)
+function private.SkillMessageHandler(msg)
 	local professionName = State.GetCurrentProfession()
 	if not professionName or not strmatch(msg, professionName) then
 		return

@@ -3,6 +3,8 @@ SilverDragon3DB = {
 ["profileKeys"] = {
 ["Karums Warrior"] = "Default",
 ["Invited Undead"] = "Default",
+["Invited Friend"] = "Default",
+["Tailoring Altchar"] = "Default",
 },
 ["namespaces"] = {
 ["ClickTarget"] = {

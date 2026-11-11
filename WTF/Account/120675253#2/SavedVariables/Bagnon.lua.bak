@@ -1,10 +1,13 @@
 
 Bagnon_Sets = {
 ["latest"] = {
+["id"] = "12.1.9",
+["cooldown"] = 1794957202,
+["who"] = "Hawkeye Fury",
 },
 ["global"] = {
 ["inventory"] = {
-["y"] = 100.0000228881836,
+["y"] = 70.99996948242188,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -12,14 +15,15 @@ Bagnon_Sets = {
 "trade",
 },
 },
-["point"] = "BOTTOMRIGHT",
+["point"] = "BOTTOMLEFT",
 ["borderColor"] = {
 },
 ["color"] = {
 },
+["showBags"] = true,
 ["activeRules"] = {
 },
-["x"] = -50.00016325712204,
+["x"] = 338.0001525878906,
 },
 ["vault"] = {
 ["color"] = {
@@ -58,8 +62,7 @@ Bagnon_Sets = {
 },
 },
 ["bank"] = {
-["color"] = {
-},
+["y"] = 502.269287109375,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -70,10 +73,14 @@ Bagnon_Sets = {
 "miscellaneous",
 },
 },
-["activeRules"] = {
-},
+["point"] = "BOTTOMLEFT",
 ["borderColor"] = {
 },
+["color"] = {
+},
+["activeRules"] = {
+},
+["x"] = 95.00001525878906,
 },
 },
 ["customRules"] = {
@@ -81,33 +88,33 @@ Bagnon_Sets = {
 ["color"] = {
 ["quiver"] = {
 },
-["account"] = {
+["herb"] = {
 },
-["enchant"] = {
+["normal"] = {
 },
 ["soul"] = {
 },
-["reagent"] = {
+["inscribe"] = {
 },
 ["mine"] = {
 },
-["engineer"] = {
+["gem"] = {
 },
-["inscribe"] = {
+["leather"] = {
 },
 ["fridge"] = {
 },
-["gem"] = {
+["engineer"] = {
 },
 ["key"] = {
 },
 ["tackle"] = {
 },
-["leather"] = {
+["reagent"] = {
 },
-["normal"] = {
+["enchant"] = {
 },
-["herb"] = {
+["account"] = {
 },
 },
 ["display"] = {

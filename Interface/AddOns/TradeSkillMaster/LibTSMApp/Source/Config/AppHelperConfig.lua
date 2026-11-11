@@ -14,6 +14,8 @@ local AppHelper = LibTSMApp:From("LibTSMService"):Include("AppHelper")
 local UIElements = LibTSMApp:From("LibTSMUI"):Include("UIElements")
 local private = {
 	settings = nil,
+	groupImportReviewCallback = nil,
+	offeredGroupImports = {},
 }
 
 
@@ -26,12 +28,25 @@ AddonSettings.RegisterOnLoad(AppHelperConfig, function(db)
 	private.settings = db:NewView("AppHelperConfigSettings")
 		:AddKey("global", "internalData", "appMessageId")
 		:AddKey("global", "internalData", "lastCharacter")
+		:AddKey("global", "internalData", "groupImportResults")
 		:AddKey("realm", "coreOptions", "auctionDBAltRealm")
 		:Commit()
 	-- Set the last character we logged into for display in the app
 	private.settings.lastCharacter = SessionInfo.GetCharacterName().." - "..SessionInfo.GetRealmName()
-	AppHelper.Configure(private.settings.auctionDBAltRealm, private.HandleDataLoaded)
+	AppHelper.Configure(private.settings.auctionDBAltRealm, private.settings.groupImportResults, private.HandleDataLoaded)
 end)
+
+
+
+-- ============================================================================
+-- Module Functions
+-- ============================================================================
+
+---Sets the callback for when the user wants to review a group import sent from the website.
+---@param callback fun(id: string) The callback which is passed the id of the group import
+function AppHelperConfig.SetGroupImportReviewCallback(callback)
+	private.groupImportReviewCallback = callback
+end
 
 
 
@@ -41,7 +56,14 @@ end)
 
 function private.HandleDataLoaded(status)
 	if status == AppHelper.DATA_STATUS.LOADED then
-		-- pass
+		local msg, msgId = AppHelper.GetMessage()
+		if msg and msgId > private.settings.appMessageId then
+			private.settings.appMessageId = msgId
+			UIElements.New("InfoPopupDialog", "dialog")
+				:SetMessage(msg)
+				:Show()
+				:Draw()
+		end
 	elseif status == AppHelper.DATA_STATUS.APP_HELPER_NOT_ENABLED then
 		Addon.Enable("TradeSkillMaster_AppHelper")
 		UIElements.New("ReloadPopupDialog", "dialog")
@@ -54,16 +76,29 @@ function private.HandleDataLoaded(status)
 			:SetMessage(L["TSM is missing important information from the TSM Desktop Application. Please ensure the TSM Desktop Application is running and is properly configured."])
 			:Show()
 			:Draw()
-		return
 	else
 		error("Unexpected status: "..tostring(status))
 	end
-	local msg, msgId = AppHelper.GetMessage()
-	if msg and msgId > private.settings.appMessageId then
-		private.settings.appMessageId = msgId
-		UIElements.New("InfoPopupDialog", "dialog")
-			:SetMessage(msg)
-			:Show()
-			:Draw()
+	private.ShowNextGroupImportPopup()
+end
+
+function private.ShowNextGroupImportPopup()
+	for _, groupImport in ipairs(AppHelper.GetPendingGroupImports()) do
+		if not private.offeredGroupImports[groupImport.id] then
+			private.offeredGroupImports[groupImport.id] = true
+			UIElements.New("AppGroupImportPopupDialog", "dialog")
+				:Configure(groupImport, private.HandleGroupImportPopupClosed)
+				:Show()
+				:Draw()
+			return
+		end
+	end
+end
+
+function private.HandleGroupImportPopupClosed(id, shouldReview)
+	if shouldReview then
+		private.groupImportReviewCallback(id)
+	else
+		private.ShowNextGroupImportPopup()
 	end
 end

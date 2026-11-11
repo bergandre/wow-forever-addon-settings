@@ -4,6 +4,7 @@ AutoLooterDB = {
 },
 ["profileKeys"] = {
 ["Karums Warrior"] = "Default",
+["Opikol Forever"] = "Default",
 ["Karums - CAMWOW EU5 Realm 4 PvP"] = "Default",
 },
 ["profiles"] = {
@@ -23,12 +24,12 @@ AutoLooterDB = {
 ["Other"] = false,
 ["Elemental"] = false,
 ["Cooking"] = false,
-["Enchanting"] = false,
+["Parts"] = false,
 ["Leather"] = false,
 ["Cloth"] = false,
 ["Herb"] = false,
 ["Metal & Stone"] = false,
-["Parts"] = false,
+["Enchanting"] = false,
 },
 ["Recipe"] = {
 ["Tailoring"] = false,
@@ -82,9 +83,9 @@ AutoLooterDB = {
 ["Other"] = false,
 ["Reagent"] = false,
 ["Mount"] = false,
+["Holiday"] = false,
 ["Pet"] = false,
 ["Junk"] = false,
-["Holiday"] = false,
 },
 ["Consumable"] = {
 ["Potions"] = false,
@@ -104,8 +105,8 @@ AutoLooterDB = {
 ["Generic(OBSOLETE)"] = false,
 },
 ["Projectile"] = {
-["Bullet"] = false,
 ["Arrow"] = false,
+["Bullet"] = false,
 },
 ["Jewelry(OBSOLETE)"] = {
 ["Jewelry(OBSOLETE)"] = false,
@@ -127,9 +128,9 @@ AutoLooterDB = {
 ["Two-Handed Maces"] = false,
 ["Guns"] = false,
 ["Fist Weapons"] = false,
-["Thrown"] = false,
-["Wands"] = false,
 ["Daggers"] = false,
+["Wands"] = false,
+["Thrown"] = false,
 ["Two-Handed Axes"] = false,
 },
 },

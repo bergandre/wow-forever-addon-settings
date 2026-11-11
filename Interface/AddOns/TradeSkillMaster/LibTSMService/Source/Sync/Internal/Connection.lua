@@ -8,6 +8,7 @@ local LibTSMService = select(2, ...).LibTSMService
 local Connection = LibTSMService:InitInternal("Sync.Connection")
 local Comm = LibTSMService:Include("Sync.Comm")
 local Constants = LibTSMService:Include("Sync.Constants")
+local Presence = LibTSMService:Include("Sync.Presence")
 local EnumType = LibTSMService:From("LibTSMUtil"):Include("BaseType.EnumType")
 local CallbackRegistry = LibTSMService:From("LibTSMUtil"):IncludeClassType("CallbackRegistry")
 local String = LibTSMService:From("LibTSMUtil"):Include("Lua.String")
@@ -37,6 +38,7 @@ local private = {
 	connectionChangedCallbacks = CallbackRegistry.NewList(),
 	threadId = {},
 	threadRunning = {},
+	threadTarget = {},
 	connectedCharacter = {},
 	lastHeartbeat = {},
 	suppressThreadTime = {},
@@ -135,10 +137,11 @@ function Connection.Establish(targetCharacter)
 	if not private.hasFriendsInfo then
 		return false, Connection.ERROR.NOT_READY
 	end
-	local wasFriend = FriendList.IsFriend(targetCharacter)
+	Presence.ClearOffline(targetCharacter)
+	local wasFriend = Presence.IsTracked(targetCharacter)
 	if strlower(targetCharacter) == strlower(SessionInfo.GetCharacterName()) then
 		return false, Connection.ERROR.CURRENT_CHARACTER
-	elseif not private.IsOnline(targetCharacter) and wasFriend then
+	elseif not Presence.IsOnline(targetCharacter) and wasFriend then
 		return false, Connection.ERROR.NOT_ONLINE
 	end
 	local iter = private.accessibleCharacterIterFunc()
@@ -185,6 +188,7 @@ function Connection.Remove(accountKey)
 	if private.threadRunning[accountKey] then
 		private.KillConnectionThread(accountKey)
 	end
+	Presence.RemoveAccount(accountKey)
 	private.removeAccountHandler(accountKey)
 end
 
@@ -226,7 +230,9 @@ end
 ---@param sourceAccount string
 ---@param sourceCharacter string
 function private.ConnectionRequestAndAckHandler(sourceAccount, sourceCharacter, data)
-	if not private.threadRunning[sourceAccount] then
+	if Presence.HandleConnectionRequest(sourceAccount, sourceCharacter) then
+		private.StartConnectionTo(sourceAccount, sourceCharacter)
+	elseif not private.threadRunning[sourceAccount] then
 		return
 	end
 	private.connectionRequestReceived[sourceAccount] = true
@@ -282,7 +288,7 @@ function private.ManagementLoop()
 	local hasAccount, hasCharacter = false, false
 	for _, account in private.accountIteratorFunc() do
 		hasAccount = true
-		local targetCharacter = private.GetTargetCharacter(account)
+		local targetCharacter = Presence.GetTargetCharacter(account)
 		if targetCharacter then
 			hasCharacter = true
 			if not private.threadId[account] then
@@ -290,6 +296,7 @@ function private.ManagementLoop()
 			end
 			if not private.threadRunning[account] and (private.suppressThreadTime[account] or 0) < LibTSMService.GetTime() then
 				private.threadRunning[account] = true
+				private.threadTarget[account] = targetCharacter
 				Threading.Start(private.threadId[account], account, targetCharacter)
 			end
 		end
@@ -311,11 +318,17 @@ function private.ConnectionThreadInner(account, targetCharacter)
 	-- add some randomness to the timeout so we don't get stuck in a race condition
 	local timeout = LibTSMService.GetTime() + RECEIVE_TIMEOUT + random(0, 1000) / 1000
 	if account < private.localAccountKey then
+		if not Presence.CanDetectOnline() then
+			Comm.SendData(Constants.DATA_TYPES.CONNECTION_REQUEST, targetCharacter)
+		end
 		-- Wait for the connection request from the client
 		while not private.connectionRequestReceived[account] do
 			if LibTSMService.GetTime() > timeout then
 				-- Timed out on the connection - don't try again for a bit
 				Log.Warn("Timed out")
+				return
+			elseif Presence.IsKnownOffline(targetCharacter) then
+				Log.Info("Target is offline")
 				return
 			end
 			Threading.Yield(true)
@@ -332,6 +345,9 @@ function private.ConnectionThreadInner(account, targetCharacter)
 				Log.Warn("Timed out")
 				private.suppressThreadTime[account] = LibTSMService.GetTime() + RECEIVE_TIMEOUT
 				return
+			elseif Presence.IsKnownOffline(targetCharacter) then
+				Log.Info("Target is offline")
+				return
 			end
 			Threading.Yield(true)
 		end
@@ -339,6 +355,7 @@ function private.ConnectionThreadInner(account, targetCharacter)
 
 	-- We are now connected
 	Log.Info("Connected to: %s %s", account, targetCharacter)
+	Presence.HandleConnected(account, targetCharacter)
 	private.connectedCharacter[account] = targetCharacter
 	private.lastHeartbeat[account] = LibTSMService.GetTime()
 	private.connectionChangedCallbacks:CallAll(account, targetCharacter, true)
@@ -347,7 +364,7 @@ function private.ConnectionThreadInner(account, targetCharacter)
 	local lastHeartbeatSend = LibTSMService.GetTime()
 	while true do
 		-- Check if they either logged off or the heartbeats have timed-out
-		if not private.IsOnline(targetCharacter, true) or LibTSMService.GetTime() - private.lastHeartbeat[account] > HEARTBEAT_TIMEOUT then
+		if not Presence.IsOnline(targetCharacter, true) or LibTSMService.GetTime() - private.lastHeartbeat[account] > HEARTBEAT_TIMEOUT then
 			return
 		end
 
@@ -374,6 +391,7 @@ function private.ConnectionThreadDone(account)
 		private.connectionChangedCallbacks:CallAll(account, player, false)
 	end
 	private.threadRunning[account] = nil
+	private.threadTarget[account] = nil
 	private.connectionRequestReceived[account] = nil
 end
 
@@ -386,7 +404,7 @@ end
 function private.SendNewAccountWhoAmI()
 	if not private.newCharacter then
 		private.newAccountTimer:Cancel()
-	elseif not FriendList.IsFriend(private.newCharacter) then
+	elseif not Presence.IsTracked(private.newCharacter) then
 		assert(private.newFriendsUpdateTimeout)
 		private.newFriendsUpdateTimeout = private.newFriendsUpdateTimeout - 1
 		if private.newFriendsUpdateTimeout > 0 then
@@ -400,7 +418,7 @@ function private.SendNewAccountWhoAmI()
 			private.newAccount = nil
 			private.newSyncAcked = nil
 		end
-	elseif not private.IsOnline(private.newCharacter) then
+	elseif not Presence.IsOnline(private.newCharacter) then
 		private.newAccountTimer:Cancel()
 		private.newCharacter = nil
 		private.newFriendsUpdateTimeout = nil
@@ -421,6 +439,7 @@ function private.CheckNewAccountStatus()
 	Log.Info("New sync character: '%s' '%s'", private.newCharacter, private.newAccount)
 	-- The other account ACK'd so setup a connection
 	private.newAccountHandler(private.newAccount, private.newCharacter)
+	Presence.SetOnline(private.newAccount, private.newCharacter)
 
 	-- Call the callbacks for this new account
 	private.connectionChangedCallbacks:CallAll(private.newAccount, private.newCharacter, nil)
@@ -431,36 +450,13 @@ function private.CheckNewAccountStatus()
 	private.newSyncAcked = nil
 end
 
-function private.GetTargetCharacter(account)
-	-- Find the player to connect to without adding to the friends list
-	local iter = private.accessibleCharacterIterFunc(account)
-	for _, player in iter do
-		if private.IsOnline(player, true) then
-			iter:Release()
-			return player
-		end
+function private.StartConnectionTo(account, character)
+	if private.threadRunning[account] and strlower(private.threadTarget[account]) ~= strlower(character) then
+		private.KillConnectionThread(account)
 	end
-
-	-- If we failed, try again with adding to friends list
-	iter = private.accessibleCharacterIterFunc(account)
-	for _, player in iter do
-		if private.IsOnline(player) then
-			iter:Release()
-			return player
-		end
-	end
-end
-
-function private.IsOnline(target, noAdd)
-	if FriendList.IsFriend(target) then
-		return FriendList.IsOnline(target)
-	elseif not noAdd and FriendList.CanAdd(target) then
-		-- Add them as a friend
-		FriendList.Add(target)
-		FriendList.Query()
-		return FriendList.IsOnline(target)
-	else
-		return false
+	if not private.threadRunning[account] then
+		private.suppressThreadTime[account] = nil
+		private.managementTimer:RunForTime(0)
 	end
 end
 

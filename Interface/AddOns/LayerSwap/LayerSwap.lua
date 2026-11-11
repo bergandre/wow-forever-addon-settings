@@ -1,4 +1,4 @@
--- LayerSwap 1.14.1 - host + panel.
+-- LayerSwap 1.14.14 - host + panel.
 -- A player changes layer by joining a group whose leader stands on another layer. A host
 -- is somebody who invites whoever asks. This file is the host, the reading of the player's
 -- own layer from creature GUIDs, the request for a swap, and the small panel on top of them.
@@ -19,6 +19,21 @@ local ADDON = ...
 -- creature GUIDs, and names are "Name-Realm".
 local TOC = (type(GetBuildInfo) == "function" and select(4, GetBuildInfo())) or 16001
 local FOREVER = TOC >= 16000 and TOC < 20000
+-- 9 Nov 2026, measured on live Forever: the layer is the creature GUID's server part - 6843 of
+-- 6843-8; the second part differs between two players on one layer. Four joins of a host whose
+-- id shared the server part and not the second part moved nobody; the one join of a host with
+-- another server part moved the guest at once (and the guest's own id there had yet another
+-- second part). What LayerSwap sends keeps the whole id, so older versions read it as before;
+-- every comparison goes through Layer.same. Classic keeps the whole id (NWB numbers its layers).
+local Layer = {}
+function Layer.key(id)
+  if not FOREVER or type(id) ~= "string" then return id end
+  return string.match(id, "^(%d+)%-") or id
+end
+function Layer.same(a, b)
+  if a == nil or b == nil then return false end
+  return a == b or Layer.key(a) == Layer.key(b)
+end
 local TBC = TOC >= 20000 and TOC < 30000
 
 LayerSwapDB = LayerSwapDB or {}
@@ -54,6 +69,82 @@ local NOTE_WAIT = 0.5
 local Near = { SOURCE = "world", DEFAULT = 150, MIN = 50, MAX = 1000, later = {} }
 Near.KIND = Near.SOURCE == "world" and "pos" or "posm"
 
+-- 1.14.2: how the ask leaves the player. The live Forever realms do not let an addon post a chat
+-- line (C_ChatInfo.AreOutgoingAddonChatMessagesRestricted, a realm setting; the beta realms
+-- allowed it): the server answers "That operation is not permitted in this channel", and the
+-- notes (addon messages) in the layer channel are refused by the client. On such a realm Swap
+-- layer puts the line into the chat box, and the player's own Enter sends it (measured 6 Nov
+-- 2026: the line went out and a host invited 5 s later). Everything behind it lives in this one
+-- table - the pending line, the chat box, the channel notices the server sends, and a gate per
+-- note kind - for the same reason Near is a table (200 locals).
+local Send = { comms = {}, notices = {}, noticeCount = 0, count = 0 }
+Send.ECHO_WAIT = 3          -- seconds for the line's own echo once it has left the box
+Send.BOX_TTL = 600          -- a line that sits in a box the addon cannot read is given up after this
+Send.PENDING_TEXT = "|cff40ff40Your request is in the chat box|r - press Enter to send it, Escape to drop it."
+-- 1.14.4: LayerSwap's own channel (the hub). On such a realm the request goes there instead of
+-- General whenever we sit in it, so General stays free of it (a user on CurseForge, 7 Nov 2026:
+-- "spamming in /1 general"). A custom channel reaches the players of every layer; General may
+-- reach only one's own layer (players' reports, and every invite through it so far came from the
+-- asker's own layer). The hub is joined on a click, the one moment an addon may join a channel,
+-- the game rejoins it at every login, and it is taken out of every chat window.
+Send.HUB = "LayerSwap"
+Send.HUB_WAIT = 10          -- an ask in the hub no host has invited by then: the button offers General (not below SWAP_COOLDOWN)
+Send.REPEAT_WAIT = 60       -- an ask nobody answered is not sent to the same place from the same zone sooner
+Send.lastAt = {}            -- [place] = { zone, at, invited }: our last ask that went out there
+Send.REFUSED = { NOT_ALLOWED_IN_CHANNEL = true, MUTED = true, NOT_MEMBER = true, BANNED = true, WRONG_PASSWORD = true }
+-- 1.14.6: the hub as a place to ask is off. On 7 Nov 2026 the game disabled the channel for the
+-- account of a player who had only joined it, and refused another's rejoin at login after two
+-- accepted lines: a custom channel is no place the live realms let an addon's traffic stay. Hosts
+-- still read it, for askers on 1.14.4; nothing joins it and nothing is said about it. The tests
+-- turn the machinery on through this global before the file loads.
+Send.HUB_ASKS = rawget(_G, "LayerSwapHubAsks") == true
+
+-- 1.14.6: the ask without a channel. On a realm that refuses chat lines an addon posts, the request
+-- needs no channel at all: the click asks the game who stands in the zone (the player search
+-- reaches every layer of the realm), and the request goes to each of them as a hidden addon
+-- whisper - the one message the live realms still carry between strangers, the kind every addon's
+-- version check runs on. Only a LayerSwap user reads it: a host on another layer in the zone
+-- invites, every user in the zone answers "heard" the same way, and nothing shows in anyone's
+-- chat. General, which the game may keep to one layer, is left to Ask in General. Everything of it
+-- lives in this one table (200 locals): the search that waits, the names, the burst, the senders.
+-- The client lets an addon send about 10 messages per prefix at once and then about one a second
+-- (its answer 3 past that): the first round takes up to BURST (two left for a host's own replies), each later round, a second apart,
+-- what the budget has grown back - so 49 names take some 40 s, and an invite ends the burst.
+local Who = { WAIT = 5, BURST = 8, BURST_WAIT = 1, ROUNDS = 45, MAX = 49, LATE = 30, from = {} }
+-- The search asks the players of our own zone: only a host there moves us (8 Nov 2026 23:21, measured
+-- on live: a host in Elwynn invited an asker in Westfall and the game moved nobody - 1.14.8 had
+-- asked the whole realm). The game answers 50 names at most, so the clicks go round the zone's
+-- level range in BANDS slices. FRESH: creatures read after a
+-- join that must still show the old layer before LayerSwap calls the host one on our layer - the
+-- game's transfer event alone said "not moved" for every host in another zone (7 of 7, Oct 2026),
+-- and no creature had been read in any of them. JUDGE_FOR: how long after a join the verdict is tried.
+Who.BANDS, Who.FRESH, Who.JUDGE_FOR = 6, 3, 60
+-- The map search (8 Nov 2026): the live group finder's who list filters by map, class and race
+-- (SendWho's third argument). Each click asks the zone's map, then the map one class at a time -
+-- 50 names a class instead of 50 in all. The text filter z-"<zone>" gave 7 of 50 rows in the zone
+-- (Westfall, 8 Nov 23:17) and 11 of 50 (Elwynn, 12:56).
+Who.CLASSES = { 1, 2, 3, 4, 5, 7, 8, 9, 11 }
+-- The book: LayerSwap users who answered our asks (heard, same), whispered first when the search
+-- finds them again - an invite in the first burst instead of up to 40 s of whispers.
+Who.BOOK_TTL, Who.BOOK_MAX = 7 * 86400, 300
+-- 1.14.12: a player a search whispered is not whispered again for ASKED_FOR seconds unless it answered (Who.fresh)
+Who.ASKED_FOR, Who.ASKED_MAX = 6 * 3600, 3000
+-- 1.14.14: the names whispered lately (Who.sentTo[name] = GetTime()), for the game's "No player named ..." line:
+-- within GONE_WAIT seconds of our whisper that line is ours, not the player's own (Who.notPlaying)
+-- a known LayerSwap user the game could not find is left alone for GONE_FOR seconds, or until it answers (Adam,
+-- 11 Nov 2026: it has to come back by itself - a known host is too rare to drop for six hours)
+Who.sentTo, Who.GONE_WAIT, Who.GONE_FOR = {}, 15, 600
+-- 1.14.13: seconds after the burst before a host with an unknown layer is asked once more (Who.anyway), and
+-- how long a host known to stand on another layer gets to invite before that happens all the same
+Who.ANYWAY_WAIT, Who.ANYWAY_LATE = 3, 10
+-- 1.14.14: an ask for new layers only names up to SEEN_MAX layers seen in the zone after the one it leaves;
+-- the guest leaves a LayerSwap host's group LEAVE_AFTER seconds after the move is confirmed
+Layer.SEEN_MAX, Layer.LEAVE_AFTER = 6, 3
+-- The border probe: the layer read within this long after a zone border is logged with the one
+-- before it (which zones share layers - Westfall and Duskwood may, Elwynn and Westfall did not).
+Who.BORDER_FOR, Who.BORDER_READS, Who.BORDER_QUIET = 60, 3, 15
+Who.GUILD_LINE = "Hidden whispers are refused here - /ls guild asks your guild, on every layer."
+
 -- The option "Skip askers near you" (1.14): off unless ticked, and its distance in yards.
 function Near.on()
   return FOREVER and LayerSwapDB.skipNear == true
@@ -72,6 +163,23 @@ local pending = {}              -- [fullName] = GetTime() of an invite not yet a
 local lastInviteAt = 0
 local watchUntil = 0
 local stats = { requests = 0, askers = 0, invites = 0, joined = 0, skipped = 0 }
+
+-- 1.14.12, live Forever (the realm refuses addon chat): a host sends at most Host.CAP invites in
+-- Host.WINDOW seconds, then takes a break until the oldest of them is that old. Invites are what other
+-- players see of a host, and players told of Blizzard silences for "spamming group invites"
+-- (CurseForge, 10 Nov 2026). Host.left(now): the seconds the break still lasts, nil while the host may
+-- invite. Elsewhere there is no break.
+local Host = { CAP = 6, WINDOW = 600, sent = {} }
+function Host.left(now)
+  if not (FOREVER and Send.restricted()) then return nil end
+  local keep = {}
+  for _, t in ipairs(Host.sent) do
+    if now - t < Host.WINDOW then keep[#keep + 1] = t end
+  end
+  Host.sent = keep
+  if #keep < Host.CAP then return nil end
+  return keep[#keep - Host.CAP + 1] + Host.WINDOW - now
+end
 local askers = {}                -- [fullName] = true: the players who asked this session, host on or off
 local notes = {}                -- [First Surname] = { want, avoid, at, zone, zoneAt, from, pos, posAt }: what an asker's notes said
 local requestedAt = {}          -- [First Surname] = GetTime() of their last request line
@@ -100,8 +208,10 @@ end
 local function log(kind, a, b, c, d)
   local db = LayerSwapDB
   db.log = db.log or {}
-  if #db.log >= LOG_MAX then return end
-  db.log[#db.log + 1] = { t = date("%H:%M:%S"), g = math.floor(GetTime() * 100) / 100, kind = kind, a = a, b = b, c = c, d = d }
+  if #db.log >= LOG_MAX then return nil end
+  local e = { t = date("%H:%M:%S"), g = math.floor(GetTime() * 100) / 100, kind = kind, a = a, b = b, c = c, d = d }
+  db.log[#db.log + 1] = e
+  return e
 end
 
 local function leaveParty()
@@ -244,21 +354,48 @@ local function zoneName(map)
   return name
 end
 
+-- 1.14.14: the name the layers are filed under. On Forever the zone-level map's name: the game's own zone text
+-- changes inside some buildings (the tower at Sentinel Hill read "Sentinel Tower", 11 Nov 2026, and the layer
+-- read there got a new letter). The game's zone text where the map says nothing, and on Classic as before.
+function Layer.zone()
+  local map = FOREVER and zoneOf("player")
+  local name = map and zoneName(map)
+  if name then return name end
+  local text = type(GetRealZoneText) == "function" and GetRealZoneText(nil) or nil
+  if isSecret(text) or type(text) ~= "string" then return nil end
+  return text
+end
+
 -- 1.14: the player's own position, for the ask's pos note and for a host that skips askers
 -- near it. x and y in whole yards, and the zone map id the two sides compare on (the number
 -- the route tag carries). nil and a reason when the game gives nothing readable - no zone, a
 -- missing function, a secret value. Forever only.
-function Near.read()
+-- frame: "world" (UnitPosition) or "map" (the zone map); Near.SOURCE when not given. A position
+-- read in the map frame carries the note kind "posm", one from the world frame "pos", so a host
+-- compares each asker's position in the frame it came in (1.14.2: the tag carries map
+-- coordinates, a hidden note world yards).
+function Near.read(frame)
   if not FOREVER then return nil, "not Forever" end
   local zone = zoneOf("player")
   if not zone then return nil, "zone unknown" end
-  if Near.SOURCE == "world" then
+  frame = frame or Near.SOURCE
+  local kind = frame == "world" and "pos" or "posm"
+  if frame == "world" then
     if type(UnitPosition) ~= "function" then return nil, "no UnitPosition" end
     local ok, a, b = pcall(UnitPosition, "player")
     if not ok or isSecret(a) or isSecret(b) or type(a) ~= "number" or type(b) ~= "number" then return nil, "unreadable" end
-    return { kind = Near.KIND, ref = tostring(zone), x = math.floor(a + 0.5), y = math.floor(b + 0.5) }
+    return { kind = kind, ref = tostring(zone), x = math.floor(a + 0.5), y = math.floor(b + 0.5) }
   end
-  if not (C_Map and C_Map.GetPlayerMapPosition and C_Map.GetMapWorldSize) then return nil, "no map position API" end
+  local px, py, why = Near.fraction(zone)
+  if not px then return nil, why end
+  local w, h = Near.mapSize(zone)
+  if not w then return nil, "map size unknown" end
+  return { kind = kind, ref = tostring(zone), x = math.floor(px * w + 0.5), y = math.floor(py * h + 0.5), fx = px, fy = py }
+end
+
+-- The player's place on a map as the game's own fraction (0-1 across the map), or nil and why.
+function Near.fraction(zone)
+  if not (C_Map and C_Map.GetPlayerMapPosition) then return nil, "no map position API" end
   local ok, pos = pcall(C_Map.GetPlayerMapPosition, zone, "player")
   if not ok or type(pos) ~= "table" or isSecret(pos) then return nil, "no map position" end
   local px, py = pos.x, pos.y
@@ -266,12 +403,32 @@ function Near.read()
     local okXY, gx, gy = pcall(pos.GetXY, pos)
     if okXY then px, py = gx, gy end
   end
-  local okSize, w, h = pcall(C_Map.GetMapWorldSize, zone)
-  if not okSize or isSecret(w) or isSecret(h) or type(w) ~= "number" or type(h) ~= "number" or w <= 0 or h <= 0 then
-    return nil, "map size unknown"
-  end
   if isSecret(px) or isSecret(py) or type(px) ~= "number" or type(py) ~= "number" then return nil, "unreadable" end
-  return { kind = Near.KIND, ref = tostring(zone), x = math.floor(px * w + 0.5), y = math.floor(py * h + 0.5) }
+  if px < 0 or px > 1 or py < 0 or py > 1 then return nil, "off the map" end
+  return px, py
+end
+
+-- A map's size in yards, or nil.
+function Near.mapSize(zone)
+  if not (C_Map and C_Map.GetMapWorldSize) then return nil end
+  local ok, w, h = pcall(C_Map.GetMapWorldSize, tonumber(zone) or zone)
+  if not ok or isSecret(w) or isSecret(h) or type(w) ~= "number" or type(h) ~= "number" or w <= 0 or h <= 0 then return nil end
+  return w, h
+end
+
+-- 1.14.2: the asker's map position from the tag of its line ("48.2,42.5" = percent of the zone
+-- map), turned into map yards on the tag's zone and kept with the asker's other notes, as a
+-- hidden note would be. The hidden notes do not travel on the live realms (the client refuses
+-- them), so the line carries the position instead - the asker chose to send it.
+function Near.fromTag(sender, tag, from)
+  if not (FOREVER and tag and tag.pos and tag.zone) then return end
+  local w, h = Near.mapSize(tag.zone)
+  if not w then return end
+  local was = notes[sender]
+  notes[sender] = { want = was and was.want, avoid = was and was.avoid, at = was and was.at,
+                    zone = was and was.zone, zoneAt = was and was.zoneAt, from = (was and was.from) or from or sender,
+                    pos = { kind = "posm", ref = tostring(tag.zone), x = tag.pos.x / 100 * w, y = tag.pos.y / 100 * h },
+                    posAt = GetTime() }
 end
 
 function Near.between(a, b)
@@ -395,18 +552,37 @@ end
 -- the asker's zone (its map id) and the layer it leaves, or "want <id>" for one layer. The line
 -- arrives on time when the notes do not (10 Oct 2026), and a host answers only a route it can
 -- read (see answer). Hosts from 1.0 on read "not <id>" / "want <id>" in it (namedLayer).
+-- 1.14.2: the asker's map position closes the tag - "<LS 1429 not 7088-2 48.2,42.5>", percent of
+-- the zone map with one decimal (a few yards), x then y - so a host that keeps its spot can judge
+-- the distance without a hidden note. Hosts from 1.10 to 1.14.1 read the zone and the layer past
+-- it (the zone is the first number, the layer sits after "not"/"want"); "48.2,42.5" matches no id.
 local function routeTag(msg)
   if not FOREVER or isSecret(msg) or type(msg) ~= "string" then return nil end
   local body = string.match(msg, "<LS([^<>]*)>")
   if not body then return nil end
+  local px, py = string.match(body, "(%d+%.?%d*),(%d+%.?%d*)%s*$")
+  local pos
+  if px and py then
+    local x, y = tonumber(px), tonumber(py)
+    if x and y and x >= 0 and x <= 100 and y >= 0 and y <= 100 then pos = { x = x, y = y } end
+  end
+  -- 1.14.14: an ask for new layers only names the layers the asker has seen after the one it leaves
+  local avoids = {}
+  for id in string.gmatch(body, "not%s+(%d+%-%d+)") do avoids[#avoids + 1] = id end
   return { zone = string.match(body, "^%s*(%d+)%s") or string.match(body, "^%s*(%d+)%s*$"),
-           want = string.match(body, "want%s+(%d+%-%d+)"), avoid = string.match(body, "not%s+(%d+%-%d+)") }
+           want = string.match(body, "want%s+(%d+%-%d+)"), avoid = string.match(body, "not%s+(%d+%-%d+)"), avoids = avoids, pos = pos }
 end
 
-local function routeText(zone, want, avoid)
+local function routeText(zone, want, avoid, fx, fy, more)
   local parts = { "<LS" }
   if zone then parts[#parts + 1] = tostring(zone) end
   if want then parts[#parts + 1] = "want " .. want elseif avoid then parts[#parts + 1] = "not " .. avoid end
+  -- more: the layers seen in the zone, after the one we leave - a host from 1.14.14 on any of them skips
+  -- the ask; an older host reads the first "not" alone
+  if not want and avoid and more then
+    for _, id in ipairs(more) do parts[#parts + 1] = "not " .. id end
+  end
+  if zone and fx and fy then parts[#parts + 1] = string.format("%.1f,%.1f", fx * 100, fy * 100) end
   return table.concat(parts, " ") .. ">"
 end
 
@@ -440,6 +616,11 @@ end
 local function canInvite()
   if ownAskWaiting() then return false, "our own ask waits for an invite" end
   if IsInInstance() then return false, "in an instance" end
+  -- 1.14.12: a host on its break (Host.left) invites nobody, and so makes no claim either
+  local pause = Host.left(GetTime())
+  if pause then
+    return false, Host.CAP .. " invites in " .. (Host.WINDOW / 60) .. " min - a break of " .. math.ceil(pause / 60) .. " min"
+  end
   local members = groupMembers()
   if not members then return false, "in a raid or a group that cannot be read" end
   for _, name in ipairs(members) do
@@ -466,12 +647,13 @@ local function invite(name, source)
     return
   end
   lastInviteAt, lastInvite[name], pending[name], hosted[name] = now, now, now, true
+  if FOREVER and Send.restricted() then Host.sent[#Host.sent + 1] = now end
   watchUntil = now + WATCH_AFTER_INVITE
   stats.invites = stats.invites + 1
   -- No hardware event is behind this call: it runs from a chat event or a timer.
   local called, err = pcall((C_PartyInfo and C_PartyInfo.InviteUnit) or InviteUnit, name)
   log("invite", name, called and "called" or ("error: " .. tostring(err)), source)
-  if called then say("invited " .. name .. " (" .. source .. ").") end
+  -- 1.14.14: no chat line for an invite or a guest who joins - the panel counts them, the log names them
 end
 
 -- The client's own line for a refusal, with its "%s" (the name) taken out: every part of it in
@@ -519,12 +701,10 @@ local CLAIM_WAIT = 1.5            -- the random delay runs up to this many secon
 local claims = {}                 -- [asker] = { by = host, at = GetTime() }
 
 local function sendClaim(name, where)
-  if not (C_ChatInfo and C_ChatInfo.SendAddonMessage) then return end
   local kind, channel = "CHANNEL", GetChannelName(LAYER_CHANNEL)
-  if where == "guild" then kind, channel = "GUILD", nil
-  elseif not channel or channel == 0 then return end
-  local ok, res = pcall(C_ChatInfo.SendAddonMessage, NOTE_PREFIX, "claim " .. name, kind, channel)
-  log("claim", name, ok and tostring(res) or ("error: " .. tostring(res)), where)
+  if where == "guild" then kind, channel = "GUILD", nil end
+  local res = Send.note(kind, channel, "claim " .. name)
+  if res ~= nil then log("claim", name, tostring(res), where) end
 end
 
 
@@ -552,18 +732,18 @@ function Near.check(name, where)
     return false
   end
   if p.ref ~= tostring(here) then
-    stats.skipped = stats.skipped + 1
-    log("skip", name, "position from another zone (map " .. p.ref .. ")", where)
-    return false
+    -- in another zone the asker stays where it is when the swap moves it: never near (1.14.8)
+    log("spot", name, "another zone (map " .. p.ref .. ")", where)
+    return true
   end
-  local mine = Near.read()
+  local mine = Near.read(p.kind == "posm" and "map" or "world")
   if not mine or mine.kind ~= p.kind then
     stats.skipped = stats.skipped + 1
     log("skip", name, "own position unknown", where)
     return false
   end
   local d = math.floor(Near.between(p, mine) + 0.5)
-  log("spot", name, d .. " yards", where)
+  log("spot", name, d .. " yards", where, p.kind == "posm" and "from the line" or "from the note")
   if d < Near.yards() then
     stats.skipped = stats.skipped + 1
     log("skip", name, "too close (" .. d .. " yards)", where)
@@ -577,6 +757,11 @@ local function claimThenInvite(name, where)
   if not FOREVER or where == "whisper" then invite(name, where); return end
   local heardAt = GetTime()
   local near = Near.on()
+  -- 1.14.5: where the realm refuses addon chat no claim can travel in a channel, and the asker's
+  -- spot came in its line - the invite goes at once. The wait was the whole margin the auto-
+  -- inviters on the asker's own layer won by (two of two invites in General, 7 Nov 2026, within
+  -- 2 s). A guild claim may still travel, so the guild keeps the wait.
+  local direct = Send.restricted() and where ~= "guild"
   local function go()
     if not hosting then Near.settle(name, false); return end
     if near then
@@ -604,7 +789,7 @@ local function claimThenInvite(name, where)
   end
   -- with the box on the delay never runs under NOTE_WAIT: an asker's note lands after its line
   -- (32 of 32 logged, up to 0.26 s), and a check in the line's frame would never see it
-  local delay = near and (NOTE_WAIT + math.random() * (CLAIM_WAIT - NOTE_WAIT)) or (math.random() * CLAIM_WAIT)
+  local delay = direct and 0 or (near and (NOTE_WAIT + math.random() * (CLAIM_WAIT - NOTE_WAIT)) or (math.random() * CLAIM_WAIT))
   if delay > 0 then C_Timer.After(delay, go) else go() end
 end
 
@@ -637,20 +822,21 @@ local heardAt = {}              -- [First Surname] = GetTime() of our last reply
 local function replyHeard(where, sender, tag, host, at)
   local function send(zone)
     local here = zoneOf("player")
-    if not (zone and here and tostring(here) == tostring(zone)) then return end
+    if not zone then return end
+    if where == "layer" and not (here and tostring(here) == tostring(zone)) then return end
     if heardAt[sender] and GetTime() - heardAt[sender] < HEARD_COOLDOWN then return end
-    if not (C_ChatInfo and C_ChatInfo.SendAddonMessage) then return end
     local kind, channel = "GUILD", nil
-    if where == "layer" then
-      kind, channel = "CHANNEL", GetChannelName(LAYER_CHANNEL)
-      if not channel or channel == 0 then return end
-    end
+    if where == "layer" then kind, channel = "CHANNEL", GetChannelName(LAYER_CHANNEL)
+    elseif where == "direct" then kind, channel = "WHISPER", Who.from[sender] or sender end
+    if Send.comms[kind] == "refused" then return end
     heardAt[sender] = at or GetTime()
     local flag = host
     if flag == nil then flag = hosting end
+    -- a host on its break (Host.left) invites nobody: it answers like a Host-off user (1.14.12)
+    if flag and Host.left(GetTime()) then flag = false end
     local text = "heard " .. sender .. "|" .. (current or "-") .. "|" .. (zoneOf("player") or "-") .. "|" .. (flag and "h" or "-")
-    local ok, res = pcall(C_ChatInfo.SendAddonMessage, NOTE_PREFIX, text, kind, channel)
-    log("heard", sender, text, ok and tostring(res) or ("error: " .. tostring(res)))
+    local res = Send.note(kind, channel, text)
+    if res ~= nil then log("heard", sender, text, tostring(res)) end
   end
   if tag then send(tag.zone); return end
   C_Timer.After(NOTE_WAIT, function()
@@ -692,13 +878,27 @@ local function onChat(where, msg, sender)
     return
   end
   local own = sender == fullName("player")
-  if not own then
+  -- 1.14.12, live Forever (the realm refuses addon chat): a host answers only the players who ask
+  -- through LayerSwap (out of sight), whisper this host or ask in the guild. A line in General or a
+  -- channel reaches every host around, and with no claim travelling there several of them invite the
+  -- same player at once - an invite the player never asked LayerSwap for, and the kind that gets
+  -- reported (players told of Blizzard silences for "spamming group invites", CurseForge, 10 Nov 2026).
+  -- Such a line is not counted and not logged.
+  if FOREVER and not own and Send.restricted() and where ~= "direct" and where ~= "whisper" and where ~= "guild" then return end
+  -- 1.14.14: a LayerSwap that has not read its own layer reads it from the units in view the moment an ask
+  -- arrives - after a zone border nothing reads them again by itself, and a host that stands still then
+  -- skips every ask. Never within BORDER_QUIET of a border (Who.rescan).
+  if FOREVER and not own and not current then Who.rescan() end
+  if own then
+    Send.echo(where, msg)
+    Near.echoLine(msg)
+  else
     stats.requests = stats.requests + 1
     if not askers[sender] then askers[sender], stats.askers = true, stats.askers + 1 end
   end
   requestedAt[sender] = GetTime()
   log("request", sender, string.sub(msg, 1, 120), where, (not hosting) and "host off" or nil)
-  if not own and FOREVER and (where == "layer" or where == "guild") then
+  if not own and FOREVER and (where == "layer" or where == "guild" or where == "direct") then
     if hosting and Near.on() then
       -- the reply waits for the verdict (1.14): the asker reads one reply per user, so it has to
       -- carry whether this host invites it; a timer settles it in any case
@@ -769,9 +969,12 @@ answer = function(where, msg, sender, scope)
   local zone
   if tag then
     zone, want, avoid = tag.zone, tag.want, tag.avoid
+    if tag.pos then Near.fromTag(sender, tag, sender); note = notes[sender] end
   elseif FOREVER and note and note.zoneAt and GetTime() - note.zoneAt <= NOTE_TTL then
     zone = note.zone
   end
+  -- 1.14.8 invited askers from the realm search in any zone; measured 8 Nov 2026 23:21 on live, the
+  -- game moved nobody (a host in Elwynn, the asker in Westfall). Own zone only again, by any route.
   if zone then
     local here = zoneOf("player")
     if not here then
@@ -799,7 +1002,7 @@ answer = function(where, msg, sender, scope)
   if not tag and not (want or avoid) and note and note.at and GetTime() - note.at <= NOTE_TTL then
     want, avoid = note.want, note.avoid
   end
-  if want and want ~= current then
+  if want and not Layer.same(want, current) then
     stats.skipped = stats.skipped + 1
     log("skip", sender, "wants " .. want .. ", we are on " .. (current or "an unknown layer"), where)
     Near.settle(sender, hosting)
@@ -813,17 +1016,29 @@ answer = function(where, msg, sender, scope)
     Near.settle(sender, hosting)
     return
   end
-  if avoid and avoid == current then
+  if avoid and Layer.same(avoid, current) then
     stats.skipped = stats.skipped + 1
     log("skip", sender, "already on our layer " .. avoid, where)
     Near.settle(sender, hosting)
     -- the asker's zone and layer: say so out of sight, so the asker knows a host heard it and
     -- why no invite comes (instead of two minutes of waiting)
-    if zone and note and note.from and C_ChatInfo and C_ChatInfo.SendAddonMessage then
-      local ok, res = pcall(C_ChatInfo.SendAddonMessage, NOTE_PREFIX, "same", "WHISPER", note.from)
-      log("note", "same to " .. sender, ok and tostring(res) or ("error: " .. tostring(res)))
+    local to = (where == "direct" and Who.from[sender]) or (note and note.from)
+    if zone and to then
+      local res = Send.note("WHISPER", to, "same")
+      if res ~= nil then log("note", "same to " .. sender, tostring(res)) end
     end
     return
+  end
+  -- 1.14.14: an ask for new layers only - this host stands on a layer the asker has seen
+  if tag and tag.avoids and current then
+    for i = 2, #tag.avoids do
+      if Layer.same(tag.avoids[i], current) then
+        stats.skipped = stats.skipped + 1
+        log("skip", sender, "on a layer the asker has seen " .. tag.avoids[i], where)
+        Near.settle(sender, hosting)
+        return
+      end
+    end
   end
   claimThenInvite(sender, where)
 end
@@ -852,7 +1067,10 @@ local function onNote(text, sender)
   -- a LayerSwap user heard our ask: "heard <asker>|<layer>|<zone>|<h or ->" (see replyHeard)
   local target, layer, zone, host = string.match(text, "^heard (.-)|([^|]*)|([^|]*)|([^|]*)$")
   if target then
-    if target == fullName("player") then onHeard(name, layer ~= "-" and layer or nil, zone ~= "-" and zone or nil, host == "h") end
+    if target == fullName("player") then
+      Who.from[name] = sender   -- the name as the game gives it, for a whisper back (Who.anyway)
+      onHeard(name, layer ~= "-" and layer or nil, zone ~= "-" and zone or nil, host == "h")
+    end
     return
   end
   -- the asker's position (1.14): "pos <zone map id> <x> <y>" in yards, kept with the asker's other
@@ -865,11 +1083,14 @@ local function onNote(text, sender)
     -- only this host's own frame, and only yards a zone can hold (world coordinates stay within
     -- about 20,000): anything else is no position, and a filter without one fails closed
     local x, y = tonumber(px), tonumber(py)
-    local pos = (pKind == Near.KIND and x and y and math.abs(x) <= 100000 and math.abs(y) <= 100000)
+    local pos = ((pKind == "pos" or pKind == "posm") and x and y and math.abs(x) <= 100000 and math.abs(y) <= 100000)
       and { kind = pKind, ref = pRef, x = x, y = y } or nil
+    -- a note of neither kind leaves a position the line already gave (1.14.2)
+    local posAt = pos and GetTime() or nil
+    if not pos and was and was.pos then pos, posAt = was.pos, was.posAt end
     notes[name] = { want = was and was.want, avoid = was and was.avoid, at = was and was.at,
                     zone = was and was.zone, zoneAt = was and was.zoneAt, from = sender,
-                    pos = pos, posAt = pos and GetTime() or nil }
+                    pos = pos, posAt = posAt }
     if hosting then
       local late = requestedAt[name] and GetTime() - requestedAt[name] < NOTE_TTL
       log("note", name, text, late and "after the chat line" or nil)
@@ -926,7 +1147,8 @@ local function onRoster()
       stats.joined = stats.joined + 1
       guestSince[name] = now
       log("joined", name, string.format("%.1f s after the invite", now - (lastInvite[name] or now)))
-      say(name .. " joined.")
+      Who.phase("guest")
+      Who.phaseSoon("guest")
     end
   end
   for name, since in pairs(guestSince) do
@@ -962,9 +1184,13 @@ local function kickHosted()
   say(n == 0 and "nobody to remove." or ("removed " .. n .. " hosted player(s)."))
 end
 
+-- 1.14.7: Host is on at every login, and the player's off lasts until the logout (Adam, 8 Nov 2026:
+-- the requests by hidden whisper reach only LayerSwap users, so every one of them who hosts is a way
+-- out for the next asker). The off is kept across a /reload, which is no logout. While it is off, the
+-- panel's status line says why it is on - in the panel, not in chat (Adam, 8 Nov 2026).
+local HOST_OFF_LINE = "Host off until you log out. Host on helps LayerSwap players change layer."
 local function setHosting(on)
   hosting = on
-  -- the lasting choice (1.12): off stays off at every login until it is turned on again
   LayerSwapDB.hosting = on and true or false
   log("hosting", hosting and "on" or "off")
   if not on then
@@ -974,7 +1200,7 @@ local function setHosting(on)
   end
   -- only ever reached from a slash command or a click, so a hardware event is behind it:
   -- the one place a channel can be joined
-  if hosting and GetChannelName(LAYER_CHANNEL) == 0 then pcall(JoinChannelByName, LAYER_CHANNEL) end
+  Send.joins()
   refresh()
 end
 
@@ -991,22 +1217,30 @@ local VOTES = 5
 local LAYER_TTL = 3600          -- a layer not seen for an hour leaves the list
 local layers = {}               -- [id] = { id, n, letter, zone, first, last }; kept in SavedVariables, times are time()
 local layerCount = 0
+-- The entry a reading belongs to: a layer already known in this zone keeps its first id.
+function Layer.canon(id)
+  if not FOREVER or id == nil or layers[id] then return id end
+  local zone = Layer.zone()
+  for other, l in pairs(layers) do
+    if l.zone == zone and Layer.key(other) == Layer.key(id) then return other end
+  end
+  return id
+end
 local votes, votedGuid = {}, {}
 local evictAt                  -- GetTime() when the server will move the player, if announced
 
 local swap                      -- the running request: { at, from, inviter, joinedAt }
 local swapGroup = false         -- true while in a group that was joined through a request
 local leftInfo                  -- { at, layer }: set when such a group is left, until the next layer reading
--- Leaving the host's group undoes the swap: the game moves the player back to their own layer
--- (measured 19 Sep 2026 23:34 - SHARD_TRANSFER 1.2 s after leaving, back on the start layer -
--- and seen by Adam in the beta, 24 Sep 2026). A swap lasts while the player stays in the group,
--- so LayerSwap never leaves it by itself - only the group of a host who did not move us (1.9).
-local AUTO_LEAVE = false
+-- In the beta, leaving the host's group undid the swap (19 and 24 Sep 2026). On live Forever the new
+-- layer stays (9 Nov 2026 10:55 and 11:48, 10 Nov 13:10), so from 1.14.14 LayerSwap leaves the group of a
+-- LayerSwap host by itself Layer.LEAVE_AFTER seconds after the move is confirmed, and the host is free for
+-- the next player. A group joined on an invite sent by hand (no reply to our ask) is left to the player.
 local notice, noticeUntil       -- one line for the panel, kept a little while
 local held                      -- { host, from, to } after a swap, while in the host's group
 
 local function layerLabel(id)
-  local l = id and layers[id]
+  local l = id and (layers[id] or layers[Layer.canon(id)])
   if not l then return "Unknown layer" end
   if l.nwb and not FOREVER then return "Layer " .. l.nwb end
   return "Layer " .. l.letter
@@ -1024,7 +1258,7 @@ local function noteNwb()
   local now = GetTime()
   if now - currentSince < 20 or now - joinedGroupAt < 180 then return end
   for id, other in pairs(layers) do
-    if id ~= current and other.nwb == n and other.zone == l.zone then other.nwb = nil end
+    if not Layer.same(id, current) and other.nwb == n and other.zone == l.zone then other.nwb = nil end
   end
   l.nwb = n
 end
@@ -1038,12 +1272,33 @@ local function forgetSightings()
   votes, votedGuid = {}, {}
 end
 
+-- 9 Nov 2026, live, 11:48: 0.3 s after the game moved the player, the nameplates still held creatures of
+-- the layer just left, and a scan read them as the player's layer - "Layer C" for 17 s, and no
+-- "swapped". The creatures in view when the game moves a player whose layer was known are the old
+-- layer's: they do not count for STALE_FOR seconds (a creature of the new layer has another GUID).
+Layer.STALE_FOR = 10
+function Layer.markStale()
+  if not current then return end
+  local guids = {}
+  for guid in pairs(votedGuid) do guids[guid] = true end
+  local function add(unit)
+    local okE, there = pcall(UnitExists, unit)
+    if not (okE and there == true) then return end
+    local guid = UnitGUID(unit)
+    if not isSecret(guid) and type(guid) == "string" then guids[guid] = true end
+  end
+  for i = 1, 40 do add("nameplate" .. i) end
+  add("target")
+  add("mouseover")
+  Layer.stale = { untilAt = GetTime() + Layer.STALE_FOR, guid = guids }
+end
+
 local function setNotice(text, seconds)
   notice, noticeUntil = text, GetTime() + (seconds or 30)
 end
 
 local function setCurrent(id)
-  if id == current then return end
+  if Layer.same(id, current) then return end
   local now = GetTime()
   local l = layers[id]
   if not l then
@@ -1051,30 +1306,48 @@ local function setCurrent(id)
     l = { id = id, n = layerCount, letter = letterFor(layerCount), first = time() }
     layers[id] = l
   end
-  l.last, l.zone = time(), GetRealZoneText()
+  l.last, l.zone = time(), Layer.zone()
   local from = current
   current, currentSince = id, now
   log("layer", id, l.letter, from)
-  if swap and swap.joinedAt and swap.from and swap.from ~= id then
+  -- the border probe: the layer read after a zone border, against the one before it
+  local cr = Who.crossing
+  if cr and cr.from and now - cr.at <= Who.BORDER_FOR and cr.reads < Who.BORDER_READS and l.zone ~= cr.from
+     and not (swap and swap.joinedAt) then
+    cr.reads = cr.reads + 1
+    log("border", cr.from .. " > " .. tostring(l.zone), cr.layer .. " > " .. id, Layer.same(id, cr.layer) and "same layer" or "other layer",
+      string.format("%.0f s after", now - cr.at))
+  end
+  Who.here = { zone = l.zone, layer = id }
+  -- the layer we asked from belongs to another zone: we walked on, the host did not move us (1.14.8) -
+  -- the transfer event fires after every zone border too, so it proves nothing here
+  local asked = swap and swap.from and layers[swap.from]
+  local walked = asked and asked ~= l and asked.zone and l.zone and asked.zone ~= l.zone
+  if swap and swap.joinedAt and swap.from and not Layer.same(swap.from, id) and not walked then
     -- the request worked: say so, and hand the host their group back
     log("swapped", swap.from, id, string.format("%.1f s after joining%s", now - swap.joinedAt,
       swap.want and (", asked for " .. swap.want) or ""))
-    if swap.want and swap.want ~= id then
+    -- the host answered our ask as a LayerSwap user: its group is left by itself (see above)
+    local auto = FOREVER and Send.restricted() and swap.inviter ~= nil and swap.replies ~= nil and swap.replies[swap.inviter] ~= nil
+    if swap.want and not Layer.same(swap.want, id) then
       -- a host who invites by hand may stand anywhere
       say("you are now on " .. layerLabel(id) .. " - not the " .. layerLabel(swap.want) .. " you asked for.")
       setNotice("You are on " .. layerLabel(id) .. ", not " .. layerLabel(swap.want) .. ".", 60)
     elseif FOREVER then
-      say("you are now on " .. layerLabel(id) .. " while you stay in the group - leaving sends you back.")
+      say("you are now on " .. layerLabel(id) .. (auto and " - LayerSwap leaves the group for you, the layer stays."
+        or " - you can leave the group, the layer stays."))
+      notice = nil   -- a warning about an earlier invite must not hide the line that says the swap worked
     else
       -- Classic keeps the new layer after the group is left; AutoLayer asks its guests to leave
       say("you are now on " .. layerLabel(id) .. " - you can leave the group.")
       setNotice("On " .. layerLabel(id) .. " now - you can leave the group.", 60)
     end
-    if FOREVER then held = { host = swap.inviter, from = swap.from, to = id } end
+    if FOREVER then held = { host = swap.inviter, from = swap.from, to = id, auto = auto or nil } end
     swap = nil
-    if AUTO_LEAVE then
-      C_Timer.After(2, function()
-        if swapGroup and IsInGroup() then pcall(leaveParty) end
+    if auto then
+      log("autoLeave", held.host, id, "moved")
+      C_Timer.After(Layer.LEAVE_AFTER, function()
+        if swapGroup and held and held.auto and IsInGroup() then pcall(leaveParty) end
       end)
     end
   end
@@ -1088,22 +1361,40 @@ end
 
 local function observe(unit)
   local guid = UnitGUID(unit)
-  if isSecret(guid) or type(guid) ~= "string" or votedGuid[guid] then return end
+  if isSecret(guid) or type(guid) ~= "string" then return end
   local kind, _, server, _, zoneUID = strsplit("-", guid)
   if (kind ~= "Creature" and kind ~= "Vehicle") or not server or not zoneUID then return end
-  votedGuid[guid] = true
+  -- a player's own summons (totems, guardians) are Creatures too, and carry the place they were made
+  if type(UnitPlayerControlled) == "function" then
+    local okP, pc = pcall(UnitPlayerControlled, unit)
+    if okP and not isSecret(pc) and pc == true then return end
+  end
+  local stale = Layer.stale
+  if stale and GetTime() < stale.untilAt and stale.guid[guid] then return end
   local id = server .. "-" .. zoneUID
+  -- read after joining a host and still on our layer, each creature once (1.14.8): one already seen
+  -- before the join counts too - still in view after it, the join did not move us
+  if swap and swap.joinedAt and Layer.same(id, current) then
+    swap.readGuid = swap.readGuid or {}
+    if not swap.readGuid[guid] then
+      swap.readGuid[guid] = true
+      swap.fresh = (swap.fresh or 0) + 1
+      if swap.fresh == Who.FRESH then refresh() end
+    end
+  end
+  if votedGuid[guid] then return end
+  votedGuid[guid] = true
   votes[#votes + 1] = id
   if #votes > VOTES then table.remove(votes, 1) end
   local count = 0
-  for _, v in ipairs(votes) do if v == id then count = count + 1 end end
-  if id == current then
-    layers[id].last = time()
+  for _, v in ipairs(votes) do if Layer.same(v, id) then count = count + 1 end end
+  if Layer.same(id, current) then
+    layers[current].last = time()
   elseif count >= (current and 3 or 2) then
     -- Two creatures are enough while nothing is known (after a refresh the sightings start
     -- from zero). Leaving a layer that is believed takes a majority of the last five: a
     -- pair of patrols that wandered in from the next zone must not flip it.
-    setCurrent(id)
+    setCurrent(Layer.canon(id))
   end
 end
 
@@ -1150,10 +1441,10 @@ local pingCount = 0
 -- The note for an ask, into the layer channel. Not a protected call; the result is logged
 -- so the beta shows whether addon messages reach the channel at all.
 local function sendNote(note, kind, channel)
-  if not (C_ChatInfo and C_ChatInfo.SendAddonMessage) or not note then return end
-  if kind == "CHANNEL" and (not channel or channel == 0) then return end
-  local ok, res = pcall(C_ChatInfo.SendAddonMessage, NOTE_PREFIX, note, kind, channel)
-  log("note", "sent", note, ok and tostring(res) or ("error: " .. tostring(res)))
+  if not note then return nil end
+  local res = Send.note(kind, channel, note)
+  if res ~= nil then log("note", "sent", note, tostring(res)) end
+  return res
 end
 
 -- Forever: our zone goes ahead of the layer note, so only a host in this zone answers.
@@ -1198,14 +1489,35 @@ end
 -- The layers seen in this zone within the hour, newest first, without the current one - the
 -- ones that can be asked for. Layers not seen for an hour are dropped on the way.
 local function seenInZone()
-  local seen, today, zone = {}, time(), GetRealZoneText() or ""
+  local seen, today, zone = {}, time(), Layer.zone() or ""
   for id, l in pairs(layers) do
     if today - l.last > LAYER_TTL then
-      if id ~= current then layers[id] = nil end
-    elseif id ~= current and l.zone == zone then seen[#seen + 1] = l end
+      if not Layer.same(id, current) then layers[id] = nil end
+    elseif not Layer.same(id, current) and l.zone == zone then seen[#seen + 1] = l end
   end
   table.sort(seen, function(a, b) return a.last > b.last end)
   return seen
+end
+
+-- 1.14.14: their ids, the newest SEEN_MAX, for an ask that wants a new layer only; and whether a layer is one of a list
+function Layer.seen()
+  local zone, today, list = Layer.zone() or "", time(), {}
+  for id, l in pairs(layers) do
+    if not Layer.same(id, current) and l.zone == zone and type(l.last) == "number" and today - l.last <= LAYER_TTL then
+      list[#list + 1] = id
+    end
+  end
+  table.sort(list, function(a, b) return layers[a].last > layers[b].last end)
+  for i = #list, Layer.SEEN_MAX + 1, -1 do list[i] = nil end
+  return list
+end
+
+function Layer.inList(id, list)
+  if not id or type(list) ~= "table" then return false end
+  for _, other in ipairs(list) do
+    if Layer.same(id, other) then return true end
+  end
+  return false
 end
 
 -- The zone's name when no other layer has been seen in it within the hour: a 'same layer'
@@ -1213,7 +1525,7 @@ end
 -- (Beta, 27 Sep 2026: four hosts in a row on the player's layer in Westfall, where one layer
 -- was ever seen; in Elwynn Forest next door, with three, the move came.)
 local function onlyLayerHere()
-  local zone = GetRealZoneText()
+  local zone = Layer.zone()
   if isSecret(zone) or type(zone) ~= "string" or zone == "" or #seenInZone() > 0 then return nil end
   return zone
 end
@@ -1231,8 +1543,15 @@ end
 -- group says so, in another zone, from where no host moves anyone (swap.elsewhere: its name).
 local function hostOnOurLayer(now)
   if not FOREVER then return false end   -- no transfer event on Classic: no way to tell
-  local yes = swap ~= nil and swap.joinedAt ~= nil and swapGroup and not swap.transferAt and not held
-    and now - swap.joinedAt >= SAME_LAYER_AFTER
+  local base = swap ~= nil and swap.joinedAt ~= nil and swapGroup and not held
+  local yes = base and not swap.transferAt and now - swap.joinedAt >= SAME_LAYER_AFTER and (swap.fresh or 0) >= Who.FRESH
+  -- 1.14.14: the game refreshed the world after the join, and the layer read since is the one we asked from
+  -- (live, 11 Nov 2026: a transfer 0.9 s after joining, the same layer 5 s later - the host was moved, not
+  -- the guest). Not moved: said once the units of the layer left are out of doubt (Layer.STALE_FOR).
+  if base and not yes and swap.transferAt and current and swap.from and Layer.same(current, swap.from)
+     and now - swap.transferAt >= Layer.STALE_FOR + 2 then
+    yes, swap.refreshed = true, true
+  end
   if yes and not swap.sameLogged then
     swap.sameLogged = true
     local here, there = zoneOf("player"), hostZone(swap.inviter)
@@ -1240,7 +1559,8 @@ local function hostOnOurLayer(now)
       swap.elsewhere = zoneName(there) or "another zone"
       log("otherZone", swap.inviter, current, "no transfer " .. SAME_LAYER_AFTER .. " s after joining", swap.elsewhere)
     else
-      log("sameLayer", swap.inviter, current, "no transfer " .. SAME_LAYER_AFTER .. " s after joining",
+      log("sameLayer", swap.inviter, current,
+        swap.refreshed and "world refreshed, same layer" or ("no transfer " .. SAME_LAYER_AFTER .. " s after joining"),
         onlyLayerHere() and "the only layer seen in this zone" or nil)
       if swap.inviter and current then sameHosts[swap.inviter] = { at = now, layer = current } end
     end
@@ -1252,11 +1572,18 @@ end
 -- via: the control that asked (button, row, menu, slash, again) - for the log
 -- leaving: the player is on the way out of a group (Leave and ask again)
 -- Returns "held" when the game stopped the message; the caller then says nothing more.
-local function askText(target, wantNumber, header)
+local function askText(target, wantNumber, header, more)
   local text = "inv layer"
   if FOREVER then
-    -- the route, in the line (1.10): our zone, and the layer named or the one we leave
-    return text .. " " .. routeText(zoneOf("player"), target, (not target) and current or nil)
+    -- the route, in the line (1.10): our zone, and the layer named or the one we leave - and,
+    -- since 1.14.2, where we stand on the zone map (Near.fraction; left out when unreadable)
+    local zone = zoneOf("player")
+    local fx, fy
+    if zone then
+      local ok, a, b = pcall(Near.fraction, zone)
+      if ok and a then fx, fy = a, b end
+    end
+    return text .. " " .. routeText(zone, target, (not target) and current or nil, fx, fy, more)
   else
     -- Classic: the NWB numbers AutoLayer hosts read - all but ours, or the one picked
     local numbers = {}
@@ -1314,6 +1641,1144 @@ local function onChannelCount(ev, index, count)
   refresh()
 end
 
+-- 9 Nov 2026: a look at the player's channels once a minute (Forever only), written to the log and
+-- nowhere else: number, name and the member count the game lists, with the layer and the zone.
+-- Whether a channel's members follow the layer shows itself without a second account - General's
+-- count jumping when the layer changes, a channel's name (LookingForGroup 40) changing its number.
+-- The game is asked for the counts of General and LookingForGroup with the roster request
+-- SetSelectedDisplayChannel makes (as readChannelCount does), one after the other, and the player's
+-- own selection in the channel window put back. The log keeps 300 entries free for the rest.
+Layer.CENSUS_EVERY, Layer.CENSUS_FIRST, Layer.CENSUS_ROOM, Layer.CENSUS_GAP = 60, 20, 700, 2
+function Layer.census()
+  if not FOREVER or type(GetNumDisplayChannels) ~= "function" or type(GetChannelDisplayInfo) ~= "function" then return end
+  if type(LayerSwapDB.log) == "table" and #LayerSwapDB.log >= Layer.CENSUS_ROOM then return end
+  local okN, n = pcall(GetNumDisplayChannels)
+  if not okN or isSecret(n) or type(n) ~= "number" then return end
+  local parts, ask = {}, {}
+  for i = 1, math.min(n, 24) do
+    local ok, name, header, _, number, count = pcall(GetChannelDisplayInfo, i)
+    if ok and header ~= true and not isSecret(name) and type(name) == "string" then
+      local lower = string.lower(name)
+      if string.find(lower, "^general") or string.find(lower, "^lookingforgroup") then ask[#ask + 1] = i end
+      parts[#parts + 1] = ((not isSecret(number) and type(number) == "number" and number > 0) and (number .. " ") or "") .. name
+        .. " " .. ((not isSecret(count) and type(count) == "number") and count or "?")
+    end
+  end
+  local zone = Layer.zone()
+  log("channels", current or "unknown", (not isSecret(zone) and type(zone) == "string" and zone ~= "") and zone or "?",
+    string.sub(table.concat(parts, "; "), 1, 400))
+  -- the counts for the next look: one channel at a time, then the player's own selection back
+  if #ask == 0 or type(SetSelectedDisplayChannel) ~= "function" then return end
+  local was
+  if type(GetSelectedDisplayChannel) == "function" then
+    local okS, sel = pcall(GetSelectedDisplayChannel)
+    if okS and not isSecret(sel) and type(sel) == "number" and sel > 0 then was = sel end
+  end
+  for k, i in ipairs(ask) do
+    C_Timer.After((k - 1) * Layer.CENSUS_GAP, function() pcall(SetSelectedDisplayChannel, i) end)
+  end
+  if was then C_Timer.After(#ask * Layer.CENSUS_GAP, function() pcall(SetSelectedDisplayChannel, was) end) end
+end
+
+-- 1.14.13: a measuring tool, so only for a player who switched it on in the saved data
+-- (/run LayerSwapDB.census = true, then /reload) - not something every client asks the game for.
+function Layer.startCensus()
+  if not FOREVER or Layer.censusOn or LayerSwapDB.census ~= true then return end
+  Layer.censusOn = true
+  local function again()
+    Layer.census()
+    C_Timer.After(Layer.CENSUS_EVERY, again)
+  end
+  C_Timer.After(Layer.CENSUS_FIRST, again)
+end
+
+-- ---------------------------------------------------------------------------------------
+-- 1.14.2: how the ask leaves the player (see the Send table at the top)
+
+-- Does this realm let an addon post a chat line? Forever only: the Classic clients know the
+-- function too, but there the lines go out, and nothing here changes for them.
+function Send.restricted()
+  if not FOREVER then return false end
+  local f = C_ChatInfo and C_ChatInfo.AreOutgoingAddonChatMessagesRestricted
+  if type(f) ~= "function" then return false end
+  local ok, v = pcall(f)
+  return ok and not isSecret(v) and v == true
+end
+
+-- One note (addon message), through a gate per kind: the first answer the client gives decides
+-- whether this kind is sent again this session. 4 (not that chat type) and 7 (no such channel)
+-- close a kind - 7 only for a channel the game lists as joined, since a channel still joining
+-- answers 7 too; every other answer leaves the gate as it is. nil when nothing was sent.
+function Send.note(kind, channel, text)
+  if not (C_ChatInfo and C_ChatInfo.SendAddonMessage) then return nil end
+  if kind == "CHANNEL" and (not channel or channel == 0) then return nil end
+  if kind == "GUILD" and not IsInGuild() then return nil end
+  if Send.comms[kind] == "refused" then return nil end
+  local ok, res = pcall(C_ChatInfo.SendAddonMessage, NOTE_PREFIX, text, kind, channel)
+  if not ok then return "error: " .. tostring(res) end
+  if isSecret(res) then return "secret" end
+  local state
+  if res == 0 then state = "ok"
+  elseif res == 4 then state = "refused"
+  elseif res == 7 then state = (kind ~= "CHANNEL" or layerDisplay() ~= nil) and "refused" or nil end
+  if state and Send.comms[kind] ~= state then
+    Send.comms[kind] = state
+    log("comms", kind, state, tostring(res))
+  end
+  return res
+end
+
+-- General's number: the client says it; else the first joined channel the game calls a zone
+-- channel of kind 1. Never the name - it is translated.
+function Send.generalId()
+  local f = C_ChatInfo and C_ChatInfo.GetGeneralChannelLocalID
+  if type(f) == "function" then
+    local ok, id = pcall(f)
+    if ok and not isSecret(id) and type(id) == "number" and id > 0 then return id end
+  end
+  local info = C_ChatInfo and C_ChatInfo.GetChannelInfoFromIdentifier
+  if type(info) ~= "function" then return nil end
+  local max = (Constants and Constants.ChatFrameConstants and Constants.ChatFrameConstants.MaxChatChannels) or 20
+  for i = 1, max do
+    local ok, id, name = pcall(GetChannelName, i)
+    if ok and not isSecret(id) and type(id) == "number" and id > 0 and not isSecret(name) and type(name) == "string" then
+      local okI, c = pcall(info, name)
+      if okI and type(c) == "table" and not isSecret(c) and not isSecret(c.zoneChannelID) and c.zoneChannelID == 1 then return id end
+    end
+  end
+end
+
+-- The layer channel as the game sees it for us: "ok" (numbered, listed, open), "not joined",
+-- "not listed" (a join the server has not completed), "closed" (a notice refused it this
+-- session) or "disabled" (the game keeps the account on the channel without a voice - the state
+-- a refused line leaves behind on the live realms, on every character of the account).
+function Send.layerState()
+  local id = GetChannelName(LAYER_CHANNEL)
+  if isSecret(id) or type(id) ~= "number" or id == 0 then return "not joined", 0 end
+  if Send.layerClosed then return "closed", id end
+  if Send.layerDisabled() then return "disabled", id end
+  if layerDisplay() == nil then return "not listed", id end
+  return "ok", id
+end
+
+-- The game's own flag for a channel the account may not use (GetChannelList: id, name, disabled).
+function Send.layerDisabled()
+  return Send.channelDisabled(LAYER_CHANNEL)
+end
+
+function Send.channelDisabled(channel)
+  if type(GetChannelList) ~= "function" then return false end
+  local ok, list = pcall(function() return { GetChannelList() } end)
+  if not ok or type(list) ~= "table" then return false end
+  for i = 1, #list, 3 do
+    local name, disabled = list[i + 1], list[i + 2]
+    if not isSecret(name) and type(name) == "string" and string.lower(name) == string.lower(channel) then
+      return not isSecret(disabled) and disabled == true
+    end
+  end
+  return false
+end
+
+-- Where the line goes. 1.14.3: General - the zone's own channel, which nobody owns and the game
+-- cannot close to one account the way it closed the layer channel to many on the live realms.
+-- 1.14.4: LayerSwap's own channel ahead of it whenever we sit in it (see Send.HUB); General when
+-- the hub is not there for us, or when notHub asks for it (Ask in General). The layer channel only
+-- when neither is, and only while it is usable. "hub"/"general"/"layer" and the number, or nothing.
+function Send.target(notHub)
+  local hub, hubId = Send.hubState()
+  if hub == "ok" and not notHub and Send.HUB_ASKS then return "hub", hubId end
+  local g = Send.generalId()
+  if g then return "general", g end
+  local state, id = Send.layerState()
+  if state == "ok" then return "layer", id end
+  return nil
+end
+
+-- Our zone as the hub's tables key it ("?" while the game does not say).
+function Send.zoneKey()
+  return tostring(zoneOf("player") or "?")
+end
+
+-- The place a request goes, in the panel's words.
+function Send.placeName(where)
+  if where == "hub" then return "LayerSwap's channel" end
+  if where == "direct" then return "players across the realm, by hidden whisper" end
+  if where == "general" then return "General" end
+  if where == "guild" then return "your guild" end
+  if where == "layer" then return "the layer channel" end
+  return "nowhere - join General"
+end
+
+function Send.isHub(name)
+  return not isSecret(name) and type(name) == "string" and string.lower(name) == string.lower(Send.HUB)
+end
+
+-- A channel by name in the game's own list (the Social window's): a join the server has not
+-- completed is numbered but not listed (launch night, 5 Nov 2026).
+function Send.listed(channel)
+  if type(GetNumDisplayChannels) ~= "function" or type(GetChannelDisplayInfo) ~= "function" then return false end
+  local okN, n = pcall(GetNumDisplayChannels)
+  if not okN or isSecret(n) or type(n) ~= "number" then return false end
+  for i = 1, n do
+    local ok, name = pcall(GetChannelDisplayInfo, i)
+    if ok and not isSecret(name) and type(name) == "string" and string.lower(name) == string.lower(channel) then return true end
+  end
+  return false
+end
+
+-- The hub as the game sees it for us, like the layer channel (Send.layerState), and its number.
+function Send.hubState()
+  local id = GetChannelName(Send.HUB)
+  if isSecret(id) or type(id) ~= "number" then id = 0 end
+  if Send.hubClosed then return "closed", id end
+  if id == 0 then return "not joined", 0 end
+  if Send.channelDisabled(Send.HUB) then return "disabled", id end
+  if not Send.listed(Send.HUB) then return "not listed", id end
+  return "ok", id
+end
+
+-- Out of every chat window: the addon reads the hub, nobody else.
+function Send.hideHub()
+  Send.hubHidden = true
+  for i = 1, (NUM_CHAT_WINDOWS or 10) do
+    local frame = _G["ChatFrame" .. i]
+    if type(frame) == "table" then
+      if type(frame.RemoveChannel) == "function" then pcall(frame.RemoveChannel, frame, Send.HUB)
+      elseif type(ChatFrame_RemoveChannel) == "function" then pcall(ChatFrame_RemoveChannel, frame, Send.HUB) end
+    end
+  end
+end
+
+-- The player's /leave of the hub, kept per character (LayerSwapDB is the account's: one alt's
+-- automatic rejoin must not undo another's /leave).
+function Send.left()
+  local t = LayerSwapDB.hubLeft
+  return type(t) == "table" and t[fullName("player")] == true
+end
+
+function Send.setLeft(on)
+  if type(LayerSwapDB.hubLeft) ~= "table" then LayerSwapDB.hubLeft = {} end
+  LayerSwapDB.hubLeft[fullName("player")] = on or nil
+end
+
+function Send.realmKey()
+  local ok, r = pcall(GetRealmName)
+  return (ok and not isSecret(r) and type(r) == "string" and r ~= "") and r or "?"
+end
+
+-- The realm's hub refused us: a password or a ban someone set holds a day, a refusal of our own
+-- join or line an hour (1.14.5; the game's own rejoin refused with nothing of ours out marks
+-- nothing, see Send.hubNotice). No click asks again meanwhile, so nobody meets the game's
+-- password box at every session. The mark is the moment the hold ends.
+function Send.realmRefused()
+  local r = type(LayerSwapDB.hubRefused) == "table" and LayerSwapDB.hubRefused[Send.realmKey()]
+  return type(r) == "number" and time() < r
+end
+
+function Send.refusedLeft()
+  local r = LayerSwapDB.hubRefused[Send.realmKey()] - time()
+  return r >= 3600 and (math.ceil(r / 3600) .. " h") or (math.ceil(r / 60) .. " min")
+end
+
+function Send.refused(hold)
+  hold = hold or 86400
+  if type(LayerSwapDB.hubRefused) ~= "table" then LayerSwapDB.hubRefused = {} end
+  LayerSwapDB.hubRefused[Send.realmKey()] = time() + hold
+  if not Send.refusedSaid then
+    Send.refusedSaid = true
+    say("LayerSwap's channel refused you on this realm - requests go to General " .. (hold >= 86400 and "for a day." or "for the next hour."))
+  end
+end
+
+-- Into the hub, from a click (Send.joins): once a session, never after the player left it (a
+-- /leave is the player's word) or the realm's hub refused us, and only where the realm refuses
+-- addon chat.
+function Send.joinHub()
+  if not Send.HUB_ASKS or not Send.restricted() or Send.hubTried or Send.left() or Send.realmRefused() then return end
+  local id = GetChannelName(Send.HUB)
+  if not isSecret(id) and type(id) == "number" and id > 0 then
+    if not Send.hubHidden then Send.hideHub() end
+    return
+  end
+  Send.hubTried, Send.hubTriedAt = true, GetTime()
+  local join = JoinPermanentChannel or JoinChannelByName
+  if type(join) ~= "function" then return end
+  local ok, err = pcall(join, Send.HUB)
+  log("hub", "join", ok and "asked" or tostring(err))
+end
+
+-- The click that may join a channel (any LayerSwap control). On a realm that refuses addon chat
+-- the hub, never the layer channel: the game bars an account from that one after a refused line,
+-- and a refused join shows the same red line (one of Adam's characters, 7 Nov 2026, at Host on).
+-- Elsewhere the layer channel, for a host.
+function Send.joins()
+  if Send.restricted() then Send.joinHub(); return end
+  if hosting and GetChannelName(LAYER_CHANNEL) == 0 then pcall(JoinChannelByName, LAYER_CHANNEL) end
+end
+
+-- 1.14.4: an ask nobody answered is not sent again to the same place from the same zone within
+-- REPEAT_WAIT - the same hosts heard it, and a second line only fills the channel. After an
+-- invite (one that did not move us), from another zone or to another place it may go at once.
+-- The seconds left, or nil.
+function Send.repeatLeft(now, where)
+  local l = where and Send.lastAt[where]
+  if not (l and not l.invited and l.zone == Send.zoneKey()) then return nil end
+  local left = Send.REPEAT_WAIT - (now - l.at)
+  return left > 0 and left or nil
+end
+
+-- Our last ask in the hub from this zone went unanswered and is still within its repeat wait: the
+-- next ask, from any control, goes to General - the hub had its chance - and to the hub after.
+function Send.hubSpent(now)
+  local l = Send.lastAt.hub
+  return l ~= nil and not l.invited and l.zone == Send.zoneKey() and now - l.at >= Send.HUB_WAIT and now - l.at < Send.REPEAT_WAIT
+end
+
+-- Where a click's line goes (requestSwap), and where the panel says it goes. With both places
+-- asked and unanswered, the hub, whose wait ends first.
+function Send.place(now, via)
+  return Send.target(via == "fallback" or (Send.hubSpent(now) and not Send.repeatLeft(now, "general")))
+end
+
+-- An ask in the hub no host has invited by HUB_WAIT: logged once, and the Swap button offers
+-- General (Send.offerGeneral); with the panel closed, chat says it.
+function Send.hubCheck(s)
+  if swap ~= s or (s.inviter and not s.inviterSeen) or s.joinedAt or s.missed then return end
+  s.missed = true
+  local direct = s.where == "direct"
+  log("ask", direct and "no invite from the zone's players" or "no invite from the hub", current, s.want, Send.HUB_WAIT .. " s")
+  local pf = _G.LayerSwapPanel
+  if not (type(pf) == "table" and pf:IsShown()) and Send.generalId() then
+    say(direct and "no host on another layer has answered yet - Ask in General in the panel (/ls) puts the request in General too."
+      or "no invite from LayerSwap's channel yet - Swap layer or /ls swap asks in General now.")
+  end
+  refresh()
+end
+
+-- The hub's ask waits past HUB_WAIT without an invite, from the zone we still stand in, and
+-- General is there to ask instead.
+-- 1.14.6: never after an ask by hidden whisper - General holds only the asker's own layer (every
+-- invite through it came from there), so it moves nobody (Adam, 8 Nov 2026: "General will not help").
+function Send.offerGeneral(now)
+  return swap ~= nil and swap.where == "hub" and not (swap.inviter and not swap.inviterSeen)
+    and not swap.joinedAt and not Send.pending and now - swap.at >= Send.HUB_WAIT and now - swap.at <= SWAP_TTL and swap.zone == Send.zoneKey() and Send.generalId() ~= nil
+end
+
+-- The chat box back to the type it had before a hub line (Send.preSend): CHANNEL is sticky, so the
+-- send leaves the box on the hub, where the player's next lines would vanish unseen. Only when
+-- the send left it on the hub, and only to a type known from before.
+function Send.restoreBox(box, prev)
+  if type(box) ~= "table" or type(box.GetStickyType) ~= "function" or type(box.SetStickyType) ~= "function" then return end
+  local ok, sticky = pcall(box.GetStickyType, box)
+  local okT, target = pcall(box.GetChannelTarget, box)
+  if not (ok and sticky == "CHANNEL" and okT and target == prev.hub) then return end
+  if prev.sticky == "CHANNEL" and prev.channel == nil then return end
+  pcall(box.SetStickyType, box, prev.sticky)
+  if type(box.SetChatType) == "function" then pcall(box.SetChatType, box, prev.sticky) end
+  if prev.sticky == "CHANNEL" and type(box.SetAttribute) == "function" then pcall(box.SetAttribute, box, "channelTarget", prev.channel) end
+  if type(box.IsShown) == "function" and box:IsShown() and type(box.UpdateHeader) == "function" then pcall(box.UpdateHeader, box) end
+  log("box", "back to", prev.sticky)
+end
+
+-- 1.14.4: other players' LayerSwap requests stay out of the chat windows - the addon reads them
+-- from the event, not from a window, so a host answers as before. Our own request in General still
+-- shows; every line of the hub is hidden, as the hub is. true hides the line.
+function Send.filterLine(_, _, msg, author, _, _, _, _, _, _, base)
+  if Send.isHub(base) then return true end
+  if isSecret(msg) or type(msg) ~= "string" then return false end
+  -- our tag's own shape: "<LS>", or a zone number, "want" or "not" first ("<LSD>" or "<LS Raiders>"
+  -- closing a line is somebody's guild)
+  local body = string.match(msg, "<LS([^<>]*)>%s*$")
+  if not body or not (body == "" or string.find(body, "^ %d") or string.find(body, "^ want %d") or string.find(body, "^ not %d")) then return false end
+  if isSecret(author) or type(author) ~= "string" or author == "" then return true end
+  return withRealm(author) ~= fullName("player")
+end
+
+function Send.filterNotice(_, _, _, _, _, _, _, _, _, _, base)
+  return Send.isHub(base)
+end
+
+-- The chat edit box the line goes into.
+function Send.editBox()
+  local f = ChatFrameUtil and ChatFrameUtil.GetActiveWindow
+  local box = type(f) == "function" and select(2, pcall(f)) or nil
+  if type(box) ~= "table" then box = DEFAULT_CHAT_FRAME and DEFAULT_CHAT_FRAME.editBox end
+  if type(box) ~= "table" then box = _G.ChatFrame1EditBox end
+  return type(box) == "table" and box or nil
+end
+
+function Send.boxText()
+  local box = Send.editBox()
+  if not (box and type(box.GetText) == "function") then return nil end
+  local ok, s = pcall(box.GetText, box)
+  if ok and not isSecret(s) and type(s) == "string" then return s end
+  return nil
+end
+
+-- The line into the chat box, one frame later (a slash command runs inside the box's own send,
+-- which empties the box right after; a frame later it is free). The pending line is remembered
+-- until its own echo comes back (Send.echo) or the box has let go of it (Send.tick).
+function Send.box(line, kind, channel, where, ask)
+  local prefix = kind == "GUILD" and (SLASH_GUILD1 or "/g") or ("/" .. tostring(channel))
+  local text = prefix .. " " .. line
+  Send.count = Send.count + 1
+  Send.pending = { id = Send.count, body = line, text = text, where = where, kind = kind, channel = channel,
+                   from = ask.from, want = ask.want, via = ask.via, at = GetTime() }
+  notice = nil   -- a notice from before the click must not stand in for the line's own instruction
+  log("ask", "in the box", current, ask.want, (ask.via or "?") .. " " .. where)
+  local open = (ChatFrameUtil and ChatFrameUtil.OpenChat) or ChatFrame_OpenChat
+  if type(open) ~= "function" then
+    setNotice("Type this in chat: " .. text, 60)
+    return
+  end
+  local id = Send.count
+  C_Timer.After(0, function()
+    if not (Send.pending and Send.pending.id == id) then return end
+    -- the box OpenChat will use, as it stands before our line (Send.restoreBox)
+    local chooser = ChatFrameUtil and ChatFrameUtil.ChooseBoxForSend
+    if type(chooser) == "function" then
+      local ok, box = pcall(chooser, DEFAULT_CHAT_FRAME)
+      if ok and type(box) == "table" and type(box.GetAttribute) == "function" then
+        local okA, target = pcall(box.GetAttribute, box, "channelTarget")
+        Send.pending.box, Send.pending.prevChannel = box, (okA and not isSecret(target)) and target or nil
+      end
+    end
+    pcall(open, text, DEFAULT_CHAT_FRAME)
+  end)
+  if not Send.ticker and C_Timer.NewTicker then Send.ticker = C_Timer.NewTicker(1, Send.tick) end
+end
+
+-- The line is dropped: nothing went out. The box is emptied only when it still holds our line.
+function Send.drop(why, line)
+  local p = Send.pending
+  if not p then return end
+  Send.pending = nil
+  local s = Send.boxText()
+  if s and string.find(s, p.body, 1, true) then
+    local box = Send.editBox()
+    if box and type(box.SetText) == "function" then pcall(box.SetText, box, "") end
+  end
+  log("ask", "dropped", current, p.want, why)
+  if line then setNotice(line, 15) end
+  refresh()
+end
+
+-- Once a second while a line is pending: as long as the box holds it the player can still send
+-- it, however long that takes; once it is gone (sent or Escape) the echo has ECHO_WAIT to come.
+function Send.tick()
+  local p = Send.pending
+  if not p then
+    if Send.ticker then Send.ticker:Cancel(); Send.ticker = nil end
+    return
+  end
+  local now = GetTime()
+  local s = Send.boxText()
+  if s == nil then
+    if now - p.at > Send.BOX_TTL then Send.drop("box unreadable", "Request not sent - click Swap layer and press Enter.") end
+    return
+  end
+  if string.find(s, p.body, 1, true) then
+    p.seen, p.goneAt = true, nil
+    return
+  end
+  if not p.seen then
+    if now - p.at >= 2 then Send.drop("never in the box", "Open the chat box, then click Swap layer again.") end
+    return
+  end
+  p.goneAt = p.goneAt or now
+  if now - p.goneAt >= Send.ECHO_WAIT then Send.drop("no echo", "Request not sent - click Swap layer and press Enter.") end
+end
+
+-- Blizzard's own hook just before the box sends: the Enter is noted (the log tells a line never
+-- sent from one the realm refused), the box counts as having held the line (an Enter before the
+-- ticker's first look must not read as "never in the box"), and a guild line's notes go ahead of it.
+function Send.preSend(box)
+  local p = Send.pending
+  if not (p and box and type(box.GetText) == "function") then return end
+  local ok, s = pcall(box.GetText, box)
+  if ok and type(s) == "string" and string.find(s, p.body, 1, true) then
+    p.enterAt, p.seen = GetTime(), true
+    log("box", "enter", p.where)
+    -- 1.14.4: the sticky type is still the one from before our line here (Blizzard sets it after the
+    -- send): a frame later the box goes back to it
+    if p.where == "hub" and type(box.GetStickyType) == "function" then
+      local okS, sticky = pcall(box.GetStickyType, box)
+      local prev = { sticky = (okS and not isSecret(sticky) and type(sticky) == "string") and sticky or "SAY",
+                     channel = (p.box == box) and p.prevChannel or nil, hub = p.channel }
+      C_Timer.After(0, function() Send.restoreBox(box, prev) end)
+    end
+    -- /ls guild: the guild's notes - position, zone, layer - leave here, right before the line,
+    -- where a 1.14/1.14.1 guild host with the box on expects them. Once per line, and never in a
+    -- way that can stop Blizzard's send.
+    if p.kind == "GUILD" and not p.notesAt then
+      p.notesAt = GetTime()
+      pcall(function()
+        Near.send("guild", "GUILD")
+        sendZone("GUILD")
+        sendNote((p.want and ("want " .. p.want)) or (p.from and ("not " .. p.from)) or "any", "GUILD")
+      end)
+    end
+  end
+end
+
+-- Our own line came back (onChat): the ask is out. A line that carries our tag starts the wait
+-- even when nothing was pending any more (an Enter long after the click); a plain "inv layer" of
+-- ours in the pending channel counts too. An ask already waiting is left alone.
+function Send.echo(where, msg)
+  local now = GetTime()
+  local p = Send.pending
+  local tag = routeTag(msg)
+  if not (tag or (p and p.where == where)) then return end
+  if not p and swap and not swap.joinedAt and now - swap.at <= SWAP_TTL then return end
+  local from = p and p.from or current
+  local want = p and p.want or (tag and tag.want) or nil
+  if where == "guild" then
+    if swap and not swap.joinedAt then swap.at, swap.guildAt = now, now
+    else swap = { at = now, from = from, want = want, guildAt = now } end
+  else
+    if swap and not swap.joinedAt and swap.guildAt then swap.at, swap.channel = now, true
+    else swap = { at = now, from = from, want = want, channel = true } end
+  end
+  -- a guild line on top of a channel ask leaves the channel's place standing (the bottom line and
+  -- Ask in General read it)
+  if where ~= "guild" or not swap.where or swap.where == "guild" then swap.where, swap.zone = where, Send.zoneKey() end
+  log("ask", "sent by you", current, want, where .. (tag and "" or " without the tag"))
+  if where == "layer" then readChannelCount("ask") end
+  if where ~= "guild" then Send.lastAt[where] = { zone = swap.zone, at = now } end
+  if where == "hub" then
+    local s = swap
+    C_Timer.After(Send.HUB_WAIT, function() Send.hubCheck(s) end)
+  end
+  Send.pending, notice = nil, nil
+  refresh()
+end
+
+-- The world moved or a group came while a line waited for its Enter: the line names a place
+-- that is no longer ours, so it is dropped.
+function Send.moved(line)
+  if Send.pending then Send.drop("moved", line) end
+  Who.moved(line)
+end
+
+-- What the server says about a channel (CHAT_MSG_CHANNEL_NOTICE and _USER). The layer channel
+-- and General are the two that matter; each kind of notice is logged once per channel per
+-- session, with a count, and never more than 20 kinds - the live client asks to join a zone
+-- channel every 0.27 s and is refused each time.
+function Send.notice(kind, channelName, zoneChannelID, index, base)
+  if isSecret(kind) or type(kind) ~= "string" then return end
+  local name = (not isSecret(base) and type(base) == "string" and base ~= "") and base
+    or ((not isSecret(channelName) and type(channelName) == "string") and (string.gsub(channelName, "^%d+%.%s*", "")) or "")
+  local layer = string.lower(name) == LAYER_CHANNEL
+  local general = not isSecret(zoneChannelID) and zoneChannelID == 1
+  local key = kind .. "|" .. string.lower(name)
+  local e = Send.notices[key]
+  if e then
+    e.n = (e.n or 1) + 1
+    e.c = e.n .. " times, last " .. date("%H:%M:%S")
+  elseif Send.noticeCount < 20 then
+    Send.noticeCount = Send.noticeCount + 1
+    e = log("notice", kind, name ~= "" and name or "?", nil, (not isSecret(index) and index ~= nil) and tostring(index) or nil)
+    if e then e.n = 1; Send.notices[key] = e end
+  end
+  if Send.isHub(name) then Send.hubNotice(kind); return end
+  if not (layer or general) then return end
+  local p = Send.pending
+  if kind == "YOU_JOINED" or kind == "YOU_CHANGED" then
+    if layer then Send.layerClosed = nil; Send.comms.CHANNEL = nil end
+  elseif kind == "YOU_LEFT" then
+    if layer and p and p.where == "layer" then Send.drop("left the channel", "You left the layer channel - click Swap layer again.") end
+  elseif kind == "NOT_ALLOWED_IN_CHANNEL" or kind == "MUTED" or kind == "NOT_MEMBER" or kind == "BANNED" or kind == "WRONG_PASSWORD" then
+    if layer then
+      Send.layerClosed = true
+      if p and p.where == "layer" then
+        local id = Send.generalId()
+        if id then
+          Send.box(p.body, "CHANNEL", id, "general", p)
+          setNotice("The layer channel refused your line - it is set for General now, press Enter.", 20)
+          refresh()
+        else
+          Send.drop(kind, "The layer channel refused your line, and you are not in General - type /join general, then click Swap layer again.")
+        end
+      elseif Send.direct and swap and not swap.joinedAt and swap == Send.direct.swap and GetTime() - Send.direct.at < 5 then
+        -- a line LayerSwap sent itself was refused: nothing went out, so the wait it started ends,
+        -- and the same line goes into the box for the player's own Enter
+        swap = nil
+        local direct = Send.direct
+        Send.direct = nil
+        log("ask", "refused by the realm", current, direct.want, kind)
+        local id = Send.generalId()
+        Send.box(direct.line, "CHANNEL", id or direct.channel, id and "general" or "layer", direct)
+        setNotice("The game refused LayerSwap's line - it is in the chat box now, press Enter.", 20)
+        refresh()
+      end
+    elseif general and p and p.where == "general" then
+      Send.drop(kind, "This realm does not let you post the request here.")
+    end
+  elseif kind == "TRIAL_RESTRICTED" then
+    if p then Send.drop(kind, "Your account cannot post in this channel (trial restriction).") end
+  elseif kind == "THROTTLED" then
+    if p then setNotice("The channel is throttled - wait a moment, then press Enter.", 15); refresh() end
+  end
+end
+
+-- What the server says about the hub (from Send.notice, logged there).
+function Send.hubNotice(kind)
+  local p = Send.pending
+  if not Send.HUB_ASKS then
+    -- read, never asked (1.14.6): the game's own rejoin at login stays out of the chat windows,
+    -- nothing is said, and Send.notice has logged a refusal already
+    if kind == "YOU_JOINED" or kind == "YOU_CHANGED" then Send.hubClosed = nil; Send.hideHub()
+    elseif Send.REFUSED[kind] then Send.hubClosed = true end
+    return
+  end
+  if kind == "YOU_JOINED" or kind == "YOU_CHANGED" then
+    local back = Send.left()
+    Send.hubClosed, Send.refusedSaid = nil, nil
+    Send.setLeft(nil)
+    if type(LayerSwapDB.hubRefused) == "table" then LayerSwapDB.hubRefused[Send.realmKey()] = nil end
+    Send.hideHub()
+    if back then
+      say("back in LayerSwap's channel: requests go there again.")
+    elseif not LayerSwapDB.hubSaid then
+      LayerSwapDB.hubSaid = true
+      say("joined LayerSwap's own channel, kept out of your chat windows: requests go there, so General stays free of them.")
+    end
+  elseif kind == "YOU_LEFT" then
+    Send.setLeft(true)
+    if p and p.where == "hub" then Send.drop("left the channel", "You left LayerSwap's channel - click Swap layer again.")
+    else say("left LayerSwap's channel: requests go to General now. /join " .. Send.HUB .. " brings it back.") end
+  elseif Send.REFUSED[kind] then
+    Send.hubClosed = true
+    local ours = (p and p.where == "hub") or (Send.hubTriedAt ~= nil and GetTime() - Send.hubTriedAt < 5)
+    if kind == "BANNED" or kind == "WRONG_PASSWORD" then Send.refused()
+    elseif ours then Send.refused(3600)
+    else
+      -- the game's own rejoin at login, refused (1.14.5): this session; the next login tries again
+      log("hub", "refused at rejoin", kind)
+      if not Send.refusedSaid then
+        Send.refusedSaid = true
+        say("LayerSwap's channel refused you - requests go to General until it lets you back in.")
+      end
+    end
+    if p and p.where == "hub" then
+      local id = Send.generalId()
+      if id then
+        Send.box(p.body, "CHANNEL", id, "general", p)
+        setNotice("LayerSwap's channel refused your line - it is set for General now, press Enter.", 20)
+        refresh()
+      else
+        Send.drop(kind, "LayerSwap's channel refused your line, and you are not in General - type /join general, then click Swap layer again.")
+      end
+    end
+  elseif kind == "TRIAL_RESTRICTED" then
+    if p then Send.drop(kind, "Your account cannot post in this channel (trial restriction).") end
+  elseif kind == "THROTTLED" then
+    if p then setNotice("The channel is throttled - wait a moment, then press Enter.", 15); refresh() end
+  end
+end
+
+-- ---------------------------------------------------------------------------------------
+-- 1.14.6: the ask without a channel (see the Who table at the top)
+
+-- Does this client and realm offer the way? Forever, where the realm refuses addon chat, with the
+-- player search and the addon whisper both there, and the whispers not refused this session.
+function Who.can()
+  if not (FOREVER and Send.restricted()) or Who.refused then return false end
+  local f = C_FriendList
+  return type(f) == "table" and type(f.SendWho) == "function" and type(f.GetNumWhoResults) == "function"
+    and type(f.GetWhoInfo) == "function" and C_ChatInfo ~= nil and type(C_ChatInfo.SendAddonMessage) == "function"
+end
+
+-- The search's answers back to the chat, for the player's own /who - unless one of the game's who
+-- lists is open and wants them. Only once our question is answered (Who.release): an answer that
+-- comes after a stop or a timeout would otherwise land in the player's chat.
+function Who.uiBack()
+  local f = C_FriendList and C_FriendList.SetWhoToUi
+  if type(f) ~= "function" then return end
+  for _, name in ipairs({ "LFGWhoListFrame", "WhoFrame" }) do
+    local frame = _G[name]
+    if type(frame) == "table" and type(frame.IsVisible) == "function" and select(2, pcall(frame.IsVisible, frame)) == true then return end
+  end
+  pcall(f, false)
+end
+
+-- The game's own who lists that open their window on any who answer while the social system is off
+-- (Forever's group finder, LFGWhoListMixin:UpdateWhoList; the old Friends window): out of the event
+-- while our question is out, unless the player has that list open, and back after it.
+Who.LISTS = { "LFGWhoListFrame", "FriendsFrame" }
+function Who.hush()
+  Who.muted = Who.muted or {}
+  for _, name in ipairs(Who.LISTS) do
+    local frame = _G[name]
+    if type(frame) == "table" and not Who.muted[name] and type(frame.IsEventRegistered) == "function" and type(frame.UnregisterEvent) == "function" then
+      local okR, reg = pcall(frame.IsEventRegistered, frame, "WHO_LIST_UPDATE")
+      local okV, seen = pcall(frame.IsVisible, frame)
+      if okR and reg == true and okV and seen ~= true and pcall(frame.UnregisterEvent, frame, "WHO_LIST_UPDATE") then Who.muted[name] = frame end
+    end
+  end
+end
+
+-- Our question is done with: answered, or given up LATE seconds after it went out.
+function Who.release(p)
+  if p and Who.inFlight ~= p then return end
+  Who.inFlight = nil
+  for name, frame in pairs(Who.muted or {}) do
+    pcall(frame.RegisterEvent, frame, "WHO_LIST_UPDATE")
+    Who.muted[name] = nil
+  end
+  Who.uiBack()
+end
+
+-- The search, from a click (the one moment the game answers an addon's /who): the players of the
+-- zone, on every layer of the realm. Returns true when the game took the question; otherwise
+-- false and why, and the click goes the old way.
+-- What this click asks: our own zone, then the zone one level band at a time (BANDS slices), in
+-- turn - only a host in our zone moves us. Without a zone name the level range of the realm.
+function Who.filter(zone)
+  local okM, m = pcall(GetMaxPlayerLevel)
+  local max = okM and not isSecret(m) and tonumber(m) or nil
+  if not max or max < 10 then max = 60 end
+  Who.band = ((Who.band or -1) + 1) % (Who.BANDS + 1)
+  local z = zone and ('z-"' .. zone .. '"') or nil
+  if Who.band == 0 then return z or ("1-" .. max) end
+  local size = math.ceil(max / Who.BANDS)
+  local lo = (Who.band - 1) * size + 1
+  local band = lo .. "-" .. math.min(max, lo + size - 1)
+  return z and (z .. " " .. band) or band
+end
+
+-- The creatures around us, read for the layer (observe): the nameplates the game shows, the
+-- target and the mouseover. After a join they tell whether it moved us (1.14.8).
+function Who.scan()
+  for i = 1, 40 do
+    local unit = "nameplate" .. i
+    local ok, there = pcall(UnitExists, unit)
+    if ok and there == true then observe(unit) end
+  end
+  observe("target")
+  observe("mouseover")
+end
+
+-- What the game says of each group member's phase (8 Nov 2026, a probe): UnitPhaseReason answers
+-- Sharding for a member on another layer - the party frame's phase icon - so after a join it may
+-- tell at once whether the host can move us. Logged only; nothing decides on it yet.
+Who.PHASE = { [0] = "phasing", [1] = "sharding", [2] = "war mode", [3] = "chromie time", [4] = "world tier", [5] = "ruleset" }
+function Who.shard(unit)
+  if type(UnitInPartyShard) ~= "function" then return "no api" end
+  local ok, v = pcall(UnitInPartyShard, unit)
+  if not ok then return "error" end
+  if isSecret(v) then return "secret" end
+  return v and "in" or "out"
+end
+
+function Who.phase(label)
+  if not FOREVER then return nil end
+  local parts = {}
+  for i = 1, PARTY_MAX - 1 do
+    local unit = "party" .. i
+    local okE, there = pcall(UnitExists, unit)
+    if okE and there == true then
+      local reason = "no api"
+      if type(UnitPhaseReason) == "function" then
+        local ok, r = pcall(UnitPhaseReason, unit)
+        if not ok then reason = "error"
+        elseif isSecret(r) then reason = "secret"
+        elseif r == nil then reason = "none"
+        else reason = Who.PHASE[r] or tostring(r) end
+      end
+      local okL, lead = pcall(UnitIsGroupLeader, unit)
+      parts[#parts + 1] = (fullName(unit) or unit) .. ((okL and lead == true) and " (lead)" or "") .. ": " .. reason
+        .. ", party shard " .. Who.shard(unit) .. ", map " .. tostring(zoneOf(unit) or "?")
+    end
+  end
+  if #parts == 0 then return nil end
+  local line = table.concat(parts, "; ")
+  log("phase", label, line, "me: party shard " .. Who.shard("player") .. ", map " .. tostring(zoneOf("player") or "?"), current)
+  return line
+end
+
+function Who.phaseSoon(label)
+  for _, s in ipairs({ 2, 10 }) do
+    C_Timer.After(s, function() if IsInGroup() then Who.phase(label .. " +" .. s .. " s") end end)
+  end
+end
+
+-- What this click asks: the players on our zone's map, then the map one class at a time (the
+-- label is what the log shows); the zone by name where the map is unknown or the client refused it.
+-- The zone's name goes along in the text, as the group finder's own list lets a player type one: a
+-- server that ignored the map would still narrow the answer to the zone, as before the map.
+function Who.query(zone, map)
+  if map and not Who.noMap then
+    Who.round = ((Who.round or -1) + 1) % (#Who.CLASSES + 1)
+    local cls = Who.round > 0 and Who.CLASSES[Who.round] or nil
+    return zone and ('z-"' .. zone .. '"') or "", { classIDs = cls and { cls } or {}, raceIDs = {}, uiMapIDs = { map } },
+      "map " .. map .. (cls and (" class " .. cls) or "")
+  end
+  local f = Who.filter(zone)
+  return f, nil, f
+end
+
+function Who.rescan()
+  if GetTime() - (Who.borderAt or -1000) < Who.BORDER_QUIET then return end
+  Who.scan()
+end
+
+function Who.ask(ask)
+  local zone = Layer.zone()
+  if isSecret(zone) or type(zone) ~= "string" or zone == "" then zone = nil end
+  Who.count = (Who.count or 0) + 1
+  local text, filters, label = Who.query(zone, zoneOf("player"))
+  -- 1.14.14: an ask for new layers only names the layers seen in this zone (Layer.seen)
+  for name, at in pairs(Who.sentTo) do
+    if GetTime() - at > 60 then Who.sentTo[name] = nil end
+  end
+  local more = ask.fresh and not ask.want and Layer.seen() or nil
+  if more and #more == 0 then more = nil end
+  local p = { id = Who.count, from = ask.from, want = ask.want, via = ask.via, at = GetTime(), zone = Send.zoneKey(),
+              zoneName = zone, line = askText(ask.want, nil, true, more), filter = label, sent = 0, rounds = 0, seen = more }
+  Who.pending, Who.inFlight = p, p
+  Who.hush()
+  if type(C_FriendList.SetWhoToUi) == "function" then pcall(C_FriendList.SetWhoToUi, true) end
+  local origin = (Enum and Enum.SocialWhoOrigin and Enum.SocialWhoOrigin.Social) or 1
+  local ok, err
+  if filters then
+    ok, err = pcall(C_FriendList.SendWho, text, origin, filters)
+    if not ok then
+      -- this client takes no map filter: the zone by name from now on
+      Who.noMap = true
+      log("who", "map filter refused", tostring(err))
+      text, filters = Who.filter(zone), nil
+      p.filter = text
+    end
+  end
+  if not filters then ok, err = pcall(C_FriendList.SendWho, text, origin) end
+  if not ok then
+    Who.pending = nil
+    Who.release(p)
+    return false, "SendWho: " .. tostring(err)
+  end
+  C_Timer.After(Who.LATE, function() Who.release(p) end)
+  Who.lastAt = p.at
+  notice = nil
+  log("who", "asked", p.filter, ask.via)
+  C_Timer.After(Who.WAIT, function() Who.timeout(p) end)
+  return true
+end
+
+-- No answer to the search within WAIT: nothing went out, and the click is free again.
+function Who.timeout(p)
+  if Who.pending ~= p or p.names then return end
+  Who.pending = nil
+  log("who", "no answer", p.filter, Who.WAIT .. " s")
+  local line = "The search for players got no answer - click Swap layer again in a moment."
+  setNotice(line, 15)
+  say(line)
+  refresh()
+end
+
+-- The game's answer (WHO_LIST_UPDATE): the names, without our own, and the first burst. Only the
+-- answer to our own question in flight; one that comes after a stop or a timeout is swallowed. The
+-- players of our own zone go first: a host there can also say it stands on our layer (1.14.8).
+function Who.results()
+  local q = Who.inFlight
+  if not q then return end
+  local p = Who.pending
+  local mine = p == q and not p.names
+  local okN, n, total = pcall(C_FriendList.GetNumWhoResults)
+  if not okN or isSecret(n) or type(n) ~= "number" then n = 0 end
+  if isSecret(total) or type(total) ~= "number" then total = n end
+  local me, names, others, seen, unread, areas = fullName("player"), {}, {}, {}, 0, {}
+  for i = 1, (mine and math.min(n, Who.MAX) or 0) do
+    local ok, info = pcall(C_FriendList.GetWhoInfo, i)
+    local name = (ok and type(info) == "table" and not isSecret(info)) and info.fullName or nil
+    if isSecret(name) or type(name) ~= "string" or name == "" then unread = unread + 1 end
+    if not isSecret(name) and type(name) == "string" and name ~= "" and not seen[name] then
+      seen[name] = true
+      local short = FOREVER and string.match(name, "^([^%-]+)") or name
+      if short ~= me and name ~= me then
+        local area = info.area
+        if not isSecret(area) and type(area) == "string" then areas[area] = (areas[area] or 0) + 1 end
+        if q.zoneName and not isSecret(area) and area == q.zoneName then names[#names + 1] = name
+        else others[#others + 1] = name end
+      end
+    end
+  end
+  Who.release(q)
+  if not mine then log("who", "late answer", q.filter, "dropped"); return end
+  local here = #names
+  for _, name in ipairs(others) do names[#names + 1] = name end
+  -- 1.14.12: a player asked in the last ASKED_FOR who did not answer is not asked again (Who.fresh)
+  local found = #names
+  names = Who.fresh(names)
+  local before = found - #names
+  names = Who.known(names)
+  p.names, p.total, p.queue = names, total, {}
+  for i, name in ipairs(names) do p.queue[i] = name end
+  -- what the game sent, for the log: the rows, the ones it gave no name for, the ones in another zone
+  log("who", #names .. (#names == 1 and " player" or " players"), "of " .. total, p.filter,
+      "rows " .. n .. ", unreadable " .. unread .. ", in your zone " .. here .. (before > 0 and (", asked before " .. before) or ""))
+  -- where the rows stand, the biggest first: whether the filter holds on this client
+  local list = {}
+  for area, k in pairs(areas) do list[#list + 1] = { area, k } end
+  table.sort(list, function(a, b) return a[2] > b[2] or (a[2] == b[2] and a[1] < b[1]) end)
+  local parts = {}
+  for i = 1, math.min(#list, 4) do parts[i] = list[i][1] .. " " .. list[i][2] end
+  if #parts > 0 then log("whoAreas", table.concat(parts, ", "), #list > 4 and ((#list - 4) .. " more") or nil) end
+  if #names == 0 and before > 0 then
+    -- everyone the search found was asked lately and did not answer: nothing is sent (1.14.12)
+    Who.pending = nil
+    log("ask", "everyone asked before", current, p.want, p.via)
+    local line = "Everyone found was asked in the last " .. math.floor(Who.ASKED_FOR / 3600) .. " h - none answered. Try another zone."
+    setNotice(line, 15)
+    say(line)
+    refresh()
+    return
+  end
+  if #names == 0 then
+    Who.pending = nil
+    log("ask", "nobody in the zone", current, p.want, p.via)
+    local line = "The search found nobody else - try again in a moment, or /ls guild."
+    setNotice(line, 15)
+    say(line)
+    refresh()
+    return
+  end
+  Who.send(p)
+end
+
+-- The book: a LayerSwap user who answered an ask of ours, by name without the realm.
+function Who.remember(name, layer, zone, host)
+  if not FOREVER or isSecret(name) or type(name) ~= "string" or name == "" then return end
+  local book = LayerSwapDB.book
+  if type(book) ~= "table" then book = {}; LayerSwapDB.book = book end
+  local key = string.match(name, "^([^%-]+)") or name
+  local e = book[key] or {}
+  e.layer, e.zone, e.at, e.gone = layer or e.layer, zone or e.zone, time(), nil
+  if host ~= nil then e.host = host and true or nil end
+  book[key] = e
+end
+
+-- At login: entries older than BOOK_TTL go, and the newest BOOK_MAX stay.
+function Who.prune()
+  local book = LayerSwapDB.book
+  if type(book) ~= "table" then return end
+  local list = {}
+  for key, e in pairs(book) do
+    if type(e) ~= "table" or type(e.at) ~= "number" or time() - e.at > Who.BOOK_TTL then book[key] = nil
+    else list[#list + 1] = key end
+  end
+  if #list > Who.BOOK_MAX then
+    table.sort(list, function(a, b) return book[a].at > book[b].at end)
+    for i = Who.BOOK_MAX + 1, #list do book[list[i]] = nil end
+  end
+end
+
+-- 1.14.12: the players a search whispered, by the name it whispered (LayerSwapDB.asked[name] = time()). A player
+-- asked in the last ASKED_FOR seconds who did not answer is not asked again: only a LayerSwap user can
+-- answer, and an answer puts the player in the book, which is always asked. Players told of Blizzard
+-- silences (CurseForge, 10 Nov 2026), and one of our own sessions whispered 481 times in 7 minutes,
+-- most of them the same players again. Kept under ASKED_MAX names, the newest.
+function Who.pruneAsked()
+  local asked = LayerSwapDB.asked
+  if type(asked) ~= "table" then LayerSwapDB.asked = {}; return end
+  local now, list = time(), {}
+  for name, at in pairs(asked) do
+    if type(at) ~= "number" or now - at >= Who.ASKED_FOR then asked[name] = nil else list[#list + 1] = name end
+  end
+  if #list > Who.ASKED_MAX then
+    table.sort(list, function(a, b) return asked[a] > asked[b] end)
+    for i = Who.ASKED_MAX + 1, #list do asked[list[i]] = nil end
+  end
+end
+
+-- The search's names without the players asked lately who did not answer, in their order.
+function Who.fresh(names)
+  Who.pruneAsked()
+  local asked = LayerSwapDB.asked
+  local book = type(LayerSwapDB.book) == "table" and LayerSwapDB.book or {}
+  local keep = {}
+  for _, name in ipairs(names) do
+    local e = book[string.match(name, "^([^%-]+)") or name]
+    if e and type(e.gone) == "number" and time() - e.gone < Who.GONE_FOR then e = nil end   -- not found lately (Who.notPlaying)
+    if not asked[name] or e then keep[#keep + 1] = name end
+  end
+  return keep
+end
+
+function Who.mark(name)
+  if type(LayerSwapDB.asked) ~= "table" then LayerSwapDB.asked = {} end
+  LayerSwapDB.asked[name] = time()
+end
+
+-- The search's names with the hosts from the book first, the rest in their order.
+function Who.known(names)
+  local book = type(LayerSwapDB.book) == "table" and LayerSwapDB.book or nil
+  if not book then return names end
+  local first, rest = {}, {}
+  for _, name in ipairs(names) do
+    local e = book[string.match(name, "^([^%-]+)") or name]
+    if e and e.host and not (type(e.gone) == "number" and time() - e.gone < Who.GONE_FOR) then first[#first + 1] = name
+    else rest[#rest + 1] = name end
+  end
+  if #first == 0 then return names end
+  log("who", "known hosts first", #first)
+  for _, name in ipairs(rest) do first[#first + 1] = name end
+  return first
+end
+
+-- 1.14.14: "No player named 'X' is currently playing." - the game's own line for a whisper it could not deliver, in
+-- the client's language (ERR_CHAT_PLAYER_NOT_FOUND_S). The name it carries when we whispered that player within
+-- GONE_WAIT seconds, as we whispered it; nil for any other line or name (the player's own /w stays theirs).
+function Who.notPlaying(text)
+  local g = ERR_CHAT_PLAYER_NOT_FOUND_S
+  if isSecret(text) or type(text) ~= "string" or isSecret(g) or type(g) ~= "string" then return nil end
+  local pattern = "^" .. string.gsub(string.gsub(g, "[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"), "%%%%s", "(.+)") .. "$"
+  local name = string.match(text, pattern)
+  if not name then return nil end
+  local now = GetTime()
+  for sent, at in pairs(Who.sentTo) do
+    if now - at <= Who.GONE_WAIT and (sent == name or (string.match(sent, "^([^%-]+)") or sent) == name) then return sent end
+  end
+  return nil
+end
+
+-- That line came for a player we whispered: logged. A stranger is not asked again for ASKED_FOR, like anyone who
+-- did not answer; one in the book - asked at every click otherwise - is left alone for GONE_FOR, or until it
+-- answers again (Who.remember).
+function Who.gone(text)
+  local name = Who.notPlaying(text)
+  if not name then return end
+  Who.gonePlayers = Who.gonePlayers or {}
+  if Who.gonePlayers[name] and GetTime() - Who.gonePlayers[name] < Who.GONE_WAIT then return end   -- once per whisper
+  Who.gonePlayers[name] = GetTime()
+  log("who", "not playing", name)
+  if type(LayerSwapDB.asked) == "table" then LayerSwapDB.asked[name] = time() end
+  local e = type(LayerSwapDB.book) == "table" and LayerSwapDB.book[string.match(name, "^([^%-]+)") or name]
+  if type(e) == "table" then e.gone = time() end
+end
+
+-- The chat windows' filter: the line is ours to hide only for a name we whispered moments ago.
+function Who.filterGone(_, _, text)
+  if Who.notPlaying(text) then return true end
+  return false
+end
+
+-- One burst of hidden whispers, BURST at a time and a second apart: the client throttles addon
+-- messages (3) - a name it refused waits for the next round; any other refusal is counted and the
+-- name dropped. The ask waits from the first whisper the client took (Who.out).
+function Who.send(p)
+  if Who.pending ~= p then return end
+  p.rounds = p.rounds + 1
+  local n = 0
+  while #p.queue > 0 and n < Who.BURST do
+    local name = p.queue[1]
+    local ok, res = pcall(C_ChatInfo.SendAddonMessage, NOTE_PREFIX, p.line, "WHISPER", name)
+    if ok and not isSecret(res) and res == 3 then break end
+    table.remove(p.queue, 1)
+    n = n + 1
+    if ok and not isSecret(res) and res == 0 then
+      p.sent = p.sent + 1
+      Who.mark(name)
+      Who.sentTo[name] = GetTime()
+      if not p.out then Who.out(p) end
+    else
+      p.failed = (p.failed or 0) + 1
+      p.why = p.why or (ok and (isSecret(res) and "secret" or tostring(res)) or ("error: " .. tostring(res)))
+    end
+  end
+  if swap and swap.who == p then swap.reach = p.sent end
+  if #p.queue > 0 and p.rounds < Who.ROUNDS then
+    C_Timer.After(Who.BURST_WAIT, function() Who.send(p) end)
+    refresh()
+    return
+  end
+  Who.pending = nil
+  Who.pruneAsked()
+  log("who", "whispered " .. p.sent .. " of " .. #p.names, p.why and ("refused " .. p.failed .. ": " .. p.why) or nil,
+      #p.queue > 0 and (#p.queue .. " left after " .. p.rounds .. " rounds") or nil)
+  p.doneAt = GetTime()
+  if p.sent > 0 then
+    C_Timer.After(Who.ANYWAY_WAIT, function() Who.anyway() end)
+    C_Timer.After(Who.ANYWAY_LATE, function() Who.anyway() end)
+  end
+  if p.sent == 0 and not p.why then
+    -- every try held back by the client's budget (3): nothing went out, and the way stays open
+    log("ask", "whispers throttled", current, p.want, p.via)
+    local line = "The game is holding back addon messages - click Swap layer again in a moment."
+    setNotice(line, 15)
+    say(line)
+  elseif p.sent == 0 then
+    -- the client took none of them (4: not that chat type): this way is closed for the session.
+    -- General is no way out (it holds only our own layer); the guild reaches every layer.
+    Who.refused = p.why or "?"
+    log("ask", "whispers refused", current, p.want, p.via)
+    setNotice(Who.GUILD_LINE, 20)
+    say(Who.GUILD_LINE)
+  end
+  refresh()
+end
+
+-- The ask is out: the wait for an invite starts, as after a chat line's echo. After HUB_WAIT
+-- without one the button offers General (Send.hubCheck, Send.offerGeneral).
+function Who.out(p)
+  p.out = true
+  local now = GetTime()
+  if swap and not swap.joinedAt and swap.guildAt then swap.at, swap.channel = now, true
+  else swap = { at = now, from = p.from, want = p.want, channel = true } end
+  swap.where, swap.zone, swap.who, swap.reach = "direct", p.zone, p, p.sent
+  swap.seen = p.seen
+  log("ask", "sent", current, p.want, (p.via or "?") .. " direct")
+  notice = nil
+  refresh()
+end
+
+-- Stop asking during the search or the burst: nothing more goes out. Returns what was pending.
+function Who.stop()
+  local p = Who.pending
+  if not p then return nil end
+  Who.pending = nil
+  return p
+end
+
+-- The world moved, or a group came, while the search or the burst ran: the rest is dropped - the
+-- names were the old zone's.
+function Who.moved(line)
+  local p = Who.stop()
+  if not p then return end
+  if p.out then
+    -- the ask is out already: only the rest of the burst is dropped
+    log("who", "burst stopped", line and "moved" or "in a group", #p.queue .. " left")
+  else
+    log("ask", "dropped", current, p.want, "moved during the search")
+    if line then setNotice(line, 15) end
+  end
+  refresh()
+end
+
+-- A hidden whisper that is a request: the line a chat ask carries, "inv layer ..." (Who.send).
+function Who.isAsk(text)
+  return not isSecret(text) and type(text) == "string" and string.find(text, "^inv layer") ~= nil
+end
+
+-- The host's side: the asker's request by hidden whisper, answered like a line in the layer
+-- channel - the zone and the layer from its tag, a "heard" back the same way, an invite from a
+-- host on another layer in the zone. The sender as the game names it is kept for the replies.
+function Who.onAsk(text, sender)
+  if isSecret(sender) or type(sender) ~= "string" or sender == "" then return end
+  local name = FOREVER and string.match(sender, "^([^%-]+)") or withRealm(sender)
+  if not name or name == fullName("player") then return end
+  Who.from[name] = sender
+  onChat("direct", text, name)
+end
+
+-- For /ls status.
+function Who.state()
+  if Who.refused then return "refused by the game this session (" .. tostring(Who.refused) .. ") - /ls guild asks your guild" end
+  if Who.can() then return "ready: Swap layer searches players across the realm and asks each of them out of sight" end
+  if not (FOREVER and Send.restricted()) then return "not needed on this realm" end
+  return "no player search in this client - requests go to General"
+end
+
 local function requestSwap(target, via, leaving, wantNumber)
   local now = GetTime()
   -- an unanswered request past its time is over; it must not hide what this click says
@@ -1322,7 +2787,7 @@ local function requestSwap(target, via, leaving, wantNumber)
     setNotice("You are in a group. Leave it to swap layers.", 10)
   elseif (swap and now - swap.at < SWAP_COOLDOWN) or now - stopped.at < SWAP_COOLDOWN then
     return
-  elseif (target and target == current) or (wantNumber and wantNumber == nwbLayer()) then
+  elseif (target and Layer.same(target, current)) or (wantNumber and wantNumber == nwbLayer()) then
     -- said straight out: an older ask still waiting would otherwise hide it
     local line = "You are already on " .. (target and layerLabel(target) or ("Layer " .. wantNumber)) .. "."
     setNotice(line, 10)
@@ -1338,6 +2803,66 @@ local function requestSwap(target, via, leaving, wantNumber)
     log("ask", "layer unknown", nil, nil, via)
     refresh()
     return "held"
+  elseif Send.restricted() then
+    -- 1.14.2: this realm does not let an addon post the line, so it goes into the chat box for
+    -- the player's own Enter (Send.target says where). Nothing joins the layer channel here: on
+    -- these realms the game bars a character from the channel after a line it refused (6 Nov
+    -- 2026: three users, two of Adam's characters), and a join it refuses shows the same red
+    -- line. 1.14.4: the click joins LayerSwap's own channel instead (Send.joinHub); this ask goes
+    -- where it can now, the next one can use it.
+    Send.joinHub()
+    -- 1.14.6: without a channel (Who.ask). The box, for General, only for Ask in General and where
+    -- the game offers no player search or refused the whispers.
+    if Who.refused then
+      setNotice(Who.GUILD_LINE, 15)
+      say(Who.GUILD_LINE)
+      log("ask", "whispers refused before", current, target, via)
+      refresh()
+      return "held"
+    end
+    if via ~= "fallback" and Who.can() then
+      if Who.pending then
+        local line = "Still searching for players - a moment."
+        setNotice(line, 5)
+        say(line)
+        return "held"
+      end
+      if now - (Who.lastAt or -1000) < SWAP_COOLDOWN then return end
+      -- a line still in the box (Ask in General) makes way for this ask, as one ask replaced another before
+      if Send.pending then Send.drop("replaced") end
+      local ok, why = Who.ask({ from = current, want = target, via = via,
+                                fresh = not target and (via == "new" or LayerSwapDB.newOnly == true) })
+      if ok then refresh(); return "search" end
+      log("who", "not asked", why, via)
+      -- 1.14.13: the search is there but did not start. No line for General in the chat box: since 1.14.12
+      -- no LayerSwap host answers there, and it is a line other players see and can report.
+      local line = "The player search did not start - try again in a moment, or /ls guild."
+      setNotice(line, 15)
+      say(line)
+      refresh()
+      return "held"
+    end
+    local where, id = Send.place(now, via)
+    if not id then
+      local line = "You are not in General or the layer channel - join General, then click again."
+      setNotice(line, 15)
+      say(line)
+      log("ask", "no channel", current, target, via)
+      refresh()
+      return "held"
+    end
+    local left = Send.repeatLeft(now, where)
+    if left then
+      local line = "No host answered your last request in " .. Send.placeName(where) .. " - ask again in " .. math.ceil(left) .. " s."
+      setNotice(line, 10)
+      say(line)
+      log("ask", "not repeated", current, target, via .. " " .. where)
+      refresh()
+      return "held"
+    end
+    Send.box(askText(target, wantNumber, true), "CHANNEL", id, where, { from = current, want = target, via = via })
+    refresh()
+    return "box"
   else
     local channel = GetChannelName(LAYER_CHANNEL)
     if channel == 0 then
@@ -1350,7 +2875,8 @@ local function requestSwap(target, via, leaving, wantNumber)
       Near.send("ask", "CHANNEL", channel)
       sendZone("CHANNEL", channel)
       sendNote(note, "CHANNEL", channel)
-      local sent, why = sendAsk(askText(target, wantNumber, true), "CHANNEL", channel, "Swap layer")
+      local line = askText(target, wantNumber, true)
+      local sent, why = sendAsk(line, "CHANNEL", channel, "Swap layer")
       if not sent then
         -- nothing went out: nothing to wait for, and no cooldown before the next click
         log("ask", why, current, target, via)
@@ -1358,16 +2884,24 @@ local function requestSwap(target, via, leaving, wantNumber)
         return "held"
       end
       -- a ping of our own after the line: its echo says whether the game is passing addon
-      -- messages on time right now (0.22-0.40 s until 8 Oct 2026, 68-139 s on 10 Oct)
+      -- messages on time right now (0.22-0.40 s until 8 Oct 2026, 68-139 s on 10 Oct). Only a
+      -- ping the client took can be waited for (1.14.2: a refused one said "delaying" for ever).
       pingCount = pingCount + 1
       local ping = "ping " .. pingCount .. "-" .. math.floor(now)
-      sendNote(ping, "CHANNEL", channel)
+      local res = sendNote(ping, "CHANNEL", channel)
       readChannelCount("ask")
       log("ask", "sent", current, target, via)
       -- a guild ask already waiting keeps waiting: both are out now
       if swap and not swap.joinedAt and swap.guildAt then swap.at, swap.channel = now, true
       else swap = { at = now, from = current, want = target, channel = true } end
-      swap.ping, swap.pingAt, swap.echoAt = ping, now, nil
+      swap.where = "layer"
+      if res == 0 then swap.ping, swap.pingAt, swap.echoAt = ping, now, nil
+      else swap.ping, swap.pingAt, swap.echoAt = nil, nil, nil end
+      -- the line LayerSwap sent itself, for the realm's answer (Send.notice). Forever only: the
+      -- Classic realms let the line out, and a channel notice there changes nothing
+      if FOREVER then
+        Send.direct = { at = now, line = line, channel = channel, swap = swap, from = current, want = target, via = via }
+      end
       notice = nil
     end
   end
@@ -1393,6 +2927,7 @@ local function replyFrom(name)
 end
 
 onSame = function(name)
+  Who.remember(name, current, zoneOf("player") and tostring(zoneOf("player")) or nil, true)
   if not waitingAsk(GetTime()) then return end
   local r = replyFrom(name)
   if r.same then return end
@@ -1402,10 +2937,13 @@ onSame = function(name)
 end
 
 onHeard = function(name, layer, zone, host)
+  Who.remember(name, layer, zone, host == true)
   if not waitingAsk(GetTime()) then return end
   local r = replyFrom(name)
   r.layer, r.zone, r.host = layer, zone, host or r.host
   log("heardReply", name, layer or "?", zone or "?", host and "hosting" or nil)
+  if host and not layer then Who.anyway() end   -- a late reply from a host that has not read its layer
+  Who.seenWarn(name)                            -- a reply that comes after its sender's invite
   refresh()
 end
 
@@ -1420,10 +2958,22 @@ end
 -- runs on an asker. About 0 yards proves the whole pipeline on one client (1.14).
 Near.echo = function(text)
   local pKind, pRef, px, py = string.match(text, "^(pos%a?) (%d+) (%-?%d+) (%-?%d+)$")
-  if not pKind or pKind ~= Near.KIND then return end
-  local mine = Near.read()
+  if not pKind or (pKind ~= "pos" and pKind ~= "posm") then return end
+  local mine = Near.read(pKind == "posm" and "map" or "world")
   if not mine or mine.ref ~= pRef then log("spot", "self", "unreadable now"); return end
   log("spot", "self", math.floor(Near.between(mine, { x = tonumber(px), y = tonumber(py) }) + 0.5) .. " yards")
+end
+
+-- Our own line came back (1.14.2): the tag's map coordinates against where we stand now, through
+-- the host's own arithmetic - about 0 yards proves the line's position on one client.
+Near.echoLine = function(msg)
+  local tag = routeTag(msg)
+  if not (tag and tag.pos and tag.zone) then return end
+  local mine = Near.read("map")
+  if not mine or mine.ref ~= tostring(tag.zone) then log("spot", "self", "unreadable now", "line"); return end
+  local w, h = Near.mapSize(tag.zone)
+  if not w then return end
+  log("spot", "self", math.floor(Near.between(mine, { x = tag.pos.x / 100 * w, y = tag.pos.y / 100 * h }) + 0.5) .. " yards", "line")
 end
 
 -- The game is slow with addon messages right now: the ask's ping took longer than LAG_AFTER to
@@ -1437,31 +2987,33 @@ end
 -- The replies counted: all, hosting, on another layer in our zone, on our own layer. A layer id
 -- belongs to one zone, so only replies from our zone are compared with our layer.
 local function heardCounts()
-  local n, h, o, s = 0, 0, 0, 0
+  local n, h, o, s, v = 0, 0, 0, 0, 0
   local here = zoneOf("player")
   here = here and tostring(here)
   for _, r in pairs(swap.replies or {}) do
+    -- only a host in our zone moves us (8 Nov 2026 23:21); a layer id belongs to one zone
     local sameZone = here ~= nil and r.zone == here
-    -- a reply from another zone is no use: no host there can move us (LayerSwap 1.10 and older
-    -- still answer from anywhere)
-    if r.same or sameZone then
-      n = n + 1
-      if r.host then h = h + 1 end
-      if r.same or (r.layer and current and r.layer == current) then s = s + 1
-      elseif r.layer and current and r.layer ~= current then o = o + 1 end
+    n = n + 1
+    if r.host then h = h + 1 end
+    if r.same or (sameZone and r.layer and current and Layer.same(r.layer, current)) then s = s + 1
+    elseif r.host and sameZone and r.layer and current then
+      -- 1.14.14: an ask for new layers only - a host on a layer we have seen is not one that can move us there
+      if swap.seen and Layer.inList(r.layer, swap.seen) then v = v + 1 else o = o + 1 end
     end
   end
-  return n, h, o, s
+  return n, h, o, s, v
 end
 
 -- One line on what LayerSwap users said, for the status line while the ask waits; "" until the
 -- first reply.
 local function heardLine()
-  local n, h, o, s = heardCounts()
+  local n, h, o, s, v = heardCounts()
   if n == 0 then return "" end
   local parts = { h > 0 and (h .. " hosting") or "none hosting" }
-  if o > 0 then parts[#parts + 1] = o .. " on another layer here" end
-  if s > 0 then parts[#parts + 1] = s .. " on yours" end
+  if o > 0 then parts[#parts + 1] = o .. " can move you" end
+  if swap.seen then
+    if s + v > 0 then parts[#parts + 1] = (s + v) .. " not on a new layer" end
+  elseif s > 0 then parts[#parts + 1] = s .. " on yours" end
   return n .. (n == 1 and " LayerSwap user heard you: " or " LayerSwap users heard you: ") .. table.concat(parts, ", ") .. "."
 end
 
@@ -1469,7 +3021,21 @@ end
 -- its way can still come - it is then the player's to decline, and it no longer counts as a swap.
 local function stopAsking(via)
   local now = GetTime()
-  if not waitingAsk(now) then return false end
+  -- the search, or the burst still going (1.14.6): nothing more goes out
+  local searched = Who.stop()
+  if Send.pending then
+    -- the line was never sent: no cooldown, and the box lets go of it
+    log("ask", "stopped", current, Send.pending.want, via .. " in the box")
+    Send.drop("stopped", "Stopped - the request was not sent.")
+    return true
+  end
+  if not waitingAsk(now) then
+    if not searched then return false end
+    log("ask", "stopped", current, searched.want, via .. " in the search")
+    setNotice("Stopped - the request was not sent.", 10)
+    refresh()
+    return true
+  end
   log("ask", "stopped", current, swap.want, via)
   stopped.at, stopped.guildAt = swap.at, swap.guildAt or -1000
   swap = nil
@@ -1503,6 +3069,13 @@ local function requestGuild(via)
     log("ask", "layer unknown", nil, nil, via)
     refresh()
     return "held"
+  elseif Send.restricted() then
+    -- 1.14.2: into the chat box for the player's own Enter (see requestSwap); the guild's notes
+    -- go out at that Enter, right before the line (Send.preSend), not now
+    local want = swap and not swap.joinedAt and swap.want or nil
+    Send.box(askText(want, nil, false), "GUILD", nil, "guild", { from = current, want = want, via = via })
+    refresh()
+    return "box"
   else
     local want = swap and not swap.joinedAt and swap.want or nil
     local note = (want and ("want " .. want)) or (current and ("not " .. current)) or "any"
@@ -1556,52 +3129,156 @@ local function refreshIn(now)
   if now - evictAt < 120 then return "soon" end
 end
 
+-- 1.14.13: a host in our zone that heard the ask but has not read its own layer ("?" in its reply) skips an ask
+-- that names the layer we leave - it cannot rule out standing on it (10 Nov 2026: two of three LayerSwap users in
+-- Westfall, one of three hosts in Stormwind). When no invite came and no host known to stand on another layer
+-- heard us - or one did and has not invited within ANYWAY_LATE - each such host is whispered once more, out of
+-- sight, with the layer left out: its LayerSwap then invites.
+-- Never for a named layer, never before the burst is out and ANYWAY_WAIT has passed, never to a host that did not
+-- move us in the last SAME_HOST_TTL. A host on our own layer is left after SAME_LAYER_LEAVE, as any host.
+-- 1.14.14: an invite from a host on a layer the player has seen, while the ask was for new layers only (a host on
+-- an older version reads only the layer we leave): said in the panel and in chat - declining stays the player's.
+function Who.seenWarn(name)
+  if not (swap and swap.seen and name and swap.inviter == name and not swap.joinedAt) then return end
+  local r = swap.replies and swap.replies[name]
+  if not (r and r.layer and Layer.inList(r.layer, swap.seen)) then return end
+  -- like a host known to stand on our own layer, it keeps the name only until another host invites
+  swap.inviterSeen = true
+  swap.warned = swap.warned or {}
+  if swap.warned[name] then return end
+  swap.warned[name] = true
+  local label = layerLabel(Layer.canon(r.layer))
+  log("seenLayerInvite", name, r.layer, label)
+  say(name .. " is on " .. label .. ", which you have seen - decline to wait for a new layer.")
+  setNotice(name .. " is on " .. label .. " - you have seen it. Decline to wait.", 30)
+  refresh()
+end
+
+function Who.anyway()
+  if not (FOREVER and Send.restricted()) then return end
+  local now = GetTime()
+  if not (waitingAsk(now) and swap.where == "direct" and swap.who and swap.who.doneAt) then return end
+  local since = now - swap.who.doneAt
+  if since < Who.ANYWAY_WAIT or swap.inviter or swap.want then return end
+  -- a host known to stand on another layer gets ANYWAY_LATE to invite: it answers "hosting" even while it
+  -- cannot invite (in a group of its own, its group full), and then nothing comes of it
+  local _, _, other = heardCounts()
+  if other > 0 and since < Who.ANYWAY_LATE then return end
+  local here = zoneOf("player")
+  if not here then return end
+  local fx, fy
+  local okF, a, b = pcall(Near.fraction, here)
+  if okF and a then fx, fy = a, b end
+  local line = "inv layer " .. routeText(here, nil, nil, fx, fy)
+  local asked = false
+  for name, r in pairs(swap.replies or {}) do
+    local seen = sameHosts[name]
+    local before = seen and current and Layer.same(seen.layer, current) and now - seen.at <= SAME_HOST_TTL
+    if r.host and not r.layer and not r.same and not r.anyway and r.zone == tostring(here) and not before then
+      r.anyway = true
+      local ok, res = pcall(C_ChatInfo.SendAddonMessage, NOTE_PREFIX, line, "WHISPER", Who.from[name] or name)
+      Who.sentTo[Who.from[name] or name] = now
+      log("ask", "asked anyway", current, name, "layer unknown, " .. ((not ok and "error") or (isSecret(res) and "secret") or tostring(res)))
+      swap.anyway = { name = name, at = now }
+      asked = true
+    end
+  end
+  if asked then refresh() end
+end
+
 -- The one status line under the buttons.
 local function statusLine()
   local now = GetTime()
+  if Send.pending then
+    -- a notice set for the line that waits (a refusal, a throttle) says why; else the line itself
+    if notice and now < (noticeUntil or 0) then return notice end
+    return Send.PENDING_TEXT
+  end
+  if Who.pending and not Who.pending.out then return "Searching for players..." end
   if swap then
     if swap.joinedAt then
       local host = swap.inviter or "a host"
       if hostOnOurLayer(now) then
-        if swap.elsewhere then return host .. " is in " .. swap.elsewhere .. " - only a host in your zone can move you." end
+        if swap.elsewhere then return host .. " in " .. swap.elsewhere .. " did not move you." end
+        if swap.refreshed then return host .. " did not move you. Leave and ask again." end
         -- two lines in the panel: the chat line names the zone
         if onlyLayerHere() then return "Host on your layer - the only one seen here. Try a busier zone." end
-        return host .. " is on your layer, so nothing changed. Leave and ask again."
+        return host .. " is on your layer. Leave and ask again."
       end
       if not current then return "In " .. host .. "'s group. Mouse over an NPC to read the layer." end
+      if not swap.transferAt and now - swap.joinedAt >= SAME_LAYER_AFTER and (swap.fresh or 0) < Who.FRESH then
+        return "In " .. host .. "'s group - mouse over an NPC to check."
+      end
       return "In " .. host .. "'s group, still on " .. layerLabel(current) .. ". (" .. clock(now - swap.joinedAt) .. ")"
-    elseif swap.inviter then
-      -- a host that did not move us before: the warning, not "accept"
-      if swap.inviterSeen and notice and now < (noticeUntil or 0) then return notice end
+    elseif swap.inviter and not swap.inviterSeen then
       return swap.inviter .. " invited you. Accept to swap."
+    elseif swap.inviterSeen and notice and now < (noticeUntil or 0) then
+      -- a host that did not move us before: the warning, not "accept"; after it the ask waits on
+      return notice
     elseif now - swap.at > SWAP_TTL then
       if swap.want then return "No host on " .. layerLabel(swap.want) .. " answered. Swap layer asks for any other." end
-      local n, h, other, same = heardCounts()
+      local n, h, other, same, known = heardCounts()
+      if swap.seen and known > 0 and other == 0 then
+        return "No host on a new layer answered. Click a layer in the list to go back to one."
+      end
       if same > 0 then
         return "No host on another layer answered; " .. same .. " here " .. (same == 1 and "is" or "are") .. " on yours. Try a busier zone."
-      end
-      if n > 0 and other == 0 then
-        -- LayerSwap users heard it, and none of them stands on another layer in this zone
-        return "No host on another layer in your zone heard you. Try again later, or in a busier zone."
       end
       if n > 0 and h == 0 then
         return n .. (n == 1 and " LayerSwap user" or " LayerSwap users") .. " heard you, but none of them hosts. Try again in a moment."
       end
+      if n > 0 and other == 0 then
+        -- LayerSwap hosts heard it, and none of them is known to stand on another layer in our zone
+        if swap.where == "direct" and IsInGuild() then return "No host on another layer heard you. /ls guild asks your guild, on every layer." end
+        return "No host on another layer heard you. Try again in a moment."
+      end
+      -- nobody among the players asked answered at all: none of them runs a LayerSwap that reads the ask
+      -- (1.14.6 or newer, Host on or off) - said as such, so the player does not click on and on (Adam, 8 Nov 2026)
+      local sent = swap.reach or 0
+      if swap.where == "direct" and n == 0 and sent > 0 then
+        if sent == 1 then return "The player asked does not run LayerSwap yet - try later, or /ls guild." end
+        return "None of the " .. sent .. " players runs LayerSwap yet - try later, or /ls guild."
+      end
+      if swap.where == "direct" and IsInGuild() then return "No host on another layer answered. /ls guild asks your guild, on every layer." end
       return "No host answered. Try again in a moment."
     end
     -- the request waits: the bottom line says it (askLine); this one carries what LayerSwap
     -- users said about it, if anything (Adam, 8 Oct 2026) - or that the game is slow (1.10)
+    if Send.offerGeneral(now) then return "No invite from LayerSwap's channel yet - Ask in General puts the request in General too." end
     if lagging(now) then return "The game is delaying addon messages right now - an invite may come late." end
+    if swap.anyway and now - swap.anyway.at < 15 then
+      return swap.anyway.name .. " does not know its layer yet - asking it anyway."
+    end
     return heardLine()
   end
   if notice and now < (noticeUntil or 0) then return notice end
   if held and swapGroup then
-    -- the swap lasts only while the player stays in the host's group
-    local back = (held.from and layers[held.from]) and layerLabel(held.from) or "your own layer"
-    return "On " .. layerLabel(current or held.to) .. " while in " .. (held.host or "the host") ..
-      "'s group. Leaving sends you back to " .. back .. "."
+    -- on live the new layer stays after the group is left (9 Nov 2026, 10:55 and 11:48)
+    if held.auto then
+      return "On " .. layerLabel(current or held.to) .. " - leaving " .. (held.host or "the host") .. "'s group, the layer stays."
+    end
+    return "On " .. layerLabel(current or held.to) .. " in " .. (held.host or "the host") ..
+      "'s group. You can leave - it stays."
+  end
+  -- Host off: the reason it is on stands here until it is on again (Adam, 8 Nov 2026)
+  if not hosting then return HOST_OFF_LINE end
+  local pause = Host.left(now)
+  if pause then
+    return "Host pauses: " .. Host.CAP .. " invites in " .. (Host.WINDOW / 60) .. " min. It invites again in " .. math.ceil(pause / 60) .. " min."
   end
   if FOREVER and not current then return "Swap layer asks once your layer is read, so a host on it skips you." end
+  if FOREVER and Send.restricted() then
+    if Who.can() then return "Swap layer asks players across the realm, out of sight, for an invite." end
+    if Who.refused then return Who.GUILD_LINE end
+    local where = Send.place(now)
+    local left = Send.repeatLeft(now, where)
+    if left then return "No host answered your last request - you can ask again in " .. math.ceil(left) .. " s." end
+    if where == "hub" then return "Swap layer asks in LayerSwap's channel for an invite from a host in your zone." end
+    if where == "general" and Send.hubSpent(now) then return "No invite from LayerSwap's channel - Swap layer asks in General now." end
+    if where == "general" and Send.HUB_ASKS then return "Swap layer asks in General until LayerSwap's channel is open to you." end
+    if where == "general" then return "Swap layer asks in General for an invite from a host in your zone." end
+    if where == nil then return "Join General to ask for an invite." end
+  end
   return "Swap layer asks a host in the layer channel for an invite."
 end
 
@@ -1615,12 +3292,24 @@ local function askLine(now)
   local reach
   if not swap.channel then
     reach = "your guild"
+  elseif swap.where == "general" then
+    reach = "General" .. guild
+  elseif swap.where == "hub" then
+    reach = "LayerSwap's channel" .. guild
+  elseif swap.where == "direct" then
+    local n = swap.reach or 0
+    reach = n .. (n == 1 and " player" or " players") .. guild
   elseif others == 0 then
     reach = swap.guildAt and "your guild - nobody else is in the layer channel" or "nobody else in the layer channel"
   elseif others then
     reach = others .. (others == 1 and " player" or " players") .. " in the layer channel" .. guild
   else
     reach = "the layer channel" .. guild
+  end
+  -- by hidden whisper the count is the players the request went to, not the ones who heard it (Adam,
+  -- 8 Nov 2026, read "48 players" as 48 who heard him): "Sent to" says so
+  if swap.where == "direct" and swap.channel then
+    return "|cff40ff40Sent to|r " .. reach .. (swap.want and (", for " .. layerLabel(swap.want)) or "") .. " (" .. clock(now - swap.at) .. ")"
   end
   local line = "|cff40ff40Asked for inv|r" .. (swap.want and (" on " .. layerLabel(swap.want)) or "")
     .. ": " .. reach .. " (" .. clock(now - swap.at) .. ")"
@@ -1629,12 +3318,16 @@ end
 
 -- A request out and nobody has invited yet.
 local function askWaiting(now)
-  return waitingAsk(now) and not swap.inviter
+  return waitingAsk(now) and not (swap.inviter and not swap.inviterSeen)
 end
 
 -- After an ask from a slash command or the menu (the panel may be closed): the line for chat.
 local function sayStatus()
   local now = GetTime()
+  if Send.pending then
+    say((notice and now < (noticeUntil or 0)) and notice or "your request is in the chat box - press Enter to send it, Escape to drop it.")
+    return
+  end
   say(askWaiting(now) and askLine(now) or statusLine())
 end
 
@@ -1816,6 +3509,15 @@ local function buildPanel()
     local now = GetTime()
     if swapGroup and hostOnOurLayer(now) then leaveAndAskAgain("again")
     elseif swapGroup then leaveSwapGroup()
+    elseif Send.pending then stopAsking("button")
+    elseif Who.pending and not Who.pending.out then
+      -- the search runs (1.14.6): the button stops it, after its first second
+      if now - Who.pending.at >= STOP_AFTER then stopAsking("button") end
+    elseif Send.offerGeneral(now) then
+      -- the hub brought no invite: the zone counts as quiet there (now, should the timer be late)
+      local want = swap.want
+      Send.hubCheck(swap)
+      requestSwap(want, "fallback")
     elseif waitingAsk(now) and swap.channel then
       if now - swap.at >= STOP_AFTER then stopAsking("button") end
     else requestSwap(nil, "button") end
@@ -1850,7 +3552,7 @@ refresh = function()
   local p = panel
   if not p or not p:IsShown() then return end
   local now = GetTime()
-  local zone = GetRealZoneText() or ""
+  local zone = Layer.zone() or ""
   if current then
     p.layer:SetText(layerLabel(current))
     p.detail:SetText(current .. "  -  " .. zone)
@@ -1881,6 +3583,17 @@ refresh = function()
   elseif swapGroup then
     setButtonText(p.swapButton, "Leave group")
     p.swapButton:SetEnabled(true)
+  elseif Send.pending then
+    -- the line waits in the chat box for the player's Enter: the button lets go of it (1.14.5)
+    setButtonText(p.swapButton, "Drop request")
+    p.swapButton:SetEnabled(true)
+  elseif Send.offerGeneral(now) then
+    setButtonText(p.swapButton, "Ask in General")
+    p.swapButton:SetEnabled(true)
+  elseif Who.pending and not Who.pending.out then
+    -- the search runs (1.14.6): it can be stopped
+    setButtonText(p.swapButton, "Stop asking")
+    p.swapButton:SetEnabled(now - Who.pending.at >= STOP_AFTER)
   elseif waitingAsk(now) and swap.channel then
     -- the wait can be ended: a request is out in the layer channel and nothing has come of it
     -- yet (after /ls guild alone the button still asks the channel too; /ls stop ends either)
@@ -1891,7 +3604,9 @@ refresh = function()
     p.swapButton:SetEnabled(false)
   else
     setButtonText(p.swapButton, "Swap layer")
-    p.swapButton:SetEnabled(not ((swap and now - swap.at < SWAP_COOLDOWN) or now - stopped.at < SWAP_COOLDOWN))
+    p.swapButton:SetEnabled(not ((swap and now - swap.at < SWAP_COOLDOWN) or now - stopped.at < SWAP_COOLDOWN
+        or now - (Who.lastAt or -1000) < SWAP_COOLDOWN)
+      and not (Send.restricted() and not Who.can() and Send.repeatLeft(now, (Send.place(now)))))
   end
   -- ON has to be unmistakable at a glance: the LIVE dot pulses red
   p.hostButton:SetText(hosting and "Host: |cffff4040LIVE|r" or "Host: |cffa0a0a0OFF|r")
@@ -1914,7 +3629,7 @@ end
 -- A click on any LayerSwap control is the hardware event the layer channel needs: a host who
 -- never joined it (the default host) joins it here.
 local function joinLayerChannel()
-  if hosting and GetChannelName(LAYER_CHANNEL) == 0 then pcall(JoinChannelByName, LAYER_CHANNEL) end
+  Send.joins()
 end
 
 local function togglePanel()
@@ -2326,25 +4041,32 @@ do
       o.sliders[#o.sliders + 1] = s
       y = y - 52 - noteHeight
     end
-    -- Host: the same lasting switch as the panel's Host button and /ls host (1.12, two users on
-    -- CurseForge, 14-16 Oct 2026: "no way to turn off hosting permanently" - 1.11.2's separate
-    -- "Host at login" box was missed, since the Host button is the switch people see)
-    check("Host", "Host", "Invite players who ask for a layer, only while you are alone. Off stays off at every login until you turn it on again.",
+    -- Host: the same switch as the panel's Host button and /ls host; off lasts until the logout (1.14.7)
+    check("Host", "Host", "Invite players who ask for a layer, only while you are alone. Off lasts until you log out - Host is on again at every login.",
       function() return hosting end,
       function(on) if on ~= hosting then setHosting(on) end end)
     if FOREVER then
+      -- Only new layers (1.14.14; a user on CurseForge, 10 Nov 2026): Swap layer names the layers seen in the
+      -- zone, and hosts on them skip the ask. Off to start: in a zone with two layers it would end after one swap.
+      check("NewOnly", "Only new layers",
+        "Swap layer asks only for layers you have not seen in this zone in the last hour. Click a layer in the panel's list to go back to one. Hosts on older versions may still invite you.",
+        function() return LayerSwapDB.newOnly == true end,
+        function(on)
+          LayerSwapDB.newOnly = on and true or false
+          log("newOnly", on and "on" or "off")
+        end)
       -- Skip askers near you (1.14; a user on CurseForge, 23 Oct 2026, farming a spot with Host
       -- on). Off to start. The notes say what gets past it: another host in the zone, a whisper,
       -- and that an ask without a position is skipped too (see Near.check).
       check("SkipNear", "Skip askers near you",
-        "With Host on, you skip anyone who asks from within the distance below, so a swap does not bring someone to the spot you farm. Other hosts in your zone still invite.",
+        "With Host on, you skip anyone who asks from within the distance below, so a swap does not bring someone to the spot you farm. Their position comes with their request; hosting sends nothing of yours. Other hosts in your zone still invite.",
         Near.on,
         function(on)
           LayerSwapDB.skipNear = on and true or false
           log("near", on and "on" or "off")
         end)
       slider("SkipNearDistance", "Distance",
-        "Closer than this, and the asker is skipped. An ask that carries no position (an older LayerSwap, or an ask in General) is skipped too.", 2,
+        "Closer than this, and the asker is skipped. An ask that carries no position (an older LayerSwap, or a line typed by hand) is skipped too.", 2,
         Near.MIN, Near.MAX, 10, Near.yards,
         function(value)
           local n = math.max(Near.MIN, math.min(Near.MAX, math.floor((value or Near.DEFAULT) / 10 + 0.5) * 10))
@@ -2432,7 +4154,8 @@ local function autoLeave(joined)
     sameHosts[joined.inviter] = { at = GetTime(), layer = current, elsewhere = joined.elsewhere }
   end
   local only = not joined.elsewhere and onlyLayerHere()
-  log("autoLeave", joined.inviter, current, joined.elsewhere and ("in " .. joined.elsewhere) or "on our layer",
+  log("autoLeave", joined.inviter, current,
+    joined.elsewhere and ("in " .. joined.elsewhere) or (joined.refreshed and "world refreshed, same layer") or "on our layer",
     only and "the only layer seen in this zone" or nil)
   if IsInGroup() then pcall(leaveParty) end
   leftInfo = { at = GetTime(), layer = current }
@@ -2440,11 +4163,13 @@ local function autoLeave(joined)
   C_Timer.After(2, function() log("leftCheck", IsInGroup() and "still in a group" or "out") end)
   local line, chat
   if joined.elsewhere then
-    line = host .. " was in " .. joined.elsewhere .. ". Click Swap layer to ask again."
-    chat = host .. " was in " .. joined.elsewhere .. ", so nothing changed - the game only moves you to a host in your own zone."
-      .. " LayerSwap left the group - click Swap layer in the panel to ask again."
+    line = host .. " was in " .. joined.elsewhere .. ". Click Swap layer again."
+    chat = host .. " was in " .. joined.elsewhere .. " and did not move you. LayerSwap left the group - click Swap layer in the panel to ask again."
+  elseif joined.refreshed then
+    line = host .. " did not move you. Click Swap layer to ask again."
+    chat = host .. " did not move you: the game refreshed the world, and you are on the same layer. LayerSwap left the group - click Swap layer in the panel to ask again."
   elseif only then
-    line = host .. " was on your layer - the only one seen here. Try a busier zone."
+    line = host .. " was on your layer, the only one seen here."
     chat = host .. " was on your layer, so nothing changed. Only one layer has been seen in " .. only
       .. " - it may have just one right now, so try a busier zone. LayerSwap left the group."
   else
@@ -2481,12 +4206,27 @@ for _, ev in ipairs({ "PLAYER_LOGIN", "PLAYER_ENTERING_WORLD", "ZONE_CHANGED_NEW
                       "SHARD_TRANSFER_IMMINENT", "SHARD_TRANSFER",
                       "NAME_PLATE_UNIT_ADDED", "PLAYER_TARGET_CHANGED", "UPDATE_MOUSEOVER_UNIT",
                       "ADDON_ACTION_FORBIDDEN", "ADDON_ACTION_BLOCKED", "CHAT_MSG_ADDON",
-                      "CHANNEL_COUNT_UPDATE", "CHANNEL_ROSTER_UPDATE" }) do
+                      "CHANNEL_COUNT_UPDATE", "CHANNEL_ROSTER_UPDATE", "WHO_LIST_UPDATE",
+                      "CHAT_MSG_CHANNEL_NOTICE", "CHAT_MSG_CHANNEL_NOTICE_USER", "CHANNEL_PASSWORD_REQUEST" }) do
   pcall(f.RegisterEvent, f, ev)
 end
 if C_ChatInfo and C_ChatInfo.RegisterAddonMessagePrefix then pcall(C_ChatInfo.RegisterAddonMessagePrefix, NOTE_PREFIX) end
+-- 1.14.2: the chat box tells, just before it sends, that the player pressed Enter on our line
+if type(EventRegistry) == "table" and type(EventRegistry.RegisterCallback) == "function" then
+  pcall(EventRegistry.RegisterCallback, EventRegistry, "ChatFrame.OnEditBoxPreSendText", function(_, box) Send.preSend(box) end, ADDON)
+end
+-- 1.14.4: other players' requests and LayerSwap's channel stay out of the chat windows (Send.filterLine)
+if FOREVER then
+  local add = (ChatFrameUtil and ChatFrameUtil.AddMessageEventFilter) or ChatFrame_AddMessageEventFilter
+  if type(add) == "function" then
+    pcall(add, "CHAT_MSG_CHANNEL", Send.filterLine)
+    pcall(add, "CHAT_MSG_CHANNEL_NOTICE", Send.filterNotice)
+    pcall(add, "CHAT_MSG_CHANNEL_NOTICE_USER", Send.filterNotice)
+    pcall(add, "CHAT_MSG_SYSTEM", Who.filterGone)   -- 1.14.14: the game's line for a whisper of ours it could not deliver
+  end
+end
 
-f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, channelBaseName)
+f:SetScript("OnEvent", function(_, ev, a1, a2, a3, a4, _, _, zoneChannelID, a8, channelBaseName)
   if ev == "NAME_PLATE_UNIT_ADDED" then
     if not isSecret(a1) and type(a1) == "string" then observe(a1) end
   elseif ev == "PLAYER_TARGET_CHANGED" then
@@ -2498,20 +4238,39 @@ f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, ch
     if not isSecret(channelBaseName) and type(channelBaseName) == "string"
        and string.lower(channelBaseName) == LAYER_CHANNEL then
       where = "layer"
+    elseif Send.isHub(channelBaseName) then
+      where = "hub"
     elseif not isSecret(zoneChannelID) and zoneChannelID == 1 then
       where = "general"
     end
     if where then onChat(where, a1, a2) end
+  elseif ev == "CHAT_MSG_CHANNEL_NOTICE" or ev == "CHAT_MSG_CHANNEL_NOTICE_USER" then
+    Send.notice(a1, a4, zoneChannelID, a8, channelBaseName)
+  elseif ev == "CHANNEL_PASSWORD_REQUEST" then
+    -- someone set a password on the hub: our join asked for it; the game's box for it is closed
+    -- (now and a frame later, whichever handler runs first) and the realm's hub left alone
+    if Send.isHub(a1) then
+      Send.hubClosed = true
+      if Send.HUB_ASKS then Send.refused() end
+      log("hub", "password asked")
+      pcall(StaticPopup_Hide, "CHAT_CHANNEL_PASSWORD", a1)
+      C_Timer.After(0, function() pcall(StaticPopup_Hide, "CHAT_CHANNEL_PASSWORD", a1) end)
+    end
   elseif ev == "CHAT_MSG_WHISPER" then
     onChat("whisper", a1, a2)
   elseif ev == "CHAT_MSG_GUILD" then
     onChat("guild", a1, a2)
   elseif ev == "CHAT_MSG_ADDON" then
-    -- prefix, text, chat type, sender
-    if not isSecret(a1) and a1 == NOTE_PREFIX then onNote(a2, a4) end
+    -- prefix, text, chat type, sender; a request by hidden whisper (1.14.6) goes to the host's side
+    if not isSecret(a1) and a1 == NOTE_PREFIX then
+      if not isSecret(a3) and a3 == "WHISPER" and Who.isAsk(a2) then Who.onAsk(a2, a4) else onNote(a2, a4) end
+    end
+  elseif ev == "WHO_LIST_UPDATE" then
+    Who.results()
   elseif ev == "CHAT_MSG_SYSTEM" or ev == "UI_ERROR_MESSAGE" then
     local text = (ev == "UI_ERROR_MESSAGE") and a2 or a1
     if not isSecret(text) and type(text) == "string" then
+      if ev == "CHAT_MSG_SYSTEM" and FOREVER then Who.gone(text) end
       if GetTime() <= watchUntil then log(ev == "UI_ERROR_MESSAGE" and "error" or "system", text) end
       -- our invite never counted - another host's got there first, or the asker sat in a group
       -- already - so the asker's next ask is ours to answer. Read at any time: on 10 Oct 2026
@@ -2534,17 +4293,39 @@ f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, ch
     local now = GetTime()
     local name = not isSecret(a1) and type(a1) == "string" and a1 or nil
     local seen = name and sameHosts[name]
-    if seen and not (current and seen.layer == current and now - seen.at <= SAME_HOST_TTL) then seen = nil end
+    if seen and not (current and Layer.same(seen.layer, current) and now - seen.at <= SAME_HOST_TTL) then seen = nil end
     local mins = seen and math.floor((now - seen.at) / 60)
     local ago = mins and (mins < 1 and "a moment ago" or (mins .. " min ago"))
     if seen then warnInvite(name, seen, ago) end
     if name and waitingAsk(now) then
-      swap.inviter, swap.inviterSeen = name, seen and true or nil
-      log("invited", name, string.format("%.1f s after asking", now - swap.at))
+      -- several hosts may answer one ask (1.14.2: no claims where the notes do not travel): the
+      -- first keeps the name, the others are only logged, and the group's leader corrects it
+      -- a host known to stand on our layer (seen) keeps the name only until another host invites,
+      -- and counts as no answer below: the hub's wait and Ask in General go on (1.14.5)
+      if swap.inviter and not (swap.inviterSeen and not seen) then
+        log("invited", name, "also", string.format("%.1f s after asking", now - swap.at))
+      else
+        swap.inviter, swap.inviterSeen = name, seen and true or nil
+        log("invited", name, string.format("%.1f s after asking", now - swap.at), seen and "known same-layer host" or nil)
+      end
+      if not seen then
+        -- answered: a new ask may go at once from the place that answered (Send.repeatLeft)
+        local l = swap.where and Send.lastAt[swap.where]
+        if l then l.invited = true end
+        if Send.pending and Send.pending.via == "fallback" then Send.drop("invited") end
+        -- answered: the rest of the burst would only ask more hosts for an invite already here
+        if Who.pending and Who.pending.out and swap.who == Who.pending then
+          local w = Who.stop()
+          log("who", "burst stopped", "invited", #w.queue .. " left")
+        end
+      end
+      Who.seenWarn(name)
       refresh()
     end
   elseif ev == "GROUP_JOINED" then
     joinedGroupAt = GetTime()
+    Who.phase("join")
+    Who.phaseSoon("join")
     if not FOREVER then forgetSightings() end   -- no transfer event on Classic to do it
     -- only a group someone invited us into is a host's group: a group we formed by
     -- inviting others is our own, and they came to our layer (beta, 24 Sep 2026)
@@ -2552,28 +4333,49 @@ f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, ch
       swap.joinedAt, swapGroup = GetTime(), true
       watchUntil = GetTime() + 20               -- "Party converted to Raid", who else joins ...
       log("joinedHost", swap.inviter, current)
+      -- the creatures around us, read now and a little later: they tell whether the join moved us
+      Who.scan()
+      C_Timer.After(1, Who.scan)
+      C_Timer.After(3, Who.scan)
       -- the panel may be closed: say it in chat once, if the game did not move us
       local joined = swap
+      Send.moved(nil)
       C_Timer.After(SAME_LAYER_AFTER + 0.2, function()
-        log("hostZone", joined.inviter, hostZone(joined.inviter) or "unknown", zoneOf("player") or "unknown",
-          joined.transferAt and "moved" or "not moved")
-        if swap == joined and hostOnOurLayer(GetTime()) then
-          -- out of the group by itself; the next ask is one click (1.9). A host in another
-          -- zone moves nobody, so that one is left at once; one in our zone gets until
-          -- SAME_LAYER_LEAVE, in case the move is only late (1.10).
-          if joined.elsewhere then
-            autoLeave(joined)
-          else
-            C_Timer.After(SAME_LAYER_LEAVE - SAME_LAYER_AFTER - 0.2, function()
-              if swap == joined and hostOnOurLayer(GetTime()) then autoLeave(joined) end
-            end)
+        -- the group's leader is the host we joined, whatever invite was the first to arrive
+        for i = 1, PARTY_MAX - 1 do
+          local unit = "party" .. i
+          if UnitExists(unit) and UnitIsGroupLeader(unit) then
+            local leader = fullName(unit)
+            if leader and leader ~= joined.inviter then
+              log("inviter", joined.inviter, "corrected to " .. leader)
+              -- the swap may have worked already (setCurrent): the host named for the stay follows too
+              if held and held.host == joined.inviter then held.host = leader end
+              joined.inviter = leader
+            end
+            break
           end
         end
+        log("hostZone", joined.inviter, hostZone(joined.inviter) or "unknown", zoneOf("player") or "unknown",
+          joined.transferAt and "moved" or "not moved")
+        -- out of the group by itself once the creatures read since the join still show our layer
+        -- (Who.FRESH), never before SAME_LAYER_LEAVE, in case the move is only late (1.10); tried
+        -- every 2 s for JUDGE_FOR. A host in another zone gets the same time (1.14.8): the game
+        -- moves a guest from any zone, and the 1.10-1.14.7 rule that left such a host at once had
+        -- only the transfer event to go on.
+        local function judge()
+          if swap ~= joined then return end
+          Who.scan()
+          local now = GetTime()
+          if now - joined.joinedAt >= SAME_LAYER_LEAVE and hostOnOurLayer(now) then autoLeave(joined)
+          elseif now - joined.joinedAt < Who.JUDGE_FOR then C_Timer.After(2, judge) end
+        end
+        judge()
       end)
       refresh()
     elseif FOREVER then
       -- any other group (the group finder, a friend): who leads it, where, and did the game move
       -- us? (Adam, 8 Oct 2026: a group-finder group moved him to another layer.) Logged only.
+      Send.moved("You are in a group - the request was not sent.")
       local at = joinedGroupAt
       C_Timer.After(SAME_LAYER_AFTER + 0.2, function()
         for i = 1, PARTY_MAX - 1 do
@@ -2603,7 +4405,7 @@ f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, ch
           setNotice("Help the next one: turn Host on. You only invite while you are alone.", 60)
           say("help the next one: turn Host on in the panel - you only invite while you are alone, and the group is theirs to leave.")
         else
-          setNotice("You left the group - the game moves you back to your own layer.", 30)
+          setNotice("You left the group - you stay on your new layer.", 30)
         end
       end
       refresh()
@@ -2619,6 +4421,8 @@ f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, ch
     if ev == "SHARD_TRANSFER" then
       evictAt, lastShardAt = nil, GetTime()
       log("shard", ev)
+      Layer.markStale()
+      if IsInGroup() then C_Timer.After(1, function() if IsInGroup() then Who.phase("transfer +1 s") end end) end
       -- in the host's group: the game moved us, so the host is on another layer
       if swap and swap.joinedAt and not swap.transferAt then
         swap.transferAt = GetTime()
@@ -2628,6 +4432,22 @@ f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, ch
       end
     end
     forgetSightings()
+    if ev == "ZONE_CHANGED_NEW_AREA" then
+      Who.borderAt = GetTime()
+      if current and Who.here and Who.here.layer == current then
+        Who.crossing = { from = Who.here.zone, layer = current, at = GetTime(), reads = 0 }
+      end
+    else
+      -- after a world refresh or a login the units in view are read again: a host that stands still
+      -- would otherwise wait for a new nameplate, target or mouseover to learn its layer, and skip
+      -- every ask meanwhile. Never within BORDER_QUIET of a zone border: a target or a nameplate
+      -- carried over it is a creature of the zone left behind, on that zone's layer.
+      C_Timer.After(2, Who.rescan)
+      C_Timer.After(5, Who.rescan)
+      -- and once more after the units of a layer just left are no longer in doubt (Layer.markStale)
+      C_Timer.After(Layer.STALE_FOR + 2, Who.rescan)
+    end
+    if ev ~= "PLAYER_ENTERING_WORLD" then Send.moved("You moved - click Swap layer again.") end
     if ev ~= "PLAYER_ENTERING_WORLD" or current == nil then
       if current then log("layer", "unknown", nil, current) end
       if swap and swap.joinedAt and swap.from == nil then swap.from = "unknown" end
@@ -2649,7 +4469,8 @@ f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, ch
     -- was just written is kept one more round instead of being wiped by this login.
     LayerSwapDB.previous = { session = LayerSwapDB.session, log = LayerSwapDB.log }
     LayerSwapDB.log = {}
-    LayerSwapDB.session = { started = date("%Y-%m-%d %H:%M:%S"), version = "1.14.1", me = fullName("player"), toc = TOC }
+    LayerSwapDB.session = { started = date("%Y-%m-%d %H:%M:%S"), version = "1.14.14", me = fullName("player"), toc = TOC, restricted = Send.restricted(),
+                            search = Who.can() }
     -- The layers seen survive a /reload and a relog; an hour without a sighting drops one.
     local saved = type(LayerSwapDB.layers) == "table" and LayerSwapDB.layers or {}
     layers, layerCount = {}, 0
@@ -2659,16 +4480,26 @@ f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, ch
         if l.n > layerCount then layerCount = l.n end
       end
     end
+    if FOREVER then
+      -- one entry per layer and zone: variants saved by 1.14.10 or older are merged, the latest kept
+      local keep = {}
+      for id, l in pairs(layers) do
+        local k = tostring(l.zone) .. "|" .. tostring(Layer.key(id))
+        if not keep[k] or l.last > layers[keep[k]].last then keep[k] = id end
+      end
+      for id, l in pairs(layers) do
+        if keep[tostring(l.zone) .. "|" .. tostring(Layer.key(id))] ~= id then layers[id] = nil end
+      end
+    end
     LayerSwapDB.layers = layers
+    Who.prune()
+    Who.pruneAsked()
+    Layer.startCensus()
     -- Host is ON from the first login (Adam, 8 Oct 2026: the layer channel held 56 players and 11
-    -- asks in 7 minutes, and he was the only host), and the switch lasts (1.12): off stays off at
-    -- every login until it is turned on again. 1.8-1.11.2 turned it on again at every login, and
-    -- two users on CurseForge read that as "no way to turn off hosting permanently". Whether this
-    -- is a login or a reload is known at PLAYER_ENTERING_WORLD (onEnterWorld), where the lines
-    -- are said. The host invites only while alone or leading a group it filled itself (canInvite).
-    -- 1.11.2 kept the lasting choice apart, as Host at login: unticked, it is honoured once as Host
-    -- off, and the key is dropped either way.
-    if LayerSwapDB.hostAtLogin == false then LayerSwapDB.hosting = false end
+    -- asks in 7 minutes, and he was the only host). The saved switch is read here for a /reload;
+    -- a real login turns it on again (onEnterWorld, which knows the two apart). 1.12-1.14.6 kept
+    -- an off across logins; 1.11.2's "Host at login" key is dropped. The host invites only while
+    -- alone or leading a group it filled itself (canInvite).
     LayerSwapDB.hostAtLogin = nil
     hosting = LayerSwapDB.hosting ~= false
     log("hosting", hosting and "on" or "off", "at login")
@@ -2681,28 +4512,38 @@ f:SetScript("OnEvent", function(_, ev, a1, a2, _, a4, _, _, zoneChannelID, _, ch
 end)
 
 -- The first PLAYER_ENTERING_WORLD of a session says whether it is a login or a /reload; the
--- login line is said here. Host itself was read at PLAYER_LOGIN and lasts across logins.
+-- login line is said here. A real login turns Host on (1.14.7); a /reload keeps what was set.
 local entered = false
-onEnterWorld = function(_, isReload)
+onEnterWorld = function(isLogin, isReload)
   if entered then return end
   entered = true
+  if isLogin and not hosting then
+    hosting, LayerSwapDB.hosting = true, true
+    log("hosting", "on", "new login")
+  end
   if hosting and not LayerSwapDB.hostSaid then
     -- the off switch, said plainly the first time, and in the panel when it opens
     LayerSwapDB.hostSaid = true
     say("type /ls to open the panel. Hosting is ON: you invite players who ask for a layer, only while you are alone."
-      .. " The Host button in the panel or /ls host turns it off, and off stays off until you turn it on again.")
-    setNotice("Hosting is on: you invite players who ask for a layer, only while you are alone. Host turns it off, and off stays off.", 300)
+      .. " The Host button in the panel or /ls host turns it off until you log out.")
+    setNotice("Host is on: you invite askers while alone. Off lasts until you log out.", 300)
   elseif hosting and isReload then
     say("type /ls to open the panel. Hosting is ON.")
   elseif hosting then
-    say("type /ls to open the panel. Hosting is ON - the Host button or /ls host turns it off.")
+    say("type /ls to open the panel. Hosting is ON - the Host button or /ls host turns it off until you log out.")
   else
-    say("type /ls to open the panel. Hosting is OFF - the Host button or /ls host turns it on.")
+    say("type /ls to open the panel. Hosting is OFF until you log out - the Host button or /ls host turns it on.")
   end
   if hosting then
-    -- the layer channel can only be joined from a click; the game rejoins it by itself once joined
+    -- a channel can only be joined from a click; the game rejoins it by itself once joined. On a
+    -- realm that refuses addon chat that is LayerSwap's own channel, never the layer channel.
     C_Timer.After(10, function()
-      if hosting and GetChannelName(LAYER_CHANNEL) == 0 then
+      if not hosting then return end
+      if Send.restricted() then
+        if Send.HUB_ASKS and GetChannelName(Send.HUB) == 0 and not Send.left() and not Send.realmRefused() then
+          say("hosting hears General, guild chat and whispers - open the panel (/ls) once to hear LayerSwap's own channel too, where requests go now.")
+        end
+      elseif GetChannelName(LAYER_CHANNEL) == 0 then
         say("hosting hears General, guild chat and whispers - open the panel (/ls) once to hear the layer channel too.")
       end
     end)
@@ -2721,7 +4562,39 @@ local function status()
     local ok, why = canInvite()
     say(ok and "ready to invite." or ("not inviting right now: " .. why .. "."))
     if Near.on() then say("skipping askers within " .. Near.yards() .. " yards of you.") end
-    if GetChannelName(LAYER_CHANNEL) == 0 then say("you are not in the '" .. LAYER_CHANNEL .. "' channel - type /join " .. LAYER_CHANNEL) end
+    if not Send.restricted() and GetChannelName(LAYER_CHANNEL) == 0 then say("you are not in the '" .. LAYER_CHANNEL .. "' channel - type /join " .. LAYER_CHANNEL) end
+  end
+  if FOREVER then
+    local r = Send.restricted()
+    say("addon chat: " .. (r and "restricted on this realm - Swap layer puts your request in the chat box for your own Enter" or "allowed - Swap layer sends the request itself"))
+    local c = Send.comms.CHANNEL
+    say("hidden notes in the layer channel: " .. (c == "refused" and "refused by the game" or c == "ok" and "working" or (r and "not used" or "untried")))
+    local state, id = Send.layerState()
+    local said = { ["ok"] = "joined as " .. tostring(id) .. ", listed by the game", ["not joined"] = "not joined",
+                   ["not listed"] = "number " .. tostring(id) .. ", not listed by the game yet",
+                   closed = "closed to you here", disabled = "disabled for your account by the game" }
+    say("layer channel: " .. (said[state] or state) .. (r and " - used only when LayerSwap's channel and General are not there" or ""))
+    if r then
+      local hs, hid = Send.hubState()
+      local hsaid = { ok = "joined as " .. tostring(hid) .. ", kept out of your chat windows",
+                      ["not joined"] = Send.left() and ("you left it - /join " .. Send.HUB .. " brings it back")
+                        or (Send.realmRefused() and ("it refused you on this realm - LayerSwap asks again in " .. Send.refusedLeft()))
+                        or (Send.hubTried and "asked to join this session - the server has not let you in")
+                        or "not joined yet - a click on LayerSwap joins it",
+                      ["not listed"] = "number " .. tostring(hid) .. ", not listed by the game yet",
+                      closed = "closed to you here", disabled = "disabled for your account by the game" }
+      if Send.HUB_ASKS then say("LayerSwap channel: " .. (hsaid[hs] or hs))
+      else say("LayerSwap channel: " .. (hs == "ok" and "joined - read for requests from older versions, never asked" or "not used")) end
+      say("hidden whispers: " .. Who.state())
+      say("requests go to: " .. (Who.refused and "your guild only, with /ls guild" or Send.placeName(Who.can() and "direct" or (Send.place(GetTime())))))
+    end
+    if Send.pending then
+      say("request: in the chat box for " .. math.floor(GetTime() - Send.pending.at) .. " s - press Enter to send it, Escape to drop it")
+    elseif Who.pending and not Who.pending.out then
+      say("request: searching for players for " .. math.floor(GetTime() - Who.pending.at) .. " s")
+    elseif waitingAsk(GetTime()) then
+      say("request: out since " .. clock(GetTime() - swap.at) .. " ago to " .. Send.placeName(swap.where or "layer"))
+    end
   end
 end
 
@@ -2736,20 +4609,23 @@ SlashCmdList["LAYERSWAP"] = function(msg)
     status()
   elseif msg == "swap" then
     if requestSwap(nil, "slash") ~= "held" then sayStatus() end
+  elseif msg == "swap new" then
+    -- 1.14.14: one ask for a layer not seen in this zone (Forever); elsewhere a plain ask
+    if requestSwap(nil, FOREVER and "new" or "slash") ~= "held" then sayStatus() end
   elseif msg == "guild" then
     if requestGuild("slash") ~= "held" then sayStatus() end
   elseif msg == "stop" then
     if stopAsking("slash") then sayStatus() else say("you are not asking for a swap right now.") end
   elseif not FOREVER and msg:match("^swap%s+%d+$") then
     -- /ls swap 2 (Classic): NWB's layer 2 - AutoLayer hosts on it answer even if we never stood there
-    local n, zone, target = tonumber(msg:match("^swap%s+(%d+)$")), GetRealZoneText()
+    local n, zone, target = tonumber(msg:match("^swap%s+(%d+)$")), Layer.zone()
     for id, l in pairs(layers) do
       if l.nwb == n and l.zone == zone then target = id end
     end
     if requestSwap(target, "slash", false, n) ~= "held" then sayStatus() end
   elseif msg:match("^swap%s+%a$") then
     -- /ls swap B: the letter the panel shows, in this zone
-    local letter, zone, target = string.upper(msg:match("^swap%s+(%a)$")), GetRealZoneText()
+    local letter, zone, target = string.upper(msg:match("^swap%s+(%a)$")), Layer.zone()
     for id, l in pairs(layers) do
       if l.letter == letter and l.zone == zone then target = id end
     end
@@ -2764,6 +4640,9 @@ SlashCmdList["LAYERSWAP"] = function(msg)
     toggleMini()
   elseif msg == "minimap" then
     toggleMinimap()
+  elseif msg == "phase" and FOREVER then
+    local line = Who.phase("slash")
+    say(line and ("phase: " .. line .. " | you: party shard " .. Who.shard("player")) or "not in a group - nothing to read.")
   elseif msg == "spot" and FOREVER then
     -- where the game says you stand, logged raw (1.14): the reading behind Skip askers near you
     local room = #(LayerSwapDB.log or {}) < LOG_MAX
@@ -2776,7 +4655,7 @@ SlashCmdList["LAYERSWAP"] = function(msg)
         .. (room and "Logged; /reload saves it to disk." or "Not logged: the log is full."))
     end
   else
-    say("/ls - open the panel   |   /ls mini - show or hide the small line   |   /ls minimap - show or hide the minimap button   |   /ls swap - ask for any other layer   |   /ls swap B - ask for Layer B   |   /ls guild - ask your guild   |   /ls stop - stop asking   |   /ls host - start or stop hosting   |   /ls kick - remove the players LayerSwap invited"
+    say("/ls - open the panel   |   /ls mini - show or hide the small line   |   /ls minimap - show or hide the minimap button   |   /ls swap - ask for any other layer   |   /ls swap B - ask for Layer B   |   /ls swap new - ask for a layer you have not seen   |   /ls guild - ask your guild   |   /ls stop - stop asking   |   /ls host - start or stop hosting   |   /ls kick - remove the players LayerSwap invited"
       .. (FOREVER and "   |   /ls spot - log where you stand" or "") .. "   |   /ls status")
   end
 end

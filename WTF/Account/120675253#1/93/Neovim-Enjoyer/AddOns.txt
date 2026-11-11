@@ -3,3 +3,6 @@ Blizzard_CompactRaidFrames: enabled
 Blizzard_CombatText: enabled
 Bagnonium_Bank: enabled
 Bagnonium_GuildBank: enabled
+Bagnon_Bank: enabled
+!Swatter: disabled
+!ImprovedErrorFrame: disabled

@@ -58,7 +58,7 @@ function AddonSettings.LoadDB()
 	end
 	local factionName = SessionInfo.GetFactionName()
 	local accessibleFactions = nil
-	if LibTSMApp.IsRetail() or LibTSMApp.IsForever() then
+	if LibTSMApp.IsRetail() then
 		accessibleFactions = { "Horde", "Alliance", "Neutral" }
 	else
 		accessibleFactions = { factionName }
@@ -260,6 +260,13 @@ function private.ProcessUpgrade(db, upgradeObj)
 				ignored[entry] = value
 			end
 			db:Set("factionrealm", factionrealm, "userData", "craftingCooldownIgnore", ignored)
+		end
+	end
+	if prevVersion < 151 and not LibTSMApp.IsRetail() and not LibTSMApp.IsForever() then
+		for _, factionrealm in db:ScopeKeyIterator("factionrealm") do
+			db:Set("factionrealm", factionrealm, "internalData", "crafts", {})
+			db:Set("factionrealm", factionrealm, "internalData", "craftingQueue", {})
+			db:Set("factionrealm", factionrealm, "userData", "craftingCooldownIgnore", {})
 		end
 	end
 	-- NOTE: When adding migrations, be careful of multiple migrations modifying the same key, as

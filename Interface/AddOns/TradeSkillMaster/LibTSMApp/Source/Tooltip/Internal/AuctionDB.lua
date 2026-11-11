@@ -29,7 +29,6 @@ local private = {
 
 AddonSettings.RegisterOnLoad(AuctionDB, function(db)
 	private.settings = db:NewView("AuctionDBSettings")
-		:AddKey("global", "tooltipOptions", "moduleTooltips")
 		:AddKey("realm", "coreOptions", "auctionDBAltRealm")
 		:Commit()
 end)
@@ -46,37 +45,25 @@ function AuctionDB.Register()
 		:SetSettingsModule("AuctionDB")
 		:AddSettingEntry("minBuyout", true, private.PopulateMinBuyoutLine)
 		:AddSettingEntry("marketValueRecent", false, private.PopulateRecentValueLine)
-		:AddSettingValueEntry("marketValue", "noTrend", "none", private.PopulateMarketValueLine)
-		:AddSettingValueEntry("marketValue", "withTrend", "none", private.PopulateMarketValueLine)
+		:AddSettingValueEntry("marketValue", "noTrend", "none", "withTrend", private.PopulateMarketValueLine, false)
+		:AddSettingValueEntry("marketValue", "withTrend", "none", "withTrend", private.PopulateMarketValueLine, true)
 		:AddSettingEntry("historical", false, private.PopulateHistoricalLine)
 	if LibTSMApp.IsRetail() or LibTSMApp.IsForever() then
 		tooltipInfo
 			:AddSettingEntry("altMinBuyout", false, private.PopulateAltMinBuyoutLine)
 			:AddSettingEntry("altMarketValueRecent", false, private.PopulateAltRecentValueLine)
-			:AddSettingValueEntry("altMarketValue", "noTrend", "none", private.PopulateAltMarketValueLine)
-			:AddSettingValueEntry("altMarketValue", "withTrend", "none", private.PopulateAltMarketValueLine)
+			:AddSettingValueEntry("altMarketValue", "noTrend", "none", "none", private.PopulateAltMarketValueLine, false)
+			:AddSettingValueEntry("altMarketValue", "withTrend", "none", "none", private.PopulateAltMarketValueLine, true)
 			:AddSettingEntry("altHistorical", false, private.PopulateAltHistoricalLine)
 	end
 	tooltipInfo
-		:AddSettingValueEntry("regionMarketValue", "noTrend", "none", private.PopulateRegionMarketValueLine)
-		:AddSettingValueEntry("regionMarketValue", "withTrend", "none", private.PopulateRegionMarketValueLine)
+		:AddSettingValueEntry("regionMarketValue", "noTrend", "none", "withTrend", private.PopulateRegionMarketValueLine, false)
+		:AddSettingValueEntry("regionMarketValue", "withTrend", "none", "withTrend", private.PopulateRegionMarketValueLine, true)
 		:AddSettingEntry("regionHistorical", false, private.PopulateRegionHistoricalLine)
 		:AddSettingEntry("regionSale", true, private.PopulateRegionSaleAvgLine)
 		:AddSettingEntry("regionSalePercent", true, private.PopulateRegionSaleRateLine)
-		:AddSettingEntry("regionSalePercent", true, private.PopulateRegionDailySoldLine)
+		:AddSettingEntry("regionSoldPerDay", true, private.PopulateRegionDailySoldLine)
 	Registry.Add(tooltipInfo)
-
-	-- Manually set the defaults for the trend entry settings
-	local settingsTbl = private.settings.moduleTooltips.AuctionDB
-	if settingsTbl.marketValue == nil then
-		settingsTbl.marketValue = "withTrend"
-	end
-	if (LibTSMApp.IsRetail() or LibTSMApp.IsForever()) and settingsTbl.altMarketValue == nil then
-		settingsTbl.altMarketValue = "none"
-	end
-	if settingsTbl.regionMarketValue == nil then
-		settingsTbl.regionMarketValue = "withTrend"
-	end
 end
 
 
@@ -96,8 +83,8 @@ function private.PopulateRecentValueLine(tooltip, itemString)
 end
 
 ---@param tooltip TooltipBuilder
-function private.PopulateMarketValueLine(tooltip, itemString)
-	private.AddPriceLine(tooltip, itemString, L["Market Value"], "DBMarket", "DBHistorical")
+function private.PopulateMarketValueLine(tooltip, itemString, withTrend)
+	private.AddPriceLine(tooltip, itemString, L["Market Value"], "DBMarket", withTrend and "DBHistorical" or nil)
 end
 
 ---@param tooltip TooltipBuilder
@@ -116,8 +103,8 @@ function private.PopulateAltRecentValueLine(tooltip, itemString)
 end
 
 ---@param tooltip TooltipBuilder
-function private.PopulateAltMarketValueLine(tooltip, itemString)
-	private.AddPriceLine(tooltip, itemString, private.settings.auctionDBAltRealm.." - "..L["Market Value"], "DBAltMarket", "DBAltHistorical")
+function private.PopulateAltMarketValueLine(tooltip, itemString, withTrend)
+	private.AddPriceLine(tooltip, itemString, private.settings.auctionDBAltRealm.." - "..L["Market Value"], "DBAltMarket", withTrend and "DBAltHistorical" or nil)
 end
 
 ---@param tooltip TooltipBuilder
@@ -126,8 +113,8 @@ function private.PopulateAltHistoricalLine(tooltip, itemString)
 end
 
 ---@param tooltip TooltipBuilder
-function private.PopulateRegionMarketValueLine(tooltip, itemString)
-	private.AddPriceLine(tooltip, itemString, L["Region Market Value Avg"], "DBRegionMarketAvg", "DBRegionHistorical")
+function private.PopulateRegionMarketValueLine(tooltip, itemString, withTrend)
+	private.AddPriceLine(tooltip, itemString, L["Region Market Value Avg"], "DBRegionMarketAvg", withTrend and "DBRegionHistorical" or nil)
 end
 
 ---@param tooltip TooltipBuilder

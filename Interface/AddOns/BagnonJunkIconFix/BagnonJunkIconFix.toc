@@ -1,0 +1,7 @@
+## Interface: 120105, 50504, 40402, 30404, 20506, 16001, 11509
+## Title: Bagnon |cff20ff20Junk Icon Fix|r
+## Notes: Moves the Scrap/junk coin icon to the top-right corner so it doesn't overlap the Bagnon ItemInfo item level.
+## Dependencies: BagBrother
+## OptionalDeps: Bagnon, Bagnonium, Bagnon_Scrap, Bagnon_ItemInfo
+
+BagnonJunkIconFix.lua

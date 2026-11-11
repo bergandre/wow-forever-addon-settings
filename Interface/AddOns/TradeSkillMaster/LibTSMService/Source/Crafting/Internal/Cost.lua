@@ -160,6 +160,7 @@ end
 ---@return number? concentration
 function Cost.GetLowestCostByItem(itemString, optionalMats, qualityMats)
 	local levelItemString = ItemString.ToLevel(itemString)
+	local craftedItemString, levelMatItemString = CraftInfoDBUtil.GetCraftedItemString(levelItemString)
 	local shouldReleaseOptionalMats = false
 	if not optionalMats then
 		shouldReleaseOptionalMats = true
@@ -172,9 +173,9 @@ function Cost.GetLowestCostByItem(itemString, optionalMats, qualityMats)
 	local singleCraftString = nil
 	local tempQualityMats = TempTable.Acquire()
 	local cdQualityMats = TempTable.Acquire()
-	for _, craftString, hasCD, profession in private.CraftStringByItemIterator(levelItemString) do
+	for _, craftString, hasCD, profession in private.CraftStringByItemIterator(craftedItemString) do
 		if not private.currentMatProfession or not OptionalMatData.Info[levelItemString] or private.currentMatProfession == profession then
-			if not CraftString.GetLevel(craftString) then
+			if not CraftString.GetLevel(craftString) and (not levelMatItemString or CraftInfoDBUtil.HasOptionalMat(craftString, levelMatItemString)) then
 				if not hasCD then
 					if singleCraftString == nil then
 						singleCraftString = craftString

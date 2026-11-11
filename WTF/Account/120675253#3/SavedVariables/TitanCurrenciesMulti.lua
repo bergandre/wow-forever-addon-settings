@@ -2,55 +2,117 @@
 TitanCurrenciesMultiDb = {
 ["TITAN_FOREVER_UNDERMINEREAL"] = {
 ["charTable"] = {
+["Tailoring-Altchar"] = {
+["currency"] = 0,
+["name"] = "|cffff7c0aTailoring",
+["faction"] = "Horde",
+},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },
 },
 ["TITAN_OUROM"] = {
 ["charTable"] = {
+["Tailoring-Altchar"] = {
+["value"] = 3000,
+["faction"] = "Horde",
+["name"] = "|cffff7c0aTailoring",
+["realm"] = "Altchar",
+},
 ["Invited-Undead"] = {
 ["value"] = 2889,
-["faction"] = "Horde",
-["name"] = "|cff8788eeInvited",
 ["realm"] = "Undead",
+["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["value"] = 372,
+["realm"] = "Friend",
+["name"] = "|cff0070ddInvited",
+["faction"] = "Horde",
 },
 },
 },
 ["TITAN_FOREVER_RANKPOINTS"] = {
 ["charTable"] = {
+["Tailoring-Altchar"] = {
+["currency"] = 0,
+["name"] = "|cffff7c0aTailoring",
+["faction"] = "Horde",
+},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },
 },
 ["TITAN_FOREVER_MERCHANTSFAVOR"] = {
 ["charTable"] = {
+["Tailoring-Altchar"] = {
+["currency"] = 0,
+["name"] = "|cffff7c0aTailoring",
+["faction"] = "Horde",
+},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },
 },
 ["TITAN_DRKTKM"] = {
 ["charTable"] = {
+["Tailoring-Altchar"] = {
+["currency"] = 0,
+["name"] = "|cffff7c0aTailoring",
+["faction"] = "Horde",
+},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },
 },
 ["TITAN_PVHNRM"] = {
 ["charTable"] = {
+["Tailoring-Altchar"] = {
+["currency"] = 0,
+["name"] = "|cffff7c0aTailoring",
+["faction"] = "Horde",
+},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },

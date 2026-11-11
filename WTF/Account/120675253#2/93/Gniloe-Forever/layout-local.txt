@@ -1,8 +1,8 @@
 Version: 1
-Frame: Gathering_Header
+Frame: ZygorGuidesViewerFrameMaster
 FrameLevel: 1
-Anchor: TOP
-X: 0
-Y: -100
-W: 130
-H: 24
+Anchor: BOTTOMRIGHT
+X: -654
+Y: 165
+W: 40
+H: 40

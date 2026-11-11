@@ -331,7 +331,7 @@ end
 ---@param itemString string The item string
 ---@return number
 function BagTracking.GetCraftingMatQuantity(itemString)
-	if LibTSMService.IsRetail() or LibTSMService.IsForever() then
+	if LibTSMService.IsRetail() then
 		return BagTracking.GetTotalQuantity(itemString)
 	else
 		return BagTracking.GetBagQuantity(itemString)

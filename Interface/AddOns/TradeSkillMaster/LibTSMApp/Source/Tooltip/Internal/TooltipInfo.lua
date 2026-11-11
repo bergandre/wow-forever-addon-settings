@@ -86,12 +86,13 @@ end
 ---@param key string The setting key
 ---@param setValue any The set value of the setting
 ---@param clearValue any The clear value of the setting
+---@param defaultValue any The default value of the setting
 ---@param populateFunc TooltipEntryPopulateFunc A function to populate the related tooltip entry info
 ---@param populateArg? any An extra argument to pass to the populate function
 ---@return self
-function TooltipInfo:AddSettingValueEntry(key, setValue, clearValue, populateFunc, populateArg)
+function TooltipInfo:AddSettingValueEntry(key, setValue, clearValue, defaultValue, populateFunc, populateArg)
 	local entry = private.entryObjPool:Get() ---@type TooltipEntry
-	entry:Acquire(self, key, setValue, clearValue, nil, populateFunc, populateArg)
+	entry:Acquire(self, key, setValue, clearValue, defaultValue, populateFunc, populateArg)
 	tinsert(self._entries, entry)
 	return self
 end

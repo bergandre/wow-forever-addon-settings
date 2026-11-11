@@ -37,6 +37,8 @@ local private = {
 local SECONDS_PER_MIN = 60
 local SECONDS_PER_DAY = 60 * 60 * 24
 local COPPER_PER_GOLD = 10000
+local MAX_CHARACTER_COPPER = 10 * 1000 * 1000 * COPPER_PER_GOLD
+local MAX_WARBANK_COPPER = 100 * 1000 * 1000 * COPPER_PER_GOLD
 
 
 
@@ -85,7 +87,7 @@ function GoldTracker.LoadCharacter(characterKey, data, lastUpdate)
 	assert(not private.characterLog[characterKey])
 	local log = GoldLog.Load(data)
 	if log then
-		log:Clean()
+		log:Clean(MAX_CHARACTER_COPPER)
 		private.characterLastUpdate[characterKey] = lastUpdate
 		private.characterLog[characterKey] = log
 	else
@@ -116,7 +118,7 @@ end
 function GoldTracker.LoadWarbank(data, lastUpdate)
 	assert(not private.warbankLog)
 	local log = GoldLog.Load(data) or GoldLog.New()
-	log:Clean()
+	log:Clean(MAX_WARBANK_COPPER)
 	private.warbankLog = log
 	private.warbankLogLastUpdate = lastUpdate
 end

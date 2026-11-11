@@ -44,17 +44,9 @@ local function Flush()
     end
 end
 
--- multibox patch: same node is re-sent at most every RESHARE seconds (receiver keeps it live 8s)
-local RESHARE = 4
-local lastSent = {}
-
 -- Solo nodos del catalogo: los aprendidos (100000+) no existen en otros clientes
 function ns.ShareNode(kind, map, coord, id)
     if not (ns.db.share and Channel() and ns.NODES[id]) then return end
-    local key = kind .. map .. ":" .. coord
-    local now = GetTime()
-    if lastSent[key] and now - lastSent[key] < RESHARE then return end
-    lastSent[key] = now
     -- %.0f y no %d: coord pasa de 2^31 y el %d de WoW da error (integer overflow)
     table.insert(queue, ("%s,%d,%.0f,%d"):format(LETTER[kind], map, coord, id))
     if not flushing then

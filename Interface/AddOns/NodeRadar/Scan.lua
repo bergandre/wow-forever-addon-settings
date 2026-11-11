@@ -1,0 +1,497 @@
+-- Scan.lua: one sweep of the minimap's blips (docs/PLAN.md, "The sweep").
+--
+-- Measured on 70450 (docs/FOREVER-PROBE.md): Minimap:UpdateMouseoverAtPoint
+-- takes a point in GetCursorPosition's space, and counts with the cursor
+-- anywhere while Minimap:SetUsingSoftCursor(true); C_TooltipInfo.
+-- GetMinimapMouseover() then reads the names there. A sweep is about 4 ms.
+
+NodeRadar = NodeRadar or {}
+local NR = NodeRadar
+local API = NR.API
+local Scan = {}
+NR.Scan = Scan
+
+-- The map's own units between samples. A node's blip is a square 25 units wide
+-- (docs/FOREVER-PROBE.md, "Item icons, first round"; a quest object's is 15, at
+-- every zoom: "Memory"), so 14 never misses one, with room for a smaller one.
+-- Each read is a new table (2.5 KB), even empty: 196 reads a sweep, not 625 at
+-- 8 (#11).
+Scan.STEP = 14
+
+-- One node's hit area (#28): a square this wide around its dot, eight of eight
+-- on Glass MiniMap's 198-unit map. Scan.Centre measures within NODE_SLACK of it.
+Scan.NODE = 25
+Scan.NODE_SLACK = 2
+-- From a blip's centroid (at most 5.5 off its node's centre: one or two samples
+-- of the grid per axis), its node's edge is 7 to 18 out: the walk steps out by
+-- STRIDE to the first point past it (#47: a same-name neighbour's square beyond
+-- a gap no longer fails it), at most FAR, then halves between.
+Scan.FAR = 24
+Scan.STRIDE = 4
+Scan.HALVINGS = 4      -- 4 / 16: an edge to 0.25 units
+-- Peeling a merged blip (#67): from a cell inside a node, its edges are at most
+-- a square away, so a peel's walks go to PEEL_FAR; up to PEEL nodes a blip.
+-- A cell is explained by a node when it lies in its square, give or take
+-- EXPLAIN_TOL (the measure's 0.25 and the projection's drift, Codex).
+Scan.PEEL_FAR = 28
+Scan.PEEL = 4
+Scan.EXPLAIN_TOL = 1.5
+Scan.RIM_MARGIN = 2    -- a peeled node's square stays this far inside the round map
+
+-- The map's rect in its own units and its effective scale; nil and why when
+-- any part is missing or secret.
+function Scan.Geometry()
+    local es = API.Num(Minimap:GetEffectiveScale())
+    local l, b, w, h = Minimap:GetRect()
+    l, b, w, h = API.Num(l), API.Num(b), API.Num(w), API.Num(h)
+    if not (es and l and b and w and h) or w <= 0 or h <= 0 then return nil, "the map's geometry is unreadable" end
+    return { es = es, l = l, b = b, w = w, h = h }
+end
+
+-- A line's text as a name: the client's escape codes out. A node above or below
+-- the player reads "|TInterface\Minimap\Minimap-PositionArrows:…|tPeacebloom",
+-- quest lines carry colours (release check, 70450): the same node must read the
+-- same name at every height, and as gathering names it.
+function Scan.Plain(s)
+    s = s:gsub("|T.-|t", ""):gsub("|A.-|a", ""):gsub("|H.-|h(.-)|h", "%1")
+    s = s:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|cn[^:]*:", ""):gsub("|r", ""):gsub("|n", " ")
+    return (s:match("^%s*(.-)%s*$"))
+end
+
+-- A row's height arrow (#41): the minimap marks a node above or below the
+-- player with Minimap-PositionArrows' upper half (texels 0-16 of 32) or lower
+-- half (16-32), measured on 70450. "above", "below", or "level" (no arrow, or
+-- one not seen before). Its texture coordinates, never a display string.
+function Scan.Height(row)
+    if not row:find("Minimap-PositionArrows", 1, true) then return "level" end
+    local top, bottom = row:match("Minimap%-PositionArrows[^|]-:(%d+):(%d+)|t")
+    if top == "0" and bottom == "16" then return "above" end
+    if top == "16" and bottom == "32" then return "below" end
+    return "level"
+end
+
+-- Two observations of a node's height as one: the same, or "mixed" (Codex,
+-- #41: a cluster can hold two nodes of a name at different heights).
+local function fold(a, b)
+    if a == nil or a == b then return b end
+    return "mixed"
+end
+
+-- The names under the mouseover and their heights ({ [name] = height }, the
+-- name's rows folded), or throws: a secret answer fails the sweep.
+local function names()
+    local data = C_TooltipInfo.GetMinimapMouseover()
+    if data == nil then return nil end
+    if API.IsSecret(data) or type(data) ~= "table" then error("the mouseover reads secret", 0) end
+    local lines = data.lines
+    if API.IsSecret(lines) then error("the mouseover reads secret", 0) end
+    if type(lines) ~= "table" then return nil end
+    local list, heights
+    for _, line in ipairs(lines) do
+        local t = type(line) == "table" and line.leftText or nil
+        if API.IsSecret(t) then error("a mouseover line reads secret", 0) end
+        if type(t) == "string" then
+            for row in t:gmatch("[^\n]+") do
+                local name = Scan.Plain(row)
+                if name ~= "" then
+                    list, heights = list or {}, heights or {}
+                    list[#list + 1] = name
+                    heights[name] = fold(heights[name], Scan.Height(row))
+                end
+            end
+        end
+    end
+    return list, heights
+end
+
+-- Cells that touch (8 neighbours) are one cluster: { name, cells = { cell, ... } }.
+local function clusters(cells)
+    local out = {}
+    for name, set in pairs(cells) do
+        local seen = {}
+        for key, cell in pairs(set) do
+            if not seen[key] then
+                local members, stack = {}, { cell }
+                seen[key] = true
+                while #stack > 0 do
+                    local c = table.remove(stack)
+                    members[#members + 1] = c
+                    for dc = -1, 1 do
+                        for dr = -1, 1 do
+                            local k = (c.col + dc) .. ":" .. (c.row + dr)
+                            local nb = set[k]
+                            if nb and not seen[k] then
+                                seen[k] = true
+                                stack[#stack + 1] = nb
+                            end
+                        end
+                    end
+                end
+                out[#out + 1] = { name = name, cells = members }
+            end
+        end
+    end
+    return out
+end
+
+-- Grid cells of a name, sampled every `step` over a rect of the map (its own
+-- units from the bottom left); only `want` is kept when given.
+local function sample(g, step, x0, y0, x1, y1, cells, want)
+    local row = 0
+    for oy = y0 + step / 2, y1, step do
+        local col = 0
+        for ox = x0 + step / 2, x1, step do
+            Minimap:UpdateMouseoverAtPoint((g.l + ox) * g.es, (g.b + oy) * g.es)
+            local found, heights = names()
+            if found then
+                for _, name in ipairs(found) do
+                    if want == nil or name == want then
+                        cells[name] = cells[name] or {}
+                        cells[name][col .. ":" .. row] = { ox, oy, col = col, row = row, height = heights[name] }
+                    end
+                end
+            end
+            col = col + 1
+        end
+        row = row + 1
+    end
+end
+
+-- A cluster of several cells may be two nodes of a name side by side: the
+-- grid bridges any gap narrower than its step (Codex, PR #12). Its patch is
+-- read again at half the step, as fine as the old grid of 8, and grouped anew,
+-- however wide: a chain of nodes is as wide as an area (Codex again). Only a
+-- name the caller counts is (`count(name)`, the alert's nodes): a quest's
+-- area, or a name not known yet, stays as it is and costs nothing more. One
+-- cell is one node. Returns the cell lists, one per blip.
+local function refine(cl, g, step, count)
+    if #cl.cells < 2 or not (count and count(cl.name)) then return { cl.cells } end
+    local c1, c2, r1, r2 = math.huge, -math.huge, math.huge, -math.huge
+    for _, c in ipairs(cl.cells) do
+        c1, c2 = math.min(c1, c.col), math.max(c2, c.col)
+        r1, r2 = math.min(r1, c.row), math.max(r2, c.row)
+    end
+    local fine = {}
+    sample(g, step / 2, c1 * step, r1 * step, math.min(g.w, (c2 + 1) * step), math.min(g.h, (r2 + 1) * step),
+        fine, cl.name)
+    local parts = clusters(fine)
+    if #parts == 0 then return { cl.cells } end
+    local out = {}
+    for _, part in ipairs(parts) do out[#out + 1] = part.cells end
+    return out
+end
+
+-- A blip at the centre of its cells, in the map's units from its centre, as
+-- drawn. Its height is "above" or "below" when all its cells agree, else nil.
+local function blip(name, members, g)
+    local sx, sy, h = 0, 0, nil
+    for _, c in ipairs(members) do
+        sx, sy = sx + c[1], sy + c[2]
+        h = fold(h, c.height)
+    end
+    -- points: the sweep's own cells (map coordinates from the bottom left), for the
+    -- icons to see which records a merged blip still covers.
+    return { name = name, x = sx / #members - g.w / 2, y = sy / #members - g.h / 2, cells = #members,
+             height = (h == "above" or h == "below") and h or nil, points = members }
+end
+
+-- Where the sweep was taken, for a blip's map coordinates (#27): the player's
+-- zone map, position on it and size in yards, and the minimap's view radius;
+-- nil when any of it is missing or secret, in an instance, or when the
+-- minimap rotates (Forever has no such option; unmeasured, so no numbers).
+local function call(f, ...)
+    if type(f) ~= "function" then return false end
+    return pcall(f, ...)
+end
+
+function Scan.Where()
+    local okI, instanced = call(IsInInstance)
+    if not okI or API.IsSecret(instanced) or type(instanced) ~= "boolean" or instanced then return nil end
+    local okR, rotate = call(C_CVar and C_CVar.GetCVar, "rotateMinimap")
+    if not okR or API.IsSecret(rotate) or (rotate ~= "0" and rotate ~= "1") then return nil end
+    if rotate == "1" then
+        local okG, ignored = call(C_Minimap.IsRotateMinimapIgnored)
+        if not okG or API.IsSecret(ignored) or ignored ~= true then return nil end
+    end
+    local okM, map = call(C_Map.GetBestMapForUnit, "player")
+    map = okM and API.Num(map)
+    if not map then return nil end
+    local okP, pos = call(C_Map.GetPlayerMapPosition, map, "player")
+    if not okP or pos == nil or API.IsSecret(pos) or type(pos) ~= "table" then return nil end
+    local okXY, px, py = call(pos.GetXY, pos)
+    px, py = okXY and API.Num(px), okXY and API.Num(py)
+    local okS, w, h = call(C_Map.GetMapWorldSize, map)
+    w, h = okS and API.Num(w), okS and API.Num(h)
+    local okV, radius = call(C_Minimap.GetViewRadius)
+    radius = okV and API.Num(radius)
+    if not (px and py and w and h and radius) or w <= 0 or h <= 0 or radius <= 0 then return nil end
+    return { map = map, x = px, y = py, w = w, h = h, radius = radius }
+end
+
+-- A blip's zone-map coordinates: uiMapID, x, y (0-1), or nil. HereBeDragons-
+-- Pins' minimap drawing inverted, measured within reach of two gathered
+-- nodes (docs/FOREVER-PROBE.md): the offset in the map's own units x radius /
+-- half-width = yards, up north, the map's y growing southward.
+function Scan.MapPosition(result, blip)
+    local where, g = result and result.where, result and result.geometry
+    if not (where and g and blip) then return nil end
+    local k = where.radius / (g.w / 2)
+    local x, y = where.x + blip.x * k / where.w, where.y - blip.y * k / where.h
+    if x < 0 or x > 1 or y < 0 or y > 1 then return nil end
+    return where.map, x, y
+end
+
+-- Puts the mouseover back where the player's cursor is, or off the map.
+local function putBack(g)
+    local px, py = GetCursorPosition()
+    px, py = API.Num(px), API.Num(py)
+    local ok, over = pcall(Minimap.IsMouseOver, Minimap)
+    if not (px and py and ok and API.Yes(over)) then
+        px, py = (g.l - 3 * g.w) * g.es, (g.b - 3 * g.h) * g.es
+    end
+    pcall(Minimap.UpdateMouseoverAtPoint, Minimap, px, py)
+end
+
+-- One sweep: { byName = { [name] = { blip, ... } }, blips = { ... }, geometry,
+-- ms }, or nil and why. The soft cursor is turned off on every path. With
+-- `count`, the names it says yes to are told apart side by side (refine);
+-- without, every cluster is one blip, the same grouping on every sweep.
+function Scan.Sweep(count)
+    local g, why = Scan.Geometry()
+    if not g then return nil, why end
+    local step = Scan.STEP
+    local parts = {}                                   -- { name, cells } per blip
+    local t0 = debugprofilestop()
+    local okOn, errOn = pcall(Minimap.SetUsingSoftCursor, Minimap, true)
+    local ok, err = okOn, errOn
+    if okOn then
+        ok, err = pcall(function()
+            local cells = {}
+            sample(g, step, 0, 0, g.w, g.h, cells)
+            for _, cl in ipairs(clusters(cells)) do
+                for _, members in ipairs(refine(cl, g, step, count)) do
+                    parts[#parts + 1] = { name = cl.name, cells = members }
+                end
+            end
+        end)
+    end
+    -- Unconditionally, whatever happened above.
+    putBack(g)
+    pcall(Minimap.SetUsingSoftCursor, Minimap, false)
+    if not ok then
+        API.Fail("sweep", err)
+        return nil, "the sweep failed: " .. tostring(err)
+    end
+    local byName, list = {}, {}
+    for _, part in ipairs(parts) do
+        local b = blip(part.name, part.cells, g)
+        byName[part.name] = byName[part.name] or {}
+        table.insert(byName[part.name], b)
+        list[#list + 1] = b
+    end
+    return { byName = byName, blips = list, geometry = g, where = Scan.Where(), ms = debugprofilestop() - t0 }
+end
+
+-- Whether a point (map units from its centre) reads that name.
+local spent = 0        -- reads since Scan.Centre began
+local function reads(g, x, y, name)
+    spent = spent + 1
+    Minimap:UpdateMouseoverAtPoint((g.l + g.w / 2 + x) * g.es, (g.b + g.h / 2 + y) * g.es)
+    local found = names()
+    if found then
+        for _, n in ipairs(found) do if n == name then return true end end
+    end
+    return false
+end
+
+-- How far from the blip, along (dx, dy), its name stops: stepping out to the
+-- first point that doesn't read it (a gap before a neighbour of its name
+-- counts), then halving between the last that did and that one; nil when it
+-- reads all the way to FAR (one merged with another of its name). Until #47 a
+-- single point FAR out had to read nothing: a same-name square within about
+-- 36 units failed it (two Silverleafs 35 apart, a 10-unit gap between them).
+local function edge(g, b, dx, dy, far)
+    local lo, hi = 0, nil
+    for d = Scan.STRIDE, far or Scan.FAR, Scan.STRIDE do
+        if not reads(g, b.x + dx * d, b.y + dy * d, b.name) then hi = d; break end
+        lo = d
+    end
+    if not hi then return nil end
+    for _ = 1, Scan.HALVINGS do
+        local mid = (lo + hi) / 2
+        if reads(g, b.x + dx * mid, b.y + dy * mid, b.name) then lo = mid else hi = mid end
+    end
+    return (lo + hi) / 2
+end
+
+-- A blip's node centre, or nil and why. Both widths must be one node's square:
+-- two of a name merged into one cluster measure as their union, wider (Codex,
+-- #28: a pair at (-7, -7) and (7, 7) read 39 x 39 between them).
+local function centre(g, b)
+    if not reads(g, b.x, b.y, b.name) then return nil, "its centroid reads nothing" end
+    local r = edge(g, b, 1, 0)
+    local l = r and edge(g, b, -1, 0)
+    local u = l and edge(g, b, 0, 1)
+    local d = u and edge(g, b, 0, -1)
+    -- Why, with what was read (#47's dots by the player's arrow: /fp nr icons).
+    if not d then
+        return nil, ("crowded: its name again past %s"):format(not r and "the right" or not l and "the left"
+            or not u and "the top" or "the bottom")
+    end
+    if math.abs(r + l - Scan.NODE) > Scan.NODE_SLACK or math.abs(u + d - Scan.NODE) > Scan.NODE_SLACK then
+        return nil, ("not one node: %.1f wide (%.1f left, %.1f right), %.1f tall (%.1f up, %.1f down)"):format(
+            r + l, l, r, u + d, u, d)
+    end
+    return b.x + (r - l) / 2, b.y + (u - d) / 2
+end
+
+-- A sweep's cell (b.points: map coordinates from the bottom left) from the
+-- map's centre, as a blip's and a record's.
+function Scan.Point(g, c) return c[1] - g.w / 2, c[2] - g.h / 2 end
+
+-- Whether a node centred at (x, y) explains a point (both from the map's centre).
+function Scan.Explains(x, y, px, py)
+    local reach = Scan.NODE / 2 + Scan.EXPLAIN_TOL
+    return math.abs(px - x) <= reach and math.abs(py - y) <= reach
+end
+
+-- A blip's cells no node of `known` or `found` (centres) explains: { px, py,
+-- cell } from the map's centre.
+function Scan.Unexplained(g, b, known, found)
+    local left = {}
+    for _, c in ipairs(b.points or {}) do
+        local px, py = Scan.Point(g, c)
+        local hit = false
+        for _, list in ipairs({ known, found or {} }) do
+            for _, n in ipairs(list) do
+                if Scan.Explains(n[1], n[2], px, py) then hit = true; break end
+            end
+            if hit then break end
+        end
+        if not hit then left[#left + 1] = { px, py, cell = c } end
+    end
+    return left
+end
+local unexplained = Scan.Unexplained
+
+local function near(list, x, y, within)
+    for _, n in ipairs(list) do
+        if math.sqrt((n[1] - x) ^ 2 + (n[2] - y) ^ 2) <= within then return true end
+    end
+    return false
+end
+
+-- Peeling (#67, docs/PLAN.md "Never a yellow dot"): the outermost unexplained
+-- cell along (dx, dy) is in a node whose edge on that side is the blip's. The
+-- walk out finds it; 3 units inside it, the walk across finds the node's other
+-- two edges, one square apart. A node's centre, or nil and why.
+local PEELS = { { -1, 0, "left" }, { 1, 0, "right" }, { 0, -1, "bottom" }, { 0, 1, "top" } }
+local function peel(g, name, left, dir)
+    local dx, dy = dir[1], dir[2]
+    local px, py = dy ~= 0 and 1 or 0, dx ~= 0 and 1 or 0    -- across
+    local best, ties = -math.huge, {}
+    for _, c in ipairs(left) do
+        local along = c[1] * dx + c[2] * dy
+        if along > best + 0.01 then best, ties = along, { c } elseif along >= best - 0.01 then ties[#ties + 1] = c end
+    end
+    table.sort(ties, function(a, b) return a[1] * px + a[2] * py < b[1] * px + b[2] * py end)
+    local s = ties[math.ceil(#ties / 2)]
+    local out = edge(g, { name = name, x = s[1], y = s[2] }, dx, dy, Scan.PEEL_FAR)
+    if not out then return nil, "crowded out to the " .. dir[3] end
+    local ex, ey = s[1] + dx * out, s[2] + dy * out
+    local q = { name = name, x = ex - dx * 3, y = ey - dy * 3 }
+    if not reads(g, q.x, q.y, name) then return nil, "nothing inside the " .. dir[3] .. " edge" end
+    local a = edge(g, q, px, py, Scan.PEEL_FAR)
+    local b = a and edge(g, q, -px, -py, Scan.PEEL_FAR)
+    if not b then return nil, "crowded across the " .. dir[3] .. " edge" end
+    if math.abs(a + b - Scan.NODE) > Scan.NODE_SLACK then
+        return nil, ("%.1f across the %s edge, not one node"):format(a + b, dir[3])
+    end
+    local cx = ex - dx * Scan.NODE / 2 + px * (a - b) / 2
+    local cy = ey - dy * Scan.NODE / 2 + py * (a - b) / 2
+    if not Scan.Explains(cx, cy, s[1], s[2]) then return nil, "the " .. dir[3] .. " node misses its cell" end
+    local half, reach = g.w / 2 - Scan.RIM_MARGIN, Scan.NODE / 2
+    for _, k in ipairs({ { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } }) do
+        if math.sqrt((cx + k[1] * reach) ^ 2 + (cy + k[2] * reach) ^ 2) > half then
+            return nil, "the " .. dir[3] .. " node reaches the rim"
+        end
+    end
+    return cx, cy
+end
+
+-- One blip: its nodes found (b.found, centres from the map's centre; b.cx, b.cy
+-- the first), its cells still unexplained (b.left), and why (b.why) when any
+-- are. b.known: the centres of its name's records, which explain cells and
+-- are never found again (within `match`). b.single: the centroid's measure
+-- first. A blip without points (one measured by hand) is that measure only.
+-- b.cut: the read ceiling stopped it.
+local function measure(g, b, budget, match)
+    local known, found = b.known or {}, {}
+    b.found = found
+    local why
+    if b.single or not b.points then
+        local x, y = centre(g, b)
+        if x and not near(known, x, y, match) then found[1] = { x, y } elseif not x then why = y end
+    end
+    if b.points then
+        local left = unexplained(g, b, known, found)
+        -- The longer axis of what's left first (a pair one above the other:
+        -- bottom, top), then on round; four failures in a row end it.
+        local x1, x2, y1, y2 = math.huge, -math.huge, math.huge, -math.huge
+        for _, c in ipairs(left) do
+            x1, x2, y1, y2 = math.min(x1, c[1]), math.max(x2, c[1]), math.min(y1, c[2]), math.max(y2, c[2])
+        end
+        local failed, i = 0, (y2 - y1 > x2 - x1) and 2 or 0
+        while #left > 0 and failed < #PEELS and #found < Scan.PEEL do
+            if spent >= budget then b.cut = true; break end
+            local dir = PEELS[i % #PEELS + 1]
+            i = i + 1
+            local x, y = peel(g, b.name, left, dir)
+            if not x then
+                why, failed = y, failed + 1
+            elseif near(known, x, y, match) or near(found, x, y, match) then
+                why, failed = "the " .. dir[3] .. " node is known", failed + 1
+            else
+                found[#found + 1] = { x, y }
+                left, failed = unexplained(g, b, known, found), 0
+            end
+        end
+        b.left = left
+        if #left == 0 then why = nil end
+    end
+    if found[1] then b.cx, b.cy = found[1][1], found[1][2] end
+    b.why = why
+end
+
+-- Measures blips from this frame's sweep (#28, #67): sets each one's nodes as
+-- above. About 29 reads a lone node, 30 a node peeled. `budget`: the reads at
+-- most (a blip started finishes its current try); `match`: within it, a node
+-- is a known one (Icons.MATCH). True, or nil and why; the soft cursor is turned
+-- off on every path, as after a sweep.
+function Scan.Centre(blips, budget, match)
+    local g, why = Scan.Geometry()
+    if not g then return nil, why end
+    budget, match, spent = budget or math.huge, match or 8, 0
+    local okOn, errOn = pcall(Minimap.SetUsingSoftCursor, Minimap, true)
+    local ok, err = okOn, errOn
+    if okOn then
+        ok, err = pcall(function()
+            for _, b in ipairs(blips) do
+                if spent >= budget then b.cut = true else measure(g, b, budget, match) end
+            end
+        end)
+    end
+    putBack(g)
+    pcall(Minimap.SetUsingSoftCursor, Minimap, false)
+    if not ok then
+        API.Fail("centre", err)
+        return nil, "measuring failed: " .. tostring(err)
+    end
+    return true
+end
+
+-- How many blips of a name a sweep saw.
+function Scan.Count(result, name)
+    local b = result and result.byName[name]
+    return b and #b or 0
+end

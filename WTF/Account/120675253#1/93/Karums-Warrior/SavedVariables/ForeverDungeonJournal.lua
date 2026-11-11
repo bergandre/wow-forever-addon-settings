@@ -1,0 +1,723 @@
+
+ForeverDungeonJournalCharacterDB = {
+["favouriteItems"] = {
+},
+["rpgTrash"] = {
+["Shadowfang Keep"] = {
+["seen"] = {
+["Creature-0-7101-33-11-3851-3A93BF02EF"] = true,
+["Creature-0-7101-33-11-3877-946DD7BFEE"] = true,
+["Creature-0-7101-33-11-2529-C25D426E63"] = true,
+["Creature-0-7101-33-11-3875-BC8C0D6E6F"] = true,
+["Creature-0-7101-33-11-3873-C25D426E63"] = true,
+["Creature-0-7101-33-11-3862-231B2F0C9D"] = true,
+},
+["n"] = 6,
+},
+},
+["flightPointsVersion"] = 2,
+["trackerSlots"] = {
+},
+["trackedDungeons"] = {
+},
+["rpgMaps"] = {
+},
+["flightPoints"] = {
+["the sepulcher, silverpine forest"] = true,
+["tarren mill, hillsbrad"] = true,
+["undercity, tirisfal"] = true,
+},
+["rpgBosses"] = {
+["Shadowfang Keep"] = {
+["baron silverlaine"] = true,
+[3927] = true,
+["odo the blindwatcher"] = true,
+[4274] = true,
+[4278] = true,
+[4627] = true,
+[3914] = true,
+["commander springvale"] = true,
+["fenrus the devourer"] = true,
+["rethilgore"] = true,
+[4279] = true,
+["archmage arugal"] = true,
+["razorclaw the butcher"] = true,
+["wolf master nandos"] = true,
+["arugal's voidwalker"] = true,
+[4275] = true,
+[3886] = true,
+[3887] = true,
+},
+},
+["rpgKills"] = {
+["Shadowfang Keep"] = true,
+},
+["runTracker"] = {
+["point"] = {
+"RIGHT",
+"RIGHT",
+-351.0785827636719,
+-57.84604644775391,
+},
+},
+["arrowChains"] = {
+},
+["journalMode"] = "gamer",
+["runLog"] = {
+["nextID"] = 2,
+["runs"] = {
+{
+["deathTimes"] = {
+1794385528,
+},
+["lastSeen"] = 1794385598,
+["finalKill"] = 1794385318,
+["dungeon"] = "Shadowfang Keep",
+["kills"] = {
+{
+["x"] = 47,
+["loot"] = {
+{
+["id"] = 5254,
+["w"] = "Vec Galore",
+["link"] = "|cnIQ3:|Hitem:5254::::::::26:1491::1::1:28:5249:::::|h[Rugged Spaulders]|h|r",
+},
+},
+["b"] = "Rethilgore",
+["m"] = "Rethilgore",
+["t"] = 1794382509,
+},
+{
+["x"] = 44,
+["loot"] = {
+{
+["id"] = 273457,
+["w"] = "Stormhelm Stormhelm",
+["link"] = "|cnIQ3:|Hitem:273457::::::::26:1491::1::1:28:5249:::::|h[Sorcerer Collar]|h|r",
+},
+},
+["b"] = "Rethilgore",
+["m"] = "Rethilgore",
+["t"] = 1794382915,
+},
+{
+["m"] = "Shadowfang Moonwalker",
+["t"] = 1794383037,
+["x"] = 38,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383109,
+["x"] = 47,
+},
+{
+["m"] = "Shadowfang Moonwalker",
+["t"] = 1794383157,
+["x"] = 36,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383161,
+["x"] = 36,
+},
+{
+["m"] = "Shadowfang Moonwalker",
+["t"] = 1794383201,
+["x"] = 36,
+},
+{
+["m"] = "Shadowfang Moonwalker",
+["t"] = 1794383226,
+["x"] = 36,
+},
+{
+["m"] = "Shadowfang Moonwalker",
+["t"] = 1794383227,
+["x"] = 36,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383250,
+["x"] = 45,
+},
+{
+["m"] = "Shadowfang Moonwalker",
+["t"] = 1794383275,
+["x"] = 36,
+},
+{
+["m"] = "Shadowfang Moonwalker",
+["t"] = 1794383299,
+["x"] = 36,
+},
+{
+["m"] = "Shadow Charger",
+["t"] = 1794383312,
+["x"] = 36,
+["b"] = "Fel Steed / Shadow Charger",
+},
+{
+["m"] = "Shadow Charger",
+["t"] = 1794383321,
+["x"] = 36,
+["b"] = "Fel Steed / Shadow Charger",
+},
+{
+["m"] = "Shadow Charger",
+["t"] = 1794383322,
+["x"] = 36,
+["b"] = "Fel Steed / Shadow Charger",
+},
+{
+["m"] = "Shadowfang Moonwalker",
+["t"] = 1794383368,
+["x"] = 36,
+},
+{
+["m"] = "Shadowfang Moonwalker",
+["t"] = 1794383371,
+["x"] = 36,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383408,
+["x"] = 45,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383418,
+["x"] = 36,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383424,
+["x"] = 36,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383435,
+["x"] = 36,
+},
+{
+["x"] = 110,
+["loot"] = {
+{
+["id"] = 1292,
+["w"] = "Vec Galore",
+["link"] = "|cnIQ3:|Hitem:1292::::::::26:1491::1::1:28:5249:::::|h[Butcher's Cleaver]|h|r",
+},
+},
+["b"] = "Razorclaw the Butcher",
+["m"] = "Razorclaw the Butcher",
+["t"] = 1794383465,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383475,
+["x"] = 45,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383477,
+["x"] = 36,
+},
+{
+["m"] = "Shadowfang Glutton",
+["t"] = 1794383519,
+["x"] = 45,
+},
+{
+["m"] = "Shadowfang Glutton",
+["t"] = 1794383529,
+["x"] = 54,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383530,
+["x"] = 36,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383573,
+["x"] = 36,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383575,
+["x"] = 36,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383579,
+["x"] = 36,
+},
+{
+["m"] = "Shadowfang Glutton",
+["t"] = 1794383584,
+["x"] = 54,
+},
+{
+["m"] = "Shadowfang Glutton",
+["t"] = 1794383652,
+["x"] = 45,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383661,
+["x"] = 36,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383669,
+["x"] = 36,
+},
+{
+["x"] = 150,
+["loot"] = {
+{
+["id"] = 6321,
+["w"] = "Chungus Shrimp",
+["link"] = "|cnIQ3:|Hitem:6321::::::::26:1491::1::1:28:5249:::::|h[Silverlaine's Family Seal]|h|r",
+},
+},
+["b"] = "Baron Silverlaine",
+["m"] = "Baron Silverlaine",
+["t"] = 1794383690,
+},
+{
+["m"] = "Shadowfang Darksoul",
+["t"] = 1794383753,
+["x"] = 45,
+},
+{
+["m"] = "Shadowfang Darksoul",
+["t"] = 1794383755,
+["x"] = 36,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794383795,
+["x"] = 45,
+},
+{
+["m"] = "Shadowfang Darksoul",
+["t"] = 1794383800,
+["x"] = 45,
+},
+{
+["m"] = "Shadowfang Darksoul",
+["t"] = 1794383801,
+["x"] = 45,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383830,
+["x"] = 36,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794383833,
+["x"] = 45,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794383867,
+["x"] = 45,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794383867,
+["x"] = 45,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383901,
+["x"] = 36,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794383902,
+["x"] = 54,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383907,
+["x"] = 45,
+},
+{
+["x"] = 150,
+["loot"] = {
+{
+["id"] = 273643,
+["w"] = "Karums Priest",
+["link"] = "|cnIQ3:|Hitem:273643::::::::26:1491::1::1:28:5249:::::|h[Worgenbane Talisman]|h|r",
+},
+},
+["b"] = "Commander Springvale",
+["m"] = "Commander Springvale",
+["t"] = 1794383969,
+},
+{
+["m"] = "Haunted Servitor",
+["t"] = 1794383991,
+["x"] = 36,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794384022,
+["x"] = 45,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794384025,
+["x"] = 54,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794384050,
+["x"] = 54,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794384060,
+["x"] = 45,
+},
+{
+["m"] = "Wailing Guardsman",
+["t"] = 1794384064,
+["x"] = 54,
+},
+{
+["x"] = 150,
+["loot"] = {
+{
+["id"] = 273645,
+["link"] = "|cnIQ3:|Hitem:273645::::::::26:1491::1::1:28:5249:::::|h[Blindwatcher's Sight]|h|r",
+["w"] = "Karums",
+["r"] = "need",
+},
+},
+["b"] = "Odo the Blindwatcher",
+["m"] = "Odo the Blindwatcher",
+["t"] = 1794384136,
+},
+{
+["m"] = "Vile Bat",
+["t"] = 1794384148,
+["x"] = 54,
+},
+{
+["m"] = "Blood Seeker",
+["t"] = 1794384154,
+["x"] = 65,
+},
+{
+["m"] = "Tormented Officer",
+["t"] = 1794384231,
+["x"] = 65,
+},
+{
+["m"] = "Tormented Officer",
+["t"] = 1794384251,
+["x"] = 75,
+},
+{
+["m"] = "Tormented Officer",
+["t"] = 1794384253,
+["x"] = 75,
+},
+{
+["m"] = "Tormented Officer",
+["t"] = 1794384313,
+["x"] = 65,
+},
+{
+["m"] = "Tormented Officer",
+["t"] = 1794384317,
+["x"] = 65,
+},
+{
+["m"] = "Tormented Officer",
+["t"] = 1794384325,
+["x"] = 65,
+},
+{
+["m"] = "Shadowfang Ragetooth",
+["t"] = 1794384368,
+["x"] = 75,
+},
+{
+["m"] = "Shadowfang Ragetooth",
+["t"] = 1794384389,
+["x"] = 75,
+},
+{
+["m"] = "Son of Arugal",
+["t"] = 1794384419,
+["x"] = 75,
+},
+{
+["m"] = "Shadowfang Ragetooth",
+["t"] = 1794384431,
+["x"] = 75,
+},
+{
+["m"] = "Lupine Horror",
+["t"] = 1794384462,
+["x"] = 85,
+},
+{
+["m"] = "Shadowfang Ragetooth",
+["t"] = 1794384488,
+["x"] = 75,
+},
+{
+["m"] = "Lupine Horror",
+["t"] = 1794384506,
+["x"] = 75,
+},
+{
+["m"] = "Lupine Horror",
+["t"] = 1794384521,
+["x"] = 75,
+},
+{
+["m"] = "Son of Arugal",
+["t"] = 1794384534,
+["x"] = 75,
+},
+{
+["m"] = "Lupine Horror",
+["t"] = 1794384537,
+["x"] = 85,
+},
+{
+["m"] = "Shadowfang Ragetooth",
+["t"] = 1794384543,
+["x"] = 75,
+},
+{
+["m"] = "Lupine Horror",
+["t"] = 1794384614,
+["x"] = 85,
+},
+{
+["m"] = "Lupine Horror",
+["t"] = 1794384639,
+["x"] = 85,
+},
+{
+["m"] = "Son of Arugal",
+["t"] = 1794384651,
+["x"] = 85,
+},
+{
+["m"] = "Shadowfang Ragetooth",
+["t"] = 1794384665,
+["x"] = 75,
+},
+{
+["m"] = "Son of Arugal",
+["t"] = 1794384742,
+["x"] = 85,
+},
+{
+["m"] = "Shadowfang Ragetooth",
+["t"] = 1794384775,
+["x"] = 65,
+},
+{
+["x"] = 171,
+["loot"] = {
+{
+["id"] = 252792,
+["w"] = "Vec Galore",
+["link"] = "|cnIQ3:|Hitem:252792::::::::26:1491::1::1:28:5249:::::|h[Pattern: Brawler's Leather Pants]|h|r",
+},
+{
+["id"] = 273646,
+["link"] = "|cnIQ3:|Hitem:273646::::::::26:1491::1::1:28:5249:::::|h[Half-Eaten Boots]|h|r",
+["w"] = "Karums",
+["r"] = "need",
+},
+{
+["id"] = 3194,
+["w"] = "Karums Priest",
+["link"] = "|cnIQ3:|Hitem:3194::::::::26:1491::1::1:28:5249:::::|h[Black Malice]|h|r",
+},
+},
+["b"] = "Fenrus the Devourer",
+["m"] = "Fenrus the Devourer",
+["t"] = 1794384814,
+},
+{
+["m"] = "Arugal's Voidwalker",
+["t"] = 1794384843,
+["x"] = 35,
+["b"] = "Arugal's Voidwalker",
+},
+{
+["m"] = "Arugal's Voidwalker",
+["t"] = 1794384845,
+["x"] = 35,
+["b"] = "Arugal's Voidwalker",
+},
+{
+["m"] = "Arugal's Voidwalker",
+["t"] = 1794384849,
+["x"] = 35,
+["b"] = "Arugal's Voidwalker",
+},
+{
+["m"] = "Arugal's Voidwalker",
+["t"] = 1794384852,
+["x"] = 35,
+["b"] = "Arugal's Voidwalker",
+},
+{
+["m"] = "Shadowfang Ragetooth",
+["t"] = 1794384911,
+["x"] = 65,
+},
+{
+["m"] = "Son of Arugal",
+["t"] = 1794384996,
+["x"] = 85,
+},
+{
+["x"] = 171,
+["loot"] = {
+{
+["id"] = 3748,
+["w"] = "Karums Priest",
+["link"] = "|cnIQ3:|Hitem:3748::::::::26:1491::1::1:28:5249:::::|h[Feline Mantle]|h|r",
+},
+},
+["b"] = "Wolf Master Nandos",
+["m"] = "Wolf Master Nandos",
+["t"] = 1794385080,
+},
+{
+["m"] = "Lupine Horror",
+["t"] = 1794385120,
+["x"] = 85,
+},
+{
+["m"] = "Son of Arugal",
+["t"] = 1794385213,
+["x"] = 85,
+},
+{
+["m"] = "Son of Arugal",
+["t"] = 1794385222,
+["x"] = 85,
+},
+{
+["m"] = "Son of Arugal",
+["t"] = 1794385236,
+["x"] = 85,
+},
+{
+["x"] = 209,
+["loot"] = {
+{
+["id"] = 6324,
+["w"] = "Stormhelm Stormhelm",
+["link"] = "|cnIQ3:|Hitem:6324::::::::26:1491::1::1:28:5249:::::|h[Robes of Arugal]|h|r",
+},
+},
+["b"] = "Archmage Arugal",
+["m"] = "Archmage Arugal",
+["t"] = 1794385318,
+["f"] = 1,
+},
+},
+["created"] = 1794382509,
+["deaths"] = 1,
+["firstTrash"] = 1794383037,
+["seenN"] = 77,
+["money"] = 3980,
+["firstKill"] = 1794382509,
+["needs"] = {
+{
+["at"] = 1794383697,
+["roll"] = 9,
+["link"] = "|cnIQ3:|Hitem:6321::::::::26:1491::1::1:28:5249:::::|h[Silverlaine's Family Seal]|h|r",
+["id"] = 6321,
+["res"] = "lost",
+["before"] = 0,
+},
+{
+["at"] = 1794384168,
+["roll"] = 13,
+["link"] = "|cnIQ3:|Hitem:273645::::::::26:1491::1::1:28:5249:::::|h[Blindwatcher's Sight]|h|r",
+["id"] = 273645,
+["res"] = "won",
+["before"] = 0,
+},
+{
+["at"] = 1794384718,
+["roll"] = 17,
+["link"] = "|cnIQ2:|Hitem:10424::::::::26:1491::1:::::::|h[Plans: Silvered Bronze Leggings]|h|r",
+["id"] = 10424,
+["res"] = "won",
+["before"] = 0,
+},
+{
+["at"] = 1794384848,
+["roll"] = 19,
+["link"] = "|cnIQ3:|Hitem:273646::::::::26:1491::1::1:28:5249:::::|h[Half-Eaten Boots]|h|r",
+["id"] = 273646,
+["res"] = "won",
+["before"] = 0,
+},
+},
+["closed"] = true,
+["completed"] = true,
+["id"] = 1,
+["exits"] = {
+{
+["why"] = "stepped",
+["t"] = 1794382611,
+["back"] = 1794382624,
+},
+},
+["party"] = {
+["Karums-Priest"] = "PRIEST",
+["Vec-Galore"] = "ROGUE",
+["Chungus-Shrimp"] = "DRUID",
+["Karums-Warrior"] = "WARRIOR",
+["Stormhelm-Stormhelm"] = "WARLOCK",
+},
+["instanceName"] = "Shadowfang Keep",
+["otherXP"] = 0,
+["map"] = 33,
+["lastBoss"] = 1794385318,
+},
+},
+},
+["rpgQuests"] = {
+[5722] = true,
+[95204] = true,
+[5761] = true,
+[959] = true,
+[95216] = true,
+[5723] = true,
+[92401] = true,
+[1491] = true,
+[5724] = true,
+[5728] = true,
+[1013] = true,
+[92421] = true,
+[1221] = true,
+[1098] = true,
+[5725] = true,
+[1486] = true,
+[1487] = true,
+[97288] = true,
+[6981] = true,
+[914] = true,
+[962] = true,
+[1014] = true,
+},
+}

@@ -1,54 +1,106 @@
 
 LayerSwapDB = {
+["asked"] = {
+},
+["log"] = {
+{
+["a"] = "on",
+["b"] = "at login",
+["t"] = "11:51:46",
+["g"] = 33582.78,
+["kind"] = "hosting",
+},
+{
+["a"] = "6868-13",
+["b"] = "D",
+["t"] = "11:52:56",
+["g"] = 33655.11,
+["kind"] = "layer",
+},
+},
 ["previous"] = {
 ["session"] = {
-["toc"] = 16001,
+["restricted"] = true,
 ["me"] = "Karums Warrior",
-["version"] = "1.14.1",
-["started"] = "2026-11-07 12:51:50",
+["version"] = "1.14.14",
+["started"] = "2026-11-11 11:42:54",
+["toc"] = 16001,
+["search"] = true,
 },
 ["log"] = {
 {
 ["a"] = "on",
 ["b"] = "at login",
-["t"] = "12:51:50",
-["g"] = 8633.6,
+["t"] = "11:42:54",
+["g"] = 33050.67,
 ["kind"] = "hosting",
 },
-},
-},
-["log"] = {
 {
-["a"] = "on",
-["b"] = "at login",
-["t"] = "12:53:20",
-["g"] = 8723.41,
-["kind"] = "hosting",
+["a"] = "6868-13",
+["b"] = "D",
+["t"] = "11:43:10",
+["g"] = 33068.71,
+["kind"] = "layer",
 },
 },
-["layers"] = {
-["6863-4"] = {
-["last"] = 1794048647,
-["zone"] = "Undercity",
-["letter"] = "E",
-["first"] = 1794042738,
-["id"] = "6863-4",
-["n"] = 5,
 },
-},
-["hostSaid"] = true,
 ["mini"] = {
-["y"] = 258.4747924804688,
-["x"] = -24.92135429382324,
+["y"] = 258.474853515625,
+["x"] = -24.92135620117188,
 ["point"] = "BOTTOMRIGHT",
 ["hidden"] = false,
 },
-["session"] = {
-["toc"] = 16001,
-["me"] = "Karums Warrior",
-["version"] = "1.14.1",
-["started"] = "2026-11-07 12:53:20",
-},
 ["minimap"] = {
+["minimapPos"] = 333.7384361564275,
+},
+["layers"] = {
+["6868-13"] = {
+["last"] = 1794391161,
+["zone"] = "Undercity",
+["letter"] = "D",
+["first"] = 1794385965,
+["id"] = "6868-13",
+["n"] = 4,
+},
+},
+["hosting"] = true,
+["hostSaid"] = true,
+["session"] = {
+["restricted"] = true,
+["me"] = "Karums Warrior",
+["version"] = "1.14.14",
+["started"] = "2026-11-11 11:51:46",
+["toc"] = 16001,
+["search"] = true,
+},
+["book"] = {
+["Danildo Kolbasenko"] = {
+["at"] = 1794368187,
+["host"] = true,
+["zone"] = "1424",
+},
+["Granda Marreco"] = {
+["host"] = true,
+["layer"] = "6847-2",
+["at"] = 1794368186,
+["zone"] = "1424",
+},
+["Karums Priest"] = {
+["host"] = true,
+["layer"] = "6847-2",
+["at"] = 1794368186,
+["zone"] = "1424",
+},
+["Sorrel Sour"] = {
+["host"] = true,
+["layer"] = "6847-2",
+["at"] = 1794368186,
+["zone"] = "1424",
+},
+["Existential Despair"] = {
+["at"] = 1794368055,
+["layer"] = "6868-3",
+["zone"] = "1424",
+},
 },
 }

@@ -18,6 +18,7 @@ local Lifecycle = App:From("LibTSMService"):Include("Util.Lifecycle")
 local MinimapIcon = App:From("LibTSMUI"):Include("MinimapIcon")
 local UIElements = App:From("LibTSMUI"):Include("UIElements")
 local UIUtils = App:From("LibTSMUI"):Include("Util.UIUtils")
+local AppHelperConfig = App:From("LibTSMApp"):Include("Config.AppHelperConfig")
 local AddonSettings = App:From("LibTSMApp"):Include("Service.AddonSettings")
 local SlashCommands = App:From("LibTSMApp"):Include("Service.SlashCommands")
 local WhatsNew = App:From("LibTSMApp"):Include("UI.WhatsNew")
@@ -37,6 +38,7 @@ local STATE_SCHEMA = Reactive.CreateStateSchema("MainUIState")
 ---| "ACTION_HANDLE_HIDE"
 ---| "ACTION_SHOW_OPERATION_SETTINGS" -> typeName: string, operationName: string
 ---| "ACTION_SHOW_GROUP_SETTINGS" -> groupPath: GroupPathValue
+---| "ACTION_REVIEW_APP_GROUP_IMPORT" -> id: string
 
 
 
@@ -57,6 +59,7 @@ AddonSettings.RegisterOnLoad(MainUI, function(db)
 
 	Groups.Configure(private.manager:CallbackToProcessAction("ACTION_SHOW_OPERATION_SETTINGS"))
 	Operations.Configure(private.manager:CallbackToProcessAction("ACTION_SHOW_GROUP_SETTINGS"))
+	AppHelperConfig.SetGroupImportReviewCallback(private.manager:CallbackToProcessAction("ACTION_REVIEW_APP_GROUP_IMPORT"))
 
 	UIUtils.RegisterUIForAnalytics("main")
 	SlashCommands.RegisterBase(private.manager:CallbackToProcessAction("ACTION_TOGGLE"), L["Toggles the main TSM window"])
@@ -123,6 +126,13 @@ function private.ActionHandler(manager, state, action, ...)
 		local groupPath = ...
 		state.frame:SetSelectedNavButton(L["Groups"], true)
 		Groups.SetSelectedGroup(groupPath)
+	elseif action == "ACTION_REVIEW_APP_GROUP_IMPORT" then
+		local id = ...
+		if not state.frame then
+			manager:ProcessAction("ACTION_SHOW_FRAME")
+		end
+		state.frame:SetSelectedNavButton(L["Groups"], true)
+		Groups.ReviewAppGroupImport(id)
 	else
 		error("Unknown action: "..tostring(action))
 	end

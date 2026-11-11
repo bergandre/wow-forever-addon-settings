@@ -2,6 +2,11 @@
 TitanCurrenciesMultiDb = {
 ["TITAN_FOREVER_UNDERMINEREAL"] = {
 ["charTable"] = {
+["Gniloe-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff3fc7ebGniloe",
+["faction"] = "Horde",
+},
 ["Karums-Priest"] = {
 ["currency"] = 0,
 ["name"] = "|cffffffffKarums",
@@ -11,8 +16,14 @@ TitanCurrenciesMultiDb = {
 },
 ["TITAN_OUROM"] = {
 ["charTable"] = {
+["Gniloe-Forever"] = {
+["value"] = 0,
+["realm"] = "Forever",
+["name"] = "|cff3fc7ebGniloe",
+["faction"] = "Horde",
+},
 ["Karums-Priest"] = {
-["value"] = 10598,
+["value"] = 54718,
 ["faction"] = "Horde",
 ["name"] = "|cffffffffKarums",
 ["realm"] = "Priest",
@@ -21,6 +32,11 @@ TitanCurrenciesMultiDb = {
 },
 ["TITAN_FOREVER_RANKPOINTS"] = {
 ["charTable"] = {
+["Gniloe-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff3fc7ebGniloe",
+["faction"] = "Horde",
+},
 ["Karums-Priest"] = {
 ["currency"] = 0,
 ["name"] = "|cffffffffKarums",
@@ -30,6 +46,11 @@ TitanCurrenciesMultiDb = {
 },
 ["TITAN_FOREVER_MERCHANTSFAVOR"] = {
 ["charTable"] = {
+["Gniloe-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff3fc7ebGniloe",
+["faction"] = "Horde",
+},
 ["Karums-Priest"] = {
 ["currency"] = 0,
 ["name"] = "|cffffffffKarums",
@@ -39,6 +60,11 @@ TitanCurrenciesMultiDb = {
 },
 ["TITAN_DRKTKM"] = {
 ["charTable"] = {
+["Gniloe-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff3fc7ebGniloe",
+["faction"] = "Horde",
+},
 ["Karums-Priest"] = {
 ["currency"] = 0,
 ["name"] = "|cffffffffKarums",
@@ -48,6 +74,11 @@ TitanCurrenciesMultiDb = {
 },
 ["TITAN_PVHNRM"] = {
 ["charTable"] = {
+["Gniloe-Forever"] = {
+["currency"] = 0,
+["name"] = "|cff3fc7ebGniloe",
+["faction"] = "Horde",
+},
 ["Karums-Priest"] = {
 ["currency"] = 0,
 ["name"] = "|cffffffffKarums",

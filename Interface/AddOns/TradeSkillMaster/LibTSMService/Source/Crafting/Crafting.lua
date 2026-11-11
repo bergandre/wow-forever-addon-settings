@@ -106,8 +106,7 @@ end
 ---@param itemString string The item string
 ---@return boolean
 function Crafting.HasCraftedItem(itemString)
-	local levelItemString = ItemString.ToLevel(itemString)
-	return CraftInfoDBUtil.HasCraftedItem(levelItemString)
+	return CraftInfoDBUtil.HasCraftedItem(CraftInfoDBUtil.GetCraftedItemString(ItemString.ToLevel(itemString)))
 end
 
 ---Gets the item string for a given craft.

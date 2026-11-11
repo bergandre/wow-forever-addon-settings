@@ -843,11 +843,11 @@ OptionalMat.Info = {
 	["i:173160"] = { statModifier = 36 }, -- Missive of Haste
 	["i:173163"] = { statModifier = 40 }, -- Missive of Versatility
 	["i:173162"] = { statModifier = 49 }, -- Missive of Mastery
-	["i:180055"] = { absItemLevel = 19 }, -- Relic of the Past I
+	["i:180055"] = { absItemLevel = 18 }, -- Relic of the Past I
 	["i:180057"] = { absItemLevel = 28 }, -- Relic of the Past II
-	["i:180058"] = { absItemLevel = 39 }, -- Relic of the Past III
+	["i:180058"] = { absItemLevel = 38 }, -- Relic of the Past III
 	["i:180059"] = { absItemLevel = 48 }, -- Relic of the Past IV
-	["i:180060"] = { absItemLevel = 54 }, -- Relic of the Past V
+	["i:180060"] = { absItemLevel = 58 }, -- Relic of the Past V
 	["i:183942"] = { absItemLevel = 87 }, -- Novice Crafter's Mark
 	["i:173381"] = { absItemLevel = 117 }, -- Crafter's Mark I
 	["i:173382"] = { absItemLevel = 168 }, -- Crafter's Mark II

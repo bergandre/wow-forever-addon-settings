@@ -162,8 +162,7 @@ local function Update()
         local cos, sin = math.cos(-f), math.sin(-f)
         local scale = half / radius
         for _, kind in ipairs(ns.KIND_ORDER) do
-            -- multibox patch: with sharing on, show party-shared kinds even without the profession
-            if ns.KindShown(kind) and (ns.HasProfession(kind) or ns.db.share) then
+            if ns.KindShown(kind) and ns.HasProfession(kind) then
                 ns.EachNode(kind, map, function(coord, id)
                     local nx, ny = ns.Decode(coord)
                     local east, north = (nx - x) * w, (y - ny) * h

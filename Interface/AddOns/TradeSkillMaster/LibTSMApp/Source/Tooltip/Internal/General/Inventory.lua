@@ -49,8 +49,8 @@ end)
 ---Adds tooltip entries.
 ---@param tooltipInfo TooltipInfo
 function Inventory.AddEntries(tooltipInfo)
-	tooltipInfo:AddSettingValueEntry("inventoryTooltipFormat", "full", "none", private.PopulateFullInventoryLines)
-	tooltipInfo:AddSettingValueEntry("inventoryTooltipFormat", "simple", "none", private.PopulateSimpleInventoryLine)
+	tooltipInfo:AddSettingValueEntry("inventoryTooltipFormat", "full", "none", nil, private.PopulateFullInventoryLines)
+	tooltipInfo:AddSettingValueEntry("inventoryTooltipFormat", "simple", "none", nil, private.PopulateSimpleInventoryLine)
 end
 
 

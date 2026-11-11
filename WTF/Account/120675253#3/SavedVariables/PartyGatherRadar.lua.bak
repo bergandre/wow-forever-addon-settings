@@ -1,11 +1,5 @@
 
 PartyGatherRadarDB = {
-["learnedNames"] = {
-["HERB"] = {
-},
-["ORE"] = {
-},
-},
 ["settings"] = {
 ["showLive"] = true,
 ["showMinimap"] = true,
@@ -14,15 +8,17 @@ PartyGatherRadarDB = {
 ["showHistory"] = true,
 ["receiveEnabled"] = true,
 ["showOres"] = true,
+["shareEnabled"] = true,
 ["iconSize"] = 14,
 ["showWorldMap"] = false,
 ["showTooltipReporter"] = true,
-["shareEnabled"] = true,
-["enabled"] = true,
-["debug"] = false,
 ["liveTTL"] = 60,
+["enabled"] = true,
 ["iconAlpha"] = 0.9,
-["showTooltipAge"] = true,
+["debug"] = false,
+["allowInstanceChat"] = false,
+["showMinimapButton"] = true,
+["uncertainTTL"] = 240,
 ["colors"] = {
 ["live"] = {
 ["b"] = 0.2,
@@ -45,18 +41,29 @@ PartyGatherRadarDB = {
 ["r"] = 0.6,
 },
 },
-["showMinimapButton"] = true,
 ["showHerbs"] = true,
-["testTTL"] = 120,
-["uncertainTTL"] = 240,
 ["showTooltipName"] = true,
-["showOwnDetections"] = false,
+["showSpawns"] = false,
+["testTTL"] = 120,
+["showTooltipAge"] = true,
 ["autoDetect"] = true,
-["allowInstanceChat"] = false,
+["showOwnDetections"] = false,
+["proximityDetect"] = false,
+["hideNotFound"] = true,
 },
-["schema"] = 1,
 ["diagnostics"] = {
 ["log"] = {
 },
+},
+["learnedNames"] = {
+["HERB"] = {
+},
+["ORE"] = {
+},
+},
+["probe"] = {
+},
+["schema"] = 1,
+["knownSpots"] = {
 },
 }

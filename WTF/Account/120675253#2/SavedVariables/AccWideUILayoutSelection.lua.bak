@@ -1,6 +1,11 @@
 
 AccWideUIAceDB = {
 ["char"] = {
+["Gniloe Forever"] = {
+["useEditModeLayout"] = {
+["hasBeenPrepared"] = true,
+},
+},
 ["Karums Priest"] = {
 ["useEditModeLayout"] = {
 ["hasBeenPrepared"] = true,
@@ -11,6 +16,7 @@ AccWideUIAceDB = {
 ["hasDoneFirstTimeSetup"] = true,
 },
 ["profileKeys"] = {
+["Gniloe Forever"] = "Default",
 ["Karums Priest"] = "Default",
 },
 ["profiles"] = {
@@ -29,12 +35,12 @@ AccWideUIAceDB = {
 ["tutorialTooltips"] = {
 ["cvars"] = {
 ["closedExtraAbiltyTutorials"] = "",
-["closedInfoFrames"] = "@@@@@@@@P@@B@@@@@@APH",
+["closedInfoFrames"] = "@@@D@@@@P@@B@@@@@@ApH",
 },
 },
-["mouseoverCast"] = {
+["empowerTap"] = {
 ["cvars"] = {
-["enableMouseoverCast"] = "0",
+["empowerTapControls"] = "0",
 },
 },
 ["editModeLayoutID"] = 6,
@@ -59,8 +65,8 @@ AccWideUIAceDB = {
 ["locked"] = true,
 ["opacity"] = 0.7,
 ["position"] = {
-["y"] = 336.0001525878906,
-["x"] = 2441.95263671875,
+["y"] = 336.0000610351563,
+["x"] = 2441.952880859375,
 },
 ["showPlayers"] = true,
 },
@@ -82,6 +88,70 @@ AccWideUIAceDB = {
 ["enableMultiActionBars"] = "31",
 },
 },
+["minimap"] = {
+["cvars"] = {
+["minimapTrackingShowAll"] = "0",
+["minimapZoom"] = "2",
+["minimapInsideZoom"] = "1",
+},
+},
+["raidFrames"] = {
+["cvars"] = {
+["raidFramesHealthBarColor"] = "FF2B9305",
+["raidFramesPosition"] = "",
+["raidFramesDisplayOnlyDispellableDebuffs"] = "0",
+["raidFramesDispelIndicatorAnimatedBorder"] = "0",
+["raidOptionShowBorders"] = "1",
+["threatWarning"] = "3",
+["raidFramesDisplayIncomingHeals"] = "1",
+["raidFramesCenterBigDefensive"] = "1",
+["raidFramesHealthBarColorBG"] = "FF141414",
+["showDispelDebuffs"] = "1",
+["raidFramesDispelIndicatorType"] = "2",
+["raidFramesDisplayClassColor"] = "0",
+["noBuffDebuffFilterOnTarget"] = "1",
+["raidOptionSortMode"] = "role",
+["raidOptionLocked"] = "lock",
+["raidFramesDisplayPowerBars"] = "0",
+["raidOptionDisplayMainTankAndAssist"] = "1",
+["showPartyPets"] = "0",
+["raidFramesDisplayOnlyHealerPowerBars"] = "0",
+["raidFramesDisplayLargerRoleSpecificDebuffs"] = "1",
+["showCastableBuffs"] = "0",
+["raidFramesDispelIndicatorOverlayAnimation"] = "0",
+["raidFramesHealthText"] = "none",
+["raidFramesWidth"] = "72",
+["raidFramesHeight"] = "36",
+["raidFramesDispelIndicatorOverlay"] = "1",
+["raidOptionKeepGroupsTogether"] = "0",
+["raidFramesDisplayDebuffs"] = "1",
+["raidOptionIsShown"] = "1",
+["raidOptionDisplayPets"] = "0",
+["raidFramesDisplayAggroHighlight"] = "1",
+},
+},
+["blockChannelInvites"] = {
+["cvars"] = {
+["blockChannelInvites"] = "0",
+},
+},
+["damageMeter"] = {
+["cvars"] = {
+["damageMeterResetOnNewInstance"] = "0",
+["damageMeterEnabled"] = "0",
+},
+},
+["softTarget"] = {
+["cvars"] = {
+["SoftTargetEnemyArc"] = "2",
+["SoftTargetEnemyRange"] = "45.000000",
+["SoftTargetForce"] = "1",
+["SoftTargetFriendRange"] = "45.000000",
+["SoftTargetFriend"] = "0",
+["SoftTargetFriendArc"] = "2",
+["SoftTargetEnemy"] = "1",
+},
+},
 ["uiMisc"] = {
 ["cvars"] = {
 ["guildRewardsUsable"] = "0",
@@ -92,14 +162,35 @@ AccWideUIAceDB = {
 ["missingTransmogSourceInItemTooltips"] = "0",
 ["miniCommunitiesFrame"] = "0",
 ["characterFrameCollapsed"] = "0",
-["showHonorAsExperience"] = "0",
+["showQuestDifficultyColor"] = "1",
 ["showQuestLevel"] = "0",
 ["miniDressUpFrame"] = "0",
 ["collapseExpandBuffs"] = "1",
 ["showOutfitDetails"] = "1",
 ["displayFreeBagSlots"] = "0",
 ["guildNewsFilter"] = "0",
-["showQuestDifficultyColor"] = "1",
+["showHonorAsExperience"] = "0",
+},
+},
+["blockTrades"] = {
+["cvars"] = {
+["blockTrades"] = "0",
+},
+},
+["blockGuildInvites"] = {
+["special"] = {
+["blockGuildInvites"] = false,
+},
+},
+["spellOverlay"] = {
+["cvars"] = {
+["spellActivationOverlayOpacity"] = "0.650000",
+["displaySpellActivationOverlays"] = "1",
+},
+},
+["mouseoverCast"] = {
+["cvars"] = {
+["enableMouseoverCast"] = "0",
 },
 },
 ["chat"] = {
@@ -1543,99 +1634,10 @@ AccWideUIAceDB = {
 },
 },
 },
-["blockChannelInvites"] = {
-["cvars"] = {
-["blockChannelInvites"] = "0",
-},
-},
 ["autoLoot"] = {
 ["cvars"] = {
 ["autoLootRate"] = "150",
 ["autoLootDefault"] = "0",
-},
-},
-["softTarget"] = {
-["cvars"] = {
-["SoftTargetEnemyArc"] = "2",
-["SoftTargetEnemyRange"] = "45.000000",
-["SoftTargetForce"] = "1",
-["SoftTargetFriendRange"] = "45.000000",
-["SoftTargetFriend"] = "0",
-["SoftTargetFriendArc"] = "2",
-["SoftTargetEnemy"] = "1",
-},
-},
-["minimap"] = {
-["cvars"] = {
-["minimapTrackingShowAll"] = "0",
-["minimapZoom"] = "5",
-["minimapInsideZoom"] = "5",
-},
-},
-["lossOfControl"] = {
-["cvars"] = {
-["lossOfControlInterrupt"] = "2",
-["lossOfControl"] = "1",
-["lossOfControlSilence"] = "2",
-["lossOfControlFull"] = "2",
-["lossOfControlRoot"] = "2",
-["lossOfControlDisarm"] = "2",
-},
-},
-["blockGuildInvites"] = {
-["special"] = {
-["blockGuildInvites"] = false,
-},
-},
-["spellOverlay"] = {
-["cvars"] = {
-["spellActivationOverlayOpacity"] = "0.650000",
-["displaySpellActivationOverlays"] = "1",
-},
-},
-["empowerTap"] = {
-["cvars"] = {
-["empowerTapControls"] = "0",
-},
-},
-["raidFrames"] = {
-["cvars"] = {
-["raidFramesHealthBarColor"] = "FF2B9305",
-["raidFramesPosition"] = "",
-["raidFramesDispelIndicatorOverlay"] = "1",
-["raidFramesDispelIndicatorAnimatedBorder"] = "0",
-["raidFramesCenterBigDefensive"] = "1",
-["threatWarning"] = "3",
-["raidFramesDisplayIncomingHeals"] = "1",
-["raidOptionShowBorders"] = "1",
-["raidFramesHealthBarColorBG"] = "FF141414",
-["raidFramesDispelIndicatorType"] = "2",
-["showDispelDebuffs"] = "1",
-["raidFramesDisplayClassColor"] = "0",
-["noBuffDebuffFilterOnTarget"] = "1",
-["raidOptionSortMode"] = "role",
-["raidFramesHeight"] = "36",
-["raidFramesHealthText"] = "none",
-["raidFramesDisplayDebuffs"] = "1",
-["showPartyPets"] = "0",
-["raidFramesDisplayOnlyHealerPowerBars"] = "0",
-["raidFramesDisplayLargerRoleSpecificDebuffs"] = "1",
-["showCastableBuffs"] = "0",
-["raidFramesDispelIndicatorOverlayAnimation"] = "0",
-["raidFramesDisplayPowerBars"] = "0",
-["raidFramesWidth"] = "72",
-["raidOptionLocked"] = "lock",
-["raidFramesDisplayOnlyDispellableDebuffs"] = "0",
-["raidOptionKeepGroupsTogether"] = "0",
-["raidOptionDisplayMainTankAndAssist"] = "1",
-["raidOptionIsShown"] = "1",
-["raidOptionDisplayPets"] = "0",
-["raidFramesDisplayAggroHighlight"] = "1",
-},
-},
-["blockTrades"] = {
-["cvars"] = {
-["blockTrades"] = "0",
 },
 },
 ["camera"] = {
@@ -1660,23 +1662,23 @@ AccWideUIAceDB = {
 ["questPOIWQ"] = "1",
 ["scrollToLogQuest"] = "0",
 ["dragonRidingRacesFilter"] = "0",
-["worldQuestFilterResources"] = "1",
+["questLogOpen"] = "1",
 ["worldQuestFilterEquipment"] = "1",
 ["primaryProfessionsFilter"] = "1",
 ["questPOI"] = "1",
 ["showDelveEntrancesOnMap"] = "1",
 ["dragonRidingRacesFilterWQ"] = "1",
 ["contentTrackingFilter"] = "1",
-["questLogOpen"] = "1",
+["miniWorldMap"] = "0",
 ["worldQuestFilterReputation"] = "1",
 ["worldQuestFilterAnima"] = "1",
+["worldQuestFilterResources"] = "1",
 ["worldQuestFilterProfessionMaterials"] = "1",
-["miniWorldMap"] = "0",
 ["showQuestObjectivesInLog"] = "1",
-["secondaryProfessionsFilter"] = "1",
+["digSites"] = "1",
 ["worldQuestFilterGold"] = "1",
 ["showTamersWQ"] = "1",
-["digSites"] = "1",
+["secondaryProfessionsFilter"] = "1",
 ["showTamers"] = "1",
 ["worldQuestFilterArtifactPower"] = "1",
 },
@@ -1693,13 +1695,13 @@ AccWideUIAceDB = {
 ["nameplateMaxDistance"] = "41",
 ["nameplatePlayRemovalAnimation"] = "1",
 ["nameplateMaxScaleDistance"] = "10.000000",
-["nameplateShowCastBars"] = "1",
+["nameplateTargetBehindMaxDistance"] = "0.100000",
 ["nameplateShowEnemies"] = "1",
 ["nameplateSimplifiedScale"] = "0.300000",
 ["nameplateSelectedAlpha"] = "1.000000",
 ["nameplateShowSelf"] = "0",
 ["nameplateMaxScale"] = "1.000000",
-["nameplateBottomInset"] = "0.100000",
+["nameplateMotionSpeed"] = "0.025000",
 ["nameplateShowEnemyMinions"] = "0",
 ["nameplateShowEnemyPets"] = "0",
 ["nameplateMinScaleDistance"] = "10.000000",
@@ -1708,18 +1710,18 @@ AccWideUIAceDB = {
 ["nameplateForceShowUnitName"] = "1",
 ["nameplateMinAlphaDistance"] = "10.000000",
 ["nameplateOccludedAlphaMult"] = "0.400000",
-["nameplateMotionSpeed"] = "0.025000",
-["nameplateMinScale"] = "0.800000",
-["nameplateGameObjectMaxDistance"] = "30.000000",
-["nameplateTargetBehindMaxDistance"] = "0.100000",
-["nameplateMaxAlpha"] = "1.000000",
-["nameplateShowEnemyTotems"] = "0",
-["nameplatePlayerMaxDistance"] = "40.000000",
 ["nameplateShowFriendlyNPCs"] = "0",
+["nameplateMinScale"] = "0.800000",
+["nameplateBottomInset"] = "0.100000",
+["nameplateShowCastBars"] = "1",
+["nameplateSelectedScale"] = "1.200000",
+["nameplatePlayerMaxDistance"] = "40.000000",
+["nameplateShowEnemyTotems"] = "0",
+["nameplateMaxAlpha"] = "1.000000",
 ["nameplateShowEnemyGuardians"] = "0",
 ["nameplateTopInset"] = "0.080000",
 ["nameplateShowAllPersonalAuras"] = "0",
-["nameplateSelectedScale"] = "1.200000",
+["nameplateGameObjectMaxDistance"] = "30.000000",
 ["nameplateCheckDistanceForTarget"] = "0",
 },
 },
@@ -1745,10 +1747,14 @@ AccWideUIAceDB = {
 ["GamepadRaidTargetingHoverMode"] = "0",
 },
 },
-["damageMeter"] = {
+["lossOfControl"] = {
 ["cvars"] = {
-["damageMeterResetOnNewInstance"] = "0",
-["damageMeterEnabled"] = "0",
+["lossOfControlInterrupt"] = "2",
+["lossOfControl"] = "1",
+["lossOfControlSilence"] = "2",
+["lossOfControlFull"] = "2",
+["lossOfControlRoot"] = "2",
+["lossOfControlDisarm"] = "2",
 },
 },
 ["cooldownViewer"] = {
@@ -1758,7 +1764,7 @@ AccWideUIAceDB = {
 },
 },
 ["lastSaved"] = {
-["unixTime"] = 1794048792,
+["unixTime"] = 1794382227,
 ["character"] = "Karums Priest",
 },
 ["profileSaveVer"] = 6,

@@ -1,16 +1,28 @@
 
 RestPlus_Data = {
+["Opikol=CAMWOW EU5 Realm 4 PvP"] = {
+["restXP"] = 58,
+["currXP"] = 0,
+["nextXP"] = 400,
+["class"] = "Wck",
+["logtime"] = 11487256,
+["resting"] = false,
+["AlertStatus"] = 0,
+["level"] = 1,
+["wellRestedRank"] = 0,
+["race"] = "AlR",
+},
 ["Karums=CAMWOW EU5 Realm 4 PvP"] = {
-["restXP"] = 254,
-["currXP"] = 11571,
-["nextXP"] = 14400,
+["restXP"] = 276,
+["currXP"] = 31810,
+["nextXP"] = 36400,
 ["class"] = "War",
-["logtime"] = 11484771,
+["logtime"] = 11490462,
 ["resting"] = true,
 ["AlertStatus"] = 0,
-["level"] = 15,
-["wellRestedRank"] = 0,
+["level"] = 26,
 ["race"] = "Trl",
+["wellRestedRank"] = 0,
 },
 }
 RestPlus_Settings = {

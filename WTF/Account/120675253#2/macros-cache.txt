@@ -1,10 +1,17 @@
 VER 3 0000000000000002 "/follow" "134357"
-/follow
+/follow Karums Warrior
 END
 VER 3 0000000000000006 "assist focus" "134400"
 #showtooltip
-/target [nomod:ctrl,@focustarget,harm,nodead]
+/target [nomod:rctrl,@focustarget,harm,nodead]
 /cast Smite
+END
+VER 3 000000000000001C "Decursive" "INV_MISC_QUESTIONMARK"
+/stopcasting
+/cast [@mouseover,nomod,exists] Dispel Magic;  [@mouseover,exists,mod:ctrl] Cure Disease; [@mouseover,exists,mod:shift] Dispel Magic
+END
+VER 3 000000000000001E "FOLLOW" "4630458"
+/follow Karums Warrior
 END
 VER 3 0000000000000005 "follow focus" "1322719"
 /follow focus
@@ -15,20 +22,24 @@ VER 3 0000000000000004 "follow heal" "1035050"
 END
 VER 3 0000000000000014 "fortitude f" "134400"
 #showtooltip
-/cast [mod:shift,@player][mod:ctrl,help,nodead][@focus,help,nodead][@player] Power Word: Fortitude
+/cast [mod:rshift,@player][mod:rctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Power Word: Fortitude
+END
+VER 3 000000000000001D "heal f" "134400"
+#showtooltip
+/cast [mod:shift,@player][mod:ctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Heal
 END
 VER 3 0000000000000009 "heal flash" "134400"
 #showtooltip
-/cast [mod:shift,@player][mod:ctrl,help,nodead][@focus,help,nodead][@player] Lesser Heal
+/cast [mod:rshift,@player][mod:rctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Lesser Heal
 END
 VER 3 0000000000000010 "mindblast f" "134400"
 #showtooltip
-/target [nomod:ctrl,@focustarget,harm,nodead]
+/target [nomod:rctrl,@focustarget,harm,nodead]
 /cast Mind Blast
 END
 VER 3 0000000000000013 "renew f" "134400"
 #showtooltip
-/cast [mod:shift,@player][mod:ctrl,help,nodead][@focus,help,nodead][@player] Renew
+/cast [mod:rshift,@player][mod:rctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Renew
 END
 VER 3 000000000000000C "RXP ITEM" "134400"
 #showtooltip
@@ -40,24 +51,34 @@ VER 3 0000000000000018 "RXPFollow" "Inv_boots_02"
 /follow
 END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Varimathras
+/targetexact Deathstalker Vincent
 /tm !7
 /targetlasttarget [dead]
+END
+VER 3 000000000000001A "sef" "134400"
+/console SoftTargetInteractRange 30
+/console SoftTargetInteractArc 2
 END
 VER 3 0000000000000017 "set focus" "1386545"
 /focus
 END
 VER 3 000000000000000B "shoot" "134400"
 #showtooltip
-/target [nomod:ctrl,@focustarget,harm,nodead]
+/target [nomod:rctrl,@focustarget,harm,nodead]
 /cast !Shoot
+END
+VER 3 0000000000000019 "test" "136224"
+/p test
+END
+VER 3 000000000000001B "toggle junk" "134400"
+/run local t,id=GetCursorInfo() if t~="item" then local _,l=GameTooltip:GetItem() id=l and tonumber(l:match("item:(%d+)")) end if id then Scrap:ToggleJunk(id) ClearCursor() end
 END
 VER 3 0000000000000008 "word pain assist" "134400"
 #showtooltip
-/target [nomod:ctrl,@focustarget,harm,nodead]
+/target [nomod:rctrl,@focustarget,harm,nodead]
 /cast Shadow Word: Pain
 END
 VER 3 000000000000000D "word shield focu" "134400"
 #showtooltip
-/cast [mod:shift,@player][mod:ctrl,help,nodead][@focus,help,nodead][@player] Power Word: Shield
+/cast [mod:rshift,@player][mod:rctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Power Word: Shield
 END

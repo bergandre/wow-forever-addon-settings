@@ -4,7 +4,7 @@ Bagnon_Sets = {
 },
 ["global"] = {
 ["inventory"] = {
-["y"] = 100.0000076293945,
+["y"] = 99.99999237060547,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -17,9 +17,10 @@ Bagnon_Sets = {
 },
 ["color"] = {
 },
+["showBags"] = true,
 ["activeRules"] = {
 },
-["x"] = -50.00111004408882,
+["x"] = -50.00047198142534,
 },
 ["vault"] = {
 ["color"] = {
@@ -58,8 +59,7 @@ Bagnon_Sets = {
 },
 },
 ["bank"] = {
-["color"] = {
-},
+["y"] = -466.2693398379731,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -70,10 +70,15 @@ Bagnon_Sets = {
 "miscellaneous",
 },
 },
-["activeRules"] = {
-},
+["point"] = "TOPLEFT",
 ["borderColor"] = {
 },
+["color"] = {
+},
+["x"] = 95,
+["activeRules"] = {
+},
+["showBags"] = true,
 },
 },
 ["customRules"] = {

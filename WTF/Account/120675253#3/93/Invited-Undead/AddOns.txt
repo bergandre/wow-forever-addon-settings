@@ -10,14 +10,14 @@ AtlasLootContinued_Options: disabled
 AtlasLootContinued_PvP: disabled
 AutoLooter: disabled
 BagBrother: enabled
-Bagnon: disabled
-Bagnon_Bank: disabled
+Bagnon: enabled
+Bagnon_Bank: enabled
 Bagnon_BoE: disabled
-Bagnon_Config: disabled
+Bagnon_Config: enabled
 Bagnon_Garbage: disabled
-Bagnon_GuildBank: disabled
+Bagnon_GuildBank: enabled
 Bagnon_ItemInfo: disabled
-Bagnon_Scrap: disabled
+Bagnon_Scrap: enabled
 Bagnonium: enabled
 Bagnonium_Bank: enabled
 Bagnonium_Config: enabled
@@ -39,8 +39,8 @@ Pawn: disabled
 Prat-3.0: enabled
 RXPGuides: disabled
 Scrap: enabled
-Scrap_Merchant: disabled
-Scrap_Config: disabled
+Scrap_Merchant: enabled
+Scrap_Config: enabled
 SilverDragon: disabled
 SilverDragon_History: disabled
 SilverDragon_Overlay: disabled
@@ -77,3 +77,5 @@ Blizzard_CompactRaidFrames: enabled
 Blizzard_CombatText: enabled
 Syndicator: enabled
 ZygorGuidesViewerForever: disabled
+!Swatter: disabled
+!ImprovedErrorFrame: disabled

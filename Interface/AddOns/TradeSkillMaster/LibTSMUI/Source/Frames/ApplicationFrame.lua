@@ -171,6 +171,10 @@ function ApplicationFrame:Release()
 	self._protected = nil
 	self._minWidth = 0
 	self._minHeight = 0
+	for _, dialogFrame in ipairs(self._dialogStack) do
+		private.ReleaseDialogContext(dialogFrame)
+	end
+	wipe(self._dialogStack)
 	self.__super:Release()
 end
 
@@ -403,10 +407,11 @@ end
 
 ---Hides the current dialog.
 function ApplicationFrame:HideDialog()
-	local dialogFrame = self._dialogStack[#self._dialogStack]
-	if not dialogFrame then
+	if #self._dialogStack == 0 then
 		return
 	end
+	local dialogFrame = tremove(self._dialogStack)
+	private.ReleaseDialogContext(dialogFrame)
 	local parent = dialogFrame:GetParentElement()
 	assert(parent)
 	---@cast parent Container
@@ -560,13 +565,9 @@ function ApplicationFrame.__private:_HandleResizeUpdate()
 	self:Draw()
 end
 
-function ApplicationFrame.__private:_HandleDialogHide()
-	local dialog = tremove(self._dialogStack)
-	assert(dialog)
-	local context = dialog:GetContext()
-	if context then
-		TempTable.Release(context)
-	end
+function ApplicationFrame.__private:_HandleDialogHide(dialogFrame)
+	Table.RemoveByValue(self._dialogStack, dialogFrame)
+	private.ReleaseDialogContext(dialogFrame)
 end
 
 
@@ -596,4 +597,14 @@ end
 
 function private.DialogOnMouseUp(dialog)
 	dialog:GetParentElement():GetParentElement():HideDialog()
+end
+
+---@param dialogFrame BaseFrame
+function private.ReleaseDialogContext(dialogFrame)
+	local context = dialogFrame:GetContext()
+	if not context then
+		return
+	end
+	dialogFrame:SetContext(nil)
+	TempTable.Release(context)
 end

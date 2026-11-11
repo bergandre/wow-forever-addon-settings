@@ -13,17 +13,19 @@ local UIElements = LibTSMApp:From("LibTSMUI"):Include("UIElements")
 local private = {
 	settings = nil,
 }
-local VERSION = 5
+local VERSION = 6
 local CONTENT_LINES = {} ---@type WhatsNewContentLine[]
 do
 	-- Build up the content lines
-	if LibTSMApp.IsRetail() or LibTSMApp.IsForever() then
-		tinsert(CONTENT_LINES, { label = L["New Sniper Mechanism"], content = L["In retail, Sniper works in a new way which makes it much faster and now supports the base group."] })
-		tinsert(CONTENT_LINES, { label = L["Alternate AuctionDB Realm Data"], content = L["You can configure an alternate realm to load AuctionDB data for to allow easy comparison between two realms in item tooltips."] })
+	if LibTSMApp.IsForever() then
+		tinsert(CONTENT_LINES, { label = L["WoW: Forever Support"], content = L["TSM now supports WoW: Forever, including AuctionDB price data from the TSM Desktop App."] })
 	end
-	tinsert(CONTENT_LINES, { label = L["Scroll Table Improvements"], content = L["TSM uses scroll tables through the addon to show large amounts of data. 4.14 includes significant performance improvements, dragging to reorder columns, adding price sources and custom sources as additional columns, and more."] })
-	tinsert(CONTENT_LINES, { label = L["Custom Strings in More Operations"], content = L["Mailing, Vendoring, and Warehousing operation settings now fully support using custom strings."] })
-	tinsert(CONTENT_LINES, { label = L["Import Item IDs from Wowhead"], content = L["When searching for items on Wowhead, you can copy the results as a list of item IDs. TSM now allows you to paste that list directly into the group import dialog to make it easy to create TSM groups."] })
+	tinsert(CONTENT_LINES, { label = L["Post Scan Results"], content = L["Post scans now show the current auctions for each item alongside your min, normal and max prices. Drag or double-click an auction to undercut it instead."] })
+	tinsert(CONTENT_LINES, { label = L["Activity Feed"], content = L["The Dashboard now has an Activity feed showing your recent sales, purchases, expirations and cancellations."] })
+	if LibTSMApp.IsRetail() then
+		tinsert(CONTENT_LINES, { label = L["Crafting Improvements"], content = L["Crafting costs can now mix material qualities when that's cheaper, and you can choose how many of each quality to use. You can also craft with Concentration, costs account for expected Resourcefulness and Multicraft, and Dye Crafting is supported."] })
+	end
+	tinsert(CONTENT_LINES, { label = L["Base Group Support"], content = L["Mailing operations, the Banking UI and Vendoring group actions now support the Base Group, so you can act on every item that isn't in a group."] })
 end
 
 

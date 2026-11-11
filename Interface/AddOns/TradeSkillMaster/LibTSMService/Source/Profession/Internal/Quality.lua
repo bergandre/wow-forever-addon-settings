@@ -6,8 +6,10 @@
 
 local LibTSMService = select(2, ...).LibTSMService
 local Quality = LibTSMService:InitInternal("Profession.Quality")
+local Math = LibTSMService:From("LibTSMUtil"):Include("Lua.Math")
 local DF_MAX_QUALITY_MAT_DIFFICULTY_RATIO = 0.25
 local MIDNIGHT_TWW_MAX_QUALITY_MAT_DIFFICULTY_RATIO = 0.4
+local SKILL_PRECISION = 0.01
 local SKILL_PER_TARGET_QUALITY = {
 	[2] = {
 		0,
@@ -82,7 +84,7 @@ function Quality.GetNeededSkill(targetQuality, recipeDifficulty, recipeQuality, 
 	local currentSkill = currentLowerBound + currentQualityRatio * (currentUpperBound - currentLowerBound)
 	local targetLowerBound = skillPerTargetQuality[targetQuality] * recipeDifficulty
 	local targetUpperBound = skillPerTargetQuality[min(targetQuality + 1, recipeMaxQuality)] * recipeDifficulty
-	neededSkill = max(targetLowerBound - currentSkill, 0)
+	neededSkill = max(Math.Round(targetLowerBound - currentSkill, SKILL_PRECISION), 0)
 	maxAddedSkill = targetQuality == recipeMaxQuality and math.huge or (targetUpperBound - currentSkill)
 	assert(neededSkill >= 0 and maxAddedSkill > 0)
 	local maxQualityMatSkill = hasQualityMats and recipeDifficulty * maxMatContribution or 0

@@ -1,8 +1,10 @@
 
 TipTac_Config = {
 ["profileKeys"] = {
-["Karums Warrior"] = "Default",
+["Invited Friend"] = "Default",
 ["Karums - PvP"] = "Default",
+["Tailoring Altchar"] = "Default",
+["Karums Warrior"] = "Default",
 ["Opikol - PvP"] = "Default",
 ["Invited Undead"] = "Default",
 },

@@ -45,7 +45,9 @@ function Disenchant.Get()
 		return DATA.Mists
 	elseif LibTSMData.IsBCClassic() then
 		return DATA.BCC
-	elseif LibTSMData.IsVanillaClassic() or LibTSMData.IsForever() then
+	elseif LibTSMData.IsForever() then
+		return DATA.Forever
+	elseif LibTSMData.IsVanillaClassic() then
 		return DATA.Vanilla
 	else
 		error("Unknown game version")
@@ -174,7 +176,7 @@ DATA.Vanilla = {
 		minLevel = 41,
 		maxLevel = 45,
 		sourceInfo = {
-			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 46, maxItemLevel = 50, matRate = 0.250, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 46, maxItemLevel = 50, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
 			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 46, maxItemLevel = 50, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
 		},
 	},
@@ -207,6 +209,270 @@ DATA.Vanilla = {
 			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 20, maxItemLevel = 25, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
 			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 16, maxItemLevel = 20, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
 			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 21, maxItemLevel = 25, matRate = 0.100, minAmount = 1, maxAmount = 1, amountOfMats = 0.100},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 20, maxItemLevel = 25, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+		},
+	},
+	["i:11084"] = { -- Large Glimmering Shard
+		minLevel = 21,
+		maxLevel = 25,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 26, maxItemLevel = 30, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 26, maxItemLevel = 30, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 26, maxItemLevel = 30, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 26, maxItemLevel = 30, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+		},
+	},
+	["i:11138"] = { -- Small Glowing Shard
+		minLevel = 26,
+		maxLevel = 30,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 31, maxItemLevel = 35, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 31, maxItemLevel = 35, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 31, maxItemLevel = 35, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 31, maxItemLevel = 35, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+		},
+	},
+	["i:11139"] = { -- Large Glowing Shard
+		minLevel = 31,
+		maxLevel = 35,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 36, maxItemLevel = 40, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 36, maxItemLevel = 40, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 36, maxItemLevel = 40, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 36, maxItemLevel = 40, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+		},
+	},
+	["i:11177"] = { -- Small Radiant Shard
+		minLevel = 36,
+		maxLevel = 40,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 41, maxItemLevel = 45, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 41, maxItemLevel = 45, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 4, minItemLevel = 40, maxItemLevel = 45, matRate = 1.000, minAmount = 2, maxAmount = 4, amountOfMats = 3.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 41, maxItemLevel = 45, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 41, maxItemLevel = 45, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 4, minItemLevel = 40, maxItemLevel = 45, matRate = 1.000, minAmount = 2, maxAmount = 4, amountOfMats = 3.000},
+		},
+	},
+	["i:11178"] = { -- Large Radiant Shard
+		minLevel = 41,
+		maxLevel = 45,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 46, maxItemLevel = 50, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 46, maxItemLevel = 50, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 4, minItemLevel = 46, maxItemLevel = 50, matRate = 1.000, minAmount = 2, maxAmount = 4, amountOfMats = 3.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 46, maxItemLevel = 50, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 46, maxItemLevel = 50, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 4, minItemLevel = 46, maxItemLevel = 50, matRate = 1.000, minAmount = 2, maxAmount = 4, amountOfMats = 3.000},
+		},
+	},
+	["i:14343"] = { -- Small Brilliant Shard
+		minLevel = 46,
+		maxLevel = 50,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 51, maxItemLevel = 55, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 51, maxItemLevel = 55, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 4, minItemLevel = 51, maxItemLevel = 55, matRate = 1.000, minAmount = 2, maxAmount = 4, amountOfMats = 3.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 51, maxItemLevel = 55, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 51, maxItemLevel = 55, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 4, minItemLevel = 51, maxItemLevel = 55, matRate = 1.000, minAmount = 2, maxAmount = 4, amountOfMats = 3.000},
+		},
+	},
+	["i:14344"] = { -- Large Brilliant Shard
+		minLevel = 51,
+		maxLevel = 60,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 56, maxItemLevel = 60, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 61, maxItemLevel = 99, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 56, maxItemLevel = 60, matRate = 0.995, minAmount = 1, maxAmount = 1, amountOfMats = 0.995},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 61, maxItemLevel = 99, matRate = 0.990, minAmount = 1, maxAmount = 1, amountOfMats = 0.990},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 56, maxItemLevel = 60, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 61, maxItemLevel = 99, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 56, maxItemLevel = 60, matRate = 0.995, minAmount = 1, maxAmount = 1, amountOfMats = 0.995},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 61, maxItemLevel = 99, matRate = 0.990, minAmount = 1, maxAmount = 1, amountOfMats = 0.990},
+		},
+	},
+
+	-- Crystals
+	["i:20725"] = { -- Nexus Crystal
+		minLevel = 51,
+		maxLevel = 60,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 56, maxItemLevel = 60, matRate = 0.005, minAmount = 1, maxAmount = 1, amountOfMats = 0.005},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 61, maxItemLevel = 99, matRate = 0.010, minAmount = 1, maxAmount = 1, amountOfMats = 0.010},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 4, minItemLevel = 56, maxItemLevel = 60, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 4, minItemLevel = 61, maxItemLevel = 99, matRate = 1.000, minAmount = 1, maxAmount = 2, amountOfMats = 1.666},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 56, maxItemLevel = 60, matRate = 0.005, minAmount = 1, maxAmount = 1, amountOfMats = 0.005},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 61, maxItemLevel = 99, matRate = 0.010, minAmount = 1, maxAmount = 1, amountOfMats = 0.010},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 4, minItemLevel = 56, maxItemLevel = 60, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 4, minItemLevel = 61, maxItemLevel = 99, matRate = 1.000, minAmount = 1, maxAmount = 2, amountOfMats = 1.666},
+		},
+	},
+}
+
+
+
+-- ============================================================================
+-- Forever
+-- ============================================================================
+
+DATA.Forever = {
+	-- Dust
+	["i:10940"] = { -- Strange Dust
+		minLevel = 1,
+		maxLevel = 20,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 5, maxItemLevel = 15, matRate = 0.800, minAmount = 1, maxAmount = 2, amountOfMats = 1.200},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 16, maxItemLevel = 20, matRate = 0.750, minAmount = 2, maxAmount = 3, amountOfMats = 1.850},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 21, maxItemLevel = 25, matRate = 0.750, minAmount = 4, maxAmount = 6, amountOfMats = 3.750},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 5, maxItemLevel = 15, matRate = 0.800, minAmount = 2, maxAmount = 3, amountOfMats = 2.000},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 16, maxItemLevel = 19, matRate = 0.750, minAmount = 3, maxAmount = 4, amountOfMats = 2.625},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 5, maxItemLevel = 15, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 16, maxItemLevel = 20, matRate = 0.200, minAmount = 2, maxAmount = 3, amountOfMats = 0.500},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 21, maxItemLevel = 25, matRate = 0.150, minAmount = 4, maxAmount = 6, amountOfMats = 0.750},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 16, maxItemLevel = 19, matRate = 0.200, minAmount = 3, maxAmount = 4, amountOfMats = 0.700},
+		},
+	},
+	["i:11083"] = { -- Soul Dust
+		minLevel = 21,
+		maxLevel = 30,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 26, maxItemLevel = 30, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 31, maxItemLevel = 35, matRate = 0.750, minAmount = 2, maxAmount = 5, amountOfMats = 2.550},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 26, maxItemLevel = 30, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 31, maxItemLevel = 35, matRate = 0.200, minAmount = 2, maxAmount = 5, amountOfMats = 0.700},
+		},
+	},
+	["i:11137"] = { -- Vision Dust
+		minLevel = 31,
+		maxLevel = 40,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 36, maxItemLevel = 40, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 41, maxItemLevel = 45, matRate = 0.750, minAmount = 2, maxAmount = 5, amountOfMats = 2.550},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 36, maxItemLevel = 40, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 41, maxItemLevel = 45, matRate = 0.200, minAmount = 2, maxAmount = 5, amountOfMats = 0.700},
+		},
+	},
+	["i:11176"] = { -- Dream Dust
+		minLevel = 41,
+		maxLevel = 50,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 46, maxItemLevel = 50, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 51, maxItemLevel = 55, matRate = 0.750, minAmount = 2, maxAmount = 5, amountOfMats = 2.550},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 46, maxItemLevel = 50, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 51, maxItemLevel = 55, matRate = 0.200, minAmount = 2, maxAmount = 5, amountOfMats = 0.700},
+		},
+	},
+	["i:16204"] = { -- Illusion Dust
+		minLevel = 51,
+		maxLevel = 60,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 56, maxItemLevel = 60, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 61, maxItemLevel = 99, matRate = 0.750, minAmount = 2, maxAmount = 5, amountOfMats = 2.550},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 56, maxItemLevel = 60, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 61, maxItemLevel = 99, matRate = 0.200, minAmount = 2, maxAmount = 5, amountOfMats = 0.700},
+		},
+	},
+
+	-- Essences
+	["i:10938"] = { -- Lesser Magic Essence
+		minLevel = 1,
+		maxLevel = 10,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 5, maxItemLevel = 15, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 5, maxItemLevel = 15, matRate = 0.200, minAmount = 2, maxAmount = 3, amountOfMats = 0.500},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 5, maxItemLevel = 15, matRate = 0.800, minAmount = 1, maxAmount = 2, amountOfMats = 1.200},
+		},
+	},
+	["i:10939"] = { -- Greater Magic Essence
+		minLevel = 11,
+		maxLevel = 15,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 16, maxItemLevel = 20, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 16, maxItemLevel = 19, matRate = 0.200, minAmount = 2, maxAmount = 3, amountOfMats = 0.500},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 16, maxItemLevel = 20, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 21, maxItemLevel = 25, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 26, maxItemLevel = 30, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 16, maxItemLevel = 19, matRate = 0.750, minAmount = 2, maxAmount = 3, amountOfMats = 1.875},
+		},
+	},
+	["i:10998"] = { -- Lesser Astral Essence
+		minLevel = 16,
+		maxLevel = 20,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 21, maxItemLevel = 25, matRate = 0.150, minAmount = 1, maxAmount = 2, amountOfMats = 0.220},
+		},
+	},
+	["i:11082"] = { -- Greater Astral Essence
+		minLevel = 21,
+		maxLevel = 25,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 26, maxItemLevel = 30, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+		},
+	},
+	["i:11134"] = { -- Lesser Mystic Essence
+		minLevel = 26,
+		maxLevel = 30,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 31, maxItemLevel = 35, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 31, maxItemLevel = 35, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+		},
+	},
+	["i:11135"] = { -- Greater Mystic Essence
+		minLevel = 31,
+		maxLevel = 35,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 36, maxItemLevel = 40, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 36, maxItemLevel = 40, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+		},
+	},
+	["i:11174"] = { -- Lesser Nether Essence
+		minLevel = 36,
+		maxLevel = 40,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 41, maxItemLevel = 45, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 41, maxItemLevel = 45, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+		},
+	},
+	["i:11175"] = { -- Greater Nether Essence
+		minLevel = 41,
+		maxLevel = 45,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 46, maxItemLevel = 50, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 46, maxItemLevel = 50, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+		},
+	},
+	["i:16202"] = { -- Lesser Eternal Essence
+		minLevel = 46,
+		maxLevel = 50,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 51, maxItemLevel = 55, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 51, maxItemLevel = 55, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+		},
+	},
+	["i:16203"] = { -- Greater Eternal Essence
+		minLevel = 51,
+		maxLevel = 60,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 56, maxItemLevel = 60, matRate = 0.200, minAmount = 1, maxAmount = 2, amountOfMats = 0.300},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 61, maxItemLevel = 99, matRate = 0.200, minAmount = 2, maxAmount = 3, amountOfMats = 0.500},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 56, maxItemLevel = 60, matRate = 0.750, minAmount = 1, maxAmount = 2, amountOfMats = 1.100},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 61, maxItemLevel = 99, matRate = 0.750, minAmount = 2, maxAmount = 3, amountOfMats = 1.850},
+		},
+	},
+
+	-- Shards
+	["i:10978"] = { -- Small Glimmering Shard
+		minLevel = 1,
+		maxLevel = 20,
+		sourceInfo = {
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 16, maxItemLevel = 20, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 2, minItemLevel = 21, maxItemLevel = 25, matRate = 0.100, minAmount = 1, maxAmount = 1, amountOfMats = 0.100},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 16, maxItemLevel = 19, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.ARMOR, quality = 3, minItemLevel = 20, maxItemLevel = 25, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 16, maxItemLevel = 20, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 2, minItemLevel = 21, maxItemLevel = 25, matRate = 0.100, minAmount = 1, maxAmount = 1, amountOfMats = 0.100},
+			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 16, maxItemLevel = 19, matRate = 0.050, minAmount = 1, maxAmount = 1, amountOfMats = 0.050},
 			{class = Disenchant.ITEM_CLASSES.WEAPON, quality = 3, minItemLevel = 20, maxItemLevel = 25, matRate = 1.000, minAmount = 1, maxAmount = 1, amountOfMats = 1.000},
 		},
 	},

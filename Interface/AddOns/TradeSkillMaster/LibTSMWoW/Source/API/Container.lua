@@ -333,7 +333,7 @@ end
 ---Returns whether or not the warbank is open.
 ---@return boolean
 function Container.IsWarbankOpen()
-	return Container.CanAccessWarbank() and BankFrame:GetActiveBankType() == Enum.BankType.Account
+	return Container.CanAccessWarbank() and BankPanel:GetActiveBankType() == Enum.BankType.Account
 end
 
 ---Opens all bags.

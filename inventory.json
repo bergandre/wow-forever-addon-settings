@@ -1,0 +1,144 @@
+{
+  "Karums Warrior": {
+    "bags": [
+      {"name": "Ataeric: On Arcane Curiosities", "itemID": 210177, "count": 1},
+      {"name": "Blacksmith Hammer", "itemID": 5956, "count": 1},
+      {"name": "Charred Wolf Meat", "itemID": 2679, "count": 19},
+      {"name": "Deliah's Ring", "itemID": 3234, "count": 1},
+      {"name": "Hearthstone", "itemID": 6948, "count": 1},
+      {"name": "Mining Pick", "itemID": 2901, "count": 1},
+      {"name": "Really Sticky Glue", "itemID": 4941, "count": 10},
+      {"name": "Red-speckled Mushroom", "itemID": 4605, "count": 20},
+      {"name": "Rough Sharpening Stone", "itemID": 2862, "count": 14},
+      {"name": "Senggin Root", "itemID": 3448, "count": 20},
+      {"name": "Wolf Heart Sample", "itemID": 6016, "count": 1}
+    ],
+    "bank": [
+      {"name": "Healing Potion", "itemID": 929, "count": 1}
+    ],
+    "equipped": [
+      {"name": "Brawler's Harness", "itemID": 6125, "count": 1},
+      {"name": "Copper Battle Axe", "itemID": 3488, "count": 1},
+      {"name": "Gemmed Copper Boots", "itemID": 250620, "count": 1},
+      {"name": "Hunting Cloak", "itemID": 4689, "count": 1},
+      {"name": "Puk's Friendship Bracelet", "itemID": 281271, "count": 1},
+      {"name": "Rezlak's Spare Knife", "itemID": 287060, "count": 1},
+      {"name": "Runed Copper Belt", "itemID": 2857, "count": 1},
+      {"name": "Runed Copper Pants", "itemID": 3473, "count": 1},
+      {"name": "Warrior's Tunic", "itemID": 2965, "count": 1}
+    ]
+  },
+  "Gniloe Forever": {
+    "bags": [
+      {"name": "Forest Mushroom Cap", "itemID": 4604, "count": 4},
+      {"name": "Hearthstone", "itemID": 6948, "count": 1},
+      {"name": "Refreshing Spring Water", "itemID": 159, "count": 2},
+      {"name": "Tough Hunk of Bread", "itemID": 4540, "count": 5}
+    ],
+    "bank": [],
+    "equipped": [
+      {"name": "Apprentice's Boots", "itemID": 55, "count": 1},
+      {"name": "Apprentice's Pants", "itemID": 1395, "count": 1},
+      {"name": "Apprentice's Robe", "itemID": 6140, "count": 1},
+      {"name": "Apprentice's Shirt", "itemID": 6096, "count": 1},
+      {"name": "Bent Staff", "itemID": 35, "count": 1}
+    ]
+  },
+  "Karums Priest": {
+    "bags": [
+      {"name": "Ataeric: On Arcane Curiosities", "itemID": 210177, "count": 1},
+      {"name": "Deliah's Ring", "itemID": 3234, "count": 1},
+      {"name": "Hearthstone", "itemID": 6948, "count": 1},
+      {"name": "Really Sticky Glue", "itemID": 4941, "count": 10},
+      {"name": "Rough Sharpening Stone", "itemID": 2862, "count": 10},
+      {"name": "Senggin Root", "itemID": 3448, "count": 20},
+      {"name": "Skinning Knife", "itemID": 7005, "count": 1},
+      {"name": "Wolf Heart Sample", "itemID": 6016, "count": 1}
+    ],
+    "bank": [
+      {"name": "Healing Potion", "itemID": 929, "count": 2}
+    ],
+    "equipped": [
+      {"name": "Ancestral Woollies", "itemID": 3291, "count": 1},
+      {"name": "Greater Magic Wand", "itemID": 11288, "count": 1},
+      {"name": "Infantry Cloak", "itemID": 6508, "count": 1},
+      {"name": "Juju Hex Robes", "itemID": 16606, "count": 1},
+      {"name": "Kolkar Hammer", "itemID": 286728, "count": 1},
+      {"name": "Mogra's Friendship Bracelet", "itemID": 281269, "count": 1},
+      {"name": "Neophyte's Shirt", "itemID": 53, "count": 1},
+      {"name": "Spellbinder Boots", "itemID": 2971, "count": 1}
+    ]
+  },
+  "Invited Friend": {
+    "bags": [
+      {"name": "Copper Ore", "itemID": 2770, "count": 20},
+      {"name": "Copper Rod", "itemID": 6217, "count": 4},
+      {"name": "Hearthstone", "itemID": 6948, "count": 1},
+      {"name": "Pyrite", "itemID": 249391, "count": 2},
+      {"name": "Silver Bar", "itemID": 2842, "count": 1}
+    ],
+    "bank": [
+      {"name": "Linen Cloth", "itemID": 2589, "count": 20},
+      {"name": "Rough Sharpening Stone", "itemID": 2862, "count": 20},
+      {"name": "Silverleaf", "itemID": 765, "count": 20}
+    ],
+    "equipped": [
+      {"name": "Primitive Kilt", "itemID": 6135, "count": 1},
+      {"name": "Primitive Mantle", "itemID": 6134, "count": 1},
+      {"name": "Worn Mace", "itemID": 36, "count": 1}
+    ]
+  },
+  "Invited Undead": {
+    "bags": [
+      {"name": "Commonplace Herb Seeds", "itemID": 268415, "count": 1},
+      {"name": "Flint and Tinder", "itemID": 4471, "count": 1},
+      {"name": "Hearthstone", "itemID": 6948, "count": 1},
+      {"name": "Lesser Healing Potion", "itemID": 858, "count": 1},
+      {"name": "Mageroyal", "itemID": 785, "count": 5},
+      {"name": "Red Linen Bag", "itemID": 5762, "count": 1},
+      {"name": "Swiftthistle", "itemID": 2452, "count": 10}
+    ],
+    "bank": [
+      {"name": "Bear Meat", "itemID": 3173, "count": 10},
+      {"name": "Clam Meat", "itemID": 5503, "count": 3},
+      {"name": "Coarse Stone", "itemID": 2836, "count": 9},
+      {"name": "Copper Bar", "itemID": 2840, "count": 39},
+      {"name": "Copper Ore", "itemID": 2770, "count": 102},
+      {"name": "Copper Rod", "itemID": 6217, "count": 1},
+      {"name": "Frilled Lichen", "itemID": 249399, "count": 5},
+      {"name": "Hunting Buckler", "itemID": 3652, "count": 1},
+      {"name": "Lesser Healing Potion", "itemID": 858, "count": 2},
+      {"name": "Light Feather", "itemID": 17056, "count": 1},
+      {"name": "Light Hide", "itemID": 783, "count": 9},
+      {"name": "Light Leather", "itemID": 2318, "count": 20},
+      {"name": "Linen Cloth", "itemID": 2589, "count": 89},
+      {"name": "Mageroyal", "itemID": 785, "count": 23},
+      {"name": "Malachite", "itemID": 774, "count": 2},
+      {"name": "Minor Discolored Healing Potion", "itemID": 4596, "count": 2},
+      {"name": "Minor Healing Potion", "itemID": 118, "count": 7},
+      {"name": "Murloc Eye", "itemID": 730, "count": 2},
+      {"name": "Northern Shortsword of Power", "itemID": 2078, "count": 1},
+      {"name": "Pyrite", "itemID": 249391, "count": 2},
+      {"name": "Rough Grinding Stone", "itemID": 3470, "count": 7},
+      {"name": "Rough Stone", "itemID": 2835, "count": 103},
+      {"name": "Scorpid Stinger", "itemID": 5466, "count": 3},
+      {"name": "Sharp Claw", "itemID": 5635, "count": 3},
+      {"name": "Silver Ore", "itemID": 2775, "count": 4},
+      {"name": "Small Lustrous Pearl", "itemID": 5498, "count": 2},
+      {"name": "Small Spider Leg", "itemID": 5465, "count": 47},
+      {"name": "Small Venom Sac", "itemID": 1475, "count": 1},
+      {"name": "Spider Ichor", "itemID": 3174, "count": 11},
+      {"name": "Stringy Wolf Meat", "itemID": 2672, "count": 3},
+      {"name": "Swiftthistle", "itemID": 2452, "count": 2},
+      {"name": "Tigerseye", "itemID": 818, "count": 4},
+      {"name": "Tin Ore", "itemID": 2771, "count": 22},
+      {"name": "Waylaid Crate: Apprentice Curiosities", "itemID": 248685, "count": 1}
+    ],
+    "equipped": [
+      {"name": "Acolyte's Pants", "itemID": 1396, "count": 1},
+      {"name": "Acolyte's Robe", "itemID": 6129, "count": 1},
+      {"name": "Acolyte's Shoes", "itemID": 59, "count": 1},
+      {"name": "Worn Dagger", "itemID": 2092, "count": 1}
+    ]
+  }
+}

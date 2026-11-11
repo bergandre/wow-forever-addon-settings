@@ -1,0 +1,488 @@
+local hbInfo, hbInfo2, _
+HealBot_Spell_IDs={};
+HealBot_Spell_Names={};
+
+local CC_ScaleTo1000=nil
+local CC_ScaleTo100=nil
+local CC_ScaleColPct=nil
+local function HealBot_WoWAPI_SetC_Curve()
+    if C_CurveUtil then 
+        if not CC_ScaleTo100 then 
+            CC_ScaleTo100 = C_CurveUtil.CreateCurve();
+            CC_ScaleTo100:SetType(Enum.LuaCurveType.Linear);
+            CC_ScaleTo100:AddPoint(0.0, 0);
+            CC_ScaleTo100:AddPoint(1.0, 100);
+        end
+        if not CC_ScaleTo1000 then 
+            CC_ScaleTo1000 = C_CurveUtil.CreateCurve();
+            CC_ScaleTo1000:SetType(Enum.LuaCurveType.Linear);
+            CC_ScaleTo1000:AddPoint(0.0, 0);
+            CC_ScaleTo1000:AddPoint(1.0, 1000);
+        end
+        if not CC_ScaleColPct then
+            CC_ScaleColPct=C_CurveUtil.CreateColorCurve()
+            CC_ScaleColPct:SetType(Enum.LuaCurveType.Linear)
+            CC_ScaleColPct:AddPoint(0.0, CreateColor(1, 0, 0))
+            CC_ScaleColPct:AddPoint(0.35, CreateColor(1, 1, 0))
+            CC_ScaleColPct:AddPoint(0.7, CreateColor(0, 1, 0))
+        end
+    end
+end
+
+local function HealBot_WoWAPI_True()
+    return true
+end
+
+local function HealBot_WoWAPI_Nothing()
+    return ""
+end
+
+function HealBot_WoWAPI_SetAll()
+    HealBot_WoWAPI_SetC_Curve()
+    HealBot_WoWAPI_SetC_Spell()
+    HealBot_WoWAPI_SetC_SpellBook()
+    HealBot_WoWAPI_SetC_Item()
+    HealBot_WoWAPI_SetC_AddOns()
+    HealBot_WoWAPI_SetHealth()
+    HealBot_WoWAPI_SetMana()
+end
+
+-- GetSpellIDForSpellIdentifier
+-- C_Spell
+local GetSpellInfo=GetSpellInfo
+local GetSpellName=GetSpellInfo
+local GetSpellSubtext=HealBot_WoWAPI_Nothing
+local GetSpellId=GetSpellInfo
+local GetSpellCooldown=GetSpellCooldown
+local GetSpellCount=GetSpellCount
+local GetSpellCharges=GetSpellCharges
+
+local function HealBot_WoWAPI_GetSpellNameV1(spellId)
+    return GetSpellName(spellId)
+end
+
+local function HealBot_WoWAPI_GetSpellNameV1f(spellId)
+    hbInfo=GetSpellName(spellId)
+    if hbInfo then
+        hbInfo2=GetSpellSubtext(spellId)
+        return hbInfo.name, hbInfo2
+    end
+    return nil
+end
+
+local function HealBot_WoWAPI_GetSpellNameV11(spellId)
+    hbInfo=GetSpellName(spellId)
+    if hbInfo then
+        return hbInfo.name
+    end
+    return nil
+end
+
+local function HealBot_WoWAPI_GetSpellIdV1(spellName)
+    _, _, _, _, _, _, hbInfo=GetSpellId(spellName)
+    return hbInfo
+end
+
+local function HealBot_WoWAPI_GetSpellIdV11(spellName)
+    return GetSpellId(spellName)
+end
+
+local function HealBot_WoWAPI_GetInfoV1(spellId)
+    return GetSpellInfo(spellId)
+end
+
+local function HealBot_WoWAPI_GetInfoV11(spellId)
+    hbInfo=GetSpellInfo(spellId)
+    if hbInfo then
+        return hbInfo.name, nil, hbInfo.iconID, hbInfo.castTime, hbInfo.minRange, hbInfo.maxRange, hbInfo.spellID
+    end
+    return nil
+end
+
+local function HealBot_WoWAPI_GetCooldownV1(spellId)
+    if HEALBOT_GAME_VERSION == 4 and (spellId == HEALBOT_SPELL_HOLYWORDSERENITY or spellId == HEALBOT_SPELL_HOLYWORDSANCTUARY) then
+        spellId=HEALBOT_SPELL_HOLYWORDCHASTISE
+    end
+    return GetSpellCooldown(spellId)
+end
+
+local function HealBot_WoWAPI_GetCooldownV11(spellId)
+    hbInfo=GetSpellCooldown(spellId)
+    -- Midnight: the whole struct can be secret in combat; boolean-testing or
+    -- indexing it then is an immediate lua error
+    if HealBot_issecretvalue(hbInfo) then return nil end
+    if hbInfo then
+        return hbInfo.startTime, hbInfo.duration --, hbInfo.isEnabled, hbInfo.modRate
+    end
+    return nil
+end
+
+local function HealBot_WoWAPI_GetSpellChargesV1(spellId)
+    return GetSpellCharges(spellId)
+end
+
+local function HealBot_WoWAPI_GetSpellCountV1(spellId)
+    return GetSpellCount(spellId)
+end
+
+local function HealBot_WoWAPI_GetSpellChargesV11(spellId)
+    hbInfo=GetSpellCharges(spellId)
+    -- Midnight: struct can be secret in combat (see GetCooldownV11)
+    if HealBot_issecretvalue(hbInfo) then return nil end
+    if hbInfo then
+        return hbInfo.currentCharges --, hbInfo.maxCharges
+    end
+    return nil
+end
+
+local HealBot_WoWAPI_GetSpellName=HealBot_WoWAPI_GetSpellNameV1
+local HealBot_WoWAPI_GetSpellId=HealBot_WoWAPI_GetSpellIdV1
+local HealBot_WoWAPI_GetSpellInfo=HealBot_WoWAPI_GetInfoV1
+local HealBot_WoWAPI_GetSpellCooldown=HealBot_WoWAPI_GetCooldownV1
+local HealBot_WoWAPI_GetSpellCount=HealBot_WoWAPI_GetSpellCountV1
+local HealBot_WoWAPI_GetSpellCharges=HealBot_WoWAPI_GetSpellChargesV1
+local HealBot_WoWAPI_GetSpellLink=GetSpellLink
+local HealBot_WoWAPI_IsPassiveSpell=IsPassiveSpell
+local HealBot_WoWAPI_PickupSpell=PickupSpell
+local HealBot_WoWAPI_GetSpellTexture=GetSpellTexture
+local HealBot_WoWAPI_GetSpellPowerCost=GetSpellPowerCost
+local HealBot_WoWAPI_IsHelpfulSpell=IsHelpfulSpell
+local HealBot_WoWAPI_IsHarmfulSpell=IsHarmfulSpell
+local HealBot_WoWAPI_IsSpellInRange=IsSpellInRange
+
+function HealBot_WoWAPI_SetC_Spell()
+    if C_Spell then
+        if C_Spell.GetSpellSubtext then
+            GetSpellSubtext=C_Spell.GetSpellSubtext
+        end
+        if C_Spell.GetSpellIDForSpellIdentifier then
+            HealBot_WoWAPI_GetSpellId=HealBot_WoWAPI_GetSpellIdV11
+            GetSpellId=C_Spell.GetSpellIDForSpellIdentifier
+        end
+        if C_Spell.GetSpellInfo then
+            HealBot_WoWAPI_GetSpellName=HealBot_WoWAPI_GetSpellNameV11
+            HealBot_WoWAPI_GetSpellInfo=HealBot_WoWAPI_GetInfoV11
+            GetSpellInfo=C_Spell.GetSpellInfo
+            GetSpellName=C_Spell.GetSpellInfo
+            if HEALBOT_FOREVER then
+                HealBot_WoWAPI_GetSpellName=HealBot_WoWAPI_GetSpellNameV1f
+            end
+        end
+        if C_Spell.GetSpellCooldown then
+            HealBot_WoWAPI_GetSpellCooldown=HealBot_WoWAPI_GetCooldownV11
+            GetSpellCooldown=C_Spell.GetSpellCooldown
+        end
+        if C_Spell.GetSpellCharges then
+            HealBot_WoWAPI_GetSpellCount=HealBot_WoWAPI_GetSpellChargesV11
+            HealBot_WoWAPI_GetSpellCharges=HealBot_WoWAPI_GetSpellChargesV11
+            GetSpellCharges=C_Spell.GetSpellCharges
+        end
+        if C_Spell.GetSpellCount then
+            HealBot_WoWAPI_GetSpellCount=HealBot_WoWAPI_GetSpellChargesV11
+            HealBot_WoWAPI_GetSpellCharges=HealBot_WoWAPI_GetSpellChargesV11
+            GetSpellCharges=C_Spell.GetSpellCharges
+        end
+        HealBot_WoWAPI_GetSpellLink=C_Spell.GetSpellLink or GetSpellLink
+        HealBot_WoWAPI_IsPassiveSpell=C_Spell.IsSpellPassive or IsPassiveSpell
+        HealBot_WoWAPI_PickupSpell=C_Spell.PickupSpell or PickupSpell
+        HealBot_WoWAPI_GetSpellTexture=C_Spell.GetSpellTexture or GetSpellTexture
+        HealBot_WoWAPI_GetSpellPowerCost=C_Spell.GetSpellPowerCost or GetSpellPowerCost
+        HealBot_WoWAPI_IsHelpfulSpell=C_Spell.IsSpellHelpful or C_Spell.IsHelpfulSpell or IsHelpfulSpell
+        HealBot_WoWAPI_IsHarmfulSpell=C_Spell.IsSpellHarmful or C_Spell.IsHarmfulSpell or IsHarmfulSpell
+        HealBot_WoWAPI_IsSpellInRange=C_Spell.IsSpellInRange or IsSpellInRange
+
+    end
+end
+
+function HealBot_WoWAPI_SpellName(spellId)
+    return HealBot_WoWAPI_GetSpellName(spellId or "X")
+end
+
+function HealBot_WoWAPI_SpellId(spellName)
+    return HealBot_WoWAPI_GetSpellId(spellName or "X")
+end
+
+function HealBot_WoWAPI_SpellInfo(spellId)
+    return HealBot_WoWAPI_GetSpellInfo(spellId or "X")
+end
+
+function HealBot_WoWAPI_SpellCooldown(spellId)
+    return HealBot_WoWAPI_GetSpellCooldown(spellId or "X")
+end
+
+function HealBot_WoWAPI_SpellLink(spellId)
+    return HealBot_WoWAPI_GetSpellLink(spellId or "X")
+end
+
+function HealBot_WoWAPI_IsSpellPassive(spellId)
+    return HealBot_WoWAPI_IsPassiveSpell(spellId or "X")
+end
+
+function HealBot_WoWAPI_SpellPickup(spellId)
+    return HealBot_WoWAPI_PickupSpell(spellId or "X")
+end
+
+function HealBot_WoWAPI_SpellTexture(spellId)
+    return HealBot_WoWAPI_GetSpellTexture(spellId or "X")
+end
+
+function HealBot_WoWAPI_SpellCharges(spellId)
+    return HealBot_WoWAPI_GetSpellCharges(spellId or "X")
+end
+
+function HealBot_WoWAPI_SpellCount(spellId)
+    return HealBot_WoWAPI_GetSpellCount(spellId or "X")
+end
+
+function HealBot_WoWAPI_SpellPowerCost(spellId)
+    return HealBot_WoWAPI_GetSpellPowerCost(spellId or "X")
+end
+
+function HealBot_WoWAPI_HelpfulSpell(spellName, spellId)
+    if HEALBOT_CLIENT_VERSION>10 then
+        return HealBot_WoWAPI_IsHelpfulSpell(spellId or "X")
+    else
+        return HealBot_WoWAPI_IsHelpfulSpell(spellName or "X")
+    end
+end
+
+function HealBot_WoWAPI_HarmfulSpell(spellName, spellId)
+    if HEALBOT_CLIENT_VERSION>10 then
+        return HealBot_WoWAPI_IsHarmfulSpell(spellId or "X")
+    else
+        return HealBot_WoWAPI_IsHarmfulSpell(spellName or "X")
+    end
+end
+
+function HealBot_WoWAPI_SpellInRange(spellId, unit)
+    return HealBot_WoWAPI_IsSpellInRange(spellId or "X", unit)
+end
+
+
+-- C_SpellBook
+local GetSpellTabInfo=GetSpellTabInfo
+local GetSpellBookItemInfo=GetSpellBookItemInfo
+local GetSpellBookItemName=GetSpellBookItemName
+local function HealBot_WoWAPI_GetSpellTabInfoV1(index)
+    return GetSpellTabInfo(index)
+end
+
+local function HealBot_WoWAPI_GetSpellTabInfoV11(index)
+    hbInfo=GetSpellTabInfo(index)
+    if hbInfo then
+        return nil, nil, hbInfo.itemIndexOffset, hbInfo.numSpellBookItems, nil, 0 --hbInfo.isOffSpec
+    end
+    return nil
+end
+
+local function HealBot_WoWAPI_GetSpellBookItemInfoV1(index)
+    return GetSpellBookItemInfo(index, BOOKTYPE_SPELL)
+end
+
+local SpellBookItemtypes={[1]="SPELL", [3]="SPELL", [4]="FLYOUT"}
+local function HealBot_WoWAPI_GetSpellBookItemInfoV11(index)
+    hbInfo=GetSpellBookItemInfo(index, Enum.SpellBookSpellBank.Player)
+    if hbInfo and hbInfo.itemType then
+        return SpellBookItemtypes[hbInfo.itemType], hbInfo.actionID
+    else
+        hbInfo=GetSpellBookItemInfo(index, Enum.SpellBookSpellBank.Pet)
+        if hbInfo and hbInfo.itemType then
+            return SpellBookItemtypes[hbInfo.itemType], hbInfo.actionID
+        end
+    end
+    return nil
+end
+
+local function HealBot_WoWAPI_GetSpellBookItemNameV1(index)
+    return GetSpellBookItemName(index, BOOKTYPE_SPELL)
+end
+
+local function HealBot_WoWAPI_GetSpellBookItemNameV11(index)
+    return GetSpellBookItemName(index, Enum.SpellBookSpellBank.Player)
+end
+
+local HealBot_WoWAPI_GetNumSpellTabs=GetNumSpellTabs
+local HealBot_WoWAPI_GetSpellTabInfo=HealBot_WoWAPI_GetSpellTabInfoV1
+local HealBot_WoWAPI_GetSpellBookItemInfo=HealBot_WoWAPI_GetSpellBookItemInfoV1
+local HealBot_WoWAPI_GetSpellBookItemName=HealBot_WoWAPI_GetSpellBookItemNameV1
+
+function HealBot_WoWAPI_SetC_SpellBook()
+    if C_SpellBook then
+        HealBot_WoWAPI_GetNumSpellTabs=C_SpellBook.GetNumSpellBookSkillLines or GetNumSpellTabs
+        if C_SpellBook.GetSpellBookSkillLineInfo then
+            HealBot_WoWAPI_GetSpellTabInfo=HealBot_WoWAPI_GetSpellTabInfoV11
+            GetSpellTabInfo=C_SpellBook.GetSpellBookSkillLineInfo
+        end
+        if C_SpellBook.GetSpellBookItemInfo then
+            HealBot_WoWAPI_GetSpellBookItemInfo=HealBot_WoWAPI_GetSpellBookItemInfoV11
+            GetSpellBookItemInfo=C_SpellBook.GetSpellBookItemInfo
+        end
+        if C_SpellBook.GetSpellBookItemName then
+            HealBot_WoWAPI_GetSpellBookItemName=HealBot_WoWAPI_GetSpellBookItemNameV11
+            GetSpellBookItemName=C_SpellBook.GetSpellBookItemName
+        end
+    end
+end
+
+function HealBot_WoWAPI_NumSpellTabs()
+    return HealBot_WoWAPI_GetNumSpellTabs()
+end
+
+function HealBot_WoWAPI_SpellTabInfo(index)
+    return HealBot_WoWAPI_GetSpellTabInfo(index)
+end
+
+function HealBot_WoWAPI_SpellBookItemInfo(index)
+    return HealBot_WoWAPI_GetSpellBookItemInfo(index)
+end
+
+function HealBot_WoWAPI_SpellBookItemName(index)
+    return HealBot_WoWAPI_GetSpellBookItemName(index)
+end
+
+function HealBot_WoWAPI_SetSpellBookTooltip(tooltip, index)
+    if HEALBOT_CLIENT_VERSION>10 then
+        tooltip:SetSpellBookItem(index, Enum.SpellBookSpellBank.Player)
+    else
+        tooltip:SetSpellBookItem(index, BOOKTYPE_SPELL)
+    end
+end
+
+
+-- C_Item
+local HealBot_WoWAPI_GetItemInfo=GetItemInfo
+local HealBot_WoWAPI_GetItemInfoInstant=GetItemInfoInstant
+local HealBot_WoWAPI_IsUsableItem=IsUsableItem
+local HealBot_WoWAPI_GetItemClassInfo=GetItemClassInfo
+local HealBot_WoWAPI_GetItemCooldown=GetItemCooldown
+local HealBot_WoWAPI_GetItemCount=GetItemCount
+local HealBot_WoWAPI_PickupItem=PickupItem
+
+function HealBot_WoWAPI_SetC_Item()
+    if C_Item then
+        HealBot_WoWAPI_GetItemInfo=C_Item.GetItemInfo or GetItemInfo
+        HealBot_WoWAPI_GetItemInfoInstant=C_Item.GetItemInfoInstant or GetItemInfoInstant
+        HealBot_WoWAPI_IsUsableItem=C_Item.IsUsableItem or IsUsableItem
+        HealBot_WoWAPI_GetItemClassInfo=C_Item.GetItemClassInfo or GetItemClassInfo
+        HealBot_WoWAPI_GetItemCooldown=C_Item.GetItemCooldown or GetItemCooldown
+        HealBot_WoWAPI_GetItemCount=C_Item.GetItemCount or GetItemCount
+        HealBot_WoWAPI_PickupItem=C_Item.PickupItem or PickupItem
+    end
+end
+
+function HealBot_WoWAPI_ItemInfo(itemId)
+    return HealBot_WoWAPI_GetItemInfo(itemId)
+end
+
+function HealBot_WoWAPI_ItemInfoInstant(itemId)
+    return HealBot_WoWAPI_GetItemInfoInstant(itemId)
+end
+
+function HealBot_WoWAPI_UsableItem(itemId)
+    return HealBot_WoWAPI_IsUsableItem(itemId)
+end
+
+function HealBot_WoWAPI_ItemClassInfo(itemId)
+    return HealBot_WoWAPI_GetItemClassInfo(itemId)
+end
+
+function HealBot_WoWAPI_ItemCooldown(itemId)
+    return HealBot_WoWAPI_GetItemCooldown(itemId)
+end
+
+function HealBot_WoWAPI_ItemCount(itemId, includeBank, includeUses)
+    return HealBot_WoWAPI_GetItemCount(itemId, includeBank, includeUses)
+end
+
+function HealBot_WoWAPI_ItemPickup(itemId)
+    return HealBot_WoWAPI_PickupItem(itemId)
+end
+
+
+-- C_AddOns
+local HealBot_WoWAPI_AddOnLoad=LoadAddOn
+function HealBot_WoWAPI_SetC_AddOns()
+    if C_AddOns then
+        HealBot_WoWAPI_AddOnLoad=C_AddOns.LoadAddOn or LoadAddOn
+    end
+end
+
+function HealBot_WoWAPI_LoadAddOn(name)
+    return HealBot_WoWAPI_AddOnLoad(name)
+end
+
+-- Health
+local hlth, maxhlth, pcthlth, cpcthlth, hpcthlth, pctColR, pctColG, pctCol = 0,0,0,0,0,0,0,nil
+function HealBot_WoWAPI_ClassicUnitHealth(unit)
+    hlth,maxhlth=UnitHealth(unit),UnitHealthMax(unit)
+    if (maxhlth or 0)>0 then
+        if hlth>maxhlth then maxhlth=hlth end
+        pcthlth=hlth/maxhlth
+        cpcthlth=floor(pcthlth*100)
+        hpcthlth=floor(pcthlth*1000)
+        pctColR, pctColG=HealBot_Action_BarColourPct(pcthlth)
+    else
+        hlth=100
+        maxhlth=100
+        pcthlth=1
+        cpcthlth=100
+        hpcthlth=1000
+        pctColR=0
+        pctColG=1
+    end
+    return hlth, maxhlth, pcthlth, cpcthlth, hpcthlth, pctColR, pctColG
+end
+
+function HealBot_WoWAPI_MidnightUnitHealth(unit)
+    hlth,maxhlth=UnitHealth(unit),UnitHealthMax(unit)
+    pcthlth=UnitHealthPercent(unit, true)
+    cpcthlth=UnitHealthPercent(unit, true, CC_ScaleTo100)
+    hpcthlth=UnitHealthPercent(unit, true, CC_ScaleTo1000)
+    pctCol=UnitHealthPercent(unit, true, CC_ScaleColPct)
+    pctColR, pctColG=pctCol:GetRGB()
+    return hlth, maxhlth, pcthlth, cpcthlth, hpcthlth, pctColR, pctColG
+end
+
+local HealBot_WoWAPI_UnitHealthPercent=HealBot_WoWAPI_ClassicUnitHealth
+function HealBot_WoWAPI_SetHealth()
+    if UnitHealthPercent then  -- if HEALBOT_MIDNIGHT then
+        HealBot_WoWAPI_UnitHealthPercent=HealBot_WoWAPI_MidnightUnitHealth
+    end
+end
+
+function HealBot_WoWAPI_UnitHealth(unit)
+    return HealBot_WoWAPI_UnitHealthPercent(unit)
+end
+
+-- Mana
+local mana, maxmana, pctmana, cpctmana, hpctmana = 0,0,0,0
+function HealBot_WoWAPI_ClassicUnitMana(unit, pType)
+    mana,maxmana=UnitPower(unit),UnitPowerMax(unit)
+    if (maxmana or 0)>0 then
+        pctmana=mana/maxmana
+        cpctmana=floor(pctmana*100)
+        hpctmana=floor(pctmana*1000)
+    else
+        cpctmana=0
+        hpctmana=0
+    end
+    return mana, maxmana, cpctmana, hpctmana
+end
+
+function HealBot_WoWAPI_MidnightUnitMana(unit, pType)
+    mana,maxmana=UnitPower(unit),UnitPowerMax(unit)
+    cpctmana=UnitPowerPercent(unit, pType, true, CC_ScaleTo100)
+    hpctmana=UnitPowerPercent(unit, pType, true, CC_ScaleTo1000)
+    return mana, maxmana, cpctmana, hpctmana
+end
+
+local HealBot_WoWAPI_UnitManaPercent=HealBot_WoWAPI_ClassicUnitMana
+function HealBot_WoWAPI_SetMana()
+    if UnitPowerPercent then  -- if HEALBOT_MIDNIGHT then
+        HealBot_WoWAPI_UnitManaPercent=HealBot_WoWAPI_MidnightUnitMana
+    end
+end
+
+function HealBot_WoWAPI_UnitMana(unit, pType)
+    return HealBot_WoWAPI_UnitManaPercent(unit, pType)
+end

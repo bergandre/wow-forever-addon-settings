@@ -20,14 +20,14 @@ WT_Crafting = {
 },
 },
 ["settings"] = {
-["showMerchantsFavorRecipes"] = false,
 ["showOtherFactionRecipes"] = false,
+["showMerchantsFavorRecipes"] = false,
 ["showReputationRecipes"] = false,
 },
 ["selectedProfessions"] = {
-[182] = true,
 [185] = true,
 [393] = true,
+[182] = true,
 },
 ["selectedSources"] = {
 ["world_object"] = false,

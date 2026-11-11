@@ -9,8 +9,6 @@ PawnCommon = {
 ["Debug"] = false,
 ["ColorTooltipBorder"] = true,
 ["ShowTooltipIcons"] = true,
-["ShowSpecIcons"] = true,
-["ShowSocketingAdvisor"] = true,
 ["Scales"] = {
 ["\"Classic\":WARRIOR2"] = {
 ["Color"] = "c69b6d",
@@ -166,6 +164,9 @@ PawnCommon = {
 ["LocalizedName"] = "Shaman: Enhancement",
 ["ClassID"] = 7,
 ["PerCharacterOptions"] = {
+["Invited Friend"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "DAMAGER",
@@ -231,6 +232,9 @@ PawnCommon = {
 ["LocalizedName"] = "Shaman: Restoration",
 ["ClassID"] = 7,
 ["PerCharacterOptions"] = {
+["Invited Friend"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "HEALER",
@@ -310,6 +314,9 @@ PawnCommon = {
 ["LocalizedName"] = "Druid: Restoration",
 ["ClassID"] = 11,
 ["PerCharacterOptions"] = {
+["Tailoring Altchar"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "HEALER",
@@ -323,6 +330,9 @@ PawnCommon = {
 ["LocalizedName"] = "Druid: Feral (Damage)",
 ["ClassID"] = 11,
 ["PerCharacterOptions"] = {
+["Tailoring Altchar"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "DAMAGER",
@@ -336,6 +346,9 @@ PawnCommon = {
 ["LocalizedName"] = "Druid: Feral (Tank)",
 ["ClassID"] = 11,
 ["PerCharacterOptions"] = {
+["Tailoring Altchar"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "TANK",
@@ -349,6 +362,9 @@ PawnCommon = {
 ["LocalizedName"] = "Druid: Balance",
 ["ClassID"] = 11,
 ["PerCharacterOptions"] = {
+["Tailoring Altchar"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "DAMAGER",
@@ -375,6 +391,9 @@ PawnCommon = {
 ["LocalizedName"] = "Shaman: Elemental",
 ["ClassID"] = 7,
 ["PerCharacterOptions"] = {
+["Invited Friend"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "DAMAGER",
@@ -397,6 +416,8 @@ PawnCommon = {
 ["SpecID"] = 2,
 },
 },
+["ShowSocketingAdvisor"] = true,
+["ShowSpecIcons"] = true,
 ["IgnoreGemsWhileLeveling"] = true,
 ["ButtonPosition"] = 2,
 ["Digits"] = 1,

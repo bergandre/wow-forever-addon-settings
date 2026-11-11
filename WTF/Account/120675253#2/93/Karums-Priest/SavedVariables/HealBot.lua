@@ -14,13 +14,13 @@ HealBot_Config = {
 },
 ["CurrentSpec"] = 1,
 ["Skin_ID"] = -1,
-["LastLoadout"] = 1656487,
+["LastLoadout"] = 0,
 ["LastAutoSkinChangeTime"] = 0,
-["CurrentLoadout"] = 1656487,
+["CurrentLoadout"] = 0,
 ["SkinSpecEnabled"] = {
 },
 ["PrivFocus"] = "x",
-["SpecProfAtSave"] = "1:1:1656487",
+["SpecProfAtSave"] = "1:1",
 ["MacroUse10"] = false,
 ["LastAutoSkinChangeType"] = "None",
 ["DisabledNow"] = 0,
@@ -80,9 +80,9 @@ HealBot_Config_Spells = {
 },
 ["EmergAvoidBlueCursor"] = {
 },
-["ButtonCastMethod"] = 2,
 ["EmergSpellTarget"] = {
 },
+["ButtonCastMethod"] = 2,
 ["EnabledKeyCombo"] = {
 },
 ["EnemySpellTarget"] = {
@@ -118,16 +118,17 @@ HealBot_Config_Buffs = {
 ["ShowBuffWarning"] = false,
 ["SoundBuffChan"] = 2,
 ["SoundBuffPlay"] = "Elf Bell Toll",
-["WarnRange_Bar"] = 2,
-["CustomBuffCheck"] = {
-false,
-false,
-false,
-},
-["BuffWatch"] = true,
 ["AlwaysShowSelf"] = false,
-["BuffCustomWatchInCombat"] = true,
 ["ListSortOrder"] = 1,
+["ListSortFilterTag"] = "",
+["WarnRange_Bar"] = 2,
+["BuffCustomWatchInCombat"] = true,
+["CustomBuffName"] = {
+"",
+"",
+"",
+"",
+},
 ["LongBuffTimer"] = 120,
 ["BuffWatchInCombat"] = false,
 ["ListSortFilter"] = 1,
@@ -143,13 +144,12 @@ false,
 ["AlwaysShowTimed"] = false,
 ["HealBotBuffColR"] = {
 },
-["CustomBuffName"] = {
-"",
-"",
-"",
-"",
+["CustomBuffCheck"] = {
+false,
+false,
+false,
 },
-["ListSortFilterTag"] = "",
+["BuffWatch"] = true,
 ["HealBotBuffDropDown"] = {
 ["43"] = 4,
 ["41"] = 4,
@@ -266,6 +266,7 @@ HealBot_Config_Cures = {
 },
 ["IgnoreFastDurDebuffsSecs"] = 2,
 ["ListSortOrder"] = 1,
+["EnableBar"] = true,
 ["HealBot_Custom_Debuffs_All"] = {
 ["Disease"] = false,
 ["Bleed"] = false,
@@ -273,7 +274,6 @@ HealBot_Config_Cures = {
 ["Magic"] = false,
 ["Curse"] = false,
 },
-["EnableBar"] = true,
 ["DebuffWatchWhenGrouped"] = false,
 ["WarnRange_Screen"] = 2,
 ["WarnRange_Bar"] = 2,
@@ -342,8 +342,8 @@ HealBot_Config_Cures = {
 ["HealBotDebuffPriority"] = {
 ["Disease"] = 7,
 ["Bleed"] = 9,
-["Poison"] = 8,
 ["Curse"] = 6,
+["Poison"] = 8,
 ["Magic"] = 5,
 ["Custom"] = 15,
 },
@@ -351,10 +351,13 @@ HealBot_Config_Cures = {
 }
 HealBot_ActionIcons_Loadouts = {
 ["Standard:1:1656487"] = "lodJlK4kjU4a8d",
+["Standard:1"] = "lodJlK4kjU4a8d",
 }
 HealBot_ActionIconsData_Loadouts = {
 ["Standard:1:1656487"] = "lodJlK4kjU4a8d",
+["Standard:1"] = "lodJlK4kjU4a8d",
 }
 HealBot_Spell_Loadouts = {
+"1fzWUnimqq0FPUUPnPhRr9ut6HsoBjqEffvJDL9sL4VVMDtunrosOb0SmV1myaZzt7B(UEhAB)bDUZDXbKYU0n(Xr)3ibxNGtlV(By0QDZyZCmfIftktOU4pHXHAKw9FhxAct9bXsp6TP8JFa8LI1hzDhRpX6ZSUN1dS(Ie5b5MKgK4GKheaGqaeeGWaeiGqrXuQDWv3TCu3Pck)uRxA)VJI6xptuW30LOti9vWUwfxx72gRyJf5lmoMHu5pB1ddhl9jMYVS(c7nRJmM)c",
 ["1:1656487"] = "1fzqpkmiqu4)soOUQhLgpTQhuptsnmPBZsbdmDt6)ERZ4Mq3LM08k5bVVHzWaMBMRh813DO96d05UvhBqA0L(JFS1)nsWV7GDd7)j0A1UESQpMcXSDYtOE73HXMsKE5)jouf6UhelDR3MgxEg4pfRlzDfRRz9dw3W6ww3jrwi)K0GehK8GaaecGGaegGabekkMsPlUA2HJAMrqERwCOP7jk4RQt0jK(kyF105f()VjtNyzvm7OzghhrxGsXldhlDbtJhw)M9KYrgZZp",
 }

@@ -68,7 +68,9 @@ function PlayerInfo.GetConnectedAlts()
 			local realm = strmatch(factionrealm, "^[^%-]+ %- (.+)$")
 			assert(realm)
 			realm = gsub(realm, "%-", "")
-			character = CharacterInfo.Ambiguate(gsub(character.."-"..realm, " ", ""))
+			if not LibTSMApp.IsForever() then
+				character = CharacterInfo.Ambiguate(gsub(character.."-"..realm, " ", ""))
+			end
 			if character ~= SessionInfo.GetCharacterName() then
 				tinsert(private.connectedAlts, character)
 			end

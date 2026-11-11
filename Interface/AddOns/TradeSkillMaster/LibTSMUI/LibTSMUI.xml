@@ -90,6 +90,7 @@
     <Script file="Source\Group\OperationsList.lua" />
     <Script file="Source\Group\ApplicationGroupTreeWithControls.lua" />
     <Script file="Source\Group\GroupExportDialog.lua" />
+    <Script file="Source\Group\AppGroupImportRow.lua" />
     <Script file="Source\Group\GroupImportDialog.lua" />
     <Script file="Source\Group\GroupOperationRow.lua" />
     <Script file="Source\Group\GroupAddOperationDialog.lua" />
@@ -136,6 +137,8 @@
     <Script file="Source\Debug\DatabaseBrowseScrollTable.lua" />
     <Script file="Source\Debug\DatabaseStructureScrollTable.lua" />
     <Script file="Source\Debug\ErrorFrame.lua" />
+
+    <Script file="Source\Group\AppGroupImportPopupDialog.lua" />
 
     <Script file="Source\Ledger\RecordTradeDialog.lua" />
 

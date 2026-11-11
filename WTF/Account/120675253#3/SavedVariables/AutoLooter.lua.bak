@@ -3,6 +3,8 @@ AutoLooterDB = {
 ["namespaces"] = {
 },
 ["profileKeys"] = {
+["Invited Friend"] = "Default",
+["Tailoring Altchar"] = "Default",
 ["Karums Warrior"] = "Default",
 ["Karums - CAMWOW EU5 Realm 4 PvP"] = "Default",
 ["Invited Undead"] = "Default",
@@ -80,9 +82,9 @@ AutoLooterDB = {
 ["Other"] = false,
 ["Reagent"] = false,
 ["Mount"] = false,
+["Junk"] = false,
 ["Holiday"] = false,
 ["Pet"] = false,
-["Junk"] = false,
 },
 ["Consumable"] = {
 ["Potions"] = false,

@@ -75,7 +75,9 @@ function Schema.Get()
 	-- [148] updated global.craftingUIContext.{craftsScrollingTable,matsScrollingTable}
 	-- [149] updated global.auctionUIContext.{auctioningAuctionScrollingTable,myAuctionsScrollingTable,shoppingAuctionScrollingTable,sniperScrollingTable}
 	-- [150] renamed the Forever realms to Normal, Roleplay, and Roleplay PvP
-	return Settings.NewSchema(150, 102)
+	-- [151] cleared factionrealm.internalData.{crafts,craftingQueue}, factionrealm.userData.craftingCooldownIgnore on classic
+	-- [152] added global.internalData.groupImportResults
+	return Settings.NewSchema(152, 102)
 		:EnterScope("global")
 			:EnterNamespace("debug")
 				:AddBoolean("chatLoggingEnabled", false, 102)
@@ -90,6 +92,7 @@ function Schema.Get()
 				:AddNumber("warbankMoney", 0, 128)
 				:AddString("warbankGoldLog", "", 128)
 				:AddNumber("warbankGoldLogLastUpdate", 0, 128)
+				:AddTable("groupImportResults", {}, 152)
 			:LeaveNamespace()
 			:EnterNamespace("appearanceOptions")
 				:AddBoolean("taskListBackgroundLock", false, 102)

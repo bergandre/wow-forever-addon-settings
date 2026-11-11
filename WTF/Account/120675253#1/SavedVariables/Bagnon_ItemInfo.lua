@@ -4,9 +4,9 @@ BagnonItemInfo_DB = {
 ["enableItemBind"] = true,
 ["garbageDesaturation"] = true,
 ["enableUncollected"] = true,
-["minimumItemLevel"] = 11,
-["enableRarityColoring"] = true,
+["minimumItemLevel"] = 17,
+["enableGarbage"] = true,
 ["garbageOverlay"] = true,
 ["garbageOverlayAlpha"] = 1,
-["enableGarbage"] = true,
+["enableRarityColoring"] = true,
 }

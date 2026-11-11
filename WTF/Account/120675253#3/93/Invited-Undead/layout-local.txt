@@ -1,8 +1,8 @@
 Version: 1
-Frame: BagnoniumInventory1
+Frame: Grid2LayoutFrame
 FrameLevel: 1
-Anchor: BOTTOMRIGHT
-X: 0
-Y: 0
-W: 400
-H: 500
+Anchor: RIGHT
+X: -120
+Y: 218
+W: 206
+H: 82

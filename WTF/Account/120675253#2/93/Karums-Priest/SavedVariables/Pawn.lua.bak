@@ -4,47 +4,77 @@ PawnOptions = {
 ["LastPlayerFullName"] = "Karums Priest",
 ["AutoSelectScales"] = false,
 ["ItemLevels"] = {
-[15] = {
-["ID"] = 6508,
-["Level"] = 9,
-["Link"] = "|cnIQ1:|Hitem:6508::::::::14:1487:::::::::|h[Infantry Cloak]|h|r",
-},
-[17] = {
-["ID"] = 286728,
-["Level"] = 8,
-["AlsoFitsIn"] = 16,
-["Link"] = "|cnIQ1:|Hitem:286728::::::::15:1487::11:::::::|h[Kolkar Hammer]|h|r",
-},
-[8] = {
-["ID"] = 2971,
-["Level"] = 14,
-["Link"] = "|cnIQ1:|Hitem:2971::::::::15:1487:::::::::|h[Spellbinder Boots]|h|r",
-},
-[18] = {
-["ID"] = 11288,
-["Level"] = 23,
-["Link"] = "|cnIQ2:|Hitem:11288::::::::14:1487:::::::::|h[Greater Magic Wand]|h|r",
-},
-[16] = {
-["ID"] = 286728,
-["Level"] = 8,
-["AlsoFitsIn"] = 17,
-["Link"] = "|cnIQ1:|Hitem:286728::::::::14:1487::11:::::::|h[Kolkar Hammer]|h|r",
-},
-[5] = {
-["ID"] = 16606,
-["Level"] = 5,
-["Link"] = "|cnIQ2:|Hitem:16606::::::::14:1487::11:::::::|h[Juju Hex Robes]|h|r",
-},
-[9] = {
-["ID"] = 281269,
-["Level"] = 10,
-["Link"] = "|cnIQ2:|Hitem:281269::::::::14:1487::11:::::::|h[Mogra's Friendship Bracelet]|h|r",
+{
+["ID"] = 3732,
+["Level"] = 30,
+["Link"] = "|cnIQ1:|Hitem:3732::::::::25:1487::11:::::::|h[Hooded Cowl]|h|r",
 },
 [7] = {
-["ID"] = 3291,
-["Level"] = 13,
-["Link"] = "|cnIQ2:|Hitem:3291::::::::14:1487:::::::::|h[Ancestral Woollies]|h|r",
+["ID"] = 6568,
+["Level"] = 24,
+["Link"] = "|cnIQ2:|Hitem:6568::::::::25:1487:::1:12745::::::|h[Shimmering Trousers of the Sorcerer]|h|r",
+},
+[17] = {
+["ID"] = 273137,
+["Level"] = 22,
+["Link"] = "|cnIQ3:|Hitem:273137::::::::22:1487::1::1:28:5254:::::|h[Skum's Bucket]|h|r",
+},
+[15] = {
+["ID"] = 273005,
+["Level"] = 18,
+["Link"] = "|cnIQ3:|Hitem:273005::::::::16:1487::1::1:28:5244:::::|h[Satyrskin Cloak]|h|r",
+},
+[8] = {
+["ID"] = 271214,
+["Level"] = 24,
+["Link"] = "|cnIQ3:|Hitem:271214::::::::19:1487::1::1:28:5256:::::|h[Rotmender's Treads]|h|r",
+},
+[16] = {
+["ID"] = 271216,
+["Level"] = 22,
+["Link"] = "|cnIQ3:|Hitem:271216::::::::18:1487::1::1:28:5256:::::|h[Scepter of the Abandoned]|h|r",
+},
+[9] = {
+["ID"] = 9793,
+["Level"] = 25,
+["Link"] = "|cnIQ2:|Hitem:9793::::::::25:1487:::1:12718::::::|h[Ivycloth Bracelets of the Eagle]|h|r",
+},
+[5] = {
+["ID"] = 271206,
+["Level"] = 20,
+["Link"] = "|cnIQ3:|Hitem:271206::::::::18:1487::1::1:28:5256:::::|h[Leftover Abomination Skin]|h|r",
+},
+[10] = {
+["ID"] = 286979,
+["Level"] = 22,
+["Link"] = "|cnIQ3:|Hitem:286979::::::::18:1487::1::1:28:5256:::::|h[Rotmender's Gloves]|h|r",
+},
+[3] = {
+["ID"] = 10657,
+["Level"] = 26,
+["Link"] = "|cnIQ2:|Hitem:10657::::::::24:1487::11:::::::|h[Talbar Mantle]|h|r",
+},
+[11] = {
+["ID"] = 281673,
+["Level"] = 28,
+["AlsoFitsIn"] = 12,
+["Link"] = "|cnIQ2:|Hitem:281673::::::::24:1487::11:::::::|h[Loop of Sacrifice]|h|r",
+},
+[6] = {
+["ID"] = 273089,
+["Level"] = 22,
+["Link"] = "|cnIQ3:|Hitem:273089::::::::23:1487::1::1:28:5254:::::|h[Slither Cord]|h|r",
+},
+[12] = {
+["ID"] = 281673,
+["Level"] = 28,
+["AlsoFitsIn"] = 11,
+["Link"] = "|cnIQ2:|Hitem:281673::::::::25:1487::11:::::::|h[Loop of Sacrifice]|h|r",
+},
+[18] = {
+["ID"] = 5250,
+["Level"] = 28,
+["Link"] = "|cnIQ2:|Hitem:5250::::::::25:1487::11:::::::|h[Charred Wand]|h|r",
 },
 },
 ["LastKeybindingsSet"] = 1,

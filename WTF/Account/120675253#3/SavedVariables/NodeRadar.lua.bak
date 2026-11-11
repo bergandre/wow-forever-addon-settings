@@ -1,0 +1,11 @@
+
+NodeRadarDB = {
+["moveScanAsked"] = true,
+["blindNotice"] = 70888,
+["learned"] = {
+},
+["schema"] = 2,
+["minimap"] = {
+["hide"] = false,
+},
+}

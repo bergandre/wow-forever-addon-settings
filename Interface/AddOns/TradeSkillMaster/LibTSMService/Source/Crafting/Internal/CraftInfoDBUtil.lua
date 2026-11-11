@@ -11,6 +11,7 @@ local ItemInfo = LibTSMService:Include("Item.ItemInfo")
 local BagTracking = LibTSMService:Include("Inventory.BagTracking")
 local WarbankTracking = LibTSMService:Include("Inventory.WarbankTracking")
 local Profession = LibTSMService:Include("Profession")
+local OptionalMatData = LibTSMService:From("LibTSMData"):Include("OptionalMat")
 local TempTable = LibTSMService:From("LibTSMUtil"):Include("BaseType.TempTable")
 local Table = LibTSMService:From("LibTSMUtil"):Include("Lua.Table")
 local Database = LibTSMService:From("LibTSMDatabase"):Include("Database")
@@ -46,12 +47,45 @@ end)
 
 ---Returns whether or not the craft DB has a given item.
 ---@param itemString string The item string
+---@param levelMatItemString? string Only include crafts with an optional mat slot which accepts this item
 ---@return boolean
-function CraftInfoDBUtil.HasCraftedItem(itemString)
-	return CraftInfoDB.NewCraftQuery()
-		:AutoRelease()
-		:Equal("itemString", itemString)
-		:IsNotEmpty()
+function CraftInfoDBUtil.HasCraftedItem(itemString, levelMatItemString)
+	if not levelMatItemString then
+		return CraftInfoDB.NewCraftQuery()
+			:AutoRelease()
+			:Equal("itemString", itemString)
+			:IsNotEmpty()
+	end
+	local result = false
+	for _, craftString in private.CraftStringByItemIterator(itemString) do
+		result = result or CraftInfoDBUtil.HasOptionalMat(craftString, levelMatItemString)
+	end
+	return result
+end
+
+---Gets the item string which the crafts for an item are stored under.
+---@param levelItemString string The level item string
+---@return string craftedItemString
+---@return string? levelMatItemString
+function CraftInfoDBUtil.GetCraftedItemString(levelItemString)
+	local itemLevel = ItemString.ParseLevel(levelItemString)
+	local levelMatItemString = itemLevel and private.GetOptionalMatByItemLevel(itemLevel)
+	if not levelMatItemString or CraftInfoDBUtil.HasCraftedItem(levelItemString) then
+		return levelItemString, nil
+	end
+	return ItemString.GetBaseFast(levelItemString), levelMatItemString
+end
+
+---Returns whether or not a craft has an optional mat slot which accepts an item.
+---@param craftString string The craft string
+---@param itemString string The item string of the material
+---@return boolean
+function CraftInfoDBUtil.HasOptionalMat(craftString, itemString)
+	local result = false
+	for _, matString in CraftInfoDBUtil.OptionalMatIterator(craftString) do
+		result = result or MatString.ContainsItem(matString, itemString)
+	end
+	return result
 end
 
 ---Gets the level item string produced by a recipe string.
@@ -244,4 +278,20 @@ end
 
 function private.GetMatQuantity(itemString)
 	return BagTracking.GetCraftingMatQuantity(itemString) + WarbankTracking.GetQuantity(itemString)
+end
+
+function private.GetOptionalMatByItemLevel(itemLevel)
+	for matItemString, info in pairs(OptionalMatData.Info) do
+		if info.absItemLevel == itemLevel then
+			return matItemString
+		end
+	end
+	return nil
+end
+
+function private.CraftStringByItemIterator(itemString)
+	return CraftInfoDB.NewCraftQuery()
+		:AutoRelease()
+		:Equal("itemString", itemString)
+		:Iterator("craftString")
 end

@@ -1,0 +1,379 @@
+
+Grid2DB = {
+["namespaces"] = {
+["Grid2Frame"] = {
+["profiles"] = {
+["Karums Warrior"] = {
+["iconSize"] = 18,
+["frameHeight"] = 62,
+["displayZoomedIcons"] = true,
+["frameWidth"] = 62,
+},
+},
+},
+["Grid2Layout"] = {
+["profiles"] = {
+["Karums Warrior"] = {
+["PosY"] = -564.2669470762485,
+["PosX"] = 781.0666949834558,
+},
+},
+},
+},
+["profileKeys"] = {
+["Karums Warrior"] = "Karums Warrior",
+},
+["profiles"] = {
+["Karums Warrior"] = {
+["statusMap"] = {
+["text-down"] = {
+["name"] = 99,
+},
+["power-bar"] = {
+["power"] = 50,
+},
+["power-bar-color"] = {
+["power"] = 51,
+},
+["icon-right"] = {
+["dungeon-role"] = 150,
+},
+["health-bar"] = {
+["heal-absorbs"] = 2,
+["shields"] = 4,
+["health-current"] = 1,
+["heals-incoming"] = 3,
+["shields-overflow"] = 5,
+},
+["debuffs-icons"] = {
+["debuffs-Relevant"] = 50,
+},
+["health-bar-color"] = {
+["classcolor"] = 50,
+},
+["buffs-icons"] = {
+["buffs-Relevant"] = 100,
+},
+["text-up-color"] = {
+["charmed"] = 93,
+["feign-death"] = 96,
+["death"] = 98,
+["classcolor"] = 65,
+["offline"] = 97,
+["vehicle"] = 95,
+},
+["alpha"] = {
+["range"] = 99,
+},
+["corner-bottom"] = {
+["threat"] = 99,
+},
+["border"] = {
+["target"] = 50,
+["debuffs-DispellableByMe"] = 51,
+},
+["text-up"] = {
+["charmed"] = 70,
+["feign-death"] = 96,
+["death"] = 97,
+["vehicle"] = 93,
+["health-current"] = 65,
+["offline"] = 95,
+},
+["text-down-color"] = {
+["classcolor"] = 99,
+},
+["icon-left"] = {
+["raid-icon-player"] = 155,
+},
+["icon-center"] = {
+["phased"] = 50,
+["resurrection"] = 54,
+["death"] = 53,
+["ready-check"] = 55,
+["offline"] = 52,
+["summon"] = 51,
+},
+},
+["indicators"] = {
+["power-bar-color"] = {
+["type"] = "bar-color",
+},
+["text-down"] = {
+["type"] = "text",
+["location"] = {
+["y"] = 4,
+["relPoint"] = "BOTTOM",
+["point"] = "BOTTOM",
+["x"] = 0,
+},
+["level"] = 6,
+["textlength"] = 6,
+["fontSize"] = 10,
+},
+["icon-left"] = {
+["type"] = "icon",
+["location"] = {
+["y"] = 0,
+["relPoint"] = "LEFT",
+["point"] = "LEFT",
+["x"] = -2,
+},
+["level"] = 8,
+["fontSize"] = 8,
+["size"] = 12,
+},
+["border"] = {
+["color1"] = {
+["a"] = 0,
+["b"] = 0,
+["g"] = 0,
+["r"] = 0,
+},
+["type"] = "border",
+},
+["text-down-color"] = {
+["type"] = "text-color",
+},
+["icon-center"] = {
+["type"] = "icon",
+["location"] = {
+["y"] = 0,
+["relPoint"] = "CENTER",
+["point"] = "CENTER",
+["x"] = 0,
+},
+["level"] = 9,
+["fontSize"] = 8,
+["size"] = 20,
+},
+["icon-right"] = {
+["type"] = "icon",
+["location"] = {
+["y"] = 0,
+["relPoint"] = "RIGHT",
+["point"] = "RIGHT",
+["x"] = 2,
+},
+["level"] = 8,
+["fontSize"] = 8,
+["size"] = 12,
+},
+["health-bar"] = {
+{
+["horTile"] = "REPEAT",
+["reverse"] = true,
+["color"] = {
+["a"] = 0.7,
+["b"] = 0.737,
+["g"] = 0,
+["r"] = 1,
+},
+["texture"] = "Grid2 Shield",
+["verTile"] = "REPEAT",
+},
+{
+["color"] = {
+["a"] = 0.5,
+},
+},
+{
+["horTile"] = "REPEAT",
+["color"] = {
+["a"] = 0.7,
+},
+["texture"] = "Grid2 Shield",
+["prevBar"] = 1,
+["verTile"] = "REPEAT",
+},
+{
+["color"] = {
+["a"] = 1,
+["b"] = 1,
+["g"] = 0.992,
+["r"] = 0.965,
+},
+["prevBar"] = -1,
+["glowLine"] = 6,
+["texture"] = "Grid2 GlowH",
+},
+["location"] = {
+["y"] = 0,
+["relPoint"] = "CENTER",
+["point"] = "CENTER",
+["x"] = 0,
+},
+["type"] = "multibar",
+["level"] = 3,
+["textureColor"] = {
+["a"] = 1,
+},
+},
+["debuffs-icons"] = {
+["fontSize"] = 9,
+["borderOpacity"] = 1,
+["disableCooldown"] = true,
+["fontJustifyV"] = "TOP",
+["borderSize"] = 1,
+["iconSize"] = 26,
+["level"] = 8,
+["tooltipAnchor"] = "ANCHOR_BOTTOMRIGHT",
+["type"] = "icons",
+["enableCooldownText"] = true,
+["reverseCooldown"] = true,
+["color1"] = {
+["a"] = 1,
+["r"] = 1,
+["g"] = 1,
+["b"] = 1,
+},
+["maxIcons"] = 1,
+["ctFontSize"] = 10,
+["smartCenter"] = true,
+["location"] = {
+["y"] = -2,
+["relPoint"] = "CENTER",
+["point"] = "CENTER",
+["x"] = 0,
+},
+["useStatusColor"] = true,
+["fontJustifyH"] = "RIGHT",
+["tooltipEnabled"] = true,
+},
+["alpha"] = {
+["type"] = "alpha",
+},
+["buffs-icons"] = {
+["tooltipAnchor"] = "ANCHOR_TOPRIGHT",
+["fontSize"] = 9,
+["enableCooldownText"] = true,
+["tooltipEnabled"] = true,
+["reverseCooldown"] = true,
+["color1"] = {
+["a"] = 1,
+["r"] = 0,
+["g"] = 0,
+["b"] = 0,
+},
+["fontJustifyH"] = "RIGHT",
+["borderSize"] = 1,
+["ctFontSize"] = 10,
+["type"] = "icons",
+["location"] = {
+["y"] = 0,
+["relPoint"] = "TOPLEFT",
+["point"] = "TOPLEFT",
+["x"] = 0,
+},
+["level"] = 8,
+["borderOpacity"] = 1,
+["fontJustifyV"] = "TOP",
+},
+["background"] = {
+["type"] = "background",
+},
+["corner-bottom"] = {
+["type"] = "square",
+["location"] = {
+["y"] = 5,
+["relPoint"] = "BOTTOM",
+["point"] = "BOTTOM",
+["x"] = 0,
+},
+["level"] = 9,
+["color1"] = {
+["a"] = 1,
+["b"] = 1,
+["g"] = 1,
+["r"] = 1,
+},
+["size"] = 7,
+},
+["tooltip"] = {
+["showDefault"] = true,
+["type"] = "tooltip",
+},
+["text-up"] = {
+["type"] = "text",
+["fontSize"] = 9,
+["location"] = {
+["y"] = -8,
+["relPoint"] = "TOP",
+["point"] = "TOP",
+["x"] = 0,
+},
+["level"] = 7,
+["percent"] = true,
+["textlength"] = 6,
+},
+["text-up-color"] = {
+["type"] = "text-color",
+},
+["power-bar"] = {
+["type"] = "bar",
+["backColor"] = {
+["a"] = 1,
+["r"] = 0,
+["g"] = 0,
+["b"] = 0,
+},
+["color1"] = {
+["a"] = 1,
+["b"] = 0,
+["g"] = 0,
+["r"] = 0,
+},
+["hideWhenInactive"] = true,
+["location"] = {
+["y"] = -1,
+["relPoint"] = "BOTTOM",
+["point"] = "BOTTOM",
+["x"] = 0,
+},
+["backTexture"] = "Grid2 Flat",
+["orientation"] = "HORIZONTAL",
+["level"] = 5,
+["height"] = 4,
+["texture"] = "Gradient",
+},
+["health-bar-color"] = {
+["type"] = "multibar-color",
+},
+},
+["statuses"] = {
+["buffs-Relevant"] = {
+["type"] = "mbuffs",
+["color1"] = {
+["a"] = 1,
+["b"] = 0,
+["g"] = 1,
+["r"] = 0,
+},
+["aura_filter"] = {
+["sortRule"] = 3,
+["filter"] = "HELPFUL|RAID_IN_COMBAT",
+},
+},
+["dungeon-role"] = {
+["hideInCombat"] = true,
+},
+["heals-incoming"] = {
+["includePlayerHeals"] = true,
+},
+["debuffs-Relevant"] = {
+["type"] = "mdebuffs",
+["colors"] = {
+},
+["aura_filter"] = {
+["sortRule"] = 3,
+["excludeSatedDebuffs"] = true,
+},
+},
+},
+["versions"] = {
+["Grid2"] = 200,
+},
+["__template"] = "Classic",
+},
+},
+}

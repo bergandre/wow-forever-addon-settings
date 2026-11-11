@@ -2,3 +2,6 @@ Blizzard_ObjectiveTracker: enabled
 Blizzard_CompactRaidFrames: enabled
 Blizzard_CombatText: enabled
 Bagnonium_Bank: enabled
+!Swatter: disabled
+!ImprovedErrorFrame: disabled
+Bagnon_Bank: enabled

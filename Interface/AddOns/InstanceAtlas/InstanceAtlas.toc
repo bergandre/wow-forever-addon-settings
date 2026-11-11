@@ -1,0 +1,8 @@
+## Interface: 16001
+## Title: InstanceAtlas
+## Notes: Custom instance maps and boss markers for WoW Forever.
+## Author: ChatGPT
+## Version: 0.6.1
+## SavedVariables: InstanceAtlasDB
+
+InstanceAtlas.lua

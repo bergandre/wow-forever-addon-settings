@@ -27,7 +27,7 @@ local EXPANDER_SLOT_WIDTH = 16
 -- ============================================================================
 
 local OperationTree = ComponentRegistry.Define("OperationTree", "List")
-OperationTree.ROW_HEIGHT = 28
+OperationTree.ROW_HEIGHT = 24
 OperationTree._STATE_SCHEMA = OperationTree._STATE_SCHEMA:Extend("OperationTreeState")
 	:UpdateFieldDefault("backgroundColor", "container/low")
 	:Commit()
@@ -146,7 +146,7 @@ function OperationTree.__protected:_HandleRowAcquired(row)
 	-- Text
 	local text = row:AddText("text")
 	text:SetHeight(self.ROW_HEIGHT)
-	text:TSMSetFont("BODY_BODY1")
+	text:TSMSetFont("BODY_SMALL")
 	text:SetJustifyH("LEFT")
 
 	-- Add

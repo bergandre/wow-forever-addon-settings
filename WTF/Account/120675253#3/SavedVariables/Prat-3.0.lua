@@ -6,24 +6,24 @@ Prat3DB = {
 ["Default"] = {
 ["colors"] = {
 ["localdefense"] = {
-["r"] = 1,
-["g"] = 0.7529412508010864,
 ["b"] = 0.7529412508010864,
+["g"] = 0.7529412508010864,
+["r"] = 1,
 },
 ["layer"] = {
-["b"] = 0.7529412508010864,
-["g"] = 0.7529412508010864,
 ["r"] = 1,
+["g"] = 0.7529412508010864,
+["b"] = 0.7529412508010864,
 },
 ["general"] = {
-["r"] = 1,
-["g"] = 0.7529412508010864,
 ["b"] = 0.7529412508010864,
+["g"] = 0.7529412508010864,
+["r"] = 1,
 },
 ["trade"] = {
-["r"] = 1,
-["g"] = 0.7529412508010864,
 ["b"] = 0.7529412508010864,
+["g"] = 0.7529412508010864,
+["r"] = 1,
 },
 },
 },
@@ -44,12 +44,14 @@ Prat3DB = {
 ["profileKeys"] = {
 ["Karums Warrior"] = "Default",
 ["Invited Undead"] = "Default",
+["Invited Friend"] = "Default",
+["Tailoring Altchar"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {
 ["modules"] = {
 ["EventNames"] = 3,
-["Alias"] = 2,
+["ChatLog"] = 2,
 ["Mentions"] = 2,
 ["PopupMessage"] = 2,
 ["AltNames"] = 2,
@@ -57,7 +59,7 @@ Prat3DB = {
 ["Paragraph"] = 2,
 ["KeyBindings"] = 2,
 ["LinkInfoIcons"] = 2,
-["ChatLog"] = 2,
+["Alias"] = 2,
 ["OriginalButtons"] = 2,
 },
 },

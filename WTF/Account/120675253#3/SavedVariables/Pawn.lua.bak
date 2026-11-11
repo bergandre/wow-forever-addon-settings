@@ -11,6 +11,12 @@ PawnCommon = {
 ["ShowTooltipIcons"] = true,
 ["ShowUpgradesOnTooltips"] = true,
 ["ShowSocketingAdvisor"] = true,
+["ShowSpecIcons"] = true,
+["LastVersion"] = 2.1401,
+["ButtonPosition"] = 2,
+["Digits"] = 1,
+["ShowQuestUpgradeAdvisor"] = true,
+["IgnoreGemsWhileLeveling"] = true,
 ["Scales"] = {
 ["\"Classic\":WARRIOR2"] = {
 ["Color"] = "c69b6d",
@@ -166,6 +172,9 @@ PawnCommon = {
 ["ClassID"] = 7,
 ["LocalizedName"] = "Shaman: Enhancement",
 ["PerCharacterOptions"] = {
+["Invited Friend"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "DAMAGER",
@@ -218,6 +227,9 @@ PawnCommon = {
 ["ClassID"] = 7,
 ["LocalizedName"] = "Shaman: Elemental",
 ["PerCharacterOptions"] = {
+["Invited Friend"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "DAMAGER",
@@ -231,6 +243,9 @@ PawnCommon = {
 ["ClassID"] = 7,
 ["LocalizedName"] = "Shaman: Restoration",
 ["PerCharacterOptions"] = {
+["Invited Friend"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "HEALER",
@@ -268,6 +283,9 @@ PawnCommon = {
 ["ClassID"] = 11,
 ["LocalizedName"] = "Druid: Feral (Tank)",
 ["PerCharacterOptions"] = {
+["Tailoring Altchar"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "TANK",
@@ -281,6 +299,9 @@ PawnCommon = {
 ["ClassID"] = 11,
 ["LocalizedName"] = "Druid: Feral (Damage)",
 ["PerCharacterOptions"] = {
+["Tailoring Altchar"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "DAMAGER",
@@ -310,6 +331,9 @@ PawnCommon = {
 ["ClassID"] = 11,
 ["LocalizedName"] = "Druid: Restoration",
 ["PerCharacterOptions"] = {
+["Tailoring Altchar"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "HEALER",
@@ -349,6 +373,9 @@ PawnCommon = {
 ["ClassID"] = 11,
 ["LocalizedName"] = "Druid: Balance",
 ["PerCharacterOptions"] = {
+["Tailoring Altchar"] = {
+["Visible"] = true,
+},
 },
 ["DoNotShow1HUpgrades"] = false,
 ["Role"] = "DAMAGER",
@@ -397,10 +424,4 @@ PawnCommon = {
 ["UnenchantedColor"] = "bfbfbf",
 },
 },
-["LastVersion"] = 2.1401,
-["ButtonPosition"] = 2,
-["Digits"] = 1,
-["ShowQuestUpgradeAdvisor"] = true,
-["IgnoreGemsWhileLeveling"] = true,
-["ShowSpecIcons"] = true,
 }

@@ -1,1 +1,124 @@
-../../120675253#1/SavedVariables/Bagnon.lua
+
+Bagnon_Sets = {
+["latest"] = {
+["id"] = "12.1.9",
+["cooldown"] = 1794957202,
+["who"] = "Hawkeye Fury",
+},
+["global"] = {
+["inventory"] = {
+["y"] = 70.99996948242188,
+["rules"] = {
+["sidebar"] = {
+"all",
+"normal",
+"trade",
+},
+},
+["point"] = "BOTTOMLEFT",
+["borderColor"] = {
+},
+["color"] = {
+},
+["x"] = 338.0001525878906,
+["activeRules"] = {
+},
+["showBags"] = true,
+},
+["vault"] = {
+["color"] = {
+},
+["rules"] = {
+["sidebar"] = {
+"all",
+"tradegoods",
+"consumable",
+"armor",
+"questitem",
+"miscellaneous",
+},
+},
+["activeRules"] = {
+},
+["borderColor"] = {
+},
+},
+["guild"] = {
+["color"] = {
+},
+["rules"] = {
+["sidebar"] = {
+"all",
+"tradegoods",
+"consumable",
+"armor",
+"questitem",
+"miscellaneous",
+},
+},
+["activeRules"] = {
+},
+["borderColor"] = {
+},
+},
+["bank"] = {
+["y"] = 502.269287109375,
+["rules"] = {
+["sidebar"] = {
+"all",
+"tradegoods",
+"consumable",
+"armor",
+"questitem",
+"miscellaneous",
+},
+},
+["point"] = "BOTTOMLEFT",
+["borderColor"] = {
+},
+["color"] = {
+},
+["activeRules"] = {
+},
+["x"] = 95.00001525878906,
+},
+},
+["customRules"] = {
+},
+["color"] = {
+["quiver"] = {
+},
+["account"] = {
+},
+["enchant"] = {
+},
+["soul"] = {
+},
+["reagent"] = {
+},
+["mine"] = {
+},
+["engineer"] = {
+},
+["inscribe"] = {
+},
+["fridge"] = {
+},
+["gem"] = {
+},
+["key"] = {
+},
+["tackle"] = {
+},
+["leather"] = {
+},
+["normal"] = {
+},
+["herb"] = {
+},
+},
+["display"] = {
+},
+["profiles"] = {
+},
+}

@@ -44,8 +44,8 @@ end)
 ---Adds tooltip entries.
 ---@param tooltipInfo TooltipInfo
 function Convert.AddEntries(tooltipInfo)
-	tooltipInfo:AddSettingValueEntry("convertTooltipFormat", "full", "none", private.PopulateFullConvertLines)
-	tooltipInfo:AddSettingValueEntry("convertTooltipFormat", "simple", "none", private.PopulateSimpleConvertLines)
+	tooltipInfo:AddSettingValueEntry("convertTooltipFormat", "full", "none", nil, private.PopulateFullConvertLines)
+	tooltipInfo:AddSettingValueEntry("convertTooltipFormat", "simple", "none", nil, private.PopulateSimpleConvertLines)
 end
 
 

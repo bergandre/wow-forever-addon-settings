@@ -24,24 +24,10 @@ local private = {
 
 OpenFrame:OnModuleLoad(function()
 	if LibTSMService.IsRetail() or LibTSMService.IsForever() then
-		Container.RegisterBankFrameCallback(function(isOpen)
-			if isOpen then
-				private.SetOpenFrame(Container.IsWarbankOpen() and Util.FRAME.CONTAINER.WARBANK or Util.FRAME.CONTAINER.BANK)
-			else
-				private.SetOpenFrame(nil)
-			end
-		end)
+		Container.RegisterBankFrameCallback(private.HandleBankVisible)
 	end
-	DefaultUI.RegisterBankVisibleCallback(function(visible)
-		private.SetOpenFrame(visible and Util.FRAME.CONTAINER.BANK or nil)
-	end)
-	DefaultUI.RegisterAccountBankVisibleCallback(function(visible)
-		if visible then
-			private.SetOpenFrame(Container.IsWarbankOpen() and Util.FRAME.CONTAINER.WARBANK or Util.FRAME.CONTAINER.BANK)
-		else
-			private.SetOpenFrame(nil)
-		end
-	end)
+	DefaultUI.RegisterBankVisibleCallback(private.HandleBankVisible)
+	DefaultUI.RegisterAccountBankVisibleCallback(private.HandleBankVisible)
 	if not LibTSMService.IsVanillaClassic() then
 		DefaultUI.RegisterGuildBankVisibleCallback(function(visible)
 			private.SetOpenFrame(visible and Util.FRAME.GUILD_BANK or nil)
@@ -72,6 +58,14 @@ end
 -- ============================================================================
 -- Private Helper Functions
 -- ============================================================================
+
+function private.HandleBankVisible(visible)
+	if visible then
+		private.SetOpenFrame(Container.IsWarbankOpen() and Util.FRAME.CONTAINER.WARBANK or Util.FRAME.CONTAINER.BANK)
+	else
+		private.SetOpenFrame(nil)
+	end
+end
 
 function private.SetOpenFrame(frame)
 	if private.openFrame == frame then

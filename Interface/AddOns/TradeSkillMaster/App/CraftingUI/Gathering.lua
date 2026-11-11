@@ -53,7 +53,7 @@ local OPEN_TASK_LIST_TEXTS = {
 }
 local INVALID_SOURCES = {}
 do
-	if App.IsRetail() or App.IsForever() then
+	if App.IsRetail() then
 		Table.InsertMultiple(INVALID_SOURCES, "bank")
 	elseif App.IsVanillaClassic() then
 		Table.InsertMultiple(INVALID_SOURCES, "guildBank", "altGuildBank")

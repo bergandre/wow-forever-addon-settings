@@ -154,6 +154,7 @@ function ComboBox.__private:_HandleMenuShownChanged(shown)
 		self._frame:SetFrameStrata("DIALOG")
 	elseif self._closedStrata then
 		self._frame:SetFrameStrata(self._closedStrata)
+		self._frame:SetFrameLevel(self._frame:GetParent():GetFrameLevel() + (self._state.relativeLevel or 1))
 		self._closedStrata = nil
 	end
 end

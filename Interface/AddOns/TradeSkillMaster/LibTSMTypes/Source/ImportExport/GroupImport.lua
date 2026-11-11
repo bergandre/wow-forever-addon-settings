@@ -20,6 +20,7 @@ local private = {
 	encoder = nil,
 	operationsTemp = {},
 	groupsTemp = {},
+	customSourcesTemp = {},
 }
 local MAGIC_STR = "TSM_EXPORT"
 local VERSION = 1
@@ -126,7 +127,7 @@ function GroupImport:GetTotals()
 			end
 		end
 	end
-	wipe(self._customSources)
+	assert(not next(private.customSourcesTemp))
 	local numOperations, numExistingOperations = 0, 0
 	for moduleName, moduleOperations in pairs(self._operations) do
 		assert(not next(private.operationsTemp))
@@ -144,18 +145,19 @@ function GroupImport:GetTotals()
 					numExistingOperations = numExistingOperations + 1
 				end
 				for key in Operation.CustomStringSettingKeyIterator(moduleName) do
-					self:_GetCustomSources(operationSettings[key], self._customSources)
+					self:_GetCustomSources(operationSettings[key], private.customSourcesTemp, false)
 				end
 			end
 		end
 		wipe(private.operationsTemp)
 	end
 	local numExistingCustomSources = 0
-	for name in pairs(self._customSources) do
+	for name in pairs(private.customSourcesTemp) do
 		if self._customSourceExistsFunc(name) then
 			numExistingCustomSources = numExistingCustomSources + 1
 		end
 	end
+	wipe(private.customSourcesTemp)
 	local numItems = 0
 	for _, groupPath in pairs(self._items) do
 		if not self._filteredGroups[groupPath] then
@@ -223,7 +225,7 @@ function GroupImport:Commit(moveExistingItems, includeOperations, replaceOperati
 			wipe(private.operationsTemp)
 		end
 		if not replaceOperations then
-			-- Remove existing operations and custom sources from the import context
+			-- Remove existing operations from the import context
 			for moduleName, moduleOperations in pairs(self._operations) do
 				for operationName in pairs(moduleOperations) do
 					if Operation.Exists(moduleName, operationName) then
@@ -234,30 +236,20 @@ function GroupImport:Commit(moveExistingItems, includeOperations, replaceOperati
 					self._operations[moduleName] = nil
 				end
 			end
-			for name in pairs(self._customSources) do
-				if self._customSourceExistsFunc(name) then
-					self._customSources[name] = nil
-				end
-			end
 		end
 		if next(self._customSources) then
-			-- Regenerate the list of custom sources in case some operations were filtered out
-			wipe(self._customSources)
+			-- Create the custom sources
+			assert(not next(private.customSourcesTemp))
 			for moduleName, moduleOperations in pairs(self._operations) do
 				for _, operationSettings in pairs(moduleOperations) do
 					for key in Operation.CustomStringSettingKeyIterator(moduleName) do
-						self:_GetCustomSources(operationSettings[key], self._customSources)
+						self:_GetCustomSources(operationSettings[key], private.customSourcesTemp, not replaceOperations)
 					end
 				end
 			end
-			-- Create the custom sources
-			numCustomSources = Table.Count(self._customSources)
-			if not replaceOperations then
-				for name in pairs(self._customSources) do
-					assert(not CustomString.IsCustomSourceRegistered(name))
-				end
-			end
-			CustomString.ImportCustomSources(self._customSources)
+			numCustomSources = Table.Count(private.customSourcesTemp)
+			CustomString.ImportCustomSources(private.customSourcesTemp)
+			wipe(private.customSourcesTemp)
 		end
 		-- Create the operations
 		for _, moduleOperations in pairs(self._operations) do
@@ -306,11 +298,11 @@ end
 -- Private Class Methods
 -- ============================================================================
 
-function GroupImport.__private:_GetCustomSources(str, result)
-	for _, name, customSourceStr in CustomString.DependantCustomSourceIterator(tostring(str)) do
-		if not result[name] then
+function GroupImport.__private:_GetCustomSources(str, result, excludeExisting)
+	for _, name, customSourceStr in CustomString.DependantCustomSourceInTableIterator(tostring(str), self._customSources) do
+		if not result[name] and (not excludeExisting or not self._customSourceExistsFunc(name)) then
 			result[name] = customSourceStr
-			self:_GetCustomSources(customSourceStr, result)
+			self:_GetCustomSources(customSourceStr, result, excludeExisting)
 		end
 	end
 end
@@ -396,9 +388,12 @@ function GroupImport.__private:_DecodeNewImport(str, dedupGroup)
 		if type(name) ~= "string" or name == "" or gsub(name, "([a-z]+)", "") ~= "" then
 			Log.Err("Invalid name (%s)", tostring(name))
 			return false
-		elseif type(str) ~= "string" then
+		elseif type(customSourceStr) ~= "string" then
 			Log.Err("Invalid str (%s)", tostring(customSourceStr))
 			return false
+		elseif CustomString.IsSourceRegistered(name) or CustomString.IsReservedWord(name) then
+			Log.Warn("Ignoring custom source with reserved name (%s)", name)
+			customSources[name] = nil
 		end
 	end
 

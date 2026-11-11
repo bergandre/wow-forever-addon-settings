@@ -46,8 +46,8 @@ end)
 ---Adds tooltip entries.
 ---@param tooltipInfo TooltipInfo
 function Destroy.AddEntries(tooltipInfo)
-	tooltipInfo:AddSettingValueEntry("destroyTooltipFormat", "full", "none", private.PopulateFullDestroyLines)
-	tooltipInfo:AddSettingValueEntry("destroyTooltipFormat", "simple", "none", private.PopulateSimpleDestroyLines)
+	tooltipInfo:AddSettingValueEntry("destroyTooltipFormat", "full", "none", nil, private.PopulateFullDestroyLines)
+	tooltipInfo:AddSettingValueEntry("destroyTooltipFormat", "simple", "none", nil, private.PopulateSimpleDestroyLines)
 end
 
 

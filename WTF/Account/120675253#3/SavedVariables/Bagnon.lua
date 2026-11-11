@@ -17,9 +17,10 @@ Bagnon_Sets = {
 },
 ["color"] = {
 },
+["x"] = -50.00047198142534,
 ["activeRules"] = {
 },
-["x"] = -50.00108233298784,
+["showBags"] = true,
 },
 ["vault"] = {
 ["color"] = {
@@ -58,7 +59,7 @@ Bagnon_Sets = {
 },
 },
 ["bank"] = {
-["y"] = 502.2691345214844,
+["y"] = -466.2693398379731,
 ["rules"] = {
 ["sidebar"] = {
 "all",
@@ -69,11 +70,12 @@ Bagnon_Sets = {
 "miscellaneous",
 },
 },
-["point"] = "BOTTOMLEFT",
+["point"] = "TOPLEFT",
 ["borderColor"] = {
 },
 ["color"] = {
 },
+["showBags"] = true,
 ["activeRules"] = {
 },
 ["x"] = 95,

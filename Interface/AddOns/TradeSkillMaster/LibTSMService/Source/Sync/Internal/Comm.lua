@@ -13,6 +13,7 @@ local Table = LibTSMService:From("LibTSMUtil"):Include("Lua.Table")
 local Log = LibTSMService:From("LibTSMUtil"):Include("Util.Log")
 local DelayTimer = LibTSMService:From("LibTSMWoW"):IncludeClassType("DelayTimer")
 local CombatLockdown = LibTSMService:From("LibTSMWoW"):Include("Service.CombatLockdown")
+local ChatEvent = LibTSMService:From("LibTSMWoW"):Include("Service.ChatEvent")
 local ClientInfo = LibTSMService:From("LibTSMWoW"):Include("Util.ClientInfo")
 local AceComm = LibStub("AceComm-3.0")
 local private = {
@@ -26,8 +27,10 @@ local private = {
 	queuedPacket = {},
 	queuedSourceCharacter = {},
 	queueTimer = nil,
+	lastSendTime = {},
 	versionStr = Constants.VERSION.."_"..ClientInfo.GetLocale(),
 }
+local PLAYER_NOT_FOUND_WINDOW = 10
 
 
 
@@ -57,6 +60,9 @@ function Comm.Load(localAccountKey, svCopyError, ownerAccountKeyFunc)
 	private.localAccountKey = localAccountKey
 	private.svCopyError = svCopyError
 	private.ownerAccountKeyFunc = ownerAccountKeyFunc
+	if LibTSMService.IsForever() then
+		ChatEvent.SetPlayerNotFoundFilter(private.IsRecentTarget)
+	end
 end
 
 ---Sets the function to call to force a character to be disconnected.
@@ -86,6 +92,7 @@ function Comm.SendData(dataType, targetCharacter, data)
 	local priority = (dataType == Constants.DATA_TYPES.HEARTBEAT or dataType == Constants.DATA_TYPES.RPC_PREAMBLE) and "ALERT" or nil
 	-- Send the message
 	AceComm:SendCommMessage("TSMSyncData", compressed, "WHISPER", targetCharacter, priority)
+	private.lastSendTime[strlower(targetCharacter)] = LibTSMService.GetTime()
 	return #compressed
 end
 
@@ -103,6 +110,11 @@ end
 -- ============================================================================
 -- Private Helper Functions
 -- ============================================================================
+
+function private.IsRecentTarget(character)
+	local sendTime = private.lastSendTime[strlower(character)]
+	return sendTime and LibTSMService.GetTime() - sendTime <= PLAYER_NOT_FOUND_WINDOW or false
+end
 
 function private.OnCommReceived(_, packet, _, sourceCharacter)
 	-- Delay the processing to make sure it happens within a debuggable context (this function is called via pcall)

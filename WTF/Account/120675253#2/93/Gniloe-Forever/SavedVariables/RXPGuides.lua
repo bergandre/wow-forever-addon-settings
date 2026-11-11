@@ -9,6 +9,17 @@ RXPCData = {
 },
 ["questNameCache"] = {
 },
+["guideDisabled"] = {
+[0] = 481,
+},
+["flightPaths"] = {
+},
+["guideProgress"] = {
+},
+["stepSkip"] = {
+},
+["discardPile"] = {
+},
 ["guideMetaData"] = {
 ["RestedXP Forever Guide (H)||50-51 Stranglethorn/Blasted Lands"] = {
 ["guideId"] = 2342917451,
@@ -1763,17 +1774,6 @@ RXPCData = {
 ["displayname"] = "6-10 Durotar",
 },
 },
-["flightPaths"] = {
-},
-["guideProgress"] = {
-},
-["stepSkip"] = {
-},
-["discardPile"] = {
-},
-["guideDisabled"] = {
-[0] = 481,
-},
 }
 RXPCTrackingData = {
 ["profileKeys"] = {
@@ -1798,7 +1798,6 @@ RXPCTrackingData = {
 ["trackedGuid"] = "Player-6938-009964C9",
 },
 ["Gniloe - PvP"] = {
-["trackedGuid"] = "Player-6938-009964C9",
 ["levels"] = {
 {
 ["groupExperience"] = 0,
@@ -1810,9 +1809,9 @@ RXPCTrackingData = {
 ["monthDay"] = 5,
 ["weekday"] = 5,
 ["month"] = 11,
-["year"] = 2026,
-["hour"] = 9,
 ["minute"] = 42,
+["hour"] = 9,
+["year"] = 2026,
 },
 ["started"] = 0,
 },
@@ -1820,6 +1819,7 @@ RXPCTrackingData = {
 },
 },
 },
+["trackedGuid"] = "Player-6938-009964C9",
 },
 },
 }
@@ -1834,24 +1834,24 @@ RXPCComms = {
 ["Gniloe - PvP"] = {
 ["players"] = {
 ["Invited Friend"] = {
-["level"] = 1,
-["isRxp"] = true,
+["xpPercentage"] = 25,
+["class"] = "SHAMAN",
 ["version"] = 1,
 ["lastSeen"] = 37784.339,
 ["timePlayed"] = 0,
-["class"] = "SHAMAN",
+["level"] = 1,
 ["xp"] = 0,
-["xpPercentage"] = 25,
+["isRxp"] = true,
 },
 ["Karums Warrior"] = {
-["level"] = 7,
-["isRxp"] = true,
+["xpPercentage"] = 56,
+["class"] = "WARRIOR",
 ["version"] = 1,
 ["lastSeen"] = 37784.339,
 ["timePlayed"] = 0,
-["class"] = "WARRIOR",
+["level"] = 7,
 ["xp"] = 0,
-["xpPercentage"] = 56,
+["isRxp"] = true,
 },
 },
 },

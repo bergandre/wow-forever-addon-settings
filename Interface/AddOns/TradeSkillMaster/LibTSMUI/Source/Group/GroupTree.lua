@@ -21,7 +21,7 @@ local private = {
 	},
 }
 local FLAG_WIDTH = 6
-local FLAG_HEIGHT = 20
+local FLAG_HEIGHT = 16
 local FLAG_SPACING = 4
 local CONTENT_SPACING = 8
 local INDENT_WIDTH = 13
@@ -39,7 +39,7 @@ local EXPANDER_TEXTURE_COLLAPSED = "iconPack.14x14/Caret/Right"
 -- ============================================================================
 
 local GroupTree = ComponentRegistry.Define("GroupTree", "List", "ABSTRACT")
-GroupTree.ROW_HEIGHT = 28
+GroupTree.ROW_HEIGHT = 24
 
 
 
@@ -208,7 +208,7 @@ function GroupTree.__protected:_HandleRowAcquired(row)
 	-- Text
 	local text = row:AddText("text")
 	text:SetHeight(self.ROW_HEIGHT)
-	text:TSMSetFont("BODY_BODY1")
+	text:TSMSetFont("BODY_SMALL")
 	text:SetJustifyH("LEFT")
 
 	-- Layout the elements

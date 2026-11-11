@@ -2,9 +2,12 @@ local LibTSMService = select(2, ...).LibTSMService
 local CraftingOrders = LibTSMService:InitInternal("Profession.CraftingOrders")
 local Database = LibTSMService:From("LibTSMDatabase"):Include("Database")
 local Event = LibTSMService:From("LibTSMWoW"):Include("Service.Event")
+local TradeSkill = LibTSMService:From("LibTSMWoW"):Include("API.TradeSkill")
+local Table = LibTSMService:From("LibTSMUtil"):Include("Lua.Table")
 local private = {
 	activeScan = nil,
 	request = nil,
+	restoreSkillLineIds = {},
 }
 local PROFESSION_ID_EXPANSION_SKILL = {
 	[1] = {2872, 2907}, -- Blacksmithing
@@ -65,6 +68,7 @@ CraftingOrders:OnModuleLoad(function()
 			callback = C_FunctionContainers.CreateCallback(function() end),
 		}
 		Event.Register("TRADE_SKILL_DATA_SOURCE_CHANGED", private.ScanCraftingOrders)
+		Event.Register("TRADE_SKILL_CLOSE", private.OnTradeSkillClose)
 		Event.Register("CRAFTINGORDERS_CAN_REQUEST", private.OnCanRequest)
 		Event.Register("CRAFTINGORDERS_UPDATE_ORDER_COUNT", private.OnUpdateOrderCount)
 	end
@@ -75,6 +79,13 @@ end)
 -- ============================================================================
 -- Private Helper Functions
 -- ============================================================================
+
+function private.OnTradeSkillClose()
+	local scan = private.activeScan
+	if scan then
+		private.StopScan(scan)
+	end
+end
 
 function private.OnCanRequest()
 	local scan = private.activeScan
@@ -114,27 +125,49 @@ function private.CommitPendingOrders(scan)
 end
 
 function private.ScanCraftingOrders()
-	local professionInfo = C_TradeSkillUI.GetChildProfessionInfo()
-	if not professionInfo.profession or not C_TradeSkillUI.IsNearProfessionSpellFocus(professionInfo.profession) then
+	local profession = nil
+	if TradeSkill.GetType() == TradeSkill.TYPE.PLAYER then
+		profession = C_TradeSkillUI.GetChildProfessionInfo().profession
+	end
+	local activeScan = private.activeScan
+	if activeScan then
+		private.StopScan(activeScan)
+	end
+	if not profession then
 		return
 	end
-	local skillLineIds = PROFESSION_ID_EXPANSION_SKILL[professionInfo.profession]
-	if not skillLineIds then
+	local restoreSkillLineId = private.restoreSkillLineIds[profession]
+	if restoreSkillLineId then
+		private.restoreSkillLineIds[profession] = nil
+		private.SetSkillLine(restoreSkillLineId)
+	end
+	local expansionSkillLineIds = PROFESSION_ID_EXPANSION_SKILL[profession]
+	if not expansionSkillLineIds or not C_TradeSkillUI.IsNearProfessionSpellFocus(profession) then
 		return
 	end
-	private.orderDB:NewAutoReleaseQuery():Equal("profession", professionInfo.profession):Delete()
-	private.rewardDB:NewAutoReleaseQuery():Equal("profession", professionInfo.profession):Delete()
+	private.orderDB:NewAutoReleaseQuery():Equal("profession", profession):Delete()
+	private.rewardDB:NewAutoReleaseQuery():Equal("profession", profession):Delete()
 	local learnedSkillLineIds = {}
 	for _, childInfo in ipairs(C_TradeSkillUI.GetChildProfessionInfos()) do
 		if childInfo.skillLevel > 0 then
 			learnedSkillLineIds[childInfo.professionID] = true
 		end
 	end
+	local skillLineIds = {}
+	for _, skillLineId in ipairs(expansionSkillLineIds) do
+		if learnedSkillLineIds[skillLineId] then
+			tinsert(skillLineIds, skillLineId)
+		end
+	end
+	local selectedSkillLineId = C_TradeSkillUI.GetChildProfessionInfo().professionID
+	if Table.RemoveByValue(skillLineIds, selectedSkillLineId) > 0 then
+		tinsert(skillLineIds, selectedSkillLineId)
+	end
 	private.activeScan = {
-		profession = professionInfo.profession,
-		learnedSkillLineIds = learnedSkillLineIds,
+		profession = profession,
+		selectedSkillLineId = selectedSkillLineId,
+		requestedSkillLineId = nil,
 		skillLineIds = skillLineIds,
-		index = 1,
 		awaitingResponse = false,
 	}
 	if ProfessionsFrame:GetTab() ~= ProfessionsFrame.craftingOrdersTabID then
@@ -144,20 +177,30 @@ end
 
 function private.RequestNextSkillLine(scan)
 	private.CommitPendingOrders(scan)
-	local skillLineId = scan.skillLineIds[scan.index]
-	while skillLineId and not scan.learnedSkillLineIds[skillLineId] do
-		scan.index = scan.index + 1
-		skillLineId = scan.skillLineIds[scan.index]
-	end
+	local skillLineId = tremove(scan.skillLineIds, 1)
 	if not skillLineId then
 		private.activeScan = nil
+		private.SetSkillLine(scan.selectedSkillLineId)
 		return
 	end
-	scan.index = scan.index + 1
-	C_TradeSkillUI.SetProfessionChildSkillLineID(skillLineId)
-	local professionInfo = Professions.GetProfessionInfo()
-	ProfessionsFrame:SetProfessionInfo(professionInfo, false)
+	scan.requestedSkillLineId = skillLineId
+	private.SetSkillLine(skillLineId)
 	private.request.profession = scan.profession
 	scan.awaitingResponse = true
 	C_CraftingOrders.RequestCrafterOrders(private.request)
+end
+
+function private.StopScan(scan)
+	private.activeScan = nil
+	if scan.requestedSkillLineId and scan.requestedSkillLineId ~= scan.selectedSkillLineId then
+		private.restoreSkillLineIds[scan.profession] = scan.selectedSkillLineId
+	end
+end
+
+function private.SetSkillLine(skillLineId)
+	if C_TradeSkillUI.GetChildProfessionInfo().professionID == skillLineId then
+		return
+	end
+	C_TradeSkillUI.SetProfessionChildSkillLineID(skillLineId)
+	ProfessionsFrame:SetProfessionInfo(Professions.GetProfessionInfo(), false)
 end

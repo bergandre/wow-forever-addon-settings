@@ -29,6 +29,9 @@ local private = {
 	auctionDBData = nil, ---@type AppAuctionDBData?
 	shoppingData = nil,
 	altRealms = {},
+	groupImports = {}, ---@type AppGroupImport[]
+	groupImportsById = {}, ---@type table<string,AppGroupImport>
+	groupImportResults = nil, ---@type table<string,AppGroupImportResultInfo>!
 }
 local DATA_STATUS = EnumType.New("APP_HELPER_DATA_STATUS", {
 	APP_HELPER_NOT_ENABLED = EnumType.NewValue(),
@@ -53,7 +56,12 @@ local AUCTIONDB_COMMODITY_TAGS = {
 	AUCTIONDB_COMMODITY_SCAN_STAT = true,
 	AUCTIONDB_COMMODITY_HISTORICAL = true,
 }
+local GROUP_IMPORT_RESULTS = {
+	IMPORTED = true,
+	DISCARDED = true,
+}
 local MAX_ANALYTICS_AGE = 14 * 24 * 60 * 60 -- 2 weeks
+local MIN_GROUP_IMPORT_RESULT_AGE = 7 * 24 * 60 * 60
 local MAX_FULL_SCAN_AGE = 12 * 60 * 60 -- 12 hours
 local APP_DB_GLOBAL_NAME = "TradeSkillMaster_AppHelperDB"
 
@@ -77,6 +85,19 @@ local APP_DB_GLOBAL_NAME = "TradeSkillMaster_AppHelperDB"
 ---@field region table<string,string>
 ---@field commodity table<string,string>
 ---@field altRealm table<string,string>
+
+---@class AppGroupImport
+---@field id string
+---@field name string
+---@field author string
+---@field sentAt number
+---@field importString string
+
+---@alias AppGroupImportResult "IMPORTED"|"DISCARDED"
+
+---@class AppGroupImportResultInfo
+---@field result AppGroupImportResult
+---@field time number
 
 
 
@@ -146,6 +167,8 @@ function TSM_APPHELPER_LOAD_DATA(tag, realmOrRegion, data)
 		end
 		private.shoppingData = data
 		Log.Info("Got Shopping data")
+	elseif tag == "GROUP_IMPORTS" then
+		private.LoadGroupImports(data)
 	else
 		Log.Err("Unknown AppHelper data: %s, %s", strsub(tag, 1, 25), strsub(realmOrRegion, 1, 25))
 	end
@@ -203,9 +226,11 @@ end)
 
 ---Configures the AppHelper code.
 ---@param altAuctionDBRealm string The alternate auctionDB realm to load data for
+---@param groupImportResults table<string,AppGroupImportResultInfo> The table to store group import results in
 ---@param dataLoadCallback fun(status: EnumValue) A callback for when loading of AppHelper data is complete
-function AppHelper.Configure(altAuctionDBRealm, dataLoadCallback)
+function AppHelper.Configure(altAuctionDBRealm, groupImportResults, dataLoadCallback)
 	private.altAuctionDBRealm = altAuctionDBRealm
+	private.groupImportResults = groupImportResults
 	private.dataLoadCallback = dataLoadCallback
 end
 
@@ -253,6 +278,36 @@ function AppHelper.GetAndClearShoppingData()
 	return data
 end
 
+---Gets the group imports sent from the website which haven't been imported or discarded yet.
+---@return AppGroupImport[]
+function AppHelper.GetPendingGroupImports()
+	local result = {}
+	for _, groupImport in ipairs(private.groupImports) do
+		if not private.groupImportResults[groupImport.id] then
+			tinsert(result, groupImport)
+		end
+	end
+	return result
+end
+
+---Gets a group import sent from the website by its id.
+---@param id string The id of the group import
+---@return AppGroupImport?
+function AppHelper.GetGroupImport(id)
+	return private.groupImportsById[id]
+end
+
+---Stores the result of a group import sent from the website so it isn't offered again.
+---@param id string The id of the group import
+---@param result AppGroupImportResult The result
+function AppHelper.SetGroupImportResult(id, result)
+	assert(private.groupImportsById[id] and GROUP_IMPORT_RESULTS[result])
+	private.groupImportResults[id] = {
+		result = result,
+		time = LibTSMService.GetTime(),
+	}
+end
+
 ---Iterates over the alt realm names.
 ---@return fun(): string @Iterator with fields: `realm`
 ---@return table
@@ -271,6 +326,7 @@ function private.HandleLogin()
 	TSM_APPHELPER_LOAD_DATA = function(tag)
 		Log.Err("Got late app data: %s", tag)
 	end
+	private.PruneGroupImportResults()
 
 	if not Addon.IsInstalled("TradeSkillMaster_AppHelper") then
 		return true
@@ -298,6 +354,50 @@ function private.HandleLogin()
 
 	private.dataLoadCallback(isAppRunning and DATA_STATUS.LOADED or DATA_STATUS.DATA_OLD)
 	return true
+end
+
+function private.LoadGroupImports(data)
+	local func = loadstring(data)
+	local groupImports = func and func()
+	if type(groupImports) ~= "table" then
+		Log.Err("Invalid group imports data")
+		return
+	end
+	for _, groupImport in ipairs(groupImports) do
+		if not private.IsValidGroupImport(groupImport) then
+			Log.Err("Invalid group import")
+		elseif private.groupImportsById[groupImport.id] then
+			Log.Err("Duplicate group import (%s)", groupImport.id)
+		else
+			private.groupImportsById[groupImport.id] = groupImport
+			tinsert(private.groupImports, groupImport)
+		end
+	end
+	Log.Info("Got %d group imports", #private.groupImports)
+end
+
+function private.IsValidGroupImport(groupImport)
+	if type(groupImport) ~= "table" then
+		return false
+	elseif type(groupImport.id) ~= "string" or groupImport.id == "" then
+		return false
+	elseif type(groupImport.name) ~= "string" or type(groupImport.author) ~= "string" then
+		return false
+	elseif type(groupImport.sentAt) ~= "number" then
+		return false
+	elseif type(groupImport.importString) ~= "string" or groupImport.importString == "" then
+		return false
+	end
+	return true
+end
+
+function private.PruneGroupImportResults()
+	local minTime = LibTSMService.GetTime() - MIN_GROUP_IMPORT_RESULT_AGE
+	for id, info in pairs(private.groupImportResults) do
+		if info.time < minTime and not private.groupImportsById[id] then
+			private.groupImportResults[id] = nil
+		end
+	end
 end
 
 function private.StoreAuctionDBData(tbl, tag, data, label)
@@ -340,6 +440,7 @@ function private.SaveAppData()
 	private.SaveBlackMarket(appDB)
 	private.SaveAnalytics(appDB)
 	private.SaveFullScan(appDB)
+	private.SaveGroupImports(appDB)
 end
 
 function private.SaveBlackMarket(appDB)
@@ -394,4 +495,11 @@ function private.SaveFullScan(appDB)
 		data = data,
 		scanTime = scanTime,
 	})
+end
+
+function private.SaveGroupImports(appDB)
+	appDB.groupImports = {}
+	for id, info in pairs(private.groupImportResults) do
+		appDB.groupImports[id] = info.result
+	end
 end

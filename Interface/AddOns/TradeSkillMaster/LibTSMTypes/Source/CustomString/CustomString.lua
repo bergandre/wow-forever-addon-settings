@@ -259,6 +259,26 @@ function CustomString.DependantCustomSourceIterator(text)
 	return TempTable.Iterator(result, 2)
 end
 
+---Iterates over the custom sources from a table which a string depends on, whether or not they are registered.
+---@param text string The custom string
+---@param customSources table<string,string> The custom sources to check
+---@return fun():number, string, string @Iterator with fields: `index`, `name`, `customSourceStr`
+---@return table
+---@return number
+function CustomString.DependantCustomSourceInTableIterator(text, customSources)
+	local result = TempTable.Acquire()
+	local obj = private.GetParsedObject(text)
+	if obj then
+		for name, customSourceStr in pairs(customSources) do
+			if obj:IsDependantOnSource(name) then
+				tinsert(result, name)
+				tinsert(result, customSourceStr)
+			end
+		end
+	end
+	return TempTable.Iterator(result, 2)
+end
+
 ---Returns whether or not a custom string depends on the specified source.
 ---@param text string The custom string
 ---@param key string The source key
@@ -291,12 +311,20 @@ function private.Sanitize(text)
 	return result
 end
 
-function private.GetObject(text)
+function private.GetParsedObject(text)
 	text = private.sanitizeMapReader[text]
 	private.objects[text] = private.objects[text] or Object.Create(text)
 	local obj = private.objects[text]
 	local isValid, errType, errTokenStr = obj:Validate()
 	if not isValid then
+		return nil, errType, errTokenStr
+	end
+	return obj, nil, nil
+end
+
+function private.GetObject(text)
+	local obj, errType, errTokenStr = private.GetParsedObject(text)
+	if not obj then
 		return nil, errType, errTokenStr
 	end
 	errType, errTokenStr = Sources.ValidateObject(obj)

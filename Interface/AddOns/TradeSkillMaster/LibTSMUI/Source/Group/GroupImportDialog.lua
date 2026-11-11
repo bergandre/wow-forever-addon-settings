@@ -11,9 +11,15 @@ local UIElements = LibTSMUI:Include("UIElements")
 local CustomString = LibTSMUI:From("LibTSMTypes"):Include("CustomString")
 local Group = LibTSMUI:From("LibTSMTypes"):Include("Group")
 local GroupImport = LibTSMUI:From("LibTSMTypes"):IncludeClassType("GroupImport")
+local TimeFormat = LibTSMUI:From("LibTSMWoW"):Include("UI.TimeFormat")
+local AppHelper = LibTSMUI:From("LibTSMService"):Include("AppHelper")
 local ChatMessage = LibTSMUI:From("LibTSMService"):Include("UI.ChatMessage")
+local Theme = LibTSMUI:From("LibTSMService"):Include("UI.Theme")
 local DEFAULT_IMPORT_GROUP_TREE_CONTEXT = { unselected = {}, collapsed = {} }
 local IMPORT_EXPORT_IGNORED_OPERATION_TYPES = { "Mailing" }
+local APP_GROUP_IMPORT_ROW_HEIGHT = 24
+local APP_GROUP_IMPORT_ROW_SPACING = 8
+local MAX_VISIBLE_APP_GROUP_IMPORTS = 3
 local private = {}
 local GROUPS_URL = nil
 do
@@ -46,7 +52,9 @@ GroupImportDialog._STATE_SCHEMA = GroupImportDialog._STATE_SCHEMA:Extend("GroupI
 	:AddNumberField("numOperations", 0)
 	:AddNumberField("numExistingOperations", 0)
 	:AddNumberField("numExistingCustomSources", 0)
+	:AddOptionalStringField("appGroupImportId")
 	:Commit()
+GroupImportDialog:_AddActionScripts("OnGroupImported")
 
 
 
@@ -92,6 +100,12 @@ function GroupImportDialog:Configure(db)
 	return self
 end
 
+---Shows the summary for a group import sent from the website (must be called after the dialog is shown).
+---@param id string The id of the group import
+function GroupImportDialog:ReviewAppGroupImport(id)
+	self._childManager:ProcessAction("ACTION_REVIEW_APP_GROUP_IMPORT", id)
+end
+
 
 
 -- ============================================================================
@@ -104,10 +118,23 @@ function GroupImportDialog.__private:_ActionHandler(manager, state, action, ...)
 	if action == "ACTION_CLOSE_DIALOG" then
 		self:GetBaseElement():HideDialog()
 	elseif action == "ACTION_HANDLE_VALUE_CHANGED" then
-		local value = state.input:GetValue()
-		local success, numInvalidItems, numChangedOperations = self._importObj:Process(value)
+		return manager:ProcessAction("ACTION_PROCESS_IMPORT_STRING", state.input:GetValue())
+	elseif action == "ACTION_REVIEW_APP_GROUP_IMPORT" then
+		local id = ...
+		local appGroupImport = AppHelper.GetGroupImport(id)
+		assert(appGroupImport)
+		state.appGroupImportId = id
+		return manager:ProcessAction("ACTION_PROCESS_IMPORT_STRING", appGroupImport.importString)
+	elseif action == "ACTION_PROCESS_IMPORT_STRING" then
+		local importString = ...
+		local success, numInvalidItems, numChangedOperations = self._importObj:Process(importString)
 		if not success then
-			ChatMessage.PrintUser(L["The pasted value was not valid. Ensure you are pasting the entire import string."])
+			if state.appGroupImportId then
+				AppHelper.SetGroupImportResult(state.appGroupImportId, "DISCARDED")
+				ChatMessage.PrintUser(L["The group sent from tradeskillmaster.com could not be read and was discarded."])
+			else
+				ChatMessage.PrintUser(L["The pasted value was not valid. Ensure you are pasting the entire import string."])
+			end
 			return manager:ProcessAction("ACTION_CLOSE_DIALOG")
 		end
 		if numInvalidItems > 0 then
@@ -153,6 +180,14 @@ function GroupImportDialog.__private:_ActionHandler(manager, state, action, ...)
 	elseif action == "ACTION_COMMIT" then
 		local groupName, numItems, numOperations, numCustomSources = self._importObj:Commit(state.moveItems, state.includeOperations, state.replaceOperations)
 		ChatMessage.PrintfUser(L["Imported group (%s) with %d items, %d operations, and %d custom sources."], groupName, numItems, numOperations, numCustomSources)
+		if state.appGroupImportId then
+			AppHelper.SetGroupImportResult(state.appGroupImportId, "IMPORTED")
+		end
+		self:_SendActionScript("OnGroupImported", groupName)
+		return manager:ProcessAction("ACTION_CLOSE_DIALOG")
+	elseif action == "ACTION_DISCARD" then
+		assert(state.appGroupImportId)
+		AppHelper.SetGroupImportResult(state.appGroupImportId, "DISCARDED")
 		return manager:ProcessAction("ACTION_CLOSE_DIALOG")
 	else
 		error("Unknown action: "..tostring(action))
@@ -161,7 +196,10 @@ end
 
 function GroupImportDialog.__private:_GetViewContentFrame(_, path)
 	if path == "input" then
-		self:SetSize(658, 250)
+		local appGroupImports = AppHelper.GetPendingGroupImports()
+		local numVisibleAppGroupImports = min(#appGroupImports, MAX_VISIBLE_APP_GROUP_IMPORTS)
+		local appGroupImportsHeight = numVisibleAppGroupImports * (APP_GROUP_IMPORT_ROW_HEIGHT + APP_GROUP_IMPORT_ROW_SPACING) - APP_GROUP_IMPORT_ROW_SPACING
+		self:SetSize(658, 250 + (#appGroupImports > 0 and (40 + appGroupImportsHeight) or 0))
 		self:SetPadding(12)
 		local frame = nil
 		for _ in self._state:WithAutoStorePaused() do
@@ -191,6 +229,7 @@ function GroupImportDialog.__private:_GetViewContentFrame(_, path)
 					:SetFont("BODY_XSMALL")
 					:SetText(format(L["You can import groups by pasting an import string into the box below. Group import strings can be found at: %s"], GROUPS_URL))
 				)
+				:AddChildrenWithFunction(private.AddAppGroupImports, appGroupImports, appGroupImportsHeight)
 				:AddChild(UIElements.New("Text", "text")
 					:SetHeight(20)
 					:SetMargin(0, 0, 0, 8)
@@ -207,7 +246,8 @@ function GroupImportDialog.__private:_GetViewContentFrame(_, path)
 		end
 		return frame
 	elseif path == "summary" then
-		self:SetSize(612, 437)
+		local appGroupImport = self._state.appGroupImportId and AppHelper.GetGroupImport(self._state.appGroupImportId)
+		self:SetSize(612, appGroupImport and 457 or 437)
 		self:SetPadding(8)
 		local frame = nil
 		for _ in self._state:WithAutoStorePaused() do
@@ -216,7 +256,7 @@ function GroupImportDialog.__private:_GetViewContentFrame(_, path)
 				:AddChild(UIElements.New("BaseFrame", "header")
 					:SetLayout("HORIZONTAL")
 					:SetHeight(24)
-					:SetMargin(0, 0, -4, 16)
+					:SetMargin(0, 0, -4, appGroupImport and 4 or 16)
 					:AddChild(UIElements.New("Spacer", "spacer")
 						:SetWidth(20)
 					)
@@ -230,6 +270,13 @@ function GroupImportDialog.__private:_GetViewContentFrame(_, path)
 						:SetBackgroundAndSize("iconPack.24x24/Close/Default")
 						:SetAction("OnClick", "ACTION_CLOSE_DIALOG")
 					)
+				)
+				:AddChildIf(appGroupImport ~= nil, UIElements.New("Text", "source")
+					:SetHeight(20)
+					:SetMargin(0, 0, 0, 12)
+					:SetFont("BODY_XSMALL")
+					:SetJustifyH("CENTER")
+					:SetText(appGroupImport and private.GetAppGroupImportSourceText(appGroupImport) or "")
 				)
 				:AddChild(UIElements.New("BaseFrame", "nav")
 					:SetLayout("HORIZONTAL")
@@ -308,9 +355,18 @@ function GroupImportDialog.__private:_GetViewContentFrame(_, path)
 					)
 					:AddChild(UIElements.New("Spacer", "spacer"))
 				)
-				:AddChild(UIElements.New("MediumPrimaryActionButton", "btn")
-					:SetText(L["Import"])
-					:SetAction("OnClick", "ACTION_COMMIT")
+				:AddChild(UIElements.New("BaseFrame", "buttons")
+					:SetLayout("HORIZONTAL")
+					:SetHeight(28)
+					:AddChild(UIElements.New("MediumPrimaryActionButton", "btn")
+						:SetText(L["Import"])
+						:SetAction("OnClick", "ACTION_COMMIT")
+					)
+					:AddChildIf(appGroupImport ~= nil, UIElements.New("MediumSecondaryActionButton", "discardBtn")
+						:SetMargin(8, 0, 0, 0)
+						:SetText(L["Discard"])
+						:SetAction("OnClick", "ACTION_DISCARD")
+					)
 				)
 		end
 		return frame
@@ -329,6 +385,41 @@ end
 -- ============================================================================
 -- Private Helper Functions
 -- ============================================================================
+
+function private.AddAppGroupImports(frame, appGroupImports, height)
+	if #appGroupImports == 0 then
+		return
+	end
+	frame:AddChild(UIElements.New("Text", "appGroupImportsText")
+		:SetHeight(20)
+		:SetMargin(0, 0, 0, 8)
+		:SetFont("BODY_SMALL_SEMIBOLD")
+		:SetText(L["Sent from tradeskillmaster.com"])
+	)
+	local list = UIElements.New("BaseScrollFrame", "appGroupImports")
+		:SetHeight(height)
+		:SetMargin(0, 0, 0, 12)
+		:SetPadding(0, #appGroupImports > MAX_VISIBLE_APP_GROUP_IMPORTS and (Theme.GetScrollbarWidth() + Theme.GetScrollbarMargin() * 2) or 0, 0, 0)
+	for i, appGroupImport in ipairs(appGroupImports) do
+		local groupText = Theme.GetGroupColor(1):ColorText(appGroupImport.name)
+		list:AddChild(UIElements.New("AppGroupImportRow", "row"..i)
+			:SetHeight(APP_GROUP_IMPORT_ROW_HEIGHT)
+			:SetMargin(0, 0, i > 1 and APP_GROUP_IMPORT_ROW_SPACING or 0, 0)
+			:Configure(appGroupImport.id, format(L["%s by %s, sent %s ago"], groupText, appGroupImport.author, private.GetSentDuration(appGroupImport)))
+			:SetAction("OnReview", "ACTION_REVIEW_APP_GROUP_IMPORT")
+		)
+	end
+	frame:AddChild(list)
+end
+
+function private.GetAppGroupImportSourceText(appGroupImport)
+	local siteText = Theme.GetColor("accent/main"):ColorText("tradeskillmaster.com")
+	return format(L["From %s, sent %s ago - %s by %s"], siteText, private.GetSentDuration(appGroupImport), appGroupImport.name, appGroupImport.author)
+end
+
+function private.GetSentDuration(appGroupImport)
+	return TimeFormat.Duration(max(LibTSMUI.GetTime() - appGroupImport.sentAt, 1))
+end
 
 function private.StateToReplaceOperationsCheckboxLabel(numExistingOperations, numExistingCustomSources)
 	if numExistingCustomSources > 0 then

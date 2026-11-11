@@ -4,6 +4,221 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) ; ve
 [SemVer](https://semver.org/lang/fr/). La version figure dans `PartyGatherRadar.toc` et
 `PartyGatherRadar_Forever.toc` (`## Version`, fichiers identiques) et `Core/Init.lua` (`ns.VERSION`).
 
+## [0.6.0] - 2026-11-09
+
+### Contexte
+
+La restriction de la minicarte du build 70862 est voulue : sur le suivi de bugs de l'interface
+(Stanzilla/WoWUIBugs#894), il a été répondu, au nom de Blizzard, « This is intentional and an unwanted
+interaction. The API will be removed entirely in a future update » puis « Minimap is off limits ».
+La portée de la cible d'interaction douce reste plafonnée à environ 15 m, quels que soient les réglages.
+**Sur le client live, une herbe ou un filon n'est donc partagé que quand le joueur qui le voit passe la
+souris sur son icône de minicarte** (ou passe tout près, avec `/pgr near on`). Cette version peut en plus
+montrer, sur demande, où herbes et filons peuvent pousser.
+
+### Ajouté
+
+- Points d'apparition (réglage « Points d'apparition de QuestieDB », `/pgr spawns on|off`, **désactivé par
+  défaut** : sans lui, seules les plantes signalées par le groupe et les emplacements connus s'affichent) :
+  quand QuestieDB (installé avec Questie) est présent, l'addon lit dans ses données les endroits où chaque
+  herbe et chaque filon peut apparaître, et les montre sur la minicarte. QuestieDB n'est lu qu'une fois le
+  réglage activé.
+  - Rien de QuestieDB n'est copié dans l'addon : ses données sont lues en jeu par son interface publique
+    (`LibQuestieDB`, contrat 4). Sans QuestieDB, rien ne change ; `/pgr status` le signale.
+  - Liste fixe d'objets de récolte (identifiants du jeu), variantes de Forever comprises (« Wilted
+    Peacebloom », « Stunted Silverleaf », « Poor Copper Vein », « Chunk of Amber »...). Les objets de
+    quête qui portent un nom de ressource ne sont pas lus.
+  - Marqueur plus petit et plus pâle qu'un emplacement connu ; l'infobulle donne le nom (langue du client
+    si QuestieDB la fournit), l'état « point d'apparition possible » et la distance. La présence actuelle
+    n'est jamais affirmée.
+  - Masqué près d'une détection ou d'un emplacement connu du même type (moins de 20 m, emplacement tout
+    juste récolté compris), et pour un type que le personnage piste lui-même : ses points natifs suffisent.
+  - Deux objets au même endroit (filons de cuivre et d'étain qui partagent leurs points) font un seul
+    marqueur, avec les deux noms.
+  - Lecture par carte, à l'arrivée, quelques objets par image et jamais en combat ; les 4 dernières cartes
+    sont gardées en mémoire. Une erreur de QuestieDB sur un objet n'empêche pas les autres.
+- `/pgr status` : ligne « points d'apparition (QuestieDB) » (disponibles, lecture en cours, absent,
+  version non prise en charge), nombre sur la carte et réglage.
+- TOC : `## OptionalDeps: QuestieDB`, pour que QuestieDB soit chargé avant l'addon.
+
+### Vérifié hors jeu
+
+- Les coordonnées de QuestieDB 1.0.13 (Forever) ont été comparées aux emplacements vus en jeu par Aedot :
+  0,1 à 0,3 % de carte (environ 5 à 15 m) pour les relevés précis, au Bois de la Pénombre, au Loch Modan et
+  aux Steppes ardentes, avec le bon nom de ressource.
+- 173 tests hors jeu (8 nouveaux) ; les 17 mutations de la fonctionnalité sont détectées.
+
+### Non vérifié en jeu
+
+- L'affichage des points d'apparition sur le client live, la lecture de QuestieDB en jeu (noms traduits,
+  temps de lecture d'une carte), et les quatre zones que QuestieDB décrit comme redessinées entre Era et
+  Forever (Mulgore, Maleterres de l'Est, Les Carmines, Hurlevent). Voir `Tests/TestPlan.md`, scénario 13.
+
+## [0.5.0] - 2026-11-09
+
+### Contexte
+
+Avec la 0.4.1 sur le client live (build 70862), Aedot ne voit une plante qu'après le survol de la
+minicarte d'Aekiss à la souris. Le client ne nomme un point de la minicarte que sous le vrai curseur, et
+aucune API ne liste les points : lire la minicarte sans survol reste impossible. Déplacer le curseur par
+programme ou utiliser un outil externe enfreindrait les principes de l'addon (aucune automatisation).
+Cette version ajoute deux sources légitimes, sans souris.
+
+### Ajouté
+
+- Détection de proximité, sans souris (réglage « Détection de proximité », `/pgr near on|off`, désactivé
+  par défaut) : l'addon lit la cible d'interaction douce du jeu (unité `softinteract`, celle de la touche
+  d'interaction). Quand c'est une herbe ou un filon reconnu, il est partagé avec le groupe à la position du
+  joueur : à ±5 m s'il est à portée d'interaction, sinon à ±15 m. Le pistage n'est pas nécessaire.
+  - Activer le réglage règle le ciblage doux du jeu : `SoftTargetInteract` 3, `SoftTargetInteractArc` 2,
+    `SoftTargetInteractOnlyInRange` 0, `SoftTargetInteractRange` au moins 15. La portée n'est jamais
+    réduite.
+  - Les valeurs d'origine sont gardées (`PartyGatherRadarDB.proximityCVars`). `/pgr near off` les rétablit,
+    sauf celles que le joueur ou un autre addon a changées entre-temps.
+  - Rien n'est changé en combat : l'action est appliquée à la fin du combat. Un rétablissement interrompu
+    par un `/reload` ou une déconnexion en combat est repris à l'entrée suivante dans le monde.
+  - La cible douce n'est lue que si le réglage est actif, même quand le joueur l'a activée lui-même.
+  - Le GUID de la cible identifie l'objet : vu de deux côtés, il reste une seule ressource ; deux objets du
+    même nom tout proches ne sont jamais fusionnés.
+  - Une vue à portée d'interaction remplace une position moins précise ; une vue lointaine ne déplace pas
+    une position plus précise (survol ou récolte).
+  - Le journal note la distance de ciblage (distance parcourue jusqu'à la portée d'interaction), pour
+    vérifier en jeu la limite d'environ 15 m.
+  - Une herbe cueillie que la cible douce désigne encore, le temps qu'elle disparaisse, n'est pas signalée
+    de nouveau pendant 60 s : même objet (GUID), ou même nom à portée de l'endroit de la cueillette.
+    Constaté en jeu : revue 0,3 s après la cueillette, elle réapparaissait chez les autres et son
+    emplacement perdait la marque « récolté ».
+  - Aucune touche n'est liée. L'addon ne cible, ne déplace et ne récolte rien.
+- Emplacements connus : chaque herbe ou filon vu (balayage, survol, proximité, récolte, ou reçu du groupe)
+  est gardé par carte dans `PartyGatherRadarDB.knownSpots`.
+  - Fusion à 15 m pour une même sorte, ou jusqu'à la somme des deux précisions (au plus 30 m : une herbe vue
+    à ±15 m de deux côtés). La position la plus précise est gardée. Au plus 300 par carte et 3000 en tout ;
+    les plus anciens sont retirés, ceux reçus du groupe avant ceux vus par le joueur.
+  - Une ressource récoltée (par le joueur, ou retirée par un membre) n'affiche pas son emplacement pendant
+    5 min. Une nouvelle vue lève ce délai.
+  - Affichés sur la minicarte comme des positions historiques (icône discrète). L'infobulle montre
+    « Emplacement connu », la date de dernière vue, le nombre de fois vu et l'avertissement « présence
+    actuelle non confirmée ».
+  - Cachés près d'une détection récente de la même sorte (20 m), pour une sorte que ce personnage piste
+    déjà (points natifs), et, s'ils viennent d'un autre joueur, quand la réception est coupée.
+  - Ils restent après `/reload`, après l'expiration des détections et après `/pgr clear`.
+  - Case « Emplacements connus » dans la fenêtre de réglages (réglage `showHistory`).
+  - `/pgr spots` donne le nombre d'emplacements ; `/pgr spots clear` les efface tous.
+- Une récolte (herbe ou filon) ajoute un emplacement connu à la position du joueur, à ±5 m, même sans
+  pistage.
+- Discussion : le message « Aucun joueur nommé '…' ne joue actuellement » est masqué quand il vise un membre
+  du groupe connecté (réglage « Masquer “Aucun joueur nommé …” », `/pgr quiet on|off`, activé par défaut). Ce
+  message vient d'un autre addon, qui chuchote un membre sous la forme « Prénom-Nom » ; le serveur le lit
+  comme un nom sur un autre royaume. Constaté avec ForeverGuide 1.39.5 (préfixe `FGD`), qui inondait la
+  discussion. PartyGatherRadar n'envoie jamais de chuchotement. Seul l'affichage change : les envois de
+  l'autre addon continuent, et un joueur hors du groupe ou un membre déconnecté garde son message.
+- `/pgr status` : lignes « détection de proximité » et « emplacements connus ».
+- `/pgr diag` : sondes `UnitGUID`, `UnitIsInInteractRange` et `C_CVar.SetCVar`.
+- Boucle d'affichage de la minicarte : arrêtée quand aucun marqueur ni emplacement connu de la carte courante
+  n'est affichable ; relancée par un changement de zone, de pistage ou de réglage.
+- 23 tests hors jeu (165 au total) : proximité partagée et rafraîchie, précision gardée puis remplacée à
+  portée, même objet vu de deux côtés, herbe cueillie encore ciblée (même GUID, ou même nom sans GUID),
+  minerai sans pistage, réglages du jeu gardés, rétablis (aussi après
+  un `/reload` en combat), combat, cibles refusées (PNJ, coffre, nom secret), emplacements reçus, affichés
+  et gardés après `/reload`, masqués après une récolte, affichés quand les détections sont masquées,
+  emplacement de récolte, fusion, bornes et ordre de retrait, boucle d'affichage arrêtée, SavedVariables
+  modifiées à la main, message « joueur introuvable » masqué seulement pour un membre connecté (français,
+  anglais, motif du message).
+
+### Modifié
+
+- L'avertissement « balayage aveugle » et son rappel proposent `/pgr near on` et citent les emplacements
+  connus.
+
+### Vérifié en jeu (2026-11-09, build 70862, deux clients, SavedVariables des deux joueurs)
+
+- Lecture de la cible douce sur des herbes de Forever : GUID « GameObject-… » et nom lisibles. Doulourante et
+  Aciérite sauvage partagées à ±5 m sans survol.
+- Distance de ciblage : « ciblé à environ 8 m » et « 4 m » avant la portée d'interaction, soit environ 4 à
+  13 m de la plante. La proximité ne voit donc que la plante toute proche : elle ne remplace pas le survol
+  pour les plantes lointaines de la minicarte.
+- Sans pistage : Aedot, sans Découverte d'herbes, a partagé une Aciérite sauvage vue de près, reçue par
+  Aekiss.
+- Emplacements reçus gardés dans les SavedVariables d'Aedot, marqués récoltés 3 s après la cueillette
+  d'Aekiss.
+
+### Non vérifié en jeu
+
+- Effet des réglages du jeu posés par l'addon : sur les deux clients, ils avaient déjà les valeurs voulues
+  (`proximityCVars` vide).
+- Herbe cueillie encore ciblée, ignorée 60 s (correctif fait après l'essai en jeu).
+- Affichage et infobulle des emplacements connus.
+- Masquage de « Aucun joueur nommé … » avec ForeverGuide.
+
+## [0.4.1] - 2026-11-08
+
+### Contexte
+
+Premier essai en jeu de la 0.4.0 sur le client live (build 1.60.1.70862, deux clients). Le balayage ne
+lit plus rien ; la détection au survol, le passage automatique en mode survol et la réception par le
+groupe fonctionnent. Mais une herbe survolée a produit 4 messages en 0,6 s : la souris qui parcourt le
+point déplace la position estimée de plus de 8 m à chaque lecture, et chaque déplacement était renvoyé.
+
+### Corrigé
+
+- Survol : une position affinée est renvoyée au groupe au plus toutes les 2 s. La dernière position part
+  aussi après le survol, une fois le délai écoulé. La première annonce reste immédiate ; le balayage
+  n'est pas concerné.
+- Mode survol : l'arrivée d'un membre ne déclenche plus un envoi à chaque lecture au survol (toutes les
+  0,2 s). La demande de renvoi n'était remise à zéro que par un balayage qui lit des ressources, donc
+  jamais en mode survol.
+
+### Ajouté
+
+- 3 tests hors jeu (142 au total) : souris qui bouge sur une herbe survolée, position en attente envoyée
+  après le survol, arrivée d'un membre en mode survol.
+
+### Modifié
+
+- Documentation : résultats du premier essai en jeu (scénario 11). Sur ce client, aucune détection n'est
+  possible sans survol : aucune API ne donne les points de la minicarte.
+
+## [0.4.0] - 2026-11-08
+
+### Contexte
+
+Une mise à jour du client WoW Forever de novembre 2026 restreint la sonde de minicarte : elle ne nomme plus
+un point que sous le vrai curseur (constat publié par NaowhForever_Professions 1.2.17). Le balayage de la
+0.3.2 ne lisait donc plus rien, sans erreur ni message : la détection s'arrêtait en silence.
+
+### Ajouté
+
+- Détection au survol : quand le joueur passe la souris sur un point de sa minicarte, l'infobulle native
+  sous le vrai curseur est lue toutes les 0,2 s. Une herbe ou un minerai reconnu est placé sous le curseur,
+  suivi et partagé avec le groupe comme une détection du balayage.
+- Adaptation automatique au client : une ressource vue au survol, absente du balayage suivant alors que ce
+  balayage n'a lu aucune ressource, compte comme une preuve (une par ressource physique, valable 10 min,
+  effacées dès qu'un balayage lit une ressource). Après deux preuves, le balayage est déclaré aveugle :
+  avertissement unique dans la discussion, mode survol, un essai de balayage toutes les 30 s, capacité
+  « sondage minicarte » plus annoncée (nouveau HELLO au groupe à chaque changement de mode). Un essai qui
+  relit une ressource sur au plus la moitié de ses points rétablit la détection automatique ; une
+  infobulle restée figée sur tous les points ne compte pas. Le mode est mémorisé pour le build du client
+  (`PartyGatherRadarDB.probe`) et réévalué à chaque nouveau build.
+- Herbe cueillie par le joueur (`UNIT_SPELLCAST_SUCCEEDED` du sort de cueillette) : retirée tout de suite,
+  chez lui et dans le groupe. Un filon miné n'est pas retiré, car il peut souvent être miné plusieurs fois.
+- Avertissement unique après 5 balayages d'affilée interrompus par la sonde (erreur, valeur secrète), ou
+  si les fonctions de sondage disparaissent du client. Avant, ces échecs restaient silencieux.
+- Aucun balayage ni lecture au survol en combat ou pendant une restriction d'addons
+  (`C_RestrictedActions.IsAddOnRestrictionActive` : combat, rencontre, mode défi, JcJ, carte).
+- `/pgr status`, `/pgr diag` : mode de détection, ressources trouvées au survol, herbes cueillies, sonde
+  « restreinte par le client » ; `/pgr probe scan` explique un balayage vide sur un client restreint.
+- 15 tests hors jeu (139 au total) : client restreint, preuves et passage en mode survol, retour au
+  balayage, mémoire par build, cueillette, échecs répétés, restrictions d'addons, fonctions de sondage
+  absentes, preuves expirées, dédoublonnées ou effacées, infobulle figée, survol en combat.
+
+### Modifié
+
+- Une ressource vue seulement au survol n'est plus déclarée disparue par un balayage qui n'a lu aucune
+  ressource : elle expire normalement (récente 60 s, puis incertaine 240 s).
+- Balayage : un nom reconnu dont le type n'est pas pisté (filon sans Découverte de gisements) n'est plus
+  compté comme une ressource lue.
+- Documentation : client live (build 1.60.1.70862), restriction de novembre, scénario en jeu 11.
+
 ## [0.3.2] - 2026-11-04
 
 ### Ajouté
@@ -11,7 +226,12 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) ; ve
 - `PartyGatherRadar_Forever.toc` : copie exacte de `PartyGatherRadar.toc`, chargée en priorité par le
   client WoW Forever (même convention que Questie ou Offhand). `Tools/package.ps1` l'inclut dans le ZIP et
   refuse d'empaqueter si les deux TOC diffèrent ; un test hors jeu vérifie la même chose.
-### Corrigé- Publication CurseForge : l'app CurseForge signalait la 0.3.1 « might be corrupt (Belongs to 'Retail') »  dans l'instance Forever, car l'index de CurseForge rangeait ce fichier sous Retail 12.1.5 malgré son  tag WoW Forever 1.60.1. La 0.3.2 est publiée comme nouveau fichier avec le tag WoW Forever 1.60.1.
+
+### Corrigé
+
+- Publication CurseForge : l'app CurseForge signalait la 0.3.1 « might be corrupt (Belongs to 'Retail') »
+  dans l'instance Forever, car l'index de CurseForge rangeait ce fichier sous Retail 12.1.5 malgré son
+  tag WoW Forever 1.60.1. La 0.3.2 est publiée comme nouveau fichier avec le tag WoW Forever 1.60.1.
 
 ## [0.3.1] - 2026-10-15
 

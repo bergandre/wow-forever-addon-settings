@@ -140,7 +140,7 @@ function MoveContext:DoMoveThreaded()
 	for sourceSlotId, targetSlotId in pairs(self._slotIds) do
 		self:_MoveSlot(sourceSlotId, targetSlotId, self._slotMoveQuantity[sourceSlotId])
 		Threading.Yield()
-		if self._source == Util.FRAME.GUILD_BANK or self._target == Util.FRAME.GUILD_BANK then
+		if self._source == Util.FRAME.GUILD_BANK or self._target == Util.FRAME.GUILD_BANK or self._source == Util.FRAME.CONTAINER.WARBANK or self._target == Util.FRAME.CONTAINER.WARBANK then
 			self._pendingSlotId = sourceSlotId
 			return
 		end
