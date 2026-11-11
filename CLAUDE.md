@@ -1,5 +1,19 @@
 # WoW Forever addon settings
 
+## Rule: keep this file current
+
+Knowledge about this repo lives **in this repo**, not only in chat or personal memory. Whenever you
+change or discover something a future session would need, update this file (or a doc it links to)
+in the same session, before finishing:
+
+- custom addon settings you set or edited (which addon, which profile/keys, what and why)
+- symlinks / linkages between accounts, characters, installs or repos
+- copies of settings from other installs (source → target, any renames)
+- addons installed, removed or rejected, and why
+- quirks of the Forever client or an addon version that cost time to find out
+
+Keep entries short and factual; replace outdated entries instead of appending contradictions.
+
 This repo IS the live game UI: the WoW Forever install links its folders here.
 
 ```
