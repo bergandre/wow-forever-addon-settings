@@ -9,15 +9,26 @@ PawnOptions = {
 ["Level"] = 30,
 ["Link"] = "|cnIQ1:|Hitem:3732::::::::25:1487::11:::::::|h[Hooded Cowl]|h|r",
 },
+{
+["ID"] = 281265,
+["Level"] = 20,
+["Link"] = "|cnIQ2:|Hitem:281265::::::::26:1487::11:::::::|h[Roadwatcher's Confidence]|h|r",
+},
+{
+["ID"] = 3748,
+["Level"] = 28,
+["Link"] = "|cnIQ3:|Hitem:3748::::::::26:1487::1::1:28:5249:::::|h[Feline Mantle]|h|r",
+},
+[13] = {
+["ID"] = 273643,
+["Level"] = 26,
+["AlsoFitsIn"] = 14,
+["Link"] = "|cnIQ3:|Hitem:273643::::::::26:1487::1::1:28:5249:::::|h[Worgenbane Talisman]|h|r",
+},
 [7] = {
 ["ID"] = 6568,
 ["Level"] = 24,
 ["Link"] = "|cnIQ2:|Hitem:6568::::::::25:1487:::1:12745::::::|h[Shimmering Trousers of the Sorcerer]|h|r",
-},
-[17] = {
-["ID"] = 273137,
-["Level"] = 22,
-["Link"] = "|cnIQ3:|Hitem:273137::::::::22:1487::1::1:28:5254:::::|h[Skum's Bucket]|h|r",
 },
 [15] = {
 ["ID"] = 273005,
@@ -39,26 +50,26 @@ PawnOptions = {
 ["Level"] = 25,
 ["Link"] = "|cnIQ2:|Hitem:9793::::::::25:1487:::1:12718::::::|h[Ivycloth Bracelets of the Eagle]|h|r",
 },
-[5] = {
-["ID"] = 271206,
-["Level"] = 20,
-["Link"] = "|cnIQ3:|Hitem:271206::::::::18:1487::1::1:28:5256:::::|h[Leftover Abomination Skin]|h|r",
+[18] = {
+["ID"] = 5250,
+["Level"] = 28,
+["Link"] = "|cnIQ2:|Hitem:5250::::::::25:1487::11:::::::|h[Charred Wand]|h|r",
 },
 [10] = {
 ["ID"] = 286979,
 ["Level"] = 22,
 ["Link"] = "|cnIQ3:|Hitem:286979::::::::18:1487::1::1:28:5256:::::|h[Rotmender's Gloves]|h|r",
 },
-[3] = {
-["ID"] = 10657,
-["Level"] = 26,
-["Link"] = "|cnIQ2:|Hitem:10657::::::::24:1487::11:::::::|h[Talbar Mantle]|h|r",
+[17] = {
+["ID"] = 273137,
+["Level"] = 22,
+["Link"] = "|cnIQ3:|Hitem:273137::::::::22:1487::1::1:28:5254:::::|h[Skum's Bucket]|h|r",
 },
 [11] = {
-["ID"] = 281673,
-["Level"] = 28,
+["ID"] = 6414,
+["Level"] = 29,
 ["AlsoFitsIn"] = 12,
-["Link"] = "|cnIQ2:|Hitem:281673::::::::24:1487::11:::::::|h[Loop of Sacrifice]|h|r",
+["Link"] = "|cnIQ3:|Hitem:6414::::::::26:1487::11:::::::|h[Seal of Sylvanas]|h|r",
 },
 [6] = {
 ["ID"] = 273089,
@@ -71,10 +82,10 @@ PawnOptions = {
 ["AlsoFitsIn"] = 11,
 ["Link"] = "|cnIQ2:|Hitem:281673::::::::25:1487::11:::::::|h[Loop of Sacrifice]|h|r",
 },
-[18] = {
-["ID"] = 5250,
-["Level"] = 28,
-["Link"] = "|cnIQ2:|Hitem:5250::::::::25:1487::11:::::::|h[Charred Wand]|h|r",
+[5] = {
+["ID"] = 271206,
+["Level"] = 20,
+["Link"] = "|cnIQ3:|Hitem:271206::::::::18:1487::1::1:28:5256:::::|h[Leftover Abomination Skin]|h|r",
 },
 },
 ["LastKeybindingsSet"] = 1,

@@ -1,8 +1,1 @@
 Version: 1
-Frame: Grid2LayoutFrame
-FrameLevel: 1
-Anchor: RIGHT
-X: -120
-Y: 218
-W: 206
-H: 82

@@ -1,12 +1,7 @@
 
 ForeverDungeonJournalDB = {
-["runLogTrashTotal"] = {
-},
 ["questFaction"] = "Horde",
 ["portraitCacheVersion"] = 2,
-["runLogNames"] = {
-},
-["lastMode"] = "bosses",
 ["lootFilter"] = {
 ["enabled"] = false,
 ["classOnly"] = false,
@@ -23,6 +18,9 @@ ForeverDungeonJournalDB = {
 ["armorTypes"] = {
 },
 },
+["lastMode"] = "bosses",
+["learnedQuestIDs"] = {
+},
 ["minimap"] = {
 ["minimapPos"] = 225,
 ["hide"] = false,
@@ -33,8 +31,14 @@ ForeverDungeonJournalDB = {
 [261974] = 143035,
 [250034] = 2424,
 },
+["runLogNames"] = {
+},
 ["lastDungeon"] = "Shadowfang Keep",
-["learnedQuestIDs"] = {
+["flightTimes"] = {
+["The Sepulcher, Silverpine Forest>Undercity, Tirisfal"] = 112,
+},
+["runLogTrashTotal"] = {
+["Shadowfang Keep"] = 90,
 },
 ["portraitTexturesByNpcID"] = {
 },
@@ -87,6 +91,10 @@ ForeverDungeonJournalDB = {
 [96895] = {
 ["o"] = "Find the Argent Dawn member near the entrance to the Undercity.",
 ["d"] = "Not sure if you heard, but two emissaries of the Argent Dawn just passed through here. I don't mind the Argent Dawn, but I don't like them poking around Tirisfal unsupervised either. They were both Forsaken... but that doesn't make me any less nervous.\r\n\r\nOne of them just passed by here, headed southeast. There's a group of scourge cultists snooping around the outskirts of the city in that direction. If those two heard about them, there's no doubt that would have caught their attention.",
+},
+[99] = {
+["o"] = "Bring 6 Pyrewood Shackles to Dalar Dawnweaver at the Sepulcher.",
+["d"] = "As my understanding of Arugal's magic grows so does my disdain for the hapless fool.  I am close to completing my research on his so called remedy.\n\nMy knowledge will be complete when I learn what enchantment is causing the strange behavior going on in Pyrewood Village.  By day, the peasants appear to be Human.  But when the sun goes down the townsfolk turn into Moonrage Worgen.\n\nI need to draw energy from the enchanted shackles Arugal cast on them.  Bring to me six enchanted Pyrewood Shackles, N.",
 },
 [896] = {
 ["o"] = "Retrieve the Cats Eye Emerald from one of the Venture Co. Overseers or Enforcers for Wharfmaster Dizzywig at Ratchet.",

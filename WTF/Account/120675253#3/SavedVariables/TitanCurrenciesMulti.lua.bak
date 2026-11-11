@@ -7,14 +7,14 @@ TitanCurrenciesMultiDb = {
 ["name"] = "|cffff7c0aTailoring",
 ["faction"] = "Horde",
 },
-["Invited-Friend"] = {
-["currency"] = 0,
-["name"] = "|cff0070ddInvited",
-["faction"] = "Horde",
-},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },
@@ -22,22 +22,22 @@ TitanCurrenciesMultiDb = {
 ["TITAN_OUROM"] = {
 ["charTable"] = {
 ["Tailoring-Altchar"] = {
-["value"] = 3000,
-["realm"] = "Altchar",
+["value"] = 2940,
+["faction"] = "Horde",
 ["name"] = "|cffff7c0aTailoring",
+["realm"] = "Altchar",
+},
+["Invited-Undead"] = {
+["value"] = 30414,
+["realm"] = "Undead",
+["name"] = "|cff8788eeInvited",
 ["faction"] = "Horde",
 },
 ["Invited-Friend"] = {
-["value"] = 372,
-["faction"] = "Horde",
-["name"] = "|cff0070ddInvited",
+["value"] = 312,
 ["realm"] = "Friend",
-},
-["Invited-Undead"] = {
-["value"] = 2889,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
-["name"] = "|cff8788eeInvited",
-["realm"] = "Undead",
 },
 },
 },
@@ -48,14 +48,14 @@ TitanCurrenciesMultiDb = {
 ["name"] = "|cffff7c0aTailoring",
 ["faction"] = "Horde",
 },
-["Invited-Friend"] = {
-["currency"] = 0,
-["name"] = "|cff0070ddInvited",
-["faction"] = "Horde",
-},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },
@@ -67,14 +67,14 @@ TitanCurrenciesMultiDb = {
 ["name"] = "|cffff7c0aTailoring",
 ["faction"] = "Horde",
 },
-["Invited-Friend"] = {
-["currency"] = 0,
-["name"] = "|cff0070ddInvited",
-["faction"] = "Horde",
-},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },
@@ -86,14 +86,14 @@ TitanCurrenciesMultiDb = {
 ["name"] = "|cffff7c0aTailoring",
 ["faction"] = "Horde",
 },
-["Invited-Friend"] = {
-["currency"] = 0,
-["name"] = "|cff0070ddInvited",
-["faction"] = "Horde",
-},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },
@@ -105,14 +105,14 @@ TitanCurrenciesMultiDb = {
 ["name"] = "|cffff7c0aTailoring",
 ["faction"] = "Horde",
 },
-["Invited-Friend"] = {
-["currency"] = 0,
-["name"] = "|cff0070ddInvited",
-["faction"] = "Horde",
-},
 ["Invited-Undead"] = {
 ["currency"] = 0,
 ["name"] = "|cff8788eeInvited",
+["faction"] = "Horde",
+},
+["Invited-Friend"] = {
+["currency"] = 0,
+["name"] = "|cff0070ddInvited",
 ["faction"] = "Horde",
 },
 },

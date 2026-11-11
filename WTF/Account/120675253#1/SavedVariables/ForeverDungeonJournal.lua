@@ -30,9 +30,9 @@ ForeverDungeonJournalDB = {
 },
 ["displayIDs"] = {
 [262297] = 143122,
+[261974] = 143035,
 [250034] = 2424,
 [7023] = 5285,
-[261974] = 143035,
 },
 ["trackerHintShown"] = true,
 ["runLogNames"] = {

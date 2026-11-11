@@ -67,9 +67,9 @@ Bagnonium_Sets = {
 "miscellaneous",
 },
 },
-["showBags"] = true,
 ["borderColor"] = {
 },
+["showBags"] = true,
 ["color"] = {
 },
 ["height"] = 674,
@@ -85,33 +85,33 @@ Bagnonium_Sets = {
 ["color"] = {
 ["quiver"] = {
 },
-["account"] = {
+["herb"] = {
 },
-["enchant"] = {
+["normal"] = {
 },
 ["soul"] = {
 },
-["reagent"] = {
+["inscribe"] = {
 },
 ["mine"] = {
 },
-["engineer"] = {
+["gem"] = {
 },
-["inscribe"] = {
+["leather"] = {
 },
 ["fridge"] = {
 },
-["gem"] = {
+["engineer"] = {
 },
 ["key"] = {
 },
 ["tackle"] = {
 },
-["leather"] = {
+["reagent"] = {
 },
-["normal"] = {
+["enchant"] = {
 },
-["herb"] = {
+["account"] = {
 },
 },
 ["display"] = {

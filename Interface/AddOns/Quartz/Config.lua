@@ -1,0 +1,344 @@
+--[[
+	Copyright (C) 2006-2007 Nymbia
+	Copyright (C) 2010-2017 Hendrik "Nevcairiel" Leppkes < h.leppkes@gmail.com >
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License along
+	with this program; if not, write to the Free Software Foundation, Inc.,
+	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+]]
+local Quartz3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
+local L = LibStub("AceLocale-3.0"):GetLocale("Quartz3")
+local media = LibStub("LibSharedMedia-3.0")
+local LibDualSpec = LibStub("LibDualSpec-1.0", true)
+
+----------------------------
+-- Upvalues
+-- GLOBALS: LibStub, InCombatLockdown, SettingsPanel, HideUIPanel
+local pairs, unpack, type = pairs, unpack, type
+
+local getOpt, setOpt, getColor, setColor
+do
+	function getOpt(info)
+		local key = info[#info]
+		return Quartz3.db.profile[key]
+	end
+
+	function setOpt(info, value)
+		local key = info[#info]
+		Quartz3.db.profile[key] = value
+		Quartz3:ApplySettings()
+	end
+
+	function getColor(info)
+		return unpack(getOpt(info))
+	end
+
+	function setColor(info, r, g, b, a)
+		setOpt(info, {r, g, b, a})
+	end
+end
+
+local options, moduleOptions = nil, {}
+local function getOptions()
+	if not options then
+		 options = {
+			type = "group",
+			args = {
+				unlockBar = {
+					type = "group",
+					inline = true,
+					name = "",
+					args = {
+						unlock = {
+							type = "execute",
+							name = L["Toggle Bar Lock"],
+							desc = L["Unlock the Bars to be able to move them around."],
+							func = function()
+								Quartz3:ToggleLock(true)
+							end,
+							order = 50,
+						},
+						nllock = {
+							type = "description",
+							name = "",
+							order = 51,
+						},
+					},
+				},
+				general = {
+					type = "group",
+					name = L["General"],
+					order = 10,
+					args = {
+						hidesamwise = {
+							type = "toggle",
+							name = L["Hide Samwise Icon"],
+							desc = L["Hide the icon for spells with no icon"],
+							order = 101,
+							get = getOpt,
+							set = setOpt,
+						},
+						casttimeprecision = {
+							type = "range",
+							name = L["Cast Time Precision"],
+							desc = L["Number of decimals to show for the Cast Time"],
+							min = 0, max = 3, step = 1,
+							get = getOpt,
+							set = setOpt,
+							order = 102,
+						},
+						instantfade = {
+							type = "toggle",
+							name = L["Instant Hide"],
+							desc = L["Hide the cast bar immediately after the cast ends instead of fading out"],
+							order = 103,
+							get = getOpt,
+							set = setOpt,
+						},
+						colors = {
+							type = "group",
+							name = L["Colors"],
+							desc = L["Colors"],
+							guiInline = true,
+							order = 450,
+							get = getColor,
+							set = setColor,
+							args = {
+								spelltextcolor = {
+									type = "color",
+									name = L["Spell Text"],
+									desc = L["Set the color of the %s"]:format(L["Spell Text"]),
+									order = 98,
+								},
+								timetextcolor = {
+									type = "color",
+									name = L["Time Text"],
+									desc = L["Set the color of the %s"]:format(L["Time Text"]),
+									order = 98,
+								},
+								header = {
+									type = "header",
+									name = "",
+									order = 99,
+								},
+								castingcolor = {
+									type = "color",
+									name = L["Casting"],
+									desc = L["Set the color of the cast bar when %s"]:format(L["Casting"]),
+								},
+								channelingcolor = {
+									type = "color",
+									name = L["Channeling"],
+									desc = L["Set the color of the cast bar when %s"]:format(L["Channeling"]),
+								},
+								completecolor = {
+									type = "color",
+									name = L["Complete"],
+									desc = L["Set the color of the cast bar when %s"]:format(L["Complete"]),
+								},
+								failcolor = {
+									type = "color",
+									name = L["Failed"],
+									desc = L["Set the color of the cast bar when %s"]:format(L["Failed"]),
+								},
+								nl1 = {
+									type = "description",
+									name = "",
+									order = 101,
+								},
+								backgroundcolor = {
+									type = "color",
+									name = L["Background"],
+									desc = L["Set the color of the casting bar background"],
+									order = 102,
+								},
+								backgroundalpha = {
+									type = "range",
+									name = L["Background Alpha"],
+									desc = L["Set the alpha of the casting bar background"],
+									isPercent = true,
+									min = 0, max = 1, bigStep = 0.025,
+									get = getOpt,
+									set = setOpt,
+									order = 103,
+								},
+								bordercolor = {
+									type = "color",
+									name = L["Border"],
+									desc = L["Set the color of the casting bar border"],
+									order = 104,
+								},
+								borderalpha = {
+									type = "range",
+									name = L["Border Alpha"],
+									desc = L["Set the alpha of the casting bar border"],
+									isPercent = true,
+									min = 0, max = 1, bigStep = 0.025,
+									get = getOpt,
+									set = setOpt,
+									order = 105,
+								},
+							},
+						},
+						spark = {
+							type = "group",
+							name = L["Spark"],
+							desc = L["Spark"],
+							guiInline = true,
+							order = 455,
+							get = getOpt,
+							set = setOpt,
+							args = {
+								sparkenabled = {
+									type = "toggle",
+									name = L["Show Spark"],
+									desc = L["Enable the casting bar spark"],
+									order = 101,
+								},
+								sparktexture = {
+									type = "select",
+									dialogControl = "LSM30_Statusbar",
+									name = L["Spark Texture"],
+									desc = L["Set the texture of the casting bar spark"],
+									values = AceGUIWidgetLSMlists.statusbar,
+									disabled = function() return not Quartz3.db.profile.sparkenabled end,
+									order = 102,
+								},
+								sparkcolor = {
+									type = "color",
+									name = L["Spark Color"],
+									desc = L["Set the color of the casting bar spark"],
+									hasAlpha = true,
+									get = getColor,
+									set = setColor,
+									disabled = function() return not Quartz3.db.profile.sparkenabled end,
+									order = 103,
+								},
+								sparkwidth = {
+									type = "range",
+									name = L["Spark Thickness"],
+									desc = L["Set the thickness of the casting bar spark"],
+									min = 1, max = 32, step = 1,
+									disabled = function() return not Quartz3.db.profile.sparkenabled end,
+									order = 104,
+								},
+								sparkheightmode = {
+									type = "select",
+									name = L["Spark Height"],
+									desc = L["Set the height of the casting bar spark"],
+									values = {["bar"] = L["Bar Height"], ["custom"] = L["Custom"]},
+									disabled = function() return not Quartz3.db.profile.sparkenabled end,
+									order = 105,
+								},
+								sparkheight = {
+									type = "range",
+									name = L["Custom Height"],
+									desc = L["Set the height of the casting bar spark"],
+									min = 1, max = 128, step = 1,
+									disabled = function() return not Quartz3.db.profile.sparkenabled end,
+									hidden = function() return Quartz3.db.profile.sparkheightmode ~= "custom" end,
+									order = 106,
+								},
+								sparkoffset = {
+									type = "range",
+									name = L["Spark X Offset"],
+									desc = L["Adjust the X position of the spark"],
+									min = -32, max = 32, step = 1,
+									disabled = function() return not Quartz3.db.profile.sparkenabled end,
+									order = 107,
+								},
+							},
+						},
+					},
+				},
+			},
+		}
+		for k,v in pairs(moduleOptions) do
+			options.args[k] = (type(v) == "function") and v() or v
+		end
+	end
+	return options
+end
+
+function Quartz3:ChatCommand(input)
+	if not input or input:trim() == "" then
+		if InCombatLockdown() then
+			self:Print("|cffff0000Cannot open options in combat.|r")
+			return
+		end
+		local ACD = LibStub("AceConfigDialog-3.0")
+		if ACD.OpenFrames["Quartz3"] then
+			ACD:Close("Quartz3")
+		else
+			ACD:Open("Quartz3")
+		end
+	else
+		LibStub("AceConfigCmd-3.0").HandleCommand(Quartz3, "quartz", "Quartz3", input)
+	end
+end
+
+local launcherOptions = {
+	type = "group",
+	name = "Quartz 3",
+	args = {
+		desc = {
+			type = "description",
+			order = 1,
+			fontSize = "medium",
+			name = L["Quartz 3 uses a detached configuration window."]
+				.. "\n\n" .. L["Type |cffffd700/quartz|r or click below to open it."],
+		},
+		open = {
+			type = "execute",
+			order = 2,
+			name = L["Open configuration - /quartz"],
+			func = function()
+				if InCombatLockdown() then return end
+				LibStub("AceConfigDialog-3.0"):Open("Quartz3")
+				if SettingsPanel and SettingsPanel:IsShown() then
+					HideUIPanel(SettingsPanel)
+				end
+			end,
+		},
+	},
+}
+
+function Quartz3:SetupOptions()
+	local ACR = LibStub("AceConfigRegistry-3.0")
+	local ACD = LibStub("AceConfigDialog-3.0")
+
+	ACR:RegisterOptionsTable("Quartz3", getOptions)
+
+	ACD.Status["Quartz3"] = self.db.global.configDialog
+	ACD.Status["Quartz3"].status   = ACD.Status["Quartz3"].status   or {}
+	ACD.Status["Quartz3"].children = ACD.Status["Quartz3"].children or {}
+	ACD:SetDefaultSize("Quartz3", 800, 600)
+
+	ACR:RegisterOptionsTable("Quartz3_Launcher", launcherOptions)
+	ACD:AddToBlizOptions("Quartz3_Launcher", "Quartz 3")
+
+	self:RegisterChatCommand("quartz", "ChatCommand")
+	self:RegisterChatCommand("q3", "ChatCommand")
+
+	local profileOptions = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
+	if LibDualSpec then
+		LibDualSpec:EnhanceDatabase(self.db, "Quartz3")
+		LibDualSpec:EnhanceOptions(profileOptions, self.db)
+	end
+
+	self:RegisterModuleOptions("Profiles", profileOptions, "Profiles")
+end
+
+function Quartz3:RegisterModuleOptions(name, optTable, displayName)
+	moduleOptions[name] = optTable
+end

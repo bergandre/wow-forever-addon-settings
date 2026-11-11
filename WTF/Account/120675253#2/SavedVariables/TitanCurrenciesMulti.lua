@@ -23,7 +23,7 @@ TitanCurrenciesMultiDb = {
 ["faction"] = "Horde",
 },
 ["Karums-Priest"] = {
-["value"] = 54718,
+["value"] = 46815,
 ["faction"] = "Horde",
 ["name"] = "|cffffffffKarums",
 ["realm"] = "Priest",

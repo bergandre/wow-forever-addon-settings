@@ -1,10 +1,7 @@
 
 ForeverDungeonJournalDB = {
-["portraitTexturesByNpcID"] = {
-},
 ["questFaction"] = "Horde",
 ["portraitCacheVersion"] = 2,
-["lastMode"] = "bosses",
 ["learnedItemIDs"] = {
 ["grips of control"] = {
 ["id"] = 276733,
@@ -59,18 +56,7 @@ ForeverDungeonJournalDB = {
 ["name"] = "Tidesong Wand",
 },
 },
-["minimap"] = {
-["minimapPos"] = 225,
-["hide"] = false,
-},
-["displayIDs"] = {
-[262297] = 143122,
-[250034] = 2424,
-[7023] = 5285,
-[261974] = 143035,
-},
-["runLogNames"] = {
-},
+["lastMode"] = "bosses",
 ["questText"] = {
 ["enUS"] = {
 [479] = {
@@ -125,13 +111,13 @@ ForeverDungeonJournalDB = {
 ["o"] = "Kill Arugal and bring his head to Dalar Dawnweaver at the Sepulcher.",
 ["d"] = "Arugal still resides in Shadowfang Keep. We cannot claim Silverpine as a strategic stronghold for the Dark Lady until Arugal is slain.\n\nI shall see to it that his magic is eradicated, N. But I leave it in your hands to see that Arugal meets the death he so deserves.\n\nTravel to Shadowfang Keep and put an end to Arugal's foul spells once and for all. Bring to me the vile wizard's head!",
 },
-[509] = {
-["o"] = "Bring 6 Mudsnout Blossoms to Apothecary Lydon in Tarren Mill.",
-["d"] = "Another day, another elixir to be made. If it were up to me, I'd just let the pathetic humans and Scourge fight it out.  They seem bent on killing each other as is.\n\nAlas, our Dark Lady wants to help speed up the process a tad so why not pass these morbid days by spreading a little death and disease across the land?\n\nHere's the plan, N: you go out to Nethander Stead, south of Tarren Mill and east of the river and Southshore. Collect for me 6 Mudsnout Blossoms from the field for my next elixir.",
-},
 [5761] = {
 ["o"] = "Enter Ragefire Chasm and slay Taragaman the Hungerer, then bring his heart back to Neeru Fireblade in Orgrimmar.",
 ["d"] = "The primary task set upon me by our great Warchief is to root out the creatures responsible for infesting our lord's great city with demonic influence. The Burning Blade is one threat, but there are others; the Searing Blade for instance, who make their home in Ragefire Chasm, secretly attempting to subvert innocent members of the Horde.\n\nIf they are to be stopped, then their leader must be slain--a Felguard named Taragaman the Hungerer.\n\nKill him, and his heart will appease Thrall, of this I'm sure.",
+},
+[509] = {
+["o"] = "Bring 6 Mudsnout Blossoms to Apothecary Lydon in Tarren Mill.",
+["d"] = "Another day, another elixir to be made. If it were up to me, I'd just let the pathetic humans and Scourge fight it out.  They seem bent on killing each other as is.\n\nAlas, our Dark Lady wants to help speed up the process a tad so why not pass these morbid days by spreading a little death and disease across the land?\n\nHere's the plan, N: you go out to Nethander Stead, south of Tarren Mill and east of the river and Southshore. Collect for me 6 Mudsnout Blossoms from the field for my next elixir.",
 },
 [79007] = {
 ["o"] = "Charred remains of the note serve as your only guide.",
@@ -141,10 +127,32 @@ ForeverDungeonJournalDB = {
 ["o"] = "Retrieve the Cats Eye Emerald from one of the Venture Co. Overseers or Enforcers for Wharfmaster Dizzywig at Ratchet.",
 ["d"] = "Being Wharfmaster of a busy port like Ratchet, I keep my finger on the pulse of information. I know all about the exchange of goods and money between here and Booty Bay.\n\nThe latest bit of news I've heard is about the Venture Company's Boulder Lode mine northeast of the Sludge Fen. One of the miners discovered an emerald the size of your fist. I know a few buyers who'd be interested in getting their hands on something like that, and I'd be willing to go half and half on its sale.",
 },
+[99] = {
+["o"] = "Bring 6 Pyrewood Shackles to Dalar Dawnweaver at the Sepulcher.",
+["d"] = "As my understanding of Arugal's magic grows so does my disdain for the hapless fool.  I am close to completing my research on his so called remedy.\n\nMy knowledge will be complete when I learn what enchantment is causing the strange behavior going on in Pyrewood Village.  By day, the peasants appear to be Human.  But when the sun goes down the townsfolk turn into Moonrage Worgen.\n\nI need to draw energy from the enchanted shackles Arugal cast on them.  Bring to me six enchanted Pyrewood Shackles, N.",
 },
+},
+},
+["minimap"] = {
+["minimapPos"] = 225,
+["hide"] = false,
+},
+["displayIDs"] = {
+[262297] = 143122,
+[250034] = 2424,
+[7023] = 5285,
+[261974] = 143035,
 },
 ["lastDungeon"] = "Shadowfang Keep",
+["runLogNames"] = {
+},
+["flightTimes"] = {
+["The Sepulcher, Silverpine Forest>Undercity, Tirisfal"] = 112,
+},
+["portraitTexturesByNpcID"] = {
+},
 ["runLogTrashTotal"] = {
+["Shadowfang Keep"] = 90,
 },
 ["learnedQuestIDs"] = {
 },

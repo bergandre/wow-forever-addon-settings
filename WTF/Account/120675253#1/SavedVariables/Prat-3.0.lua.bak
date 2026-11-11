@@ -33,9 +33,8 @@ Prat3DB = {
 ["profiles"] = {
 ["Default"] = {
 ["initialized"] = true,
-["minchatwidthdefault"] = 250,
 ["maxchatheightdefault"] = 800,
-["minchatheightdefault"] = 120.0000076293945,
+["minchatwidthdefault"] = 250,
 },
 },
 },

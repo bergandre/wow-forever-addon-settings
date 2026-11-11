@@ -20,10 +20,10 @@ Bagnon_Sets = {
 },
 ["color"] = {
 },
-["showBags"] = true,
+["x"] = 338.0001525878906,
 ["activeRules"] = {
 },
-["x"] = 338.0001525878906,
+["showBags"] = true,
 },
 ["vault"] = {
 ["color"] = {
@@ -88,33 +88,33 @@ Bagnon_Sets = {
 ["color"] = {
 ["quiver"] = {
 },
-["herb"] = {
+["account"] = {
 },
-["normal"] = {
+["enchant"] = {
 },
 ["soul"] = {
 },
-["inscribe"] = {
+["reagent"] = {
 },
 ["mine"] = {
 },
-["gem"] = {
+["engineer"] = {
 },
-["leather"] = {
+["inscribe"] = {
 },
 ["fridge"] = {
 },
-["engineer"] = {
+["gem"] = {
 },
 ["key"] = {
 },
 ["tackle"] = {
 },
-["reagent"] = {
+["leather"] = {
 },
-["enchant"] = {
+["normal"] = {
 },
-["account"] = {
+["herb"] = {
 },
 },
 ["display"] = {

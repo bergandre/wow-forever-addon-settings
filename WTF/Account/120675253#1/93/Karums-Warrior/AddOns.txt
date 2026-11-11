@@ -78,3 +78,4 @@ NodeRadar: enabled
 !Swatter: disabled
 !ImprovedErrorFrame: disabled
 Decursive: disabled
+Quartz: disabled

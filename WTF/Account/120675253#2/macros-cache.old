@@ -22,15 +22,15 @@ VER 3 0000000000000004 "follow heal" "1035050"
 END
 VER 3 0000000000000014 "fortitude f" "134400"
 #showtooltip
-/cast [mod:rshift,@player][mod:rctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Power Word: Fortitude
+/cast [mod:shift,@player][mod:alt,@mouseover,help,nodead][mod:ctrl,@focus,help,nodead][help,nodead][@focus,help,nodead][@player] Power Word: Fortitude
 END
 VER 3 000000000000001D "heal f" "134400"
 #showtooltip
-/cast [mod:shift,@player][mod:ctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Heal
+/cast [mod:shift,@player][mod:alt,@mouseover,help,nodead][mod:ctrl,@focus,help,nodead][help,nodead][@focus,help,nodead][@player] Heal
 END
 VER 3 0000000000000009 "heal flash" "134400"
 #showtooltip
-/cast [mod:rshift,@player][mod:rctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Lesser Heal
+/cast [mod:shift,@player][mod:alt,@mouseover,help,nodead][mod:ctrl,@focus,help,nodead][help,nodead][@focus,help,nodead][@player] Lesser Heal
 END
 VER 3 0000000000000010 "mindblast f" "134400"
 #showtooltip
@@ -39,7 +39,7 @@ VER 3 0000000000000010 "mindblast f" "134400"
 END
 VER 3 0000000000000013 "renew f" "134400"
 #showtooltip
-/cast [mod:rshift,@player][mod:rctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Renew
+/cast [mod:shift,@player][mod:alt,@mouseover,help,nodead][mod:ctrl,@focus,help,nodead][help,nodead][@focus,help,nodead][@player] Renew
 END
 VER 3 000000000000000C "RXP ITEM" "134400"
 #showtooltip
@@ -47,11 +47,11 @@ VER 3 000000000000000C "RXP ITEM" "134400"
 /click RXPItemFrameButton1 LeftButton
 END
 VER 3 0000000000000018 "RXPFollow" "Inv_boots_02"
-/targetexact Karums
+/targetexact Invited
 /follow
 END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Dalar Dawnweaver
+/targetexact Keeper Bel'dugur
 /tm !7
 /targetlasttarget [dead]
 END
@@ -80,5 +80,5 @@ VER 3 0000000000000008 "word pain assist" "134400"
 END
 VER 3 000000000000000D "word shield focu" "134400"
 #showtooltip
-/cast [mod:rshift,@player][mod:rctrl,help,nodead][@mouseover,help,nodead][@focus,help,nodead][@player] Power Word: Shield
+/cast [mod:shift,@player][mod:alt,@mouseover,help,nodead][mod:ctrl,@focus,help,nodead][help,nodead][@focus,help,nodead][@player] Power Word: Shield
 END

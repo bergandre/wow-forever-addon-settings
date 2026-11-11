@@ -1,8 +1,8 @@
 
 Bagnonium_Sets = {
 ["latest"] = {
-["id"] = "12.1.8",
-["who"] = "Karums Priest",
+["id"] = "12.1.9",
+["who"] = "Karums Warrior",
 },
 ["global"] = {
 ["inventory"] = {
@@ -21,16 +21,19 @@ Bagnonium_Sets = {
 "miscellaneous",
 },
 },
-["borderColor"] = {
-},
+["point"] = "BOTTOMRIGHT",
 ["color"] = {
 },
-["height"] = 500.0005187988281,
+["width"] = 400.0002136230469,
+["y"] = 96.61519622802734,
+["x"] = -262.435237244978,
+["borderColor"] = {
+},
+["height"] = 500.0006408691406,
 ["activeRules"] = {
 ["tabs"] = "all",
 ["sidebar"] = "all",
 },
-["width"] = 400.0002136230469,
 },
 ["guild"] = {
 ["rules"] = {
@@ -73,9 +76,9 @@ Bagnonium_Sets = {
 "miscellaneous",
 },
 },
+["showBags"] = true,
 ["borderColor"] = {
 },
-["showBags"] = true,
 ["color"] = {
 },
 ["height"] = 674,
@@ -91,33 +94,33 @@ Bagnonium_Sets = {
 ["color"] = {
 ["quiver"] = {
 },
-["herb"] = {
+["account"] = {
 },
-["normal"] = {
+["enchant"] = {
 },
 ["soul"] = {
 },
-["leather"] = {
+["fridge"] = {
 },
 ["mine"] = {
 },
-["gem"] = {
+["engineer"] = {
 },
-["inscribe"] = {
+["leather"] = {
 },
 ["reagent"] = {
 },
-["engineer"] = {
+["gem"] = {
 },
 ["key"] = {
 },
 ["tackle"] = {
 },
-["fridge"] = {
+["inscribe"] = {
 },
-["enchant"] = {
+["normal"] = {
 },
-["account"] = {
+["herb"] = {
 },
 },
 ["display"] = {

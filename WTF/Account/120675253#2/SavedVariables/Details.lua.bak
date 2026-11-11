@@ -235,7 +235,7 @@ _detalhes_global = {
 ["always_use_profile_name"] = "",
 ["slashk_dnd"] = false,
 ["immersion_unit_special_icons"] = true,
-["combat_id_global"] = 1301,
+["combat_id_global"] = 1350,
 ["displays_by_spec"] = {
 },
 ["recent_players"] = {
@@ -3416,8 +3416,47 @@ false,
 ["class_time_played"] = {
 [0] = {
 ["MAGE"] = 36.49399999999878,
-["PRIEST"] = 215143.6830000001,
+["PRIEST"] = 228844.0100000001,
 },
+},
+["frame_background_color"] = {
+0.0549,
+0.0549,
+0.0549,
+0.934,
+},
+["tutorial"] = {
+["unlock_button"] = 0,
+["main_help_button"] = 122,
+["logons"] = 122,
+["version_announce"] = 0,
+["ctrl_click_close_tutorial"] = false,
+["alert_frames"] = {
+false,
+false,
+false,
+false,
+false,
+false,
+},
+["bookmark_tutorial"] = false,
+},
+["latest_npcid_pool_access"] = 1794286909,
+["debug_options_panel"] = {
+["position"] = {
+},
+["scaletable"] = {
+["scale"] = 1,
+},
+},
+["show_warning_id1"] = true,
+["run_code"] = {
+["on_groupchange"] = "\n-- this code runs when the player enter or leave a group",
+["on_zonechanged"] = "\n-- when the player changes zone, this code will run",
+["on_init"] = "\n-- code to run when Details! initializes, put here code which only will run once\n-- this also will run then the profile is changed\n\n--size of the death log tooltip in the Deaths display (default 350)\nDetails.death_tooltip_width = 350;\n\n--when in arena or battleground, details! silently switch to activity time (goes back to the old setting on leaving, default true)\nDetails.force_activity_time_pvp = true;\n\n--speed of the bar animations (default 33)\nDetails.animation_speed = 33;\n\n--threshold to trigger slow or fast speed (default 0.45)\nDetails.animation_speed_mintravel = 0.45;\n\n--call to update animations\nDetails:RefreshAnimationFunctions();\n\n--max window size, does require a /reload to work (default 480 x 450)\nDetails.max_window_size.width = 480;\nDetails.max_window_size.height = 450;\n\n--use the arena team color as the class color (default true)\nDetails.color_by_arena_team = true;\n\n--how much time the update warning is shown (default 10)\nDetails.update_warning_timeout = 10;",
+["on_specchanged"] = "\n-- run when the player changes its spec",
+["on_leavecombat"] = "\n-- this code runs when the player leave combat",
+["on_entercombat"] = "\n-- this code runs when the player enters in combat",
 },
 ["mythic_plus"] = {
 ["make_overall_boss_only"] = false,
@@ -3441,30 +3480,6 @@ false,
 ["last_mythicrun_chart"] = {
 },
 },
-["slash_me_used"] = false,
-["latest_npcid_pool_access"] = 1794286909,
-["debug_options_panel"] = {
-["position"] = {
-},
-["scaletable"] = {
-["scale"] = 1,
-},
-},
-["show_warning_id1"] = true,
-["run_code"] = {
-["on_groupchange"] = "\n-- this code runs when the player enter or leave a group",
-["on_zonechanged"] = "\n-- when the player changes zone, this code will run",
-["on_init"] = "\n-- code to run when Details! initializes, put here code which only will run once\n-- this also will run then the profile is changed\n\n--size of the death log tooltip in the Deaths display (default 350)\nDetails.death_tooltip_width = 350;\n\n--when in arena or battleground, details! silently switch to activity time (goes back to the old setting on leaving, default true)\nDetails.force_activity_time_pvp = true;\n\n--speed of the bar animations (default 33)\nDetails.animation_speed = 33;\n\n--threshold to trigger slow or fast speed (default 0.45)\nDetails.animation_speed_mintravel = 0.45;\n\n--call to update animations\nDetails:RefreshAnimationFunctions();\n\n--max window size, does require a /reload to work (default 480 x 450)\nDetails.max_window_size.width = 480;\nDetails.max_window_size.height = 450;\n\n--use the arena team color as the class color (default true)\nDetails.color_by_arena_team = true;\n\n--how much time the update warning is shown (default 10)\nDetails.update_warning_timeout = 10;",
-["on_specchanged"] = "\n-- run when the player changes its spec",
-["on_leavecombat"] = "\n-- this code runs when the player leave combat",
-["on_entercombat"] = "\n-- this code runs when the player enters in combat",
-},
-["frame_background_color"] = {
-0.0549,
-0.0549,
-0.0549,
-0.934,
-},
 ["exit_errors"] = {
 },
 ["auto_change_to_standard"] = true,
@@ -3478,24 +3493,6 @@ false,
 },
 ["item_level_pool"] = {
 },
-["tutorial"] = {
-["unlock_button"] = 0,
-["main_help_button"] = 110,
-["logons"] = 110,
-["version_announce"] = 0,
-["ctrl_click_close_tutorial"] = false,
-["alert_frames"] = {
-false,
-false,
-false,
-false,
-false,
-false,
-},
-["bookmark_tutorial"] = false,
-},
-["spell_category_latest_save"] = 0,
-["last_10days_cache_cleanup"] = 1794779222,
 ["aura_tracker_frame"] = {
 ["scaletable"] = {
 ["scale"] = 1,
@@ -3503,6 +3500,9 @@ false,
 ["position"] = {
 },
 },
+["spell_category_latest_save"] = 0,
+["last_10days_cache_cleanup"] = 1794779222,
+["slash_me_used"] = false,
 ["breakdown_general"] = {
 ["font_size"] = 11,
 ["font_color"] = {

@@ -10,7 +10,7 @@ Scrap_CharSets = {
 [4596] = true,
 [6217] = true,
 [268415] = true,
-[5075] = false,
 [3174] = true,
+[5075] = false,
 },
 }

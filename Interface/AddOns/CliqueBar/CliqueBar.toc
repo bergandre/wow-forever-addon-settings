@@ -1,0 +1,33 @@
+## Interface: 120105, 16001
+# 16001 = WoW Forever (camelot); kept comma-separated so both clients load the base TOC
+## Title: CliqueBar
+## Notes: Shows your Clique click-cast bindings as an icon bar with keys and cooldowns.
+## IconTexture: Interface\AddOns\CliqueBar\Media\Icon.tga
+## Author: Sogu
+## Version: 0.4.0
+## SavedVariables: CliqueBarDB
+## OptionalDeps: Clique, Masque
+## Category: Unit Frames
+## X-License: All Rights Reserved
+## X-Website: https://github.com/jfstn/addons/tree/main/addons/cliquebar
+## X-Curse-Project-ID: 1642027
+## X-Wago-ID: 4N2kX06L
+# X-WoWI-ID: set after creating the WoWInterface project (optional)
+
+Libs\Libs.xml
+Locales\enUS.lua
+Locales\deDE.lua
+Locales\esES.lua
+Locales\esMX.lua
+Locales\frFR.lua
+Locales\itIT.lua
+Locales\koKR.lua
+Locales\ptBR.lua
+Locales\ruRU.lua
+Locales\zhCN.lua
+Locales\zhTW.lua
+Core.lua
+Bar.lua
+Options.lua
+Broker.lua
+About.lua

@@ -1,0 +1,164 @@
+# Changelog
+
+All notable changes to this project are documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+## [Unreleased]
+
+## [4.1.0-universal] - 2026-09-28
+
+### Added
+- WoW Forever support: `UnitFramesImproved_Camelot.toc` (`## Interface: 16001`). Forever's game
+  type is "Camelot" in Blizzard's UI code, and `_Camelot.toc` is the suffix both the client and the
+  CurseForge packager pick up for it. Forever runs Retail's Mainline unit frame templates (plus small
+  Camelot-only overrides that don't touch anything styled here), so it loads the Retail styler
+  unchanged.
+- Options page (Options -> AddOns -> UnitFramesImproved, also opened by `/ufi`) built on Blizzard's
+  native Settings API, with a **Status Text** dropdown (Numeric Value / Percentage / Both / None) -
+  WoW Forever has no visible setting for showing health/mana numbers on the unit frames. It's backed
+  by the same `statusText`/`statusTextDisplay` CVars as Blizzard's own Status Text option, so the two
+  stay in sync on every client. Switching between two shown modes (e.g. Numeric to Both) turns
+  `statusText` off and back on within the same frame, since Blizzard's status bars only redraw their
+  labels when that changes - so the new mode shows right away. Changes picked in combat or under an
+  addon restriction (encounter, Mythic+, PvP match, restricted map) are held until it ends, since
+  the change runs Blizzard's status bar updates synchronously from addon code.
+- `build.ps1` deploys to `_classic_beta_` (the WoW Forever beta install) too.
+- `tests/`: offline regression tests (Python + `lupa`, a real Lua 5.1 runtime) that load the addon
+  into a stubbed WoW client once per TOC and check loading, events, styling, the options page, and
+  packaging. Never loaded in game or packaged.
+
+### Changed
+- Removed the Ace3/LibStub dependency (AceAddon, AceEvent, AceConsole, CallbackHandler). Events now
+  go through one private event frame and slash commands through `SlashCmdList` - Blizzard's own APIs,
+  identical on every client. No more `.pkgmeta` externals, `Libs/` folder, `LICENSE-ACE3.txt`, or
+  library fetching in `build.ps1` (which still recognizes the old `Libs/`/`LICENSE-ACE3.txt` when
+  replacing a previous deploy).
+- `/ufi` and `/unitframesimproved` now open the options page instead of printing a message.
+- The "Initializing... / Initialized." chat lines on every login are gone (they came from the Ace3
+  `OnInitialize` hook).
+
+### Fixed
+- Retail: stopped writing `forceShow`/`textLockable` onto `PlayerFrame`/`TargetFrame`/`FocusFrame`.
+  Nothing reads those on the unit frame (Blizzard's text logic reads them on the status bar), so they
+  never forced the text visible - they only wrote addon fields onto Blizzard's secure frames.
+
+## [4.0.2-universal] - 2026-09-05
+
+### Fixed
+- PlayerFrame health bar no longer misaligns against the vehicle frame art - Blizzard resizes/
+  re-anchors the same health bar for vehicle state (`PlayerFrame_ToVehicleArt`), and our own
+  styling re-runs on every `PLAYER_ENTERING_WORLD`/`PLAYER_REGEN_ENABLED` (e.g. combat ending
+  while seated), so it was clobbering Blizzard's vehicle-art dimensions with our player-art ones.
+  Our styling is now skipped while `PlayerFrame.state == "vehicle"` and reapplied immediately via
+  a `PlayerFrame_ToPlayerArt` hook the moment Blizzard returns the frame to player state.
+
+## [4.0.1-universal] - 2026-09-01
+
+### Fixed
+- Classic-family TOC files (`_Vanilla`, `_Mists`, `_TBC`) failed to load at all - each started
+  with a plain `#` comment line before `## Interface:`, which the client silently treats as an
+  unparseable TOC (confirmed by comparing against ~200 real installed addons: only Questie's
+  deliberately-broken placeholder TOC shared that pattern, used intentionally to produce this
+  exact effect). `## Interface:` is now always the first line.
+- `UnitFramesImproved_Classic.toc` renamed to `UnitFramesImproved_Mists.toc` - Mists of Pandaria
+  Classic has its own dedicated TOC suffix (confirmed via other installed addons, e.g.
+  `TomTom_Mists.toc`, `BetterBags_Mists.toc`); the generic `_Classic` catch-all suffix wasn't being
+  reliably matched for it.
+- MoP Classic `Interface` declaration corrected and broadened to `50500, 50501, 50502, 50504` -
+  `50504` is this client's actual running interface (`/dump select(4, GetBuildInfo())`), which has
+  to be present in the list since "out of date" triggers whenever the declared Interface is lower
+  than the client's, not merely different from it.
+- Removed `## AllowLoadGameType` from all TOC files - redundant with, and murkier than, the
+  per-flavor TOC suffix split already in place.
+- `ADDON_ACTION_BLOCKED` error calling `MultiBarBottomLeft:ClearAllPointsBase()` during combat -
+  `UpdateTextStringWithValues` (hooked onto the shared, game-wide `TextStatusBar_UpdateTextStringWithValues`)
+  redundantly re-ran Blizzard's own "hide when inactive" logic from insecure code, including
+  `statusFrame:Hide()`, on every status bar update in the game. Blizzard's own call already handles
+  that case securely just before the hook fires, so the branch was both dead weight and a taint risk
+  to whatever secure frame-position pass runs next. Removed.
+
+### Added
+- `UnitFramesImproved_TBC.toc` for the Burning Crusade Classic Anniversary client (`_anniversary_`,
+  product `wow_anniversary`) - a separate product from Classic Era, not a continuation of it.
+- `build.ps1` now auto-detects and deploys to a `_anniversary_` install alongside the existing
+  `_retail_`/`_classic_`/`_classic_era_` flavors, and ships `CHANGELOG.md` in the built addon
+  folder/zip.
+
+## [4.0.0-universal] - 2026-09-01
+
+### Fixed
+- Classic: player frame health bar not showing the player's class color - `Style_PlayerFrame` was
+  silently erroring on `hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", ...)` on clients
+  that have migrated to Blizzard's mixin-based `TextStatusBarMixin` system, aborting the rest of the
+  function (including the class-color update) before it ever ran.
+- Classic: player frame health bar reverting to Blizzard's default green shortly after showing the
+  correct class color - `lockColor` wasn't set, so Blizzard's own native health-bar update kept
+  repainting over it on every health change.
+- Classic: Player/Target frame health bar X/Y position drift and hardcoded offsets - position is now
+  derived from Blizzard's own live anchor plus a fixed, named addon-specific delta, instead of
+  hardcoded absolute values or a full copy of Blizzard's live position.
+- Classic: Target frame `Background` texture anchored to the wrong corner with stale offsets.
+- Retail: Secret Values taint crash in `Style_PlayerFrame` when health/mana is a secret value at the
+  moment of a forced text update.
+- Potential crash in `UpdateStatusBarColor` when `frame`/`frame.healthbar` is nil (e.g.
+  target-of-target frames that may not exist, or lack a `.healthbar` alias, on every client).
+- Target frame ending up with a mix of addon and Blizzard styling when switching targets in combat -
+  `InCombatLockdown()` guards were narrowed to only the genuinely combat-restricted operation
+  (creating new regions); repositioning/recoloring already-existing regions isn't restricted.
+
+### Added
+- `PLAYER_REGEN_ENABLED` catch-up that re-applies styling on leaving combat, so anything actually
+  skipped by a combat-lockdown guard gets retried instead of staying unstyled for the rest of the
+  session.
+- Local `build.ps1` script that fetches the same Ace3/LibStub externals `.pkgmeta` declares and
+  stages a build for testing without going through the CurseForge packager - defaults to
+  `deploy/UnitFramesImproved` only, with `-DeployToWow` (or `-WowInstallPath`/`-TargetPath`) to also
+  copy that build into a local WoW install.
+- `.github/workflows/release.yml`: manually-triggerable (Actions tab -> Run workflow) packaging and
+  CurseForge publishing via the `BigWigsMods/packager` action, which also attaches the built zip to
+  a matching GitHub release using this changelog as the release notes.
+- `IconTexture` metadata in all three TOC files, so the addon shows an icon in the in-game AddOns
+  list instead of the default blank/placeholder icon.
+- `build.ps1` now also zips the staged build into `deploy\UnitFramesImproved-<version>.zip`.
+
+### Changed
+- Debug "Loading config... / Config loaded." messages now only print on the very first load, not on
+  every zone transition or post-combat re-application.
+- `UnitFramesImproved_UpdateTextStringWithValues` moved off the global namespace onto
+  `UnitFramesImproved.UpdateTextStringWithValues`.
+- `README.md` rewritten for players only, in the style of the CurseForge listing description;
+  build/release instructions moved to the new `DEVELOPMENT.md`.
+- Addon author metadata updated to kiforsbe / KawF.
+
+## [3.0.0-universal] - 2024-08-24
+### Added
+- Universal package: Retail, Classic (Cata and later progression), and Classic Era/Vanilla now ship
+  from one download instead of separate per-flavor packages.
+
+## [2.2.0-retail] - 2024-08-22
+### Changed
+- Updated for Retail patch 11.0.2.
+
+## [2.1.0-retail] - 2022-12-27
+### Changed
+- Migrated to the Ace3 addon framework and fixed related taint issues.
+- Moved source files to the repo root.
+
+## [2.0.1-retail] - 2022-11-04
+### Fixed
+- Missing `InCombatLockdown()` checks that could throw errors and disable the addon.
+
+## [2.0.0-retail] - 2022-10-29
+- Initial tagged release.
+
+[Unreleased]: https://github.com/kiforsbe/UnitFramesImproved/compare/4.1.0-universal...HEAD
+[4.1.0-universal]: https://github.com/kiforsbe/UnitFramesImproved/compare/4.0.2-universal...4.1.0-universal
+[4.0.2-universal]: https://github.com/kiforsbe/UnitFramesImproved/compare/4.0.1-universal...4.0.2-universal
+[4.0.1-universal]: https://github.com/kiforsbe/UnitFramesImproved/compare/4.0.0-universal...4.0.1-universal
+[4.0.0-universal]: https://github.com/kiforsbe/UnitFramesImproved/compare/3.0.0-universal...4.0.0-universal
+[3.0.0-universal]: https://github.com/kiforsbe/UnitFramesImproved/compare/2.2.0-retail...3.0.0-universal
+[2.2.0-retail]: https://github.com/kiforsbe/UnitFramesImproved/compare/2.1.0-retail...2.2.0-retail
+[2.1.0-retail]: https://github.com/kiforsbe/UnitFramesImproved/compare/2.0.1-retail...2.1.0-retail
+[2.0.1-retail]: https://github.com/kiforsbe/UnitFramesImproved/compare/2.0.0-retail...2.0.1-retail
+[2.0.0-retail]: https://github.com/kiforsbe/UnitFramesImproved/releases/tag/2.0.0-retail

@@ -164,10 +164,10 @@ Healbot_Config_Skins = {
 },
 ["Standard"] = {
 {
-["Y"] = 12.17,
-["X"] = 96.8,
-["RealY"] = -447,
-["RealX"] = 1321,
+["Y"] = 43.38,
+["X"] = 52.94,
+["RealX"] = 86,
+["RealY"] = -78,
 },
 {
 ["Y"] = 51,
@@ -316,7 +316,7 @@ Healbot_Config_Skins = {
 ["Standard"] = false,
 ["Raid 25"] = false,
 },
-["FocusGroups"] = {
+["BarAggro"] = {
 ["Group"] = {
 },
 ["Raid 40"] = {
@@ -351,7 +351,7 @@ Healbot_Config_Skins = {
 ["Raid 25"] = {
 },
 },
-["Chat"] = {
+["Enemy"] = {
 ["Group"] = {
 },
 ["Raid 40"] = {
@@ -375,6 +375,178 @@ Healbot_Config_Skins = {
 },
 },
 ["BarIACol"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["Healing"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["Emerg"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["DupBarsPrivList"] = {
+["Group"] = true,
+["Raid 40"] = true,
+["Standard"] = true,
+["Raid 25"] = true,
+},
+["StickyFrames"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["HeadText"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["BarVisibility"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["ToolTip"] = {
+},
+["Icons"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["AdaptiveOrder"] = {
+["Group"] = {
+"Plugin",
+"RecentHeals",
+"Debuffs",
+"Aggro",
+"Threat",
+"Highlight",
+"Target",
+"OOR",
+"Buffs",
+"Overheals",
+"Absorbs",
+},
+["Raid 40"] = {
+"Plugin",
+"RecentHeals",
+"Debuffs",
+"Aggro",
+"Threat",
+"Highlight",
+"Target",
+"OOR",
+"Buffs",
+"Overheals",
+"Absorbs",
+},
+["Standard"] = {
+"Plugin",
+"RecentHeals",
+"Debuffs",
+"Aggro",
+"Threat",
+"Highlight",
+"Target",
+"OOR",
+"Buffs",
+"Overheals",
+"Absorbs",
+},
+["Raid 25"] = {
+"Plugin",
+"RecentHeals",
+"Debuffs",
+"Aggro",
+"Threat",
+"Highlight",
+"Target",
+"OOR",
+"Buffs",
+"Overheals",
+"Absorbs",
+},
+},
+["IconText"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["CustomCols"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["RaidIcon"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["BarCol"] = {
+["Group"] = {
+},
+["Raid 40"] = {
+},
+["Standard"] = {
+},
+["Raid 25"] = {
+},
+},
+["HealBar"] = {
 ["Group"] = {
 },
 ["Raid 40"] = {
@@ -694,7 +866,7 @@ Healbot_Config_Skins = {
 },
 },
 },
-["Emerg"] = {
+["Chat"] = {
 ["Group"] = {
 },
 ["Raid 40"] = {
@@ -704,179 +876,7 @@ Healbot_Config_Skins = {
 ["Raid 25"] = {
 },
 },
-["HealBar"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["StickyFrames"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["HeadText"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["BarVisibility"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["Healing"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["Icons"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["DupBarsPrivList"] = {
-["Group"] = true,
-["Raid 40"] = true,
-["Standard"] = true,
-["Raid 25"] = true,
-},
-["BarCol"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["IconText"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["RaidIcon"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["CustomCols"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["AdaptiveOrder"] = {
-["Group"] = {
-"Plugin",
-"RecentHeals",
-"Debuffs",
-"Aggro",
-"Threat",
-"Highlight",
-"Target",
-"OOR",
-"Buffs",
-"Overheals",
-"Absorbs",
-},
-["Raid 40"] = {
-"Plugin",
-"RecentHeals",
-"Debuffs",
-"Aggro",
-"Threat",
-"Highlight",
-"Target",
-"OOR",
-"Buffs",
-"Overheals",
-"Absorbs",
-},
-["Standard"] = {
-"Plugin",
-"RecentHeals",
-"Debuffs",
-"Aggro",
-"Threat",
-"Highlight",
-"Target",
-"OOR",
-"Buffs",
-"Overheals",
-"Absorbs",
-},
-["Raid 25"] = {
-"Plugin",
-"RecentHeals",
-"Debuffs",
-"Aggro",
-"Threat",
-"Highlight",
-"Target",
-"OOR",
-"Buffs",
-"Overheals",
-"Absorbs",
-},
-},
-["ToolTip"] = {
-},
-["Enemy"] = {
-["Group"] = {
-},
-["Raid 40"] = {
-},
-["Standard"] = {
-},
-["Raid 25"] = {
-},
-},
-["BarAggro"] = {
+["FocusGroups"] = {
 ["Group"] = {
 },
 ["Raid 40"] = {
@@ -939,12 +939,12 @@ HealBot_Globals = {
 ["RecentHeals"] = false,
 ["Aggro"] = true,
 ["Plugin"] = true,
-["Absorbs"] = false,
-["Overheals"] = false,
+["Threat"] = false,
+["OOR"] = false,
 ["Target"] = false,
 ["Buffs"] = true,
-["OOR"] = false,
-["Threat"] = false,
+["Overheals"] = false,
+["Absorbs"] = false,
 },
 ["EmergIncMelee"] = {
 ["Warrior"] = true,
@@ -957,8 +957,8 @@ HealBot_Globals = {
 ["Druid"] = false,
 ["Priest"] = false,
 ["Hunter"] = false,
-["Death Knight"] = true,
 ["Warlock"] = false,
+["Death Knight"] = true,
 },
 ["CustomCuresReset"] = "6.0.0",
 ["Tooltip_ShowTarget"] = true,
@@ -987,8 +987,8 @@ HealBot_Globals = {
 ["Druid"] = true,
 ["Priest"] = true,
 ["Hunter"] = false,
-["Death Knight"] = false,
 ["Warlock"] = false,
+["Death Knight"] = false,
 },
 ["CustomBuffsIconGlow"] = {
 },
@@ -997,11 +997,11 @@ HealBot_Globals = {
 ["OverrideFrames"] = {
 ["HIDEBOSSF"] = true,
 ["USE"] = 1,
-["HIDEPTF"] = false,
-["HIDEFOCUSF"] = false,
-["HIDERAIDF"] = true,
-["RUNBLIZZEVENTS"] = false,
 ["HIDEPARTYF"] = false,
+["RUNBLIZZEVENTS"] = false,
+["HIDERAIDF"] = true,
+["HIDEFOCUSF"] = false,
+["HIDEPTF"] = false,
 },
 ["LastVersionSkinUpdate"] = "26.4",
 ["Tooltip_ShowLevel"] = true,
@@ -1015,8 +1015,8 @@ HealBot_Globals = {
 ["SmartCastDebuff"] = true,
 ["Tooltip_MouseWheel"] = false,
 ["CustomDebuffsFilter"] = {
-["DEFAULT"] = 1,
 ["Automatic Debuffs"] = 1,
+["DEFAULT"] = 1,
 },
 ["TestBarsIcons"] = {
 ["DEBUFF"] = false,
@@ -1030,7 +1030,7 @@ HealBot_Globals = {
 ["PluginBuffWatch"] = true,
 ["OptionsTheme"] = 1,
 ["PluginHealthWatch"] = true,
-["LAG"] = 0.03,
+["LAG"] = 0.029,
 ["VehicleFontSizeReduction"] = 4,
 ["FrameStrata"] = "LOW",
 ["RightButtonOptions"] = false,
@@ -1064,14 +1064,14 @@ HealBot_Globals = {
 ["HAZARDFREQ"] = 0.3,
 ["HAZARDMINALPHA"] = 0.25,
 ["GLOW"] = 3,
-["GHMINUNITS"] = 5,
-["HEALTHDROPTIME"] = 3,
+["FGDIMMING"] = 2.5,
+["FGRAIDONLY"] = false,
 ["GHDIMMING"] = 0,
 ["HOTBARDEBUFF"] = 1,
-["FGDIMMING"] = 2.5,
-["HEALTHDROPPCT"] = 400,
+["GHMINUNITS"] = 5,
 ["HEALTHDROP"] = true,
-["FGRAIDONLY"] = false,
+["HEALTHDROPPCT"] = 400,
+["HEALTHDROPTIME"] = 3,
 ["OMAX"] = 0.95,
 ["ICONGLOW"] = 3,
 },
@@ -1104,63 +1104,63 @@ HealBot_Globals = {
 ["PresetColours"] = {
 {
 ["A"] = 1,
+["R"] = 0.2,
+["G"] = 0.2,
 ["B"] = 0.9,
-["G"] = 0.2,
-["R"] = 0.2,
 },
 {
 ["A"] = 1,
-["B"] = 0.2,
-["G"] = 0.2,
 ["R"] = 0.9,
+["G"] = 0.2,
+["B"] = 0.2,
 },
 {
 ["A"] = 1,
-["B"] = 0.2,
+["R"] = 0.2,
 ["G"] = 0.9,
-["R"] = 0.2,
+["B"] = 0.2,
 },
 {
 ["A"] = 1,
-["B"] = 0.8,
+["R"] = 0.8,
 ["G"] = 0.2,
-["R"] = 0.8,
-},
-{
-["A"] = 1,
 ["B"] = 0.8,
-["G"] = 0.8,
+},
+{
+["A"] = 1,
 ["R"] = 0.2,
+["G"] = 0.8,
+["B"] = 0.8,
 },
 {
 ["A"] = 1,
-["B"] = 0.2,
-["G"] = 0.5,
 ["R"] = 0.8,
-},
-{
-["A"] = 1,
+["G"] = 0.5,
 ["B"] = 0.2,
-["G"] = 0.7,
-["R"] = 0.7,
 },
 {
 ["A"] = 1,
-["B"] = 0.5,
+["R"] = 0.7,
 ["G"] = 0.7,
+["B"] = 0.2,
+},
+{
+["A"] = 1,
 ["R"] = 0.9,
-},
-{
-["A"] = 1,
-["B"] = 1,
-["G"] = 1,
-["R"] = 1,
-},
-{
-["A"] = 1,
-["B"] = 0.7,
 ["G"] = 0.7,
+["B"] = 0.5,
+},
+{
+["A"] = 1,
+["R"] = 1,
+["G"] = 1,
+["B"] = 1,
+},
+{
+["A"] = 1,
 ["R"] = 0.7,
+["G"] = 0.7,
+["B"] = 0.7,
 },
 },
 ["PresetColoursAlias"] = {
@@ -1193,8 +1193,8 @@ HealBot_Globals = {
 ["Druid"] = true,
 ["Priest"] = true,
 ["Hunter"] = false,
-["Death Knight"] = false,
 ["Warlock"] = true,
+["Death Knight"] = false,
 },
 ["dislikeMount"] = {
 },
@@ -1232,24 +1232,24 @@ HealBot_Globals = {
 [198069] = 1,
 [196644] = 1,
 [77489] = 1,
-[27827] = 1,
 [70772] = 1,
-[212570] = 1,
+[139] = 1,
+[15286] = 1,
 [197031] = 1,
-[196490] = 1,
+[114255] = 1,
 [265258] = 1,
-[194384] = 1,
-[214121] = 1,
-[197268] = 1,
+[47536] = 1,
+[81782] = 1,
 [211443] = 1,
+[197268] = 1,
 [234711] = 1,
 [45242] = 1,
 [208065] = 1,
-[81782] = 1,
-[47536] = 1,
-[114255] = 1,
-[15286] = 1,
-[139] = 1,
+[214121] = 1,
+[194384] = 1,
+[196490] = 1,
+[212570] = 1,
+[27827] = 1,
 },
 ["HUNT"] = {
 [136] = 1,
@@ -1274,14 +1274,133 @@ HealBot_Globals = {
 [207386] = 1,
 [33763] = 1,
 [203651] = 1,
-[29166] = 1,
+[102342] = 1,
 [192081] = 1,
 [203554] = 1,
 [279793] = 1,
-[200389] = 1,
 [155777] = 1,
+[200389] = 1,
 [48438] = 1,
-[102342] = 1,
+[29166] = 1,
+},
+["MAGE"] = {
+[168] = 1,
+[12051] = 1,
+[45438] = 1,
+[116267] = 1,
+[12042] = 1,
+[1463] = 1,
+[235313] = 1,
+[235450] = 1,
+[604] = 1,
+[7302] = 1,
+[6117] = 1,
+[11426] = 1,
+[130] = 1,
+[30482] = 1,
+},
+["ALL"] = {
+[215247] = 1,
+[235966] = 1,
+[221878] = 1,
+[272276] = 1,
+[208052] = 1,
+[28880] = 1,
+[225126] = 1,
+[242622] = 1,
+[20594] = 1,
+[253287] = 1,
+[242623] = 1,
+[271843] = 1,
+[68992] = 1,
+[242586] = 1,
+[208215] = 1,
+},
+["DEMO"] = {
+[212800] = 1,
+[187827] = 1,
+[203720] = 1,
+},
+["PALA"] = {
+[85499] = 1,
+[243174] = 1,
+[53651] = 1,
+[54149] = 1,
+[31850] = 1,
+[53563] = 1,
+[6940] = 1,
+[156910] = 1,
+[498] = 1,
+[19750] = 1,
+[210256] = 1,
+[642] = 1,
+[19752] = 1,
+[223817] = 1,
+[20216] = 1,
+[200025] = 1,
+[216327] = 1,
+[223306] = 1,
+[200654] = 1,
+[287280] = 1,
+[1044] = 1,
+[204018] = 1,
+},
+["ROGU"] = {
+[31224] = 1,
+[11327] = 1,
+[5277] = 1,
+[1966] = 1,
+},
+["WARL"] = {
+[104773] = 1,
+[108366] = 1,
+},
+["DEAT"] = {
+[42650] = 1,
+[48707] = 1,
+[55233] = 1,
+[51052] = 1,
+[116888] = 1,
+[81256] = 1,
+[48792] = 1,
+},
+["SHAM"] = {
+[197995] = 1,
+[157153] = 1,
+[98008] = 1,
+[108271] = 1,
+[193796] = 1,
+[108281] = 1,
+[114049] = 1,
+[207778] = 1,
+[326059] = 1,
+[61295] = 1,
+[73920] = 1,
+[73685] = 1,
+[51564] = 1,
+[260734] = 1,
+[196834] = 1,
+[79206] = 1,
+[204288] = 1,
+[2825] = 1,
+[32182] = 1,
+},
+["MONK"] = {
+[122278] = 1,
+[116849] = 1,
+[114030] = 1,
+[124081] = 1,
+[124682] = 1,
+[115308] = 1,
+[119611] = 1,
+[198533] = 1,
+[115176] = 1,
+[125174] = 1,
+[122783] = 1,
+[185158] = 1,
+[116680] = 1,
+[191840] = 1,
+[115203] = 1,
 },
 ["EVOK"] = {
 [357170] = 1,
@@ -1298,134 +1417,21 @@ HealBot_Globals = {
 [373861] = 1,
 [370537] = 1,
 [377102] = 1,
-[367364] = 1,
+[359816] = 1,
 [390386] = 1,
 [355936] = 1,
-[359816] = 1,
-},
-["ALL"] = {
-[208215] = 1,
-[242586] = 1,
-[221878] = 1,
-[272276] = 1,
-[208052] = 1,
-[28880] = 1,
-[225126] = 1,
-[242622] = 1,
-[271843] = 1,
-[253287] = 1,
-[242623] = 1,
-[235966] = 1,
-[215247] = 1,
-[20594] = 1,
-[68992] = 1,
-},
-["DEMO"] = {
-[212800] = 1,
-[187827] = 1,
-[203720] = 1,
-},
-["SHAM"] = {
-[197995] = 1,
-[157153] = 1,
-[98008] = 1,
-[108271] = 1,
-[193796] = 1,
-[108281] = 1,
-[114049] = 1,
-[207778] = 1,
-[326059] = 1,
-[61295] = 1,
-[73920] = 1,
-[32182] = 1,
-[51564] = 1,
-[2825] = 1,
-[204288] = 1,
-[79206] = 1,
-[196834] = 1,
-[260734] = 1,
-[73685] = 1,
-},
-["ROGU"] = {
-[31224] = 1,
-[11327] = 1,
-[5277] = 1,
-[1966] = 1,
-},
-["DEAT"] = {
-[42650] = 1,
-[48707] = 1,
-[55233] = 1,
-[48792] = 1,
-[116888] = 1,
-[81256] = 1,
-[51052] = 1,
-},
-["WARL"] = {
-[104773] = 1,
-[108366] = 1,
-},
-["PALA"] = {
-[85499] = 1,
-[243174] = 1,
-[53651] = 1,
-[54149] = 1,
-[31850] = 1,
-[53563] = 1,
-[6940] = 1,
-[156910] = 1,
-[498] = 1,
-[19750] = 1,
-[204018] = 1,
-[642] = 1,
-[223817] = 1,
-[19752] = 1,
-[20216] = 1,
-[200654] = 1,
-[216327] = 1,
-[200025] = 1,
-[223306] = 1,
-[287280] = 1,
-[1044] = 1,
-[210256] = 1,
-},
-["MONK"] = {
-[122278] = 1,
-[116849] = 1,
-[114030] = 1,
-[124081] = 1,
-[124682] = 1,
-[115308] = 1,
-[115203] = 1,
-[198533] = 1,
-[115176] = 1,
-[125174] = 1,
-[122783] = 1,
-[185158] = 1,
-[116680] = 1,
-[191840] = 1,
-[119611] = 1,
-},
-["MAGE"] = {
-[168] = 1,
-[12051] = 1,
-[30482] = 1,
-[116267] = 1,
-[12042] = 1,
-[130] = 1,
-[45438] = 1,
-[235450] = 1,
-[11426] = 1,
-[7302] = 1,
-[6117] = 1,
-[604] = 1,
-[1463] = 1,
-[235313] = 1,
+[367364] = 1,
 },
 },
 ["AcceptSkins"] = 1,
 ["ClassicHoTTime"] = 6,
-["SmartCastRes"] = true,
+["CustomBuffBarColour"] = {
+["CustomBuff"] = {
+["R"] = 0.25,
+["G"] = 0.58,
+["B"] = 0.8,
+},
+},
 ["CombatAurasOn"] = true,
 ["OverrideFocusGroups"] = {
 true,
@@ -1448,8 +1454,8 @@ true,
 ["Druid"] = false,
 ["Priest"] = false,
 ["Hunter"] = true,
-["Death Knight"] = false,
 ["Warlock"] = true,
+["Death Knight"] = false,
 },
 ["HealAbsorbsDiv"] = 100,
 ["Tooltip_HeaderFontSize"] = 14,
@@ -1462,7 +1468,7 @@ true,
 },
 ["PluginTimeToDie"] = true,
 ["Tooltip_Scale"] = 1,
-["PluginMyCooldowns"] = true,
+["PluginPerformance"] = true,
 ["ShowTooltip"] = true,
 ["CustomBuffsFilter"] = {
 },
@@ -1482,7 +1488,7 @@ true,
 "lodJlK4kjU4a8d",
 "lodJlK4kjU4a8d",
 },
-["LASTSAVE"] = 1794381893,
+["LASTSAVE"] = 1794385924,
 ["FREQSAVES"] = false,
 ["BUFFS"] = {
 "lodJlK4kjU4a8d",
@@ -1501,55 +1507,18 @@ true,
 },
 ["KEEP"] = 14,
 },
-["Tooltip_ShowBuffIconInfo"] = false,
+["IconKeyCombo"] = {
+},
 ["CombatAurasMaxDur"] = 120,
 ["CompressExport"] = true,
 ["PermPrivateDamagers"] = {
 },
 ["PermPrivateHealers"] = {
 },
-["Tooltip_DetailFontSize"] = 12,
+["InHealDiv"] = 100,
 ["PluginTweaks"] = true,
 ["TalentInspect"] = true,
 ["Tooltip_ShowSpellExtra"] = true,
-["Tooltip_ShowMana"] = true,
-["SmartCast"] = true,
-["DisableToolTipInCombat"] = false,
-["CustomBuffsIconSet"] = {
-},
-["Tooltip_ShowRank"] = false,
-["CustomDebuffsShowBarCol"] = {
-["DEFAULT"] = 4,
-["Automatic Debuffs"] = 4,
-},
-["UseIconCommands"] = false,
-["Tooltip_ShowDebuffIconInfo"] = true,
-["PluginExtraButtons"] = true,
-["Tooltip_ShowMyBuffs"] = false,
-["HealBot_ButtonPosition"] = 300,
-["SmartCastBuff"] = true,
-["OneTimeMsg"] = {
-["VERSION"] = false,
-},
-["PluginRequests"] = true,
-["TopRole"] = "TANK",
-["Tooltip_ShowCD"] = false,
-["CombatAurasNums"] = false,
-["AbsorbDiv"] = 100,
-["excludeMount"] = {
-},
-["Tooltip_MaxButtons"] = 5,
-["MacroSuppressSound"] = true,
-["Tooltip_ShowRequiredBuffs"] = true,
-["HideOptions"] = true,
-["Tooltip_ShowSpec"] = true,
-["useUTF8"] = false,
-["CustomBuffIDMethod"] = {
-},
-["LastSupporter"] = 1,
-["IncMainAssist"] = true,
-["PluginThreat"] = true,
-["Tooltip_ShowHoT"] = false,
 ["OverrideColours"] = {
 ["USEADAPTIVE"] = 1,
 ["POWERALT"] = -1,
@@ -1558,70 +1527,101 @@ true,
 ["USEPOWER"] = 1,
 ["USEROLE"] = 1,
 },
+["Tooltip_ShowHoT"] = false,
+["PluginThreat"] = true,
+["IncMainAssist"] = true,
+["Tooltip_ShowRank"] = false,
+["CustomDebuffsShowBarCol"] = {
+["Automatic Debuffs"] = 4,
+["DEFAULT"] = 4,
+},
+["UseIconCommands"] = false,
+["LastSupporter"] = 1,
+["PluginExtraButtons"] = true,
+["Tooltip_ShowMyBuffs"] = false,
+["CustomBuffIDMethod"] = {
+},
+["useUTF8"] = false,
+["OneTimeMsg"] = {
+["VERSION"] = false,
+},
+["PluginRequests"] = true,
+["TopRole"] = "TANK",
+["AbsorbDiv"] = 100,
+["CombatAurasNums"] = false,
+["Tooltip_ShowCD"] = false,
+["excludeMount"] = {
+},
+["Tooltip_MaxButtons"] = 5,
+["MacroSuppressSound"] = true,
+["Tooltip_ShowRequiredBuffs"] = true,
+["HideOptions"] = true,
+["Tooltip_ShowSpec"] = true,
+["SmartCastBuff"] = true,
+["HealBot_ButtonPosition"] = 300,
+["Tooltip_ShowDebuffIconInfo"] = true,
+["CustomBuffsIconSet"] = {
+},
+["DisableToolTipInCombat"] = false,
+["SmartCast"] = true,
+["Tooltip_ShowMana"] = true,
 ["RaidHideMethod"] = 0,
 ["HideUnlockedTag"] = true,
-["InHealDiv"] = 100,
+["Tooltip_DetailFontSize"] = 12,
 ["CombatAurasDebuffs"] = 3,
-["IconKeyCombo"] = {
-},
-["PluginPerformance"] = true,
+["Tooltip_ShowBuffIconInfo"] = false,
+["PluginMyCooldowns"] = true,
 ["OverrideAdaptiveCol"] = {
 ["Absorbs"] = {
-["B"] = 1,
-["G"] = 1,
 ["R"] = 1,
+["G"] = 1,
+["B"] = 1,
 },
 ["Threat"] = {
-["B"] = 0.04,
-["G"] = 0.49,
 ["R"] = 1,
+["G"] = 0.49,
+["B"] = 0.04,
 },
 ["Highlight"] = {
-["B"] = 1,
-["G"] = 1,
 ["R"] = 0.4,
+["G"] = 1,
+["B"] = 1,
 },
 ["RecentHeals"] = {
-["B"] = 0.2,
-["G"] = 1,
 ["R"] = 0.1,
+["G"] = 1,
+["B"] = 0.2,
 },
 ["Aggro"] = {
-["B"] = 0,
-["G"] = 0,
 ["R"] = 1,
-},
-["Overheals"] = {
-["B"] = 0.2,
-["G"] = 0.2,
-["R"] = 1,
-},
-["OOR"] = {
-["B"] = 0,
 ["G"] = 0,
-["R"] = 0,
+["B"] = 0,
 },
 ["Target"] = {
-["B"] = 0.2,
-["G"] = 0.9,
 ["R"] = 1,
+["G"] = 0.9,
+["B"] = 0.2,
+},
+["OOR"] = {
+["R"] = 0,
+["G"] = 0,
+["B"] = 0,
+},
+["Overheals"] = {
+["R"] = 1,
+["G"] = 0.2,
+["B"] = 0.2,
 },
 },
 ["CDCBarColour"] = {
 ["Custom15"] = {
-["B"] = 0.28,
-["G"] = 0,
 ["R"] = 0.45,
+["G"] = 0,
+["B"] = 0.28,
 },
 },
 ["DebugOut"] = false,
-["CustomBuffBarColour"] = {
-["CustomBuff"] = {
-["B"] = 0.8,
-["G"] = 0.58,
-["R"] = 0.25,
-},
-},
+["SmartCastRes"] = true,
 }
 HealBot_Class_Spells = {
 }

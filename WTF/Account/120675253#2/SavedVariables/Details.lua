@@ -78,14 +78,6 @@ _detalhes_global = {
 ["realtime_dps_shadow"] = true,
 },
 ["show_warning_id1_amount"] = 0,
-["run_code"] = {
-["on_groupchange"] = "\n-- this code runs when the player enter or leave a group",
-["on_zonechanged"] = "\n-- when the player changes zone, this code will run",
-["on_init"] = "\n-- code to run when Details! initializes, put here code which only will run once\n-- this also will run then the profile is changed\n\n--size of the death log tooltip in the Deaths display (default 350)\nDetails.death_tooltip_width = 350;\n\n--when in arena or battleground, details! silently switch to activity time (goes back to the old setting on leaving, default true)\nDetails.force_activity_time_pvp = true;\n\n--speed of the bar animations (default 33)\nDetails.animation_speed = 33;\n\n--threshold to trigger slow or fast speed (default 0.45)\nDetails.animation_speed_mintravel = 0.45;\n\n--call to update animations\nDetails:RefreshAnimationFunctions();\n\n--max window size, does require a /reload to work (default 480 x 450)\nDetails.max_window_size.width = 480;\nDetails.max_window_size.height = 450;\n\n--use the arena team color as the class color (default true)\nDetails.color_by_arena_team = true;\n\n--how much time the update warning is shown (default 10)\nDetails.update_warning_timeout = 10;",
-["on_specchanged"] = "\n-- run when the player changes its spec",
-["on_leavecombat"] = "\n-- this code runs when the player leave combat",
-["on_entercombat"] = "\n-- this code runs when the player enters in combat",
-},
 ["latest_shield_spellid_cache_access"] = 1793915215,
 ["deathlog_healingdone_min"] = 1,
 ["current_exp_raid_encounters"] = {
@@ -244,7 +236,7 @@ _detalhes_global = {
 ["slashk_dnd"] = false,
 ["encounter_journal_cache"] = {
 },
-["combat_id_global"] = 1304,
+["combat_id_global"] = 1351,
 ["displays_by_spec"] = {
 },
 ["damage_scroll_position"] = {
@@ -337,13 +329,7 @@ _detalhes_global = {
 ["bar_texture"] = "You Are the Best!",
 },
 ["got_first_run"] = true,
-["aura_tracker_frame"] = {
-["scaletable"] = {
-["scale"] = 1,
-},
-["position"] = {
-},
-},
+["slash_me_used"] = false,
 ["data_wipes_exp"] = {
 ["9"] = false,
 ["14"] = false,
@@ -355,21 +341,12 @@ _detalhes_global = {
 ["spell_category_latest_save"] = 0,
 ["keystone_alts_cache"] = {
 },
-["tutorial"] = {
-["unlock_button"] = 0,
-["main_help_button"] = 111,
-["logons"] = 111,
-["version_announce"] = 0,
-["ctrl_click_close_tutorial"] = false,
-["alert_frames"] = {
-false,
-false,
-false,
-false,
-false,
-false,
+["aura_tracker_frame"] = {
+["scaletable"] = {
+["scale"] = 1,
 },
-["bookmark_tutorial"] = false,
+["position"] = {
+},
 },
 ["all_switch_config"] = {
 ["scale"] = 1,
@@ -2353,7 +2330,7 @@ false,
 ["text_yoffset"] = 0,
 ["texture_background_class_color"] = false,
 ["playername_alignment_auto"] = true,
-["font_face_file"] = "Interface\\Addons\\Details\\fonts\\Accidental Presidency.ttf",
+["font_face_file"] = "Interface\\Addons\\Plater\\fonts\\Accidental Presidency.ttf",
 ["backdrop"] = {
 ["color"] = {
 1,
@@ -2551,7 +2528,7 @@ false,
 0,
 0.150228589773178,
 },
-["texture_background_file"] = "Interface\\AddOns\\Details\\images\\bar4_reverse",
+["texture_background_file"] = "Interface\\AddOns\\Plater\\images\\bar4_reverse",
 ["overlay_texture"] = "Details D'ictum",
 ["texture_custom_file"] = "Interface\\",
 ["texture_highlight"] = "Interface\\FriendsFrame\\UI-FriendsList-Highlight",
@@ -3434,11 +3411,16 @@ false,
 ["class_time_played"] = {
 [0] = {
 ["MAGE"] = 36.49399999999878,
-["PRIEST"] = 215561.2070000001,
+["PRIEST"] = 229721.4090000001,
 },
 },
 ["auto_change_to_standard"] = true,
-["slash_me_used"] = false,
+["frame_background_color"] = {
+0.0549,
+0.0549,
+0.0549,
+0.934,
+},
 ["exit_errors"] = {
 },
 ["debug_options_panel"] = {
@@ -3449,6 +3431,14 @@ false,
 },
 },
 ["show_warning_id1"] = true,
+["run_code"] = {
+["on_groupchange"] = "\n-- this code runs when the player enter or leave a group",
+["on_zonechanged"] = "\n-- when the player changes zone, this code will run",
+["on_init"] = "\n-- code to run when Details! initializes, put here code which only will run once\n-- this also will run then the profile is changed\n\n--size of the death log tooltip in the Deaths display (default 350)\nDetails.death_tooltip_width = 350;\n\n--when in arena or battleground, details! silently switch to activity time (goes back to the old setting on leaving, default true)\nDetails.force_activity_time_pvp = true;\n\n--speed of the bar animations (default 33)\nDetails.animation_speed = 33;\n\n--threshold to trigger slow or fast speed (default 0.45)\nDetails.animation_speed_mintravel = 0.45;\n\n--call to update animations\nDetails:RefreshAnimationFunctions();\n\n--max window size, does require a /reload to work (default 480 x 450)\nDetails.max_window_size.width = 480;\nDetails.max_window_size.height = 450;\n\n--use the arena team color as the class color (default true)\nDetails.color_by_arena_team = true;\n\n--how much time the update warning is shown (default 10)\nDetails.update_warning_timeout = 10;",
+["on_specchanged"] = "\n-- run when the player changes its spec",
+["on_leavecombat"] = "\n-- this code runs when the player leave combat",
+["on_entercombat"] = "\n-- this code runs when the player enters in combat",
+},
 ["mythic_plus"] = {
 ["make_overall_boss_only"] = false,
 ["mythicrun_chart_frame"] = {
@@ -3471,13 +3461,23 @@ false,
 ["last_mythicrun_chart"] = {
 },
 },
-["frame_background_color"] = {
-0.0549,
-0.0549,
-0.0549,
-0.934,
-},
 ["latest_npcid_pool_access"] = 1794286909,
+["tutorial"] = {
+["unlock_button"] = 0,
+["main_help_button"] = 123,
+["logons"] = 123,
+["version_announce"] = 0,
+["ctrl_click_close_tutorial"] = false,
+["alert_frames"] = {
+false,
+false,
+false,
+false,
+false,
+false,
+},
+["bookmark_tutorial"] = false,
+},
 ["spellid_ignored"] = {
 },
 ["createauraframe"] = {

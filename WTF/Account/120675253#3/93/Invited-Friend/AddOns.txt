@@ -28,7 +28,7 @@ Blizzard_ObjectiveTracker: enabled
 Blizzard_CompactRaidFrames: enabled
 Bagnonium_Bank: enabled
 Blizzard_CombatText: enabled
-Bagnon_Bank: disabled
+Bagnon_Bank: enabled
 !Swatter: disabled
 !ImprovedErrorFrame: disabled
 AccWideUILayoutSelection: disabled
