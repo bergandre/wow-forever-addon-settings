@@ -32,8 +32,8 @@ _detalhes_database = {
 },
 },
 ["boss_hp"] = 1,
-["CombatStartedAt"] = 28368.559,
-["tempo_start"] = 801.845,
+["CombatStartedAt"] = 62328.345,
+["overall_added"] = true,
 ["last_events_tables"] = {
 },
 ["alternate_power"] = {
@@ -44,7 +44,8 @@ _detalhes_database = {
 ["cleu_events"] = {
 ["n"] = 1,
 },
-["playing_solo"] = true,
+["playerTalents"] = {
+},
 ["totals"] = {
 0,
 0,
@@ -102,8 +103,8 @@ _detalhes_database = {
 ["enemy"] = "Unknown",
 ["trinketProcs"] = {
 },
-["TotalElapsedCombatTime"] = 39.61499999999796,
-["CombatEndedAt"] = 28408.174,
+["TotalElapsedCombatTime"] = 21.91900000000169,
+["CombatEndedAt"] = 62350.264,
 ["aura_timeline"] = {
 },
 ["compressed_charts"] = {
@@ -112,7 +113,7 @@ _detalhes_database = {
 ["end_time"] = 954.168,
 ["mapId"] = 1,
 ["EncounterName"] = "Archmage Arugal",
-["overall_added"] = true,
+["tempo_start"] = 801.845,
 ["frags"] = {
 },
 ["is_challenge"] = false,
@@ -144,20 +145,19 @@ _detalhes_database = {
 ["start_time"] = 0,
 ["TimeData"] = {
 },
-["playerTalents"] = {
-},
+["playing_solo"] = true,
 },
 },
 },
 ["apocalypse_savedsegments"] = {
 },
 ["ocd_tracker"] = {
-["show_title"] = true,
+["enabled"] = false,
 ["current_cooldowns"] = {
 },
 ["lines_per_column"] = 12,
 ["group_frames"] = true,
-["show_options"] = false,
+["width"] = 120,
 ["frames"] = {
 ["defensive-raid"] = {
 },
@@ -172,7 +172,7 @@ _detalhes_database = {
 ["defensive-personal"] = {
 },
 },
-["width"] = 120,
+["show_options"] = false,
 ["ignored_cooldowns"] = {
 },
 ["cooldowns"] = {
@@ -190,7 +190,7 @@ _detalhes_database = {
 ["only_inside_instance"] = true,
 ["only_in_group"] = true,
 },
-["enabled"] = false,
+["show_title"] = true,
 ["filters"] = {
 ["itemutil"] = false,
 ["itempower"] = false,
@@ -211,16 +211,1016 @@ _detalhes_database = {
 },
 ["arena_data_compressed"] = {
 },
-["announce_firsthit"] = {
-["enabled"] = true,
-["channel"] = "SELF",
-},
+["on_death_menu"] = false,
 ["arena_data_index_selected"] = 1,
-["coach"] = {
-["enabled"] = false,
-["welcome_panel_pos"] = {
+["damage_meter_sessions"] = {
+{
+["playerCasts"] = {
 },
-["last_coach_name"] = false,
+["endUnixTime"] = 1794414302,
+["sessionId"] = 1,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414289,
+["endTime"] = 57180.862,
+["sessionName"] = "Stormhide",
+["startDate"] = "18:24:49",
+["startTime"] = 57167.393,
+["endDate"] = "18:25:02",
+["detailsId"] = "Stormhide1",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414457,
+["sessionId"] = 2,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414357,
+["endTime"] = 57336.05,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:25:57",
+["startTime"] = 57235.765,
+["endDate"] = "18:27:37",
+["detailsId"] = "Bael'dun Soldier2",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414522,
+["sessionId"] = 3,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414503,
+["endTime"] = 57400.415,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:28:23",
+["startTime"] = 57381.305,
+["endDate"] = "18:28:42",
+["detailsId"] = "Bael'dun Soldier3",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414549,
+["sessionId"] = 4,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414537,
+["endTime"] = 57427.923,
+["sessionName"] = "Malgin Barleybrew",
+["startDate"] = "18:28:57",
+["startTime"] = 57415.557,
+["endDate"] = "18:29:09",
+["detailsId"] = "Malgin Barleybrew4",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414580,
+["sessionId"] = 5,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414567,
+["endTime"] = 57458.763,
+["sessionName"] = "Bael'dun Officer",
+["startDate"] = "18:29:27",
+["startTime"] = 57445.84,
+["endDate"] = "18:29:40",
+["detailsId"] = "Bael'dun Officer5",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414653,
+["sessionId"] = 6,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414638,
+["endTime"] = 57532.09,
+["sessionName"] = "Bael'dun Officer",
+["startDate"] = "18:30:38",
+["startTime"] = 57517.164,
+["endDate"] = "18:30:53",
+["detailsId"] = "Bael'dun Officer6",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414671,
+["sessionId"] = 7,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414667,
+["endTime"] = 57549.537,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:31:07",
+["startTime"] = 57545.849,
+["endDate"] = "18:31:11",
+["detailsId"] = "Bael'dun Rifleman7",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414681,
+["sessionId"] = 8,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414675,
+["endTime"] = 57559.26,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:31:15",
+["startTime"] = 57553.859,
+["endDate"] = "18:31:21",
+["detailsId"] = "Bael'dun Rifleman8",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414692,
+["sessionId"] = 9,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414687,
+["endTime"] = 57570.18,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:31:27",
+["startTime"] = 57565.83,
+["endDate"] = "18:31:32",
+["detailsId"] = "Bael'dun Soldier9",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414710,
+["sessionId"] = 10,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414700,
+["endTime"] = 57588.783,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:31:40",
+["startTime"] = 57578.782,
+["endDate"] = "18:31:50",
+["detailsId"] = "Bael'dun Soldier10",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414737,
+["sessionId"] = 11,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414715,
+["endTime"] = 57615.171,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:31:55",
+["startTime"] = 57593.432,
+["endDate"] = "18:32:17",
+["detailsId"] = "Bael'dun Soldier11",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414784,
+["sessionId"] = 12,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414757,
+["endTime"] = 57662.43,
+["sessionName"] = "Bael'dun Officer",
+["startDate"] = "18:32:37",
+["startTime"] = 57635.473,
+["endDate"] = "18:33:04",
+["detailsId"] = "Bael'dun Officer12",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414795,
+["sessionId"] = 13,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414791,
+["endTime"] = 57673.41600000001,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:33:11",
+["startTime"] = 57669.928,
+["endDate"] = "18:33:15",
+["detailsId"] = "Bael'dun Soldier13",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414805,
+["sessionId"] = 14,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414799,
+["endTime"] = 57683.556,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:33:19",
+["startTime"] = 57677.531,
+["endDate"] = "18:33:25",
+["detailsId"] = "Bael'dun Rifleman14",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414816,
+["sessionId"] = 15,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414810,
+["endTime"] = 57694.5,
+["sessionName"] = "Bael'dun Officer",
+["startDate"] = "18:33:30",
+["startTime"] = 57688.302,
+["endDate"] = "18:33:36",
+["detailsId"] = "Bael'dun Officer15",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414840,
+["sessionId"] = 16,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414821,
+["endTime"] = 57718.438,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:33:41",
+["startTime"] = 57700.091,
+["endDate"] = "18:34:00",
+["detailsId"] = "Bael'dun Soldier16",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414881,
+["sessionId"] = 17,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414878,
+["endTime"] = 57760.002,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:34:38",
+["startTime"] = 57756.196,
+["endDate"] = "18:34:41",
+["detailsId"] = "Bael'dun Rifleman17",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414896,
+["sessionId"] = 18,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414887,
+["endTime"] = 57774.193,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:34:47",
+["startTime"] = 57765.398,
+["endDate"] = "18:34:56",
+["detailsId"] = "Bael'dun Rifleman18",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414928,
+["sessionId"] = 19,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414904,
+["endDate"] = "18:35:28",
+["endTime"] = 57806.369,
+["startDate"] = "18:35:04",
+["startTime"] = 57782.688,
+["sessionName"] = "Dig Rat",
+["detailsId"] = "Dig Rat19",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414960,
+["sessionId"] = 20,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414928,
+["endDate"] = "18:36:00",
+["endTime"] = 57839.017,
+["startDate"] = "18:35:28",
+["startTime"] = 57806.369,
+["sessionName"] = "Bael'dun Rifleman",
+["detailsId"] = "Bael'dun Rifleman20",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794414968,
+["sessionId"] = 21,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794414960,
+["endTime"] = 57846.648,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:36:00",
+["startTime"] = 57839.017,
+["endDate"] = "18:36:08",
+["detailsId"] = "Bael'dun Rifleman21",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415020,
+["sessionId"] = 22,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415005,
+["endTime"] = 57898.473,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:36:45",
+["startTime"] = 57884.039,
+["endDate"] = "18:37:00",
+["detailsId"] = "Bael'dun Soldier22",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415049,
+["sessionId"] = 23,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415032,
+["endTime"] = 57927.618,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:37:12",
+["startTime"] = 57911.112,
+["endDate"] = "18:37:29",
+["detailsId"] = "Bael'dun Rifleman23",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415069,
+["sessionId"] = 24,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415067,
+["endTime"] = 57947.826,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:37:47",
+["startTime"] = 57945.203,
+["endDate"] = "18:37:49",
+["detailsId"] = "Bael'dun Rifleman24",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415098,
+["sessionId"] = 25,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415085,
+["endTime"] = 57976.561,
+["sessionName"] = "Bael'dun Officer",
+["startDate"] = "18:38:05",
+["startTime"] = 57963.57,
+["endDate"] = "18:38:18",
+["detailsId"] = "Bael'dun Officer25",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415143,
+["sessionId"] = 26,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415113,
+["endTime"] = 58021.536,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:38:33",
+["startTime"] = 57991.963,
+["endDate"] = "18:39:03",
+["detailsId"] = "Bael'dun Rifleman26",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415176,
+["sessionId"] = 27,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415166,
+["endDate"] = "18:39:36",
+["endTime"] = 58055.16,
+["startDate"] = "18:39:26",
+["startTime"] = 58044.961,
+["sessionName"] = "Bael'dun Soldier",
+["detailsId"] = "Bael'dun Soldier27",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415191,
+["sessionId"] = 28,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415176,
+["endTime"] = 58069.783,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:39:36",
+["startTime"] = 58055.16,
+["endDate"] = "18:39:51",
+["detailsId"] = "Bael'dun Soldier28",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415239,
+["sessionId"] = 29,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415226,
+["endTime"] = 58117.454,
+["sessionName"] = "Bael'dun Officer",
+["startDate"] = "18:40:26",
+["startTime"] = 58104.623,
+["endDate"] = "18:40:39",
+["detailsId"] = "Bael'dun Officer29",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415268,
+["sessionId"] = 30,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415246,
+["endTime"] = 58146.276,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:40:46",
+["startTime"] = 58124.326,
+["endDate"] = "18:41:08",
+["detailsId"] = "Bael'dun Soldier30",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415280,
+["sessionId"] = 31,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415272,
+["endTime"] = 58158.803,
+["sessionName"] = "Bael'dun Officer",
+["startDate"] = "18:41:12",
+["startTime"] = 58150.6,
+["endDate"] = "18:41:20",
+["detailsId"] = "Bael'dun Officer31",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415300,
+["sessionId"] = 32,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415290,
+["endTime"] = 58178.621,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:41:30",
+["startTime"] = 58168.387,
+["endDate"] = "18:41:40",
+["detailsId"] = "Bael'dun Soldier32",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415328,
+["sessionId"] = 33,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415321,
+["endTime"] = 58207.011,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:42:01",
+["startTime"] = 58199.66600000001,
+["endDate"] = "18:42:08",
+["detailsId"] = "Bael'dun Rifleman33",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415350,
+["sessionId"] = 34,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415344,
+["endTime"] = 58228.806,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:42:24",
+["startTime"] = 58222.467,
+["endDate"] = "18:42:30",
+["detailsId"] = "Bael'dun Soldier34",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415378,
+["sessionId"] = 35,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415354,
+["endTime"] = 58256.731,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:42:34",
+["startTime"] = 58232.527,
+["endDate"] = "18:42:58",
+["detailsId"] = "Bael'dun Soldier35",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415390,
+["sessionId"] = 36,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415383,
+["endTime"] = 58268.524,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:43:03",
+["startTime"] = 58261.786,
+["endDate"] = "18:43:10",
+["detailsId"] = "Bael'dun Rifleman36",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415464,
+["sessionId"] = 37,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415437,
+["endTime"] = 58342.548,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:43:57",
+["startTime"] = 58315.712,
+["endDate"] = "18:44:24",
+["detailsId"] = "Bael'dun Rifleman37",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415474,
+["sessionId"] = 38,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415471,
+["endTime"] = 58353.05,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:44:31",
+["startTime"] = 58349.615,
+["endDate"] = "18:44:34",
+["detailsId"] = "Bael'dun Soldier38",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415504,
+["sessionId"] = 39,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415498,
+["endTime"] = 58383.053,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:44:58",
+["startTime"] = 58377.01,
+["endDate"] = "18:45:04",
+["detailsId"] = "Bael'dun Soldier39",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415548,
+["sessionId"] = 40,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415534,
+["endTime"] = 58426.823,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:45:34",
+["startTime"] = 58412.855,
+["endDate"] = "18:45:48",
+["detailsId"] = "Bael'dun Rifleman40",
+},
+nil,
+nil,
+nil,
+nil,
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415648,
+["sessionId"] = 45,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415640,
+["endTime"] = 58526.435,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:47:20",
+["startTime"] = 58518.786,
+["endDate"] = "18:47:28",
+["detailsId"] = "Bael'dun Rifleman45",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415674,
+["sessionId"] = 46,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415663,
+["endTime"] = 58552.387,
+["sessionName"] = "General Twinbraid",
+["startDate"] = "18:47:43",
+["startTime"] = 58541.312,
+["endDate"] = "18:47:54",
+["detailsId"] = "General Twinbraid46",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415730,
+["sessionId"] = 47,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415711,
+["endTime"] = 58608.626,
+["sessionName"] = "Bael'dun Officer",
+["startDate"] = "18:48:31",
+["startTime"] = 58589.619,
+["endDate"] = "18:48:50",
+["detailsId"] = "Bael'dun Officer47",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415769,
+["sessionId"] = 48,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415736,
+["endTime"] = 58647.959,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "18:48:56",
+["startTime"] = 58614.332,
+["endDate"] = "18:49:29",
+["detailsId"] = "Bael'dun Soldier48",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415792,
+["sessionId"] = 49,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415778,
+["endTime"] = 58671.021,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:49:38",
+["startTime"] = 58656.473,
+["endDate"] = "18:49:52",
+["detailsId"] = "Bael'dun Rifleman49",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794415826,
+["sessionId"] = 50,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794415804,
+["endTime"] = 58704.644,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "18:50:04",
+["startTime"] = 58682.959,
+["endDate"] = "18:50:26",
+["detailsId"] = "Bael'dun Rifleman50",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794416511,
+["sessionId"] = 51,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794416470,
+["endTime"] = 59390.066,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "19:01:10",
+["startTime"] = 59348.174,
+["endDate"] = "19:01:51",
+["detailsId"] = "Bael'dun Rifleman51",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794416591,
+["sessionId"] = 52,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794416527,
+["endTime"] = 59469.865,
+["sessionName"] = "Bael'dun Soldier",
+["startDate"] = "19:02:07",
+["startTime"] = 59405.732,
+["endDate"] = "19:03:11",
+["detailsId"] = "Bael'dun Soldier52",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794416655,
+["sessionId"] = 53,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794416639,
+["endTime"] = 59533.898,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "19:03:59",
+["startTime"] = 59517.908,
+["endDate"] = "19:04:15",
+["detailsId"] = "Bael'dun Rifleman53",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794416674,
+["sessionId"] = 54,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794416661,
+["endTime"] = 59552.989,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "19:04:21",
+["startTime"] = 59540.034,
+["endDate"] = "19:04:34",
+["detailsId"] = "Bael'dun Rifleman54",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794416734,
+["sessionId"] = 55,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794416692,
+["endTime"] = 59612.441,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "19:04:52",
+["startTime"] = 59570.699,
+["endDate"] = "19:05:34",
+["detailsId"] = "Bael'dun Rifleman55",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794416880,
+["sessionId"] = 56,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794416799,
+["endTime"] = 59758.735,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "19:06:39",
+["startTime"] = 59677.788,
+["endDate"] = "19:08:00",
+["detailsId"] = "Bael'dun Rifleman56",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794416927,
+["sessionId"] = 57,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794416890,
+["endTime"] = 59806.014,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "19:08:10",
+["startTime"] = 59768.30800000001,
+["endDate"] = "19:08:47",
+["detailsId"] = "Bael'dun Rifleman57",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794417042,
+["sessionId"] = 58,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794416976,
+["endTime"] = 59920.353,
+["sessionName"] = "Bael'dun Rifleman",
+["startDate"] = "19:09:36",
+["startTime"] = 59855.138,
+["endDate"] = "19:10:42",
+["detailsId"] = "Bael'dun Rifleman58",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794417106,
+["sessionId"] = 59,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794417091,
+["endTime"] = 59984.733,
+["sessionName"] = "Hecklefang Stalker",
+["startDate"] = "19:11:31",
+["startTime"] = 59970.002,
+["endDate"] = "19:11:46",
+["detailsId"] = "Hecklefang Stalker59",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794417248,
+["sessionId"] = 60,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794417236,
+["endTime"] = 60126.99,
+["sessionName"] = "Hecklefang Stalker",
+["startDate"] = "19:13:56",
+["startTime"] = 60114.232,
+["endDate"] = "19:14:08",
+["detailsId"] = "Hecklefang Stalker60",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794417331,
+["sessionId"] = 61,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794417319,
+["endTime"] = 60210.036,
+["sessionName"] = "Bael'dun Excavator",
+["startDate"] = "19:15:19",
+["startTime"] = 60197.245,
+["endDate"] = "19:15:31",
+["detailsId"] = "Bael'dun Excavator61",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794417834,
+["sessionId"] = 62,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794417794,
+["endTime"] = 60713.004,
+["sessionName"] = "Encroaching Soldier",
+["startDate"] = "19:23:14",
+["startTime"] = 60672.704,
+["endDate"] = "19:23:54",
+["detailsId"] = "Encroaching Soldier62",
+},
+{
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794417884,
+["sessionId"] = 63,
+["added"] = false,
+["playerAuras"] = {
+},
+["alreadyAdded"] = false,
+["startUnixTime"] = 1794417865,
+["endTime"] = 60762.355,
+["sessionName"] = "Greater Thunderhawk",
+["startDate"] = "19:24:25",
+["startTime"] = 60743.652,
+["endDate"] = "19:24:44",
+["detailsId"] = "Greater Thunderhawk63",
+},
 },
 ["local_instances_config"] = {
 {
@@ -247,8 +1247,8 @@ _detalhes_database = {
 ["pos"] = {
 ["normal"] = {
 ["y"] = -505.8838500976563,
-["x"] = 723.1689453125,
-["w"] = 249.3939819335938,
+["x"] = 771.734619140625,
+["w"] = 249.3939971923828,
 ["h"] = 169.7708740234375,
 },
 ["solo"] = {
@@ -317,8 +1317,8 @@ _detalhes_database = {
 ["pos"] = {
 ["normal"] = {
 ["y"] = -505.8838500976563,
-["x"] = 959.37841796875,
-["w"] = 223.0253295898438,
+["x"] = 1007.9443359375,
+["w"] = 223.0253753662109,
 ["h"] = 169.7708740234375,
 },
 ["solo"] = {
@@ -330,21 +1330,26 @@ _detalhes_database = {
 },
 },
 },
-["auto_combatlog"] = false,
-["cached_roles"] = {
+["announce_damagerecord"] = {
+["enabled"] = true,
+["channel"] = "SELF",
 },
-["nick_tag_cache"] = {
-["nextreset"] = 1795211104,
-["last_version"] = 16,
+["coach"] = {
+["enabled"] = false,
+["welcome_panel_pos"] = {
+},
+["last_coach_name"] = false,
+},
+["cached_talents"] = {
 },
 ["last_instance_id"] = 33,
 ["data_harvest_for_charsts"] = {
 ["players"] = {
 {
-["playerKey"] = "total",
-["combatObjectContainer"] = 1,
 ["name"] = "Damage of Each Individual Player",
 ["playerOnly"] = true,
+["playerKey"] = "total",
+["combatObjectContainer"] = 1,
 },
 },
 ["totals"] = {
@@ -362,50 +1367,62 @@ _detalhes_database = {
 ["custom"] = "",
 ["next"] = "",
 },
-["announce_prepots"] = {
-["enabled"] = false,
-["channel"] = "SELF",
-["reverse"] = false,
-},
+["last_instance_time"] = 1794382626,
 ["active_profile"] = "Karums-CAMWOW EU5 Realm 4 PvP",
-["mythic_dungeon_currentsaved"] = {
-["dungeon_name"] = "",
-["started"] = false,
-["segment_id"] = 0,
-["ej_id"] = 0,
-["started_at"] = 0,
-["run_id"] = 0,
-["level"] = 0,
-["dungeon_zone_id"] = 0,
-["previous_boss_killed_at"] = 0,
+["last_realversion"] = 172,
+["damage_meter_session_info"] = {
 },
-["last_day"] = "11",
-["benchmark_db"] = {
-["frame"] = {
+["ignore_nicktag"] = false,
+["data_harvested_for_charts"] = {
 },
-},
-["on_death_menu"] = false,
-["arena_data_headers"] = {
+["apocalypes_info"] = {
 },
 ["combat_log"] = {
 ["inverse_deathlog_overalldata"] = false,
-["merge_gemstones_1007"] = false,
 ["track_hunter_frenzy"] = false,
+["merge_gemstones_1007"] = false,
 ["merge_critical_heals"] = false,
 ["inverse_deathlog_raid"] = false,
 ["calc_evoker_damage"] = true,
 ["evoker_show_realtimedps"] = false,
 ["inverse_deathlog_mplus"] = false,
 },
-["ignore_nicktag"] = false,
+["benchmark_db"] = {
+["frame"] = {
+},
+},
+["mythic_plus_log"] = {
+},
+["cached_roles"] = {
+},
+["announce_firsthit"] = {
+["enabled"] = true,
+["channel"] = "SELF",
+},
+["nick_tag_cache"] = {
+["nextreset"] = 1795211104,
+["last_version"] = 16,
+},
+["character_data"] = {
+["logons"] = 133,
+},
+["apocalypse_hashes"] = {
+},
+["SoloTablesSaved"] = {
+["Mode"] = 1,
+},
+["last_version"] = "1.60.1 15402",
+["combat_id"] = 0,
+["savedStyles"] = {
+},
 ["plugin_database"] = {
 ["DETAILS_PLUGIN_TINY_THREAT"] = {
 ["enabled"] = true,
 ["only_my_group"] = false,
 ["animate"] = false,
-["author"] = "Terciob",
+["disable_gouge"] = false,
 ["hide_pull_bar"] = false,
-["useclasscolors"] = false,
+["author"] = "Terciob",
 ["playercolor"] = {
 1,
 1,
@@ -419,7 +1436,7 @@ _detalhes_database = {
 ["absolute_mode"] = false,
 ["show_party_pets"] = false,
 ["playSoundFile"] = "Details Threat Warning Volume 3",
-["disable_gouge"] = false,
+["useclasscolors"] = false,
 },
 ["DETAILS_PLUGIN_COMPARETWO_WINDOW"] = {
 ["enabled"] = true,
@@ -441,15 +1458,15 @@ _detalhes_database = {
 ["tank_block_size"] = 150,
 ["bar_height"] = 24,
 ["tank_block_texture"] = "Details Serenity",
-["show_inc_bars"] = true,
-["tank_block_powerbar_size_height"] = 10,
-["tank_block_height"] = 40,
 ["tank_block_color"] = {
 0.074509,
 0.035294,
 0.035294,
 0.832845,
 },
+["tank_block_height"] = 40,
+["tank_block_powerbar_size_height"] = 10,
+["show_inc_bars"] = true,
 },
 ["DETAILS_PLUGIN_ENCOUNTER_DETAILS"] = {
 ["enabled"] = true,
@@ -459,11 +1476,11 @@ _detalhes_database = {
 ["last_section_selected"] = "main",
 ["author"] = "Terciob",
 ["window_scale"] = 1,
-["encounter_timers_dbm"] = {
-},
+["hide_on_combat"] = false,
 ["show_icon"] = 5,
 ["opened"] = 0,
-["hide_on_combat"] = false,
+["encounter_timers_dbm"] = {
+},
 },
 ["DETAILS_PLUGIN_STREAM_OVERLAY"] = {
 ["use_square_mode"] = false,
@@ -474,32 +1491,29 @@ _detalhes_database = {
 1,
 0.5,
 },
+["scale"] = 1,
 ["arrow_anchor_y"] = 0,
-["main_frame_size"] = {
-299.9999694824219,
-499.9999694824219,
-},
 ["minimap"] = {
 ["minimapPos"] = 160,
 ["radius"] = 160,
 ["hide"] = false,
 },
-["main_frame_locked"] = false,
+["row_height"] = 20,
 ["arrow_anchor_x"] = 0,
-["row_color"] = {
-0.1,
-0.1,
-0.1,
-0.4,
+["font_color"] = {
+1,
+1,
+1,
+1,
 },
 ["row_texture"] = "Details Serenity",
 ["square_grow_direction"] = "right",
-["use_spark"] = true,
-["author"] = "Terciob",
+["point"] = "CENTER",
+["main_frame_strata"] = "LOW",
 ["square_amount"] = 5,
 ["enabled"] = false,
 ["arrow_size"] = 10,
-["y"] = 0,
+["font_size"] = 10,
 ["row_spacement"] = 21,
 ["main_frame_color"] = {
 0,
@@ -507,9 +1521,13 @@ _detalhes_database = {
 0,
 0.2,
 },
-["main_frame_strata"] = "LOW",
+["row_color"] = {
+0.1,
+0.1,
+0.1,
+0.4,
+},
 ["arrow_texture"] = "Interface\\CHATFRAME\\ChatFrameExpandArrow",
-["font_size"] = 10,
 ["per_second"] = {
 ["enabled"] = false,
 ["point"] = "CENTER",
@@ -517,45 +1535,24 @@ _detalhes_database = {
 ["font_shadow"] = true,
 ["y"] = 0,
 ["x"] = -6.103515625e-05,
-["attribute_type"] = 1,
-["update_speed"] = 0.05,
 ["size"] = 32,
+["update_speed"] = 0.05,
+["attribute_type"] = 1,
 },
+["use_spark"] = true,
 ["x"] = -0.0001220703125,
 ["font_face"] = "Friz Quadrata TT",
 ["square_size"] = 32,
-["point"] = "CENTER",
-["font_color"] = {
-1,
-1,
-1,
-1,
-},
-["row_height"] = 20,
-["scale"] = 1,
+["y"] = 0,
+["author"] = "Terciob",
+["main_frame_locked"] = false,
+["main_frame_size"] = {
+299.9999694824219,
+499.9999694824219,
 },
 },
-["last_instance_time"] = 1794382626,
-["data_harvested_for_charts"] = {
 },
-["last_realversion"] = 172,
-["announce_damagerecord"] = {
-["enabled"] = true,
-["channel"] = "SELF",
-},
-["apocalypse_hashes"] = {
-},
-["SoloTablesSaved"] = {
-["Mode"] = 1,
-},
-["last_version"] = "1.60.1 15402",
-["combat_id"] = 0,
-["savedStyles"] = {
-},
-["cached_talents"] = {
-},
-["mythic_plus_log"] = {
-},
+["last_day"] = "11",
 ["announce_deaths"] = {
 ["enabled"] = false,
 ["last_hits"] = 1,
@@ -588,8 +1585,7 @@ _detalhes_database = {
 ["_ActorTable"] = {
 },
 },
-["raid_roster"] = {
-},
+["boss_hp"] = 1,
 ["tempo_start"] = 1794382059,
 ["last_events_tables"] = {
 },
@@ -597,7 +1593,9 @@ _detalhes_database = {
 },
 ["bossTimers"] = {
 },
-["combat_counter"] = 102,
+["cleu_events"] = {
+["n"] = 1,
+},
 ["playerTalents"] = {
 },
 ["totals"] = {
@@ -623,6 +1621,31 @@ _detalhes_database = {
 ["frags_total"] = 0,
 ["voidzone_damage"] = 0,
 },
+["player_last_events"] = {
+},
+["frags_need_refresh"] = false,
+["overall_refreshed"] = true,
+["amountCasts"] = {
+},
+["instance_type"] = "party",
+["zoneName"] = "Shadowfang Keep",
+["data_fim"] = 0,
+["cleu_timeline"] = {
+},
+["trinketProcs"] = {
+},
+["aura_timeline"] = {
+},
+["compressed_charts"] = {
+},
+["data_inicio"] = 0,
+["mapId"] = 33,
+["raid_roster"] = {
+},
+["is_challenge"] = false,
+["spells_cast_timeline"] = {
+},
+["combat_counter"] = 102,
 ["totals_grupo"] = {
 0,
 0,
@@ -644,21 +1667,6 @@ _detalhes_database = {
 ["dead"] = 0,
 },
 },
-["frags_need_refresh"] = false,
-["overall_refreshed"] = true,
-["amountCasts"] = {
-},
-["instance_type"] = "party",
-["zoneName"] = "Shadowfang Keep",
-["data_fim"] = 0,
-["cleu_timeline"] = {
-},
-["trinketProcs"] = {
-},
-["aura_timeline"] = {
-},
-["compressed_charts"] = {
-},
 ["PhaseData"] = {
 {
 1,
@@ -673,16 +1681,6 @@ _detalhes_database = {
 ["damage"] = {
 },
 },
-["mapId"] = 33,
-["boss_hp"] = 1,
-["is_challenge"] = false,
-["spells_cast_timeline"] = {
-},
-["player_last_events"] = {
-},
-["segments_added"] = {
-},
-["data_inicio"] = 0,
 ["frags"] = {
 },
 ["start_time"] = 0,
@@ -690,21 +1688,31 @@ _detalhes_database = {
 ["Raid Damage Done"] = {
 },
 },
-["cleu_events"] = {
-["n"] = 1,
+["segments_added"] = {
 },
 },
-["damage_meter_sessions"] = {
+["mythic_dungeon_currentsaved"] = {
+["dungeon_name"] = "",
+["started"] = false,
+["segment_id"] = 0,
+["ej_id"] = 0,
+["started_at"] = 0,
+["run_id"] = 0,
+["level"] = 0,
+["dungeon_zone_id"] = 0,
+["previous_boss_killed_at"] = 0,
 },
-["apocalypes_info"] = {
+["arena_data_headers"] = {
 },
-["character_data"] = {
-["logons"] = 124,
+["announce_prepots"] = {
+["enabled"] = false,
+["channel"] = "SELF",
+["reverse"] = false,
 },
 ["announce_cooldowns"] = {
+["enabled"] = false,
 ["ignored_cooldowns"] = {
 },
-["enabled"] = false,
 ["custom"] = "",
 ["channel"] = "RAID",
 },
@@ -712,10 +1720,8 @@ _detalhes_database = {
 ["last_difficulty"] = 15,
 ["last_raid"] = "",
 },
-["damage_meter_session_info"] = {
-},
+["auto_combatlog"] = false,
 ["cached_specs"] = {
 ["Player-6938-008C0737"] = 1487,
-["Player-6946-0092D46A"] = 1491,
 },
 }

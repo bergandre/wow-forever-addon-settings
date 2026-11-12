@@ -28,7 +28,7 @@ TitanCurrenciesMultiDb = {
 ["realm"] = "Altchar",
 },
 ["Invited-Undead"] = {
-["value"] = 30414,
+["value"] = 31404,
 ["realm"] = "Undead",
 ["name"] = "|cff8788eeInvited",
 ["faction"] = "Horde",

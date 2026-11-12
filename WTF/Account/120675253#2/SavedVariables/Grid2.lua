@@ -15,10 +15,10 @@ Grid2DB = {
 ["profiles"] = {
 ["Karums Priest"] = {
 ["BackgroundTexture"] = "None",
-["PosX"] = -24.1528311453294,
+["Spacing"] = 9,
 ["anchor"] = "CENTER",
 ["PosY"] = -218.2313922943922,
-["Spacing"] = 9,
+["PosX"] = -24.1528311453294,
 },
 },
 },
@@ -28,8 +28,11 @@ Grid2DB = {
 },
 ["profiles"] = {
 ["Karums Priest"] = {
-["hideBlizzard"] = {
-["party"] = true,
+["themes"] = {
+["indicators"] = {
+[0] = {
+},
+},
 },
 ["indicators"] = {
 ["power-bar-color"] = {
@@ -60,13 +63,13 @@ Grid2DB = {
 ["size"] = 12,
 },
 ["border"] = {
+["type"] = "border",
 ["color1"] = {
 ["a"] = 0,
-["b"] = 0,
-["g"] = 0,
 ["r"] = 0,
+["g"] = 0,
+["b"] = 0,
 },
-["type"] = "border",
 },
 ["text-down-color"] = {
 ["type"] = "text-color",
@@ -88,13 +91,13 @@ Grid2DB = {
 ["enableCooldownText"] = true,
 ["borderSize"] = 2,
 ["ctFontSize"] = 10,
+["useStatusColor"] = true,
 ["location"] = {
 ["y"] = -1,
 ["relPoint"] = "TOPRIGHT",
 ["point"] = "TOPRIGHT",
 ["x"] = -1,
 },
-["useStatusColor"] = true,
 ["level"] = 9,
 ["fontSize"] = 8,
 ["size"] = 18,
@@ -117,12 +120,12 @@ Grid2DB = {
 ["reverse"] = true,
 ["color"] = {
 ["a"] = 0.7,
-["b"] = 0.737,
-["g"] = 0,
 ["r"] = 1,
+["g"] = 0,
+["b"] = 0.737,
 },
-["texture"] = "Grid2 Shield",
 ["verTile"] = "REPEAT",
+["texture"] = "Grid2 Shield",
 },
 {
 ["color"] = {
@@ -134,19 +137,19 @@ Grid2DB = {
 ["color"] = {
 ["a"] = 0.7,
 },
-["texture"] = "Grid2 Shield",
-["prevBar"] = 1,
 ["verTile"] = "REPEAT",
+["prevBar"] = 1,
+["texture"] = "Grid2 Shield",
 },
 {
 ["color"] = {
 ["a"] = 1,
-["b"] = 1,
-["g"] = 0.992,
 ["r"] = 0.965,
+["g"] = 0.992,
+["b"] = 1,
 },
-["prevBar"] = -1,
 ["glowLine"] = 6,
+["prevBar"] = -1,
 ["texture"] = "Grid2 GlowH",
 },
 ["location"] = {
@@ -156,10 +159,10 @@ Grid2DB = {
 ["x"] = 0,
 },
 ["type"] = "multibar",
-["level"] = 3,
 ["textureColor"] = {
 ["a"] = 1,
 },
+["level"] = 3,
 },
 ["debuffs-icons"] = {
 ["fontSize"] = 9,
@@ -175,22 +178,22 @@ Grid2DB = {
 ["reverseCooldown"] = true,
 ["color1"] = {
 ["a"] = 1,
-["r"] = 1,
-["g"] = 1,
 ["b"] = 1,
+["g"] = 1,
+["r"] = 1,
 },
 ["maxIcons"] = 3,
 ["ctFontSize"] = 10,
-["smartCenter"] = true,
+["tooltipEnabled"] = true,
 ["location"] = {
 ["y"] = -2,
 ["relPoint"] = "CENTER",
 ["point"] = "CENTER",
 ["x"] = 0,
 },
-["useStatusColor"] = true,
 ["fontJustifyH"] = "RIGHT",
-["tooltipEnabled"] = true,
+["useStatusColor"] = true,
+["smartCenter"] = true,
 },
 ["alpha"] = {
 ["type"] = "alpha",
@@ -198,46 +201,46 @@ Grid2DB = {
 ["buffs-icons"] = {
 ["tooltipAnchor"] = "ANCHOR_TOPRIGHT",
 ["fontSize"] = 9,
-["reverseCooldown"] = true,
 ["enableCooldownText"] = true,
+["borderOpacity"] = 1,
 ["tooltipEnabled"] = true,
 ["fontJustifyH"] = "RIGHT",
-["type"] = "icons",
 ["fontJustifyV"] = "TOP",
+["color1"] = {
+["a"] = 1,
+["b"] = 0,
+["g"] = 0,
+["r"] = 0,
+},
 ["maxIcons"] = 3,
 ["borderSize"] = 1,
 ["ctFontSize"] = 10,
+["iconSize"] = 12,
 ["location"] = {
 ["y"] = 6,
 ["relPoint"] = "BOTTOMLEFT",
 ["point"] = "BOTTOMLEFT",
 ["x"] = 0,
 },
-["iconSize"] = 12,
 ["level"] = 8,
-["color1"] = {
-["a"] = 1,
-["r"] = 0,
-["g"] = 0,
-["b"] = 0,
+["type"] = "icons",
+["reverseCooldown"] = true,
 },
-["borderOpacity"] = 1,
-},
-["background"] = {
-["type"] = "background",
+["health-bar-color"] = {
+["type"] = "multibar-color",
 },
 ["corner-renew"] = {
 ["type"] = "icon",
 ["enableCooldownText"] = true,
 ["borderSize"] = 2,
 ["ctFontSize"] = 10,
+["useStatusColor"] = true,
 ["location"] = {
 ["y"] = -1,
 ["relPoint"] = "TOPLEFT",
 ["point"] = "TOPLEFT",
 ["x"] = 1,
 },
-["useStatusColor"] = true,
 ["level"] = 9,
 ["fontSize"] = 8,
 ["size"] = 18,
@@ -251,21 +254,20 @@ Grid2DB = {
 ["x"] = 0,
 },
 ["level"] = 9,
+["size"] = 7,
 ["color1"] = {
 ["a"] = 1,
-["b"] = 1,
-["g"] = 1,
 ["r"] = 1,
+["g"] = 1,
+["b"] = 1,
 },
-["size"] = 7,
 },
-["tooltip"] = {
-["showDefault"] = true,
-["type"] = "tooltip",
+["text-up-color"] = {
+["type"] = "text-color",
 },
 ["text-up"] = {
 ["type"] = "text",
-["fontSize"] = 9,
+["percent"] = true,
 ["location"] = {
 ["y"] = -8,
 ["relPoint"] = "TOP",
@@ -273,41 +275,42 @@ Grid2DB = {
 ["x"] = 0,
 },
 ["level"] = 7,
-["percent"] = true,
 ["textlength"] = 6,
-},
-["text-up-color"] = {
-["type"] = "text-color",
+["fontSize"] = 9,
 },
 ["power-bar"] = {
 ["type"] = "bar",
 ["backColor"] = {
 ["a"] = 1,
-["r"] = 0,
-["g"] = 0,
 ["b"] = 0,
+["g"] = 0,
+["r"] = 0,
 },
 ["color1"] = {
 ["a"] = 1,
-["b"] = 0,
-["g"] = 0,
 ["r"] = 0,
+["g"] = 0,
+["b"] = 0,
 },
 ["hideWhenInactive"] = true,
+["orientation"] = "HORIZONTAL",
+["height"] = 4,
+["backTexture"] = "Grid2 Flat",
+["level"] = 5,
 ["location"] = {
 ["y"] = -1,
 ["relPoint"] = "BOTTOM",
 ["point"] = "BOTTOM",
 ["x"] = 0,
 },
-["backTexture"] = "Grid2 Flat",
-["orientation"] = "HORIZONTAL",
-["level"] = 5,
-["height"] = 4,
 ["texture"] = "Gradient",
 },
-["health-bar-color"] = {
-["type"] = "multibar-color",
+["tooltip"] = {
+["showDefault"] = true,
+["type"] = "tooltip",
+},
+["background"] = {
+["type"] = "background",
 },
 },
 ["statusMap"] = {
@@ -344,9 +347,9 @@ Grid2DB = {
 ["health-bar"] = {
 ["heal-absorbs"] = 2,
 ["shields"] = 4,
-["health-current"] = 1,
-["heals-incoming"] = 3,
 ["shields-overflow"] = 5,
+["heals-incoming"] = 3,
+["health-current"] = 1,
 },
 ["debuffs-icons"] = {
 ["debuffs-Relevant"] = 50,
@@ -375,6 +378,10 @@ Grid2DB = {
 ["power-bar"] = {
 ["power"] = 50,
 },
+["border"] = {
+["target"] = 50,
+["debuffs-DispellableByMe"] = 51,
+},
 ["text-up-color"] = {
 ["charmed"] = 93,
 ["feign-death"] = 96,
@@ -383,56 +390,25 @@ Grid2DB = {
 ["offline"] = 97,
 ["vehicle"] = 95,
 },
-["border"] = {
-["target"] = 50,
-["debuffs-DispellableByMe"] = 51,
-},
 },
 ["statuses"] = {
 ["buffs-Relevant"] = {
 ["type"] = "mbuffs",
+["aura_filter"] = {
+["filter"] = "HELPFUL|RAID_IN_COMBAT",
+["sortRule"] = 3,
+},
 ["color1"] = {
 ["a"] = 1,
-["b"] = 0,
-["g"] = 1,
 ["r"] = 0,
-},
-["aura_filter"] = {
-["sortRule"] = 3,
-["filter"] = "HELPFUL|RAID_IN_COMBAT",
+["g"] = 1,
+["b"] = 0,
 },
 },
 ["dungeon-role"] = {
 ["hideInCombat"] = true,
 },
-["heals-incoming"] = {
-["includePlayerHeals"] = true,
-},
-["debuff-WeakenedSoul"] = {
-["type"] = "mdebuffs",
-["colors"] = {
-["None"] = {
-["a"] = 1,
-["b"] = 0,
-["g"] = 0,
-["r"] = 1,
-},
-},
-["auras"] = {
-6788,
-},
-},
 ["buff-Renew-mine"] = {
-["color1"] = {
-["a"] = 1,
-["b"] = 0,
-["g"] = 1,
-["r"] = 0,
-},
-["type"] = "mbuff",
-["aura_filter"] = {
-["filter"] = "HELPFUL|PLAYER",
-},
 ["auras"] = {
 139,
 6074,
@@ -445,15 +421,36 @@ Grid2DB = {
 10929,
 25315,
 },
+["type"] = "mbuff",
+["aura_filter"] = {
+["filter"] = "HELPFUL|PLAYER",
+},
+["color1"] = {
+["a"] = 1,
+["r"] = 0,
+["g"] = 1,
+["b"] = 0,
+},
+},
+["debuff-WeakenedSoul"] = {
+["type"] = "mdebuffs",
+["colors"] = {
+["None"] = {
+["a"] = 1,
+["r"] = 1,
+["g"] = 0,
+["b"] = 0,
+},
+},
+["auras"] = {
+6788,
+},
+},
+["heals-incoming"] = {
+["includePlayerHeals"] = true,
 },
 ["buff-PWShield"] = {
 ["type"] = "mbuff",
-["color1"] = {
-["a"] = 1,
-["b"] = 0,
-["g"] = 0.85,
-["r"] = 1,
-},
 ["auras"] = {
 17,
 592,
@@ -466,18 +463,14 @@ Grid2DB = {
 10900,
 10901,
 },
-},
-["buff-Renew-other"] = {
 ["color1"] = {
 ["a"] = 1,
-["b"] = 0.5,
-["g"] = 0.5,
-["r"] = 0.5,
+["r"] = 1,
+["g"] = 0.85,
+["b"] = 0,
 },
-["type"] = "mbuff",
-["aura_filter"] = {
-["filter"] = "HELPFUL|!PLAYER",
 },
+["buff-Renew-other"] = {
 ["auras"] = {
 139,
 6074,
@@ -490,14 +483,24 @@ Grid2DB = {
 10929,
 25315,
 },
+["type"] = "mbuff",
+["aura_filter"] = {
+["filter"] = "HELPFUL|!PLAYER",
+},
+["color1"] = {
+["a"] = 1,
+["r"] = 0.5,
+["g"] = 0.5,
+["b"] = 0.5,
+},
 },
 ["debuffs-Relevant"] = {
 ["type"] = "mdebuffs",
 ["colors"] = {
 },
 ["aura_filter"] = {
-["sortRule"] = 3,
 ["excludeSatedDebuffs"] = true,
+["sortRule"] = 3,
 },
 },
 },
@@ -505,11 +508,8 @@ Grid2DB = {
 ["Grid2"] = 200,
 },
 ["__template"] = "Classic",
-["themes"] = {
-["indicators"] = {
-[0] = {
-},
-},
+["hideBlizzard"] = {
+["party"] = true,
 },
 },
 },

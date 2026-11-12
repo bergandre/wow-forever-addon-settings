@@ -30,6 +30,12 @@ PawnOptions = {
 ["Level"] = 24,
 ["Link"] = "|cnIQ2:|Hitem:6568::::::::25:1487:::1:12745::::::|h[Shimmering Trousers of the Sorcerer]|h|r",
 },
+[14] = {
+["ID"] = 273643,
+["Level"] = 26,
+["AlsoFitsIn"] = 13,
+["Link"] = "|cnIQ3:|Hitem:273643::::::::27:1487::1::1:28:5249:::::|h[Worgenbane Talisman]|h|r",
+},
 [15] = {
 ["ID"] = 273005,
 ["Level"] = 18,
@@ -60,10 +66,10 @@ PawnOptions = {
 ["Level"] = 22,
 ["Link"] = "|cnIQ3:|Hitem:286979::::::::18:1487::1::1:28:5256:::::|h[Rotmender's Gloves]|h|r",
 },
-[17] = {
-["ID"] = 273137,
-["Level"] = 22,
-["Link"] = "|cnIQ3:|Hitem:273137::::::::22:1487::1::1:28:5254:::::|h[Skum's Bucket]|h|r",
+[5] = {
+["ID"] = 271206,
+["Level"] = 20,
+["Link"] = "|cnIQ3:|Hitem:271206::::::::18:1487::1::1:28:5256:::::|h[Leftover Abomination Skin]|h|r",
 },
 [11] = {
 ["ID"] = 6414,
@@ -77,15 +83,15 @@ PawnOptions = {
 ["Link"] = "|cnIQ3:|Hitem:273089::::::::23:1487::1::1:28:5254:::::|h[Slither Cord]|h|r",
 },
 [12] = {
-["ID"] = 281673,
-["Level"] = 28,
+["ID"] = 6414,
+["Level"] = 29,
 ["AlsoFitsIn"] = 11,
-["Link"] = "|cnIQ2:|Hitem:281673::::::::25:1487::11:::::::|h[Loop of Sacrifice]|h|r",
+["Link"] = "|cnIQ3:|Hitem:6414::::::::27:1487::11:::::::|h[Seal of Sylvanas]|h|r",
 },
-[5] = {
-["ID"] = 271206,
-["Level"] = 20,
-["Link"] = "|cnIQ3:|Hitem:271206::::::::18:1487::1::1:28:5256:::::|h[Leftover Abomination Skin]|h|r",
+[17] = {
+["ID"] = 273137,
+["Level"] = 22,
+["Link"] = "|cnIQ3:|Hitem:273137::::::::22:1487::1::1:28:5254:::::|h[Skum's Bucket]|h|r",
 },
 },
 ["LastKeybindingsSet"] = 1,

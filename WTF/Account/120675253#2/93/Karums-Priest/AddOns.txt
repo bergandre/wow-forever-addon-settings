@@ -78,3 +78,5 @@ NodeRadar: enabled
 !ImprovedErrorFrame: disabled
 Decursive: enabled
 Quartz: disabled
+ForeverAurasCompanion: enabled
+ForeverAurasArchive: enabled

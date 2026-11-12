@@ -2,15 +2,15 @@ Version: 1
 Frame: RXPG_ARROW
 FrameLevel: 1
 Anchor: BOTTOM
-X: 654
-Y: 98
+X: 622
+Y: 112
 W: 50
 H: 50
 Frame: RXPFrame
 FrameLevel: 1
 Anchor: BOTTOMRIGHT
-X: -251
-Y: 0
+X: -218
+Y: 4
 W: 445
 H: 28
 Frame: Grid2LayoutFrame
@@ -18,5 +18,5 @@ FrameLevel: 1
 Anchor: BOTTOM
 X: -37
 Y: 215
-W: 200
+W: 109
 H: 80

@@ -74,3 +74,5 @@ Blizzard_CompactRaidFrames: enabled
 Blizzard_CombatText: enabled
 !Swatter: disabled
 !ImprovedErrorFrame: disabled
+ForeverAurasCompanion: enabled
+ForeverAurasArchive: enabled

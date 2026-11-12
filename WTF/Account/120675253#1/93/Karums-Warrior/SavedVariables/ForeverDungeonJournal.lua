@@ -2,30 +2,58 @@
 ForeverDungeonJournalCharacterDB = {
 ["favouriteItems"] = {
 },
-["rpgTrash"] = {
-["Shadowfang Keep"] = {
-["seen"] = {
-["Creature-0-7101-33-11-3851-3A93BF02EF"] = true,
-["Creature-0-7101-33-11-3877-946DD7BFEE"] = true,
-["Creature-0-7101-33-11-2529-C25D426E63"] = true,
-["Creature-0-7101-33-11-3875-BC8C0D6E6F"] = true,
-["Creature-0-7101-33-11-3873-C25D426E63"] = true,
-["Creature-0-7101-33-11-3862-231B2F0C9D"] = true,
+["rpgQuests"] = {
+[5722] = true,
+[95204] = true,
+[5761] = true,
+[959] = true,
+[95216] = true,
+[5723] = true,
+[92401] = true,
+[1491] = true,
+[5724] = true,
+[5728] = true,
+[2841] = true,
+[1013] = true,
+[92421] = true,
+[1221] = true,
+[1098] = true,
+[2843] = true,
+[5725] = true,
+[1014] = true,
+[962] = true,
+[914] = true,
+[6981] = true,
+[97288] = true,
+[1487] = true,
+[1486] = true,
 },
-["n"] = 6,
-},
+["hearthSpot"] = {
+["y"] = 0.6068857908248901,
+["mapID"] = 1440,
+["name"] = "Splintertree Post",
+["x"] = 0.739477276802063,
 },
 ["flightPointsVersion"] = 2,
 ["trackerSlots"] = {
 },
-["trackedDungeons"] = {
-},
+["journalMode"] = "gamer",
 ["rpgMaps"] = {
 },
-["flightPoints"] = {
-["the sepulcher, silverpine forest"] = true,
-["tarren mill, hillsbrad"] = true,
-["undercity, tirisfal"] = true,
+["trackedDungeons"] = {
+},
+["arrowChains"] = {
+},
+["rpgKills"] = {
+["Shadowfang Keep"] = true,
+},
+["runTracker"] = {
+["point"] = {
+"RIGHT",
+"RIGHT",
+-351.0785827636719,
+-57.84604644775391,
+},
 },
 ["rpgBosses"] = {
 ["Shadowfang Keep"] = {
@@ -44,25 +72,23 @@ ForeverDungeonJournalCharacterDB = {
 ["razorclaw the butcher"] = true,
 ["wolf master nandos"] = true,
 ["arugal's voidwalker"] = true,
-[4275] = true,
-[3886] = true,
 [3887] = true,
+[3886] = true,
+[4275] = true,
 },
 },
-["rpgKills"] = {
-["Shadowfang Keep"] = true,
+["flightPoints"] = {
+["crossroads, the barrens"] = true,
+["camp taurajo, the barrens"] = true,
+["brackenwall village, dustwallow marsh"] = true,
+["orgrimmar, durotar"] = true,
+["splintertree post, ashenvale"] = true,
+["ratchet, the barrens"] = true,
+["the sepulcher, silverpine forest"] = true,
+["tarren mill, hillsbrad"] = true,
+["undercity, tirisfal"] = true,
+["thunder bluff, mulgore"] = true,
 },
-["runTracker"] = {
-["point"] = {
-"RIGHT",
-"RIGHT",
--351.0785827636719,
--57.84604644775391,
-},
-},
-["arrowChains"] = {
-},
-["journalMode"] = "gamer",
 ["runLog"] = {
 ["nextID"] = 2,
 ["runs"] = {
@@ -392,9 +418,9 @@ ForeverDungeonJournalCharacterDB = {
 ["loot"] = {
 {
 ["id"] = 273645,
-["link"] = "|cnIQ3:|Hitem:273645::::::::26:1491::1::1:28:5249:::::|h[Blindwatcher's Sight]|h|r",
-["w"] = "Karums",
 ["r"] = "need",
+["w"] = "Karums",
+["link"] = "|cnIQ3:|Hitem:273645::::::::26:1491::1::1:28:5249:::::|h[Blindwatcher's Sight]|h|r",
 },
 },
 ["b"] = "Odo the Blindwatcher",
@@ -536,9 +562,9 @@ ForeverDungeonJournalCharacterDB = {
 },
 {
 ["id"] = 273646,
-["link"] = "|cnIQ3:|Hitem:273646::::::::26:1491::1::1:28:5249:::::|h[Half-Eaten Boots]|h|r",
-["w"] = "Karums",
 ["r"] = "need",
+["w"] = "Karums",
+["link"] = "|cnIQ3:|Hitem:273646::::::::26:1491::1::1:28:5249:::::|h[Half-Eaten Boots]|h|r",
 },
 {
 ["id"] = 3194,
@@ -634,8 +660,8 @@ ForeverDungeonJournalCharacterDB = {
 },
 ["created"] = 1794382509,
 ["deaths"] = 1,
-["firstTrash"] = 1794383037,
-["seenN"] = 77,
+["lastBoss"] = 1794385318,
+["map"] = 33,
 ["money"] = 3980,
 ["firstKill"] = 1794382509,
 ["needs"] = {
@@ -674,7 +700,15 @@ ForeverDungeonJournalCharacterDB = {
 },
 ["closed"] = true,
 ["completed"] = true,
-["id"] = 1,
+["otherXP"] = 0,
+["instanceName"] = "Shadowfang Keep",
+["party"] = {
+["Karums-Priest"] = "PRIEST",
+["Stormhelm-Stormhelm"] = "WARLOCK",
+["Chungus-Shrimp"] = "DRUID",
+["Karums-Warrior"] = "WARRIOR",
+["Vec-Galore"] = "ROGUE",
+},
 ["exits"] = {
 {
 ["why"] = "stepped",
@@ -682,42 +716,23 @@ ForeverDungeonJournalCharacterDB = {
 ["back"] = 1794382624,
 },
 },
-["party"] = {
-["Karums-Priest"] = "PRIEST",
-["Vec-Galore"] = "ROGUE",
-["Chungus-Shrimp"] = "DRUID",
-["Karums-Warrior"] = "WARRIOR",
-["Stormhelm-Stormhelm"] = "WARLOCK",
-},
-["instanceName"] = "Shadowfang Keep",
-["otherXP"] = 0,
-["map"] = 33,
-["lastBoss"] = 1794385318,
+["id"] = 1,
+["seenN"] = 77,
+["firstTrash"] = 1794383037,
 },
 },
 },
-["rpgQuests"] = {
-[5722] = true,
-[95204] = true,
-[5761] = true,
-[959] = true,
-[95216] = true,
-[5723] = true,
-[92401] = true,
-[1491] = true,
-[5724] = true,
-[5728] = true,
-[1013] = true,
-[92421] = true,
-[1221] = true,
-[1098] = true,
-[5725] = true,
-[1486] = true,
-[1487] = true,
-[97288] = true,
-[6981] = true,
-[914] = true,
-[962] = true,
-[1014] = true,
+["rpgTrash"] = {
+["Shadowfang Keep"] = {
+["seen"] = {
+["Creature-0-7101-33-11-3851-3A93BF02EF"] = true,
+["Creature-0-7101-33-11-3877-946DD7BFEE"] = true,
+["Creature-0-7101-33-11-2529-C25D426E63"] = true,
+["Creature-0-7101-33-11-3875-BC8C0D6E6F"] = true,
+["Creature-0-7101-33-11-3862-231B2F0C9D"] = true,
+["Creature-0-7101-33-11-3873-C25D426E63"] = true,
+},
+["n"] = 6,
+},
 },
 }

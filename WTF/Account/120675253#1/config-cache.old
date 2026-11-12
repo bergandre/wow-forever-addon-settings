@@ -1,5 +1,7 @@
 SET enableLootToasts "0"
 SET playerIdentityDefaultChoices "v21###$##%h##%h##%h##%h"
+SET nameplateShowEnemies "1"
+SET nameplateShowFriendlyPlayers "1"
 SET enableCollectionToasts "0"
 SET UnitNameInteractiveNPC "0"
 SET closedInfoFramesAccountWide "E"

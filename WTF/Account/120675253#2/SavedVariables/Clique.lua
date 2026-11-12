@@ -1,6 +1,9 @@
 
 CliqueDB = nil
 CliqueDB3 = {
+["profileKeys"] = {
+["Karums Priest"] = "Karums Priest",
+},
 ["global"] = {
 ["lastSeenChangelogVersion"] = "5.1.5",
 ["profileBackups"] = {
@@ -11,17 +14,14 @@ CliqueDB3 = {
 },
 },
 },
-["profileKeys"] = {
-["Karums Priest"] = "Karums Priest",
-},
 ["profiles"] = {
 ["Karums Priest"] = {
 ["bindings"] = {
 {
+["type"] = "target",
 ["sets"] = {
 ["default"] = true,
 },
-["type"] = "target",
 ["key"] = "BUTTON1",
 ["unit"] = "mouseover",
 },

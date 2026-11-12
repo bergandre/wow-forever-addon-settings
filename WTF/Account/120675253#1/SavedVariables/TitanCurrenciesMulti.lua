@@ -17,16 +17,16 @@ TitanCurrenciesMultiDb = {
 ["TITAN_OUROM"] = {
 ["charTable"] = {
 ["Karums-Warrior"] = {
-["value"] = 81252,
-["faction"] = "Horde",
-["name"] = "|cffc69b6dKarums",
+["value"] = 106807,
 ["realm"] = "Warrior",
+["name"] = "|cffc69b6dKarums",
+["faction"] = "Horde",
 },
 ["Opikol-Forever"] = {
 ["value"] = 0,
-["realm"] = "Forever",
-["name"] = "|cff8788eeOpikol",
 ["faction"] = "Horde",
+["name"] = "|cff8788eeOpikol",
+["realm"] = "Forever",
 },
 },
 },
@@ -47,7 +47,7 @@ TitanCurrenciesMultiDb = {
 ["TITAN_FOREVER_MERCHANTSFAVOR"] = {
 ["charTable"] = {
 ["Karums-Warrior"] = {
-["currency"] = 0,
+["currency"] = 55,
 ["name"] = "|cffc69b6dKarums",
 ["faction"] = "Horde",
 },

@@ -5,3 +5,5 @@ Bagnonium_Bank: enabled
 !Swatter: disabled
 !ImprovedErrorFrame: disabled
 Bagnon_Bank: enabled
+ForeverAurasCompanion: enabled
+ForeverAurasArchive: enabled

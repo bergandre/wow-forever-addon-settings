@@ -88,3 +88,5 @@ TradeSkillMaster: enabled
 TradeSkillMaster_AppHelper: enabled
 WhatsTraining: disabled
 ZygorGuidesViewerForever: disabled
+ForeverAurasCompanion: enabled
+ForeverAurasArchive: enabled

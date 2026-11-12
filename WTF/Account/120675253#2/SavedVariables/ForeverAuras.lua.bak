@@ -1,0 +1,24 @@
+
+ForeverAurasSaved = {
+["dynamicIconCache"] = {
+},
+["displays"] = {
+},
+["totemSpells"] = {
+},
+["lastArchiveClear"] = 1794404528,
+["minimap"] = {
+["hide"] = false,
+},
+["lastUpgrade"] = 1794404535,
+["dbVersion"] = 91,
+["migrationCutoff"] = 730,
+["features"] = {
+},
+["login_squelch_time"] = 10,
+["registered"] = {
+},
+["totemNames"] = {
+},
+["historyCutoff"] = 730,
+}

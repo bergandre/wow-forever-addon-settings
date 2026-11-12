@@ -22,12 +22,12 @@ Bagnonium_Sets = {
 ["point"] = "BOTTOMRIGHT",
 ["color"] = {
 },
-["width"] = 399.9997863769531,
+["width"] = 399.9996948242188,
 ["y"] = 0,
 ["x"] = 1.629982466511137e-05,
 ["borderColor"] = {
 },
-["height"] = 499.9999084472656,
+["height"] = 499.9996337890625,
 ["activeRules"] = {
 ["tabs"] = "all",
 ["sidebar"] = "all",
@@ -95,15 +95,15 @@ Bagnonium_Sets = {
 },
 ["soul"] = {
 },
-["leather"] = {
+["inscribe"] = {
 },
 ["mine"] = {
 },
 ["gem"] = {
 },
-["inscribe"] = {
+["leather"] = {
 },
-["reagent"] = {
+["fridge"] = {
 },
 ["engineer"] = {
 },
@@ -111,7 +111,7 @@ Bagnonium_Sets = {
 },
 ["tackle"] = {
 },
-["fridge"] = {
+["reagent"] = {
 },
 ["enchant"] = {
 },

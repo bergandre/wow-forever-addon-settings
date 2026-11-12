@@ -8,17 +8,19 @@ END
 VER 3 0000000000000007 "Decursive" "INV_MISC_QUESTIONMARK"
 /script DecursiveRootTable.Dcr:Println('No spell available')
 END
+VER 3 0000000000000008 "plater toggle th" "134400"
+/run Plater.ToggleThreatColorMode()
+END
 VER 3 0000000000000004 "RXP ITEM" "134400"
 #showtooltip
 /click RXPItemFrameButton1 LeftButton 1
 /click RXPItemFrameButton1 LeftButton
 END
 VER 3 0000000000000005 "RXPFollow" "Inv_boots_02"
-/targetexact Invited
-/follow
+//Party Leader
 END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Angela Curthas
+/targetexact Devrak
 /tm !7
 /targetlasttarget [dead]
 END

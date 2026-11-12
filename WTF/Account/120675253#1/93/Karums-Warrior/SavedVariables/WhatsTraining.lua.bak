@@ -20,8 +20,8 @@ WT_Crafting = {
 },
 },
 ["settings"] = {
-["showMerchantsFavorRecipes"] = false,
 ["showOtherFactionRecipes"] = false,
+["showMerchantsFavorRecipes"] = false,
 ["showReputationRecipes"] = false,
 },
 ["selectedProfessions"] = {

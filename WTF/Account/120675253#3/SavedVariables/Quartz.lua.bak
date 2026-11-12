@@ -22,13 +22,6 @@ Quartz3DB = {
 },
 },
 },
-["Player"] = {
-["profiles"] = {
-["Default"] = {
-["x"] = 548.8091430664062,
-},
-},
-},
 ["GCD"] = {
 ["profiles"] = {
 ["Default"] = {
@@ -47,6 +40,13 @@ Quartz3DB = {
 ["profiles"] = {
 ["Default"] = {
 ["x"] = 573.8091430664062,
+},
+},
+},
+["Player"] = {
+["profiles"] = {
+["Default"] = {
+["x"] = 548.8091430664062,
 },
 },
 },

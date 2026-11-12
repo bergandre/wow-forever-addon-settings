@@ -1,11 +1,11 @@
 
 RestPlus_Data = {
 ["Invited=CAMWOW EU4 Realm 8 PvP"] = {
-["restXP"] = 216,
+["restXP"] = 252,
 ["currXP"] = 255,
 ["nextXP"] = 400,
 ["class"] = "Wck",
-["logtime"] = 11490563,
+["logtime"] = 11491589,
 ["resting"] = true,
 ["AlertStatus"] = 1,
 ["level"] = 1,

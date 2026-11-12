@@ -44,7 +44,7 @@ Warrior + priest are multiboxed together (dungeons as a duo). Priest macros use 
   at **character select** (or the client closed). Check with `pgrep -fa Wow.exe` (3 clients usual).
 - Back up to the scratchpad before editing; validate after: `luac -p file.lua` and
   `lua -e "dofile('file.lua') ..."` to inspect tables.
-- Profile keys: Grid2 uses `"Karums Priest"` (space), Plater uses `"Name - Realm"`.
+- Profile keys: Grid2 and Plater both use `"Karums Priest"` (space, no realm) on Forever.
 - `link-ui-settings.sh`: symlinks shared addon SavedVariables from `#1` into `#2`/`#3`
   (list `SHARED`). Run with WoW closed. Grid2 and Plater are NOT in that list (per-account files).
 - Settings changed in-game survive addon updates (they live in SavedVariables, not in the addon folder).
@@ -59,10 +59,33 @@ Warrior + priest are multiboxed together (dungeons as a duo). Priest macros use 
   Grid2 here is the "midnight" port: statuses `mbuff`/`mbuffs`/`mdebuffs` with `auras = {spellIDs}`
   (list all ranks) and `aura_filter.filter` = Blizzard filter string. Caster filter is only
   `PLAYER` / `!PLAYER` — no filtering by caster name.
+  **Quirk:** a single `icon` indicator uses only its highest-priority aura status
+  (`GridIndicatorAuras.lua` `GetStatusAurasFilter`); lower ones mapped to it are ignored. So
+  mine/other on one corner doesn't work (Weakened Soul under PW:Shield is likewise dead). Warrior's
+  `corner-renew` therefore maps only `buff-Renew-other`, filter `HELPFUL` (any caster), green.
 - **Plater** = nameplates. Profiles copied from the Anniversary repo; `Default` = old paladin
   profile `FreamhOld`, old Default kept as `Default (TBC)`. Execute range: built-in mod
-  `Execute Range [Plater]` enabled (green bar < 20%). To show another character's DoTs use
-  `aura_tracker.debuff_tracked` (any caster); automatic tracking shows only your own.
+  **Forever = Plater "midnight" code path** (`DF.IsForeverWow()` → `IS_WOW_PROJECT_MIDNIGHT`,
+  plus the new aura-container API). Consequences:
+  - `unitFrame.InExecuteRange` is never set → builtin `Execute Range [Plater]` mod does nothing
+    (disabled). Custom mod **`Execute Green`** (warrior, `hook_data`) wraps
+    `Plater.GetHealthCutoffValue` to force a 20% range and recolors Plater's own execute zone
+    texture (`healthBar.executeRange`, faded in by Plater only in range) green on OVERLAY;
+    `health_cutoff_alpha = 0.85`. Not yet confirmed in-game.
+  - Aura tracklist matches **by spell ID only** — by-name entries (`[id] = true`) don't work.
+    `aura_tracker.debuff_tracked` (any caster, tracking stays **Automatic**) lists every rank with
+    `= false`: warrior = SW:P ranks; priest = Rend + Sunder Armor ranks.
+  - Global `GetSpellInfo` doesn't exist on Forever (use `C_Spell.GetSpellInfo` in `/run` tests).
+  Threat colors (`tank.colors` / `dps.colors`): gray = fine (tank holds it), orange = act,
+  yellow = threat switching, teal = (DPS/healer) mob is on someone else / the warrior. `tank_threat_colors` forces tank colors on Classic clients (auto-detect = Defensive
+  Stance only): warrior `true` (tanks the duo in Battle Stance), priest `false`. Warrior macro
+  `/run Plater.ToggleThreatColorMode()` flips tank↔DPS colors in groups with a real tank (works).
+  Plater files were edited with a load→modify→serialize Lua script (keeps data exact; never
+  format numbers with `%q` on Lua 5.4+, it writes hex floats).
+  **Quirk:** edits to Plater.lua got overwritten twice by a client that was still in-world on
+  that account (priest copy; warrior edit at 16:08). Before editing, confirm the account just did
+  a full logout save: `find WTF/Account/<acc>/SavedVariables -name '*.lua' -mmin -15 | wc -l`
+  should be ~40+. After the next login/logout, re-check the values are still there.
 - Decursive installed for dispels. Clique (click-casting) recommended, not installed yet.
 - User prefers existing addons over writing custom ones (a custom PartyAuras addon was tried and dropped).
 

@@ -1,17 +1,5 @@
 
 RestPlus_Data = {
-["Karums=CAMWOW EU4 Realm 4 PvP"] = {
-["restXP"] = 1820,
-["currXP"] = 24525,
-["nextXP"] = 36400,
-["class"] = "Pri",
-["logtime"] = 11490583,
-["resting"] = false,
-["AlertStatus"] = 0,
-["level"] = 26,
-["wellRestedRank"] = 0,
-["race"] = "Trl",
-},
 ["Gniloe=CAMWOW EU4 Realm 4 PvP"] = {
 ["restXP"] = 302,
 ["currXP"] = 300,
@@ -20,7 +8,19 @@ RestPlus_Data = {
 ["logtime"] = 11489081,
 ["resting"] = true,
 ["level"] = 1,
+["wellRestedRank"] = 0,
 ["race"] = "AlR",
+},
+["Karums=CAMWOW EU4 Realm 4 PvP"] = {
+["restXP"] = 1078,
+["currXP"] = 1446,
+["nextXP"] = 41400,
+["class"] = "Pri",
+["logtime"] = 11491589,
+["resting"] = false,
+["AlertStatus"] = 0,
+["level"] = 28,
+["race"] = "Trl",
 ["wellRestedRank"] = 0,
 },
 }

@@ -1,6 +1,9 @@
 
 CliqueDB = nil
 CliqueDB3 = {
+["profileKeys"] = {
+["Karums Warrior"] = "Karums Warrior",
+},
 ["global"] = {
 ["profileBackups"] = {
 ["Karums Warrior"] = {
@@ -10,17 +13,14 @@ CliqueDB3 = {
 },
 },
 },
-["profileKeys"] = {
-["Karums Warrior"] = "Karums Warrior",
-},
 ["profiles"] = {
 ["Karums Warrior"] = {
 ["bindings"] = {
 {
+["type"] = "target",
 ["sets"] = {
 ["default"] = true,
 },
-["type"] = "target",
 ["key"] = "BUTTON1",
 ["unit"] = "mouseover",
 },

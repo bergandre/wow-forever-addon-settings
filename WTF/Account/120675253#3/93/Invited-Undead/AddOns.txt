@@ -92,3 +92,5 @@ InstanceAtlas: disabled
 NodeRadar: disabled
 SharedMedia: disabled
 SharedMediaAdditionalFonts: disabled
+ForeverAurasCompanion: enabled
+ForeverAurasArchive: enabled
