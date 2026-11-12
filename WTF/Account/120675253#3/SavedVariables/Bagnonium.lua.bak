@@ -22,12 +22,12 @@ Bagnonium_Sets = {
 ["point"] = "BOTTOMRIGHT",
 ["color"] = {
 },
-["width"] = 399.9996948242188,
+["width"] = 399.9996337890625,
 ["y"] = 0,
 ["x"] = 1.629982466511137e-05,
 ["borderColor"] = {
 },
-["height"] = 499.9996337890625,
+["height"] = 499.9995727539063,
 ["activeRules"] = {
 ["tabs"] = "all",
 ["sidebar"] = "all",
@@ -81,7 +81,7 @@ Bagnonium_Sets = {
 ["tabs"] = "all",
 ["sidebar"] = "all",
 },
-["width"] = 926.9998779296875,
+["width"] = 926.9999389648438,
 },
 },
 ["customRules"] = {

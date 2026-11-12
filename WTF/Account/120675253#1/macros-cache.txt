@@ -20,8 +20,7 @@ VER 3 0000000000000005 "RXPFollow" "Inv_boots_02"
 //Party Leader
 END
 VER 3 0000000000000001 "RXPTargeting" "Ability_eyeoftheowl"
-/targetexact Ashenvale Outrunner
-/targetexact Sharptalon
+/targetexact Senani Thunderheart
 /tm !7
 /targetlasttarget [dead]
 END

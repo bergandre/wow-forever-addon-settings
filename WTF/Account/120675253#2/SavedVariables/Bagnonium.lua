@@ -19,6 +19,7 @@ Bagnonium_Sets = {
 "miscellaneous",
 },
 },
+["showBags"] = true,
 ["borderColor"] = {
 },
 ["color"] = {

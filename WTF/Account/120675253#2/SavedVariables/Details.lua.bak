@@ -35,7 +35,7 @@ _detalhes_global = {
 ["boss_wipe_min_time"] = 20,
 ["plater"] = {
 ["realtime_dps_enabled"] = false,
-["damage_taken_shadow"] = true,
+["realtime_dps_size"] = 12,
 ["realtime_dps_player_shadow"] = true,
 ["damage_taken_enabled"] = false,
 ["realtime_dps_player_size"] = 12,
@@ -51,12 +51,12 @@ _detalhes_global = {
 ["x"] = 0,
 ["side"] = 7,
 },
+["damage_taken_shadow"] = true,
 ["damage_taken_anchor"] = {
 ["y"] = 0,
 ["x"] = 0,
 ["side"] = 7,
 },
-["realtime_dps_size"] = 12,
 ["damage_taken_color"] = {
 1,
 1,
@@ -152,14 +152,14 @@ _detalhes_global = {
 ["slashk_dnd"] = false,
 ["encounter_journal_cache"] = {
 },
-["combat_id_global"] = 1514,
+["combat_id_global"] = 1614,
 ["displays_by_spec"] = {
 },
 ["damage_scroll_position"] = {
 ["scale"] = 1,
 },
 ["plugin_window_pos"] = {
-["y"] = -0.00054931640625,
+["y"] = -0.0005645751953125,
 ["x"] = 0,
 ["point"] = "LEFT",
 ["scale"] = 1,
@@ -169,7 +169,7 @@ _detalhes_global = {
 },
 ["last_changelog_size"] = 0,
 ["immersion_unit_special_icons"] = true,
-["lastUpdateWarning"] = 1794378830,
+["lastUpdateWarning"] = 1794481988,
 ["custom"] = {
 },
 ["npcid_pool"] = {
@@ -189,14 +189,14 @@ _detalhes_global = {
 ["Karums-CAMWOW EU4 Realm 4 PvP"] = "Karums-CAMWOW EU4 Realm 4 PvP",
 },
 ["report_where"] = "SAY",
-["latest_spell_pool_access"] = 1794286909,
+["latest_spell_pool_access"] = 1794481867,
 ["spell_pool"] = {
 },
 ["arena_debug"] = false,
 ["appocalypse_mode"] = 0,
 ["shield_spellid_cache"] = {
 },
-["latest_encounter_spell_pool_access"] = 1794286909,
+["latest_encounter_spell_pool_access"] = 1794481867,
 ["parser_options"] = {
 ["tank_avoidance"] = false,
 ["shield_overheal"] = false,
@@ -217,39 +217,56 @@ _detalhes_global = {
 ["bar_texture"] = "You Are the Best!",
 },
 ["got_first_run"] = true,
-["tutorial"] = {
-["unlock_button"] = 0,
-["main_help_button"] = 129,
-["logons"] = 129,
-["version_announce"] = 0,
-["ctrl_click_close_tutorial"] = false,
-["alert_frames"] = {
-false,
-false,
-false,
-false,
-false,
-false,
+["aura_tracker_frame"] = {
+["scaletable"] = {
+["scale"] = 1,
 },
-["bookmark_tutorial"] = false,
+["position"] = {
 },
-["data_wipes_exp"] = {
-["9"] = false,
-["14"] = false,
-["13"] = false,
-["12"] = false,
-["11"] = false,
-["10"] = false,
 },
-["spell_category_latest_save"] = 0,
+["item_level_pool"] = {
+},
+["show_warning_id1"] = true,
 ["keystone_alts_cache"] = {
 },
-["slash_me_used"] = false,
+["frame_background_color"] = {
+0.0549,
+0.0549,
+0.0549,
+0.934,
+},
 ["all_switch_config"] = {
 ["scale"] = 1,
 ["font_size"] = 10,
 },
-["item_level_pool"] = {
+["switchSaved"] = {
+["slots"] = 6,
+["table"] = {
+{
+["atributo"] = 1,
+["sub_atributo"] = 1,
+},
+{
+["atributo"] = 2,
+["sub_atributo"] = 1,
+},
+{
+["atributo"] = 4,
+["sub_atributo"] = 3,
+},
+{
+["atributo"] = 4,
+["sub_atributo"] = 4,
+},
+{
+["atributo"] = 1,
+["sub_atributo"] = 3,
+},
+{
+["atributo"] = 2,
+["sub_atributo"] = 3,
+},
+},
 },
 ["__profiles"] = {
 ["Gniloe-CAMWOW EU4 Realm 4 PvP"] = {
@@ -1126,9 +1143,6 @@ false,
 },
 },
 ["StatusBarSaved"] = {
-["left"] = "DETAILS_STATUSBAR_PLUGIN_PSEGMENT",
-["right"] = "DETAILS_STATUSBAR_PLUGIN_PDPS",
-["center"] = "DETAILS_STATUSBAR_PLUGIN_CLOCK",
 ["options"] = {
 ["DETAILS_STATUSBAR_PLUGIN_PDPS"] = {
 ["textYMod"] = 1,
@@ -1175,12 +1189,21 @@ false,
 },
 },
 },
+["right"] = "DETAILS_STATUSBAR_PLUGIN_PDPS",
+["left"] = "DETAILS_STATUSBAR_PLUGIN_PSEGMENT",
+["center"] = "DETAILS_STATUSBAR_PLUGIN_CLOCK",
 },
 ["menu_anchor_down"] = {
 16,
 -3,
 },
-["sessionType_user"] = 1,
+["menu_alpha"] = {
+["enabled"] = false,
+["onleave"] = 1,
+["ignorebars"] = false,
+["iconstoo"] = true,
+["onenter"] = 1,
+},
 ["instance_button_anchor"] = {
 -27,
 1,
@@ -1188,7 +1211,7 @@ false,
 ["version"] = 3,
 ["show_interrupt_casts"] = false,
 ["__locked"] = false,
-["__snapH"] = false,
+["sessionType_user"] = 1,
 ["segmento"] = 0,
 ["show_statusbar"] = false,
 ["rowareaborder_size"] = 0.5,
@@ -1219,13 +1242,7 @@ false,
 0.333333333333333,
 },
 },
-["menu_alpha"] = {
-["enabled"] = false,
-["onleave"] = 1,
-["ignorebars"] = false,
-["iconstoo"] = true,
-["onenter"] = 1,
-},
+["__snapH"] = false,
 ["bars_grow_direction"] = 1,
 ["bg_alpha"] = 0.6901,
 ["switch_tank_in_combat"] = false,
@@ -1304,28 +1321,28 @@ false,
 ["segments_amount"] = 25,
 ["overall_clear_pvp"] = true,
 ["deny_score_messages"] = false,
-["realtimedps_always_arena"] = false,
+["overall_clear_logout"] = false,
 ["skin"] = "Minimalistic",
 ["override_spellids"] = true,
+["font_sizes"] = {
+["menus"] = 10,
+},
+["minimum_combat_time"] = 5,
+["new_window_size"] = {
+["height"] = 158,
+["width"] = 310,
+},
+["memory_threshold"] = 3,
+["realtimedps_always_arena"] = false,
+["segments_amount_to_save"] = 15,
+["cloud_capture"] = true,
+["damage_taken_everything"] = false,
+["scroll_speed"] = 2,
 ["window_clamp"] = {
 -8,
 0,
 21,
 -14,
-},
-["overall_clear_logout"] = false,
-["font_sizes"] = {
-["menus"] = 10,
-},
-["memory_threshold"] = 3,
-["minimum_combat_time"] = 5,
-["segments_amount_to_save"] = 15,
-["cloud_capture"] = true,
-["damage_taken_everything"] = false,
-["scroll_speed"] = 2,
-["new_window_size"] = {
-["height"] = 158,
-["width"] = 310,
 },
 ["chat_tab_embed"] = {
 ["enabled"] = false,
@@ -1335,7 +1352,9 @@ false,
 ["single_window"] = false,
 },
 ["deadlog_events"] = 32,
-["trash_auto_remove"] = false,
+["hotcorner_topleft"] = {
+["hide"] = false,
+},
 ["close_shields"] = false,
 ["class_coords"] = {
 ["HUNTER"] = {
@@ -1461,9 +1480,7 @@ false,
 },
 ["animation_speed_triggertravel"] = 5,
 ["disable_alldisplays_window"] = false,
-["hotcorner_topleft"] = {
-["hide"] = false,
-},
+["total_abbreviation"] = 2,
 ["segments_boss_wipes_keep_best_performance"] = true,
 ["class_colors"] = {
 ["HUNTER"] = {
@@ -1583,7 +1600,7 @@ false,
 ["damage"] = "red",
 },
 ["clear_graphic"] = true,
-["total_abbreviation"] = 2,
+["trash_auto_remove"] = false,
 ["segments_auto_erase"] = 1,
 ["options_group_edit"] = true,
 ["broadcaster_enabled"] = false,
@@ -2166,9 +2183,9 @@ false,
 ["__pos"] = {
 ["normal"] = {
 ["y"] = 139.4804077148438,
-["x"] = 1138.3125,
+["x"] = 1186.87890625,
 ["w"] = 313.2340393066406,
-["h"] = 86.84915924072266,
+["h"] = 86.84915161132812,
 },
 ["solo"] = {
 ["y"] = 2,
@@ -2713,8 +2730,8 @@ false,
 ["micro_displays_side"] = 2,
 ["rounded_corner_enabled"] = false,
 ["libwindow"] = {
-["y"] = 139.48046875,
-["x"] = -116.3525390625,
+["y"] = 139.4804077148438,
+["x"] = -116.352783203125,
 ["point"] = "RIGHT",
 ["scale"] = 1,
 },
@@ -2771,9 +2788,9 @@ false,
 ["posicao"] = {
 ["normal"] = {
 ["y"] = 139.4804077148438,
-["x"] = 1138.3125,
+["x"] = 1186.87890625,
 ["w"] = 313.2340393066406,
-["h"] = 86.84915924072266,
+["h"] = 86.84915161132812,
 },
 ["solo"] = {
 ["y"] = 2,
@@ -2803,28 +2820,28 @@ false,
 },
 ["report_lines"] = 5,
 ["deny_score_messages"] = false,
-["realtimedps_always_arena"] = false,
+["overall_clear_logout"] = false,
 ["skin"] = "Minimalistic",
 ["override_spellids"] = true,
+["font_sizes"] = {
+["menus"] = 10,
+},
+["minimum_combat_time"] = 5,
+["new_window_size"] = {
+["height"] = 158,
+["width"] = 310,
+},
+["memory_threshold"] = 3,
+["realtimedps_always_arena"] = false,
+["segments_amount_to_save"] = 15,
+["cloud_capture"] = true,
+["damage_taken_everything"] = false,
+["scroll_speed"] = 2,
 ["window_clamp"] = {
 -8,
 0,
 21,
 -14,
-},
-["overall_clear_logout"] = false,
-["font_sizes"] = {
-["menus"] = 10,
-},
-["memory_threshold"] = 3,
-["minimum_combat_time"] = 5,
-["segments_amount_to_save"] = 15,
-["cloud_capture"] = true,
-["damage_taken_everything"] = false,
-["scroll_speed"] = 2,
-["new_window_size"] = {
-["height"] = 158,
-["width"] = 310,
 },
 ["chat_tab_embed"] = {
 ["enabled"] = false,
@@ -2834,7 +2851,9 @@ false,
 ["single_window"] = false,
 },
 ["deadlog_events"] = 32,
-["trash_auto_remove"] = false,
+["hotcorner_topleft"] = {
+["hide"] = false,
+},
 ["close_shields"] = false,
 ["class_coords"] = {
 ["HUNTER"] = {
@@ -2960,9 +2979,7 @@ false,
 },
 ["animation_speed_triggertravel"] = 5,
 ["disable_alldisplays_window"] = false,
-["hotcorner_topleft"] = {
-["hide"] = false,
-},
+["total_abbreviation"] = 2,
 ["segments_boss_wipes_keep_best_performance"] = true,
 ["class_colors"] = {
 ["HUNTER"] = {
@@ -2975,10 +2992,10 @@ false,
 0.61,
 0.43,
 },
-["ROGUE"] = {
-1,
-0.96,
-0.41,
+["SHAMAN"] = {
+0,
+0.44,
+0.87,
 },
 ["MAGE"] = {
 0.41,
@@ -3010,20 +3027,20 @@ false,
 0.12,
 0.23,
 },
-["PALADIN"] = {
+["ROGUE"] = {
+1,
 0.96,
-0.55,
-0.73,
+0.41,
 },
 ["PET"] = {
 0.3,
 0.4,
 0.5,
 },
-["SHAMAN"] = {
-0,
-0.44,
-0.87,
+["PALADIN"] = {
+0.96,
+0.55,
+0.73,
 },
 ["UNKNOW"] = {
 0.2,
@@ -3082,7 +3099,7 @@ false,
 ["damage"] = "red",
 },
 ["clear_graphic"] = true,
-["total_abbreviation"] = 2,
+["trash_auto_remove"] = false,
 ["segments_auto_erase"] = 1,
 ["options_group_edit"] = true,
 ["broadcaster_enabled"] = false,
@@ -3258,7 +3275,7 @@ false,
 ["boss_mods_timers"] = {
 ["encounter_timers_bw"] = {
 },
-["latest_boss_mods_access"] = 1794286909,
+["latest_boss_mods_access"] = 1794481867,
 ["encounter_timers_dbm"] = {
 },
 },
@@ -3275,16 +3292,25 @@ false,
 ["class_time_played"] = {
 [0] = {
 ["MAGE"] = 36.49399999999878,
-["PRIEST"] = 249494.6810000001,
+["PRIEST"] = 260048.0560000001,
 },
 },
-["auto_change_to_standard"] = true,
-["aura_tracker_frame"] = {
-["scaletable"] = {
-["scale"] = 1,
+["spell_category_latest_save"] = 0,
+["tutorial"] = {
+["unlock_button"] = 0,
+["main_help_button"] = 133,
+["logons"] = 133,
+["version_announce"] = 0,
+["ctrl_click_close_tutorial"] = false,
+["alert_frames"] = {
+false,
+false,
+false,
+false,
+false,
+false,
 },
-["position"] = {
-},
+["bookmark_tutorial"] = false,
 },
 ["exit_errors"] = {
 },
@@ -3295,7 +3321,7 @@ false,
 ["scale"] = 1,
 },
 },
-["show_warning_id1"] = true,
+["auto_change_to_standard"] = true,
 ["run_code"] = {
 ["on_groupchange"] = "\n-- this code runs when the player enter or leave a group",
 ["on_zonechanged"] = "\n-- when the player changes zone, this code will run",
@@ -3326,45 +3352,19 @@ false,
 ["last_mythicrun_chart"] = {
 },
 },
-["latest_npcid_pool_access"] = 1794286909,
-["frame_background_color"] = {
-0.0549,
-0.0549,
-0.0549,
-0.934,
-},
+["latest_npcid_pool_access"] = 1794481867,
+["slash_me_used"] = false,
 ["spellid_ignored"] = {
 },
 ["createauraframe"] = {
 },
-["switchSaved"] = {
-["slots"] = 6,
-["table"] = {
-{
-["atributo"] = 1,
-["sub_atributo"] = 1,
-},
-{
-["atributo"] = 2,
-["sub_atributo"] = 1,
-},
-{
-["atributo"] = 4,
-["sub_atributo"] = 3,
-},
-{
-["atributo"] = 4,
-["sub_atributo"] = 4,
-},
-{
-["atributo"] = 1,
-["sub_atributo"] = 3,
-},
-{
-["atributo"] = 2,
-["sub_atributo"] = 3,
-},
-},
+["data_wipes_exp"] = {
+["9"] = false,
+["14"] = false,
+["13"] = false,
+["12"] = false,
+["11"] = false,
+["10"] = false,
 },
 ["check_stuttering"] = false,
 ["third_party"] = {
@@ -3545,7 +3545,7 @@ false,
 },
 ["breakdown_spell_tab"] = {
 ["nest_pet_spells_by_name"] = false,
-["spellcontainer_height"] = 310.9998779296875,
+["spellcontainer_height"] = 310.9998474121094,
 ["blockspell_height"] = 67,
 ["blockspell_backgroundcolor"] = {
 0.05,
@@ -3560,7 +3560,7 @@ false,
 1,
 0.7,
 },
-["blockcontainer_width"] = 455.9996948242188,
+["blockcontainer_width"] = 455.99951171875,
 ["genericcontainer_width"] = 429,
 ["spellcontainer_width"] = 429.0004577636719,
 ["spellcontainer_header_fontcolor"] = {
@@ -3569,7 +3569,7 @@ false,
 1,
 1,
 },
-["phasecontainer_height"] = 140.0000610351563,
+["phasecontainer_height"] = 140.0000762939453,
 ["phasecontainer_enabled"] = true,
 ["targetcontainer_islocked"] = true,
 ["phasecontainer_width"] = 290.0001220703125,
@@ -3610,7 +3610,7 @@ false,
 ["statusbar_alpha"] = 0.7,
 ["genericcontainer_right_height"] = 460,
 ["genericcontainer_islocked"] = true,
-["targetcontainer_height"] = 140.0000610351563,
+["targetcontainer_height"] = 140.0000762939453,
 ["section_background_color"] = {
 0.1,
 0.1,
@@ -3633,14 +3633,14 @@ false,
 ["damage_scroll_auto_open"] = true,
 }
 __details_backup = {
+["_instance_backup"] = {
+},
 ["_general_logs"] = {
 },
 ["_exit_error"] = {
 "2026-11-09 23:50:39 | Saving Play Time: Interface/AddOns/Details/core/gears.lua:1395: attempt to call a nil value",
 "2026-11-09 23:48:21 | Saving Play Time: Interface/AddOns/Details/core/gears.lua:1395: attempt to call a nil value",
 "2026-11-09 23:31:42 | Saving Play Time: Interface/AddOns/Details/core/gears.lua:1395: attempt to call a nil value",
-},
-["_instance_backup"] = {
 },
 }
 __details_debug = {

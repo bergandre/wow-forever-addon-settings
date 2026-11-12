@@ -9,6 +9,17 @@ RXPCData = {
 },
 ["questNameCache"] = {
 },
+["guideDisabled"] = {
+[0] = 481,
+},
+["flightPaths"] = {
+},
+["guideProgress"] = {
+},
+["stepSkip"] = {
+},
+["discardPile"] = {
+},
 ["guideMetaData"] = {
 ["RestedXP Forever Guide (H)||50-51 Stranglethorn/Blasted Lands"] = {
 ["guideId"] = 2342917451,
@@ -1687,17 +1698,6 @@ RXPCData = {
 ["displayname"] = "6-10 Durotar",
 },
 },
-["flightPaths"] = {
-},
-["guideProgress"] = {
-},
-["stepSkip"] = {
-},
-["discardPile"] = {
-},
-["guideDisabled"] = {
-[0] = 481,
-},
 }
 RXPCTrackingData = {
 ["profileKeys"] = {
@@ -1716,9 +1716,9 @@ RXPCTrackingData = {
 ["monthDay"] = 7,
 ["weekday"] = 7,
 ["month"] = 11,
-["year"] = 2026,
-["hour"] = 15,
 ["minute"] = 8,
+["hour"] = 15,
+["year"] = 2026,
 },
 ["started"] = 0,
 },
@@ -1738,14 +1738,14 @@ RXPCComms = {
 ["Tailoring Altchar"] = {
 ["players"] = {
 ["Karums Warrior"] = {
-["xpPercentage"] = 37,
-["class"] = "WARRIOR",
+["isRxp"] = true,
+["level"] = 25,
 ["version"] = 1,
 ["lastSeen"] = 2401.244,
-["timePlayed"] = 0,
-["level"] = 25,
+["xpPercentage"] = 37,
+["class"] = "WARRIOR",
 ["xp"] = 0,
-["isRxp"] = true,
+["timePlayed"] = 0,
 },
 },
 },

@@ -76,3 +76,4 @@ Blizzard_CombatText: enabled
 !ImprovedErrorFrame: disabled
 ForeverAurasCompanion: enabled
 ForeverAurasArchive: enabled
+Bagnonium_Bank: enabled

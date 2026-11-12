@@ -2,7 +2,7 @@
 NodeRadarCharDB = {
 ["track"] = {
 ["last"] = {
-["ore"] = 128,
+["ore"] = 131,
 },
 ["ignored"] = {
 [5833] = true,

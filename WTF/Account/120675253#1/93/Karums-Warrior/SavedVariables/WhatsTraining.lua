@@ -15,8 +15,8 @@ WT_Crafting = {
 ["selectedProfessions"] = {
 [186] = true,
 [356] = true,
-[185] = true,
 [164] = true,
+[185] = true,
 },
 ["expandedProfessions"] = {
 {

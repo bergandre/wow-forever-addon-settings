@@ -84,9 +84,9 @@ AutoLooterDB = {
 ["Other"] = false,
 ["Reagent"] = false,
 ["Mount"] = false,
+["Holiday"] = false,
 ["Pet"] = false,
 ["Junk"] = false,
-["Holiday"] = false,
 },
 ["Consumable"] = {
 ["Potions"] = false,

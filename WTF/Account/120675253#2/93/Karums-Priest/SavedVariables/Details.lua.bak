@@ -33,7 +33,7 @@ _detalhes_database = {
 },
 ["raid_roster"] = {
 },
-["CombatStartedAt"] = 66163.134,
+["CombatStartedAt"] = 9848.189,
 ["tempo_start"] = 800.501,
 ["last_events_tables"] = {
 },
@@ -104,8 +104,8 @@ _detalhes_database = {
 ["enemy"] = "Unknown",
 ["trinketProcs"] = {
 },
-["TotalElapsedCombatTime"] = 9.546999999991385,
-["CombatEndedAt"] = 66172.681,
+["TotalElapsedCombatTime"] = 16.75300000000061,
+["CombatEndedAt"] = 9864.942000000001,
 ["aura_timeline"] = {
 },
 ["compressed_charts"] = {
@@ -175,9 +175,9 @@ _detalhes_database = {
 ["show_options"] = false,
 ["ignored_cooldowns"] = {
 },
+["framme_locked"] = false,
 ["cooldowns"] = {
 },
-["height"] = 18,
 ["own_frame"] = {
 ["defensive-raid"] = false,
 ["ofensive"] = false,
@@ -185,7 +185,7 @@ _detalhes_database = {
 ["utility"] = false,
 ["defensive-personal"] = false,
 },
-["framme_locked"] = false,
+["height"] = 18,
 ["show_conditions"] = {
 ["only_inside_instance"] = true,
 ["only_in_group"] = true,
@@ -211,10 +211,13 @@ _detalhes_database = {
 },
 ["arena_data_compressed"] = {
 },
-["last_instance_time"] = 1794382664,
+["ignore_nicktag"] = false,
 ["arena_data_index_selected"] = 1,
-["character_data"] = {
-["logons"] = 127,
+["coach"] = {
+["enabled"] = false,
+["welcome_panel_pos"] = {
+},
+["last_coach_name"] = false,
 },
 ["local_instances_config"] = {
 {
@@ -239,9 +242,9 @@ _detalhes_database = {
 ["pos"] = {
 ["normal"] = {
 ["y"] = 139.4804077148438,
-["x"] = 1138.3125,
+["x"] = 1186.87890625,
 ["w"] = 313.2340393066406,
-["h"] = 86.84915924072266,
+["h"] = 86.84915161132812,
 },
 ["solo"] = {
 ["y"] = 2,
@@ -256,147 +259,10 @@ _detalhes_database = {
 ["enabled"] = true,
 ["channel"] = "SELF",
 },
-["damage_meter_sessions"] = {
-[92] = {
-["playerCasts"] = {
+["character_data"] = {
+["logons"] = 131,
 },
-["endUnixTime"] = 1794422969,
-["sessionId"] = 92,
-["added"] = false,
-["playerAuras"] = {
-},
-["endDate"] = "20:49:29",
-["startUnixTime"] = 1794422953,
-["endTime"] = 65847.977,
-["sessionName"] = "Wildthorn Lurker",
-["startDate"] = "20:49:13",
-["startTime"] = 65831.841,
-["alreadyAdded"] = false,
-["detailsId"] = "Wildthorn Lurker92",
-},
-[94] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1794423153,
-["sessionId"] = 94,
-["added"] = false,
-["playerAuras"] = {
-},
-["endDate"] = "20:52:33",
-["startUnixTime"] = 1794423126,
-["endTime"] = 66032.105,
-["sessionName"] = "Searing Infernal",
-["startDate"] = "20:52:06",
-["startTime"] = 66004.277,
-["alreadyAdded"] = false,
-["detailsId"] = "Searing Infernal94",
-},
-[89] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1794422865,
-["sessionId"] = 89,
-["added"] = false,
-["playerAuras"] = {
-},
-["endDate"] = "20:47:45",
-["startUnixTime"] = 1794422832,
-["endTime"] = 65743.444,
-["sessionName"] = "Wildthorn Lurker",
-["startDate"] = "20:47:12",
-["startTime"] = 65710.23,
-["alreadyAdded"] = false,
-["detailsId"] = "Wildthorn Lurker89",
-},
-[91] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1794422947,
-["sessionId"] = 91,
-["added"] = false,
-["playerAuras"] = {
-},
-["endDate"] = "20:49:07",
-["startUnixTime"] = 1794422927,
-["endTime"] = 65825.243,
-["sessionName"] = "Wildthorn Lurker",
-["startDate"] = "20:48:47",
-["startTime"] = 65805.834,
-["alreadyAdded"] = false,
-["detailsId"] = "Wildthorn Lurker91",
-},
-[93] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1794423069,
-["sessionId"] = 93,
-["added"] = false,
-["playerAuras"] = {
-},
-["endDate"] = "20:51:09",
-["startUnixTime"] = 1794423051,
-["endTime"] = 65947.182,
-["sessionName"] = "Shadethicket Bark Ripper",
-["startDate"] = "20:50:51",
-["startTime"] = 65929.944,
-["alreadyAdded"] = false,
-["detailsId"] = "Shadethicket Bark Ripper93",
-},
-[88] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1794422805,
-["sessionId"] = 88,
-["added"] = false,
-["playerAuras"] = {
-},
-["endDate"] = "20:46:45",
-["startUnixTime"] = 1794422791,
-["endTime"] = 65683.519,
-["sessionName"] = "Wildthorn Lurker",
-["startDate"] = "20:46:31",
-["startTime"] = 65669.341,
-["alreadyAdded"] = false,
-["detailsId"] = "Wildthorn Lurker88",
-},
-[90] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1794422916,
-["sessionId"] = 90,
-["added"] = false,
-["playerAuras"] = {
-},
-["endDate"] = "20:48:36",
-["startUnixTime"] = 1794422889,
-["endTime"] = 65794.834,
-["sessionName"] = "Wildthorn Lurker",
-["startDate"] = "20:48:09",
-["startTime"] = 65768.124,
-["alreadyAdded"] = false,
-["detailsId"] = "Wildthorn Lurker90",
-},
-[95] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1794423294,
-["sessionId"] = 95,
-["added"] = false,
-["playerAuras"] = {
-},
-["endDate"] = "20:54:54",
-["startUnixTime"] = 1794423284,
-["endTime"] = 66172.986,
-["sessionName"] = "Wildthorn Stalker",
-["startDate"] = "20:54:44",
-["startTime"] = 66163.134,
-["alreadyAdded"] = false,
-["detailsId"] = "Wildthorn Stalker95",
-},
-},
-["announce_firsthit"] = {
-["enabled"] = true,
-["channel"] = "SELF",
+["cached_talents"] = {
 },
 ["last_instance_id"] = 33,
 ["data_harvest_for_charsts"] = {
@@ -423,11 +289,7 @@ _detalhes_database = {
 ["custom"] = "",
 ["next"] = "",
 },
-["announce_prepots"] = {
-["enabled"] = false,
-["channel"] = "SELF",
-["reverse"] = false,
-},
+["last_instance_time"] = 1794382664,
 ["active_profile"] = "Karums-CAMWOW EU4 Realm 4 PvP",
 ["mythic_dungeon_currentsaved"] = {
 ["dungeon_name"] = "",
@@ -440,12 +302,183 @@ _detalhes_database = {
 ["dungeon_zone_id"] = 0,
 ["previous_boss_killed_at"] = 0,
 },
-["last_realversion"] = 172,
-["benchmark_db"] = {
-["frame"] = {
+["damage_meter_sessions"] = {
+[91] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794502814,
+["sessionId"] = 91,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "19:00:14",
+["startUnixTime"] = 1794502808,
+["endTime"] = 9227.198,
+["sessionName"] = "Wildthorn Stalker",
+["startDate"] = "19:00:08",
+["startTime"] = 9221.597,
+["alreadyAdded"] = false,
+["detailsId"] = "Wildthorn Stalker91",
+},
+[92] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794502975,
+["sessionId"] = 92,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "19:02:55",
+["startUnixTime"] = 1794502966,
+["endTime"] = 9388.355,
+["sessionName"] = "Wildthorn Stalker",
+["startDate"] = "19:02:46",
+["startTime"] = 9379.716,
+["alreadyAdded"] = false,
+["detailsId"] = "Wildthorn Stalker92",
+},
+[93] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794503147,
+["sessionId"] = 93,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "19:05:47",
+["startUnixTime"] = 1794503138,
+["endTime"] = 9560.401,
+["sessionName"] = "",
+["startDate"] = "19:05:38",
+["startTime"] = 9550.747,
+["alreadyAdded"] = false,
+["detailsId"] = "93",
+},
+[94] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794503210,
+["sessionId"] = 94,
+["added"] = false,
+["playerAuras"] = {
+},
+["sessionName"] = "",
+["startUnixTime"] = 1794503152,
+["endDate"] = "19:06:50",
+["endTime"] = 9623.148000000001,
+["startDate"] = "19:05:52",
+["startTime"] = 9564.801,
+["alreadyAdded"] = false,
+["detailsId"] = "94",
+},
+[95] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794503225,
+["sessionId"] = 95,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "19:07:05",
+["startUnixTime"] = 1794503210,
+["endTime"] = 9638.103000000001,
+["sessionName"] = "Ashenvale Bear",
+["startDate"] = "19:06:50",
+["startTime"] = 9623.148000000001,
+["alreadyAdded"] = false,
+["detailsId"] = "Ashenvale Bear95",
+},
+[96] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794503341,
+["sessionId"] = 96,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "19:09:01",
+["startUnixTime"] = 1794503305,
+["endTime"] = 9754.598,
+["sessionName"] = "Laughing Sister",
+["startDate"] = "19:08:25",
+["startTime"] = 9718.32,
+["alreadyAdded"] = false,
+["detailsId"] = "Laughing Sister96",
+},
+[97] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794503366,
+["sessionId"] = 97,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "19:09:26",
+["startUnixTime"] = 1794503353,
+["endTime"] = 9779.354,
+["sessionName"] = "Laughing Sister",
+["startDate"] = "19:09:13",
+["startTime"] = 9765.929,
+["alreadyAdded"] = false,
+["detailsId"] = "Laughing Sister97",
+},
+[98] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794503396,
+["sessionId"] = 98,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "19:09:56",
+["startUnixTime"] = 1794503384,
+["endTime"] = 9809.286,
+["sessionName"] = "Laughing Sister",
+["startDate"] = "19:09:44",
+["startTime"] = 9796.953,
+["alreadyAdded"] = false,
+["detailsId"] = "Laughing Sister98",
+},
+[99] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794503452,
+["sessionId"] = 99,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "19:10:52",
+["startUnixTime"] = 1794503418,
+["endTime"] = 9865.242,
+["sessionName"] = "Laughing Sister",
+["startDate"] = "19:10:18",
+["startTime"] = 9831.59,
+["alreadyAdded"] = false,
+["detailsId"] = "Laughing Sister99",
+},
+[90] = {
+["playerCasts"] = {
+},
+["endUnixTime"] = 1794502703,
+["sessionId"] = 90,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "18:58:23",
+["startUnixTime"] = 1794502691,
+["endTime"] = 9116.676,
+["sessionName"] = "Ashenvale Bear",
+["startDate"] = "18:58:11",
+["startTime"] = 9104.475,
+["alreadyAdded"] = false,
+["detailsId"] = "Ashenvale Bear90",
 },
 },
-["damage_meter_session_info"] = {
+["data_harvested_for_charts"] = {
+},
+["announce_firsthit"] = {
+["enabled"] = true,
+["channel"] = "SELF",
 },
 ["apocalypes_info"] = {
 },
@@ -459,13 +492,16 @@ _detalhes_database = {
 ["evoker_show_realtimedps"] = false,
 ["inverse_deathlog_mplus"] = false,
 },
+["last_realversion"] = 172,
+["mythic_plus_log"] = {
+},
+["on_death_menu"] = false,
+["damage_meter_session_info"] = {
+},
 ["nick_tag_cache"] = {
 ["nextreset"] = 1795211215,
 ["last_version"] = 16,
 },
-["mythic_plus_log"] = {
-},
-["last_day"] = "11",
 ["plugin_database"] = {
 ["DETAILS_PLUGIN_TINY_THREAT"] = {
 ["enabled"] = true,
@@ -567,21 +603,6 @@ _detalhes_database = {
 ["square_amount"] = 5,
 ["enabled"] = false,
 ["arrow_size"] = 10,
-["use_spark"] = true,
-["row_spacement"] = 21,
-["main_frame_color"] = {
-0,
-0,
-0,
-0.2,
-},
-["author"] = "Terciob",
-["arrow_texture"] = "Interface\\CHATFRAME\\ChatFrameExpandArrow",
-["font_size"] = 10,
-["y"] = 3.0517578125e-05,
-["x"] = 0.0001220703125,
-["font_face"] = "Friz Quadrata TT",
-["square_size"] = 32,
 ["per_second"] = {
 ["enabled"] = false,
 ["point"] = "CENTER",
@@ -593,6 +614,21 @@ _detalhes_database = {
 ["update_speed"] = 0.05,
 ["attribute_type"] = 1,
 },
+["row_spacement"] = 21,
+["main_frame_color"] = {
+0,
+0,
+0,
+0.2,
+},
+["author"] = "Terciob",
+["arrow_texture"] = "Interface\\CHATFRAME\\ChatFrameExpandArrow",
+["y"] = 3.0517578125e-05,
+["font_size"] = 10,
+["x"] = 0.0001220703125,
+["font_face"] = "Friz Quadrata TT",
+["square_size"] = 32,
+["use_spark"] = true,
 ["row_color"] = {
 0.1,
 0.1,
@@ -603,10 +639,6 @@ _detalhes_database = {
 ["arrow_anchor_y"] = 0,
 },
 },
-["data_harvested_for_charts"] = {
-},
-["cached_talents"] = {
-},
 ["apocalypse_hashes"] = {
 },
 ["SoloTablesSaved"] = {
@@ -616,13 +648,9 @@ _detalhes_database = {
 ["combat_id"] = 0,
 ["savedStyles"] = {
 },
-["coach"] = {
-["enabled"] = false,
-["welcome_panel_pos"] = {
+["last_day"] = "12",
+["cached_roles"] = {
 },
-["last_coach_name"] = false,
-},
-["ignore_nicktag"] = false,
 ["announce_deaths"] = {
 ["enabled"] = false,
 ["last_hits"] = 1,
@@ -663,7 +691,9 @@ _detalhes_database = {
 },
 ["bossTimers"] = {
 },
-["combat_counter"] = 100,
+["cleu_events"] = {
+["n"] = 1,
+},
 ["playerTalents"] = {
 },
 ["totals"] = {
@@ -713,9 +743,7 @@ _detalhes_database = {
 ["is_challenge"] = false,
 ["spells_cast_timeline"] = {
 },
-["cleu_events"] = {
-["n"] = 1,
-},
+["combat_counter"] = 100,
 ["totals_grupo"] = {
 0,
 0,
@@ -761,11 +789,17 @@ _detalhes_database = {
 ["segments_added"] = {
 },
 },
-["cached_roles"] = {
+["announce_prepots"] = {
+["enabled"] = false,
+["channel"] = "SELF",
+["reverse"] = false,
 },
 ["arena_data_headers"] = {
 },
-["on_death_menu"] = false,
+["benchmark_db"] = {
+["frame"] = {
+},
+},
 ["announce_cooldowns"] = {
 ["enabled"] = false,
 ["ignored_cooldowns"] = {
@@ -779,7 +813,6 @@ _detalhes_database = {
 },
 ["auto_combatlog"] = false,
 ["cached_specs"] = {
-["Player-6938-008C0737"] = 1487,
 ["Player-6946-0092D46A"] = 1491,
 },
 }

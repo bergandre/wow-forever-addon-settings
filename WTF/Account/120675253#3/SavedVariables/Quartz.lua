@@ -60,6 +60,7 @@ Quartz3DB = {
 },
 ["profileKeys"] = {
 ["Invited Undead"] = "Default",
+["Tailoring Altchar"] = "Default",
 },
 ["global"] = {
 ["configDialog"] = {

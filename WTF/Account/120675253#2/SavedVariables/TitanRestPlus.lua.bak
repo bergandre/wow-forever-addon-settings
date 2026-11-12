@@ -1,11 +1,11 @@
 
 RestPlus_Data = {
 ["Karums=CAMWOW EU4 Realm 4 PvP"] = {
-["restXP"] = 470,
-["currXP"] = 1446,
+["restXP"] = 0,
+["currXP"] = 15378,
 ["nextXP"] = 41400,
 ["class"] = "Pri",
-["logtime"] = 11491023,
+["logtime"] = 11492350,
 ["resting"] = false,
 ["AlertStatus"] = 0,
 ["level"] = 28,

@@ -25,9 +25,9 @@ PawnOptions = {
 ["Link"] = "|cnIQ2:|Hitem:10423::::::::26:1491:::::::::|h[Silvered Bronze Leggings]|h|r",
 },
 [15] = {
-["ID"] = 14571,
-["Level"] = 21,
-["Link"] = "|cnIQ2:|Hitem:14571::::::::22:1491::1::1:28:5254:::::|h[Bristlebark Cape]|h|r",
+["ID"] = 16658,
+["Level"] = 32,
+["Link"] = "|cnIQ2:|Hitem:16658::::::::29:1491::11:::::::|h[Wildhunter Cloak]|h|r",
 },
 [8] = {
 ["ID"] = 273646,

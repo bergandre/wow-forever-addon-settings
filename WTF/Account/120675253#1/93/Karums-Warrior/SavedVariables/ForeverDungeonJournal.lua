@@ -11,22 +11,23 @@ ForeverDungeonJournalCharacterDB = {
 [5723] = true,
 [92401] = true,
 [1491] = true,
+[92421] = true,
 [5724] = true,
 [5728] = true,
-[2841] = true,
-[1013] = true,
-[92421] = true,
 [1221] = true,
-[1098] = true,
+[1013] = true,
+[2841] = true,
 [2843] = true,
-[5725] = true,
+[1098] = true,
 [1014] = true,
-[962] = true,
-[914] = true,
-[6981] = true,
+[5725] = true,
 [97288] = true,
+[914] = true,
+[962] = true,
+[6981] = true,
 [1487] = true,
 [1486] = true,
+[6563] = true,
 },
 ["hearthSpot"] = {
 ["y"] = 0.6068857908248901,
@@ -44,9 +45,6 @@ ForeverDungeonJournalCharacterDB = {
 },
 ["arrowChains"] = {
 },
-["rpgKills"] = {
-["Shadowfang Keep"] = true,
-},
 ["runTracker"] = {
 ["point"] = {
 "RIGHT",
@@ -54,6 +52,9 @@ ForeverDungeonJournalCharacterDB = {
 -351.0785827636719,
 -57.84604644775391,
 },
+},
+["rpgKills"] = {
+["Shadowfang Keep"] = true,
 },
 ["rpgBosses"] = {
 ["Shadowfang Keep"] = {
@@ -84,10 +85,10 @@ ForeverDungeonJournalCharacterDB = {
 ["orgrimmar, durotar"] = true,
 ["splintertree post, ashenvale"] = true,
 ["ratchet, the barrens"] = true,
-["the sepulcher, silverpine forest"] = true,
+["thunder bluff, mulgore"] = true,
 ["tarren mill, hillsbrad"] = true,
 ["undercity, tirisfal"] = true,
-["thunder bluff, mulgore"] = true,
+["the sepulcher, silverpine forest"] = true,
 },
 ["runLog"] = {
 ["nextID"] = 2,

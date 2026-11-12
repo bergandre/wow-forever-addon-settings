@@ -6,24 +6,24 @@ Prat3DB = {
 ["Default"] = {
 ["colors"] = {
 ["localdefense"] = {
-["b"] = 0.7529412508010864,
-["g"] = 0.7529412508010864,
 ["r"] = 1,
+["g"] = 0.7529412508010864,
+["b"] = 0.7529412508010864,
 },
 ["layer"] = {
-["r"] = 1,
-["g"] = 0.7529412508010864,
 ["b"] = 0.7529412508010864,
+["g"] = 0.7529412508010864,
+["r"] = 1,
 },
 ["general"] = {
-["b"] = 0.7529412508010864,
-["g"] = 0.7529412508010864,
 ["r"] = 1,
+["g"] = 0.7529412508010864,
+["b"] = 0.7529412508010864,
 },
 ["trade"] = {
-["b"] = 0.7529412508010864,
-["g"] = 0.7529412508010864,
 ["r"] = 1,
+["g"] = 0.7529412508010864,
+["b"] = 0.7529412508010864,
 },
 },
 },
@@ -32,26 +32,26 @@ Prat3DB = {
 ["Prat_Frames"] = {
 ["profiles"] = {
 ["Default"] = {
-["minchatwidthdefault"] = 250,
 ["initialized"] = true,
-["maxchatheightdefault"] = 799.9999389648438,
-["maxchatwidthdefault"] = 799.9999389648438,
-["minchatheightdefault"] = 119.9999923706055,
+["minchatwidthdefault"] = 250,
+["maxchatheightdefault"] = 800.0000610351562,
+["maxchatwidthdefault"] = 800.0000610351562,
+["minchatheightdefault"] = 119.9999847412109,
 },
 },
 },
 },
 ["profileKeys"] = {
 ["Karums Warrior"] = "Default",
-["Invited Undead"] = "Default",
-["Invited Friend"] = "Default",
 ["Tailoring Altchar"] = "Default",
+["Invited Friend"] = "Default",
+["Invited Undead"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {
 ["modules"] = {
 ["EventNames"] = 3,
-["ChatLog"] = 2,
+["Alias"] = 2,
 ["Mentions"] = 2,
 ["PopupMessage"] = 2,
 ["AltNames"] = 2,
@@ -59,7 +59,7 @@ Prat3DB = {
 ["Paragraph"] = 2,
 ["KeyBindings"] = 2,
 ["LinkInfoIcons"] = 2,
-["Alias"] = 2,
+["ChatLog"] = 2,
 ["OriginalButtons"] = 2,
 },
 },

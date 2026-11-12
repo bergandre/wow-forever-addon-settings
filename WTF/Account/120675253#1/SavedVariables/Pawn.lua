@@ -11,8 +11,6 @@ PawnCommon = {
 ["ColorTooltipBorder"] = true,
 ["ShownGettingStarted"] = true,
 ["ShowTooltipIcons"] = true,
-["ShowSpecIcons"] = true,
-["ShowSocketingAdvisor"] = true,
 ["Scales"] = {
 ["\"Classic\":WARRIOR2"] = {
 ["Color"] = "c69b6d",
@@ -402,6 +400,8 @@ PawnCommon = {
 ["SpecID"] = 2,
 },
 },
+["ShowSocketingAdvisor"] = true,
+["ShowSpecIcons"] = true,
 ["IgnoreGemsWhileLeveling"] = true,
 ["ButtonPosition"] = 2,
 ["Digits"] = 1,
